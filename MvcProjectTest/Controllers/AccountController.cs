@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Threading.Tasks;
 
 namespace MvcProjectTest.Controllers
 {
@@ -97,12 +98,23 @@ namespace MvcProjectTest.Controllers
                             CustomerPhone = cust.CustomerPhone
                         };
                         _repo.InsertCustomer(customer);
+                                               
                         return RedirectToAction("Index");
                     }
                     return Content("密碼不符");
                 }
             }
         }
+        public async Task<ActionResult> TesttAsync()
+        {
+            await MailService.SendMailToVerify();
+            return Content("123");
+        }
+        public ActionResult Test2()
+        {
+            return Content("2344444");
+        }
+
 
         [HttpGet]
         public ActionResult Login()
@@ -110,6 +122,7 @@ namespace MvcProjectTest.Controllers
             ViewData["Titlett"] = "會員登入";
             return View();
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel loginVM)
@@ -124,7 +137,7 @@ namespace MvcProjectTest.Controllers
             string password = HttpUtility.HtmlEncode(loginVM.CustomerPassword);
 
             string sha256Password = HashService.SHA256Hash(password);
-
+           
             //dapper
             Customer cust = _repo.CustomerLogin(account, sha256Password);
             if (cust == null)
@@ -144,7 +157,7 @@ namespace MvcProjectTest.Controllers
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
-            userData: "", //可以放使用者角色名稱
+            userData: cust.EmailConfirmed.ToString(), //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             // Encrypt the ticket.

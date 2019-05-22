@@ -53,6 +53,8 @@ namespace MvcProjectTest.Models
         [Display(Name = "確認密碼")]
         [System.ComponentModel.DataAnnotations.Compare("CustomerPassword", ErrorMessage = "密碼和確認密碼不相符")]
         public string ConfirmPassword { get; set; }
+
+        public bool EmailConfirmed { get; set; }
     }
     
 }
