@@ -153,12 +153,28 @@
     <Content Include="Assets\Css\new-product-card.css" />
     <Content Include="Assets\Css\newest-tab-block.css" />
     <Content Include="Assets\Css\normalize.css" />
+    <Content Include="Assets\Images\TChinese\010001.jpg" />
+    <Content Include="Assets\Images\TChinese\010002.jpg" />
+    <Content Include="Assets\Images\TChinese\010003.jpg" />
+    <Content Include="Assets\Images\TChinese\010004.jpg" />
     <Content Include="Assets\Images\cat\003.png" />
+    <Content Include="Assets\Images\Ebook\020001.jpg" />
+    <Content Include="Assets\Images\Ebook\020002.jpg" />
+    <Content Include="Assets\Images\Ebook\020003.jpg" />
+    <Content Include="Assets\Images\Ebook\020004.jpg" />
+    <Content Include="Assets\Images\Foreign\040001.jpg" />
+    <Content Include="Assets\Images\Foreign\040002.jpg" />
+    <Content Include="Assets\Images\Foreign\040003.jpg" />
+    <Content Include="Assets\Images\Foreign\040004.jpg" />
     <Content Include="Assets\Images\logo\B-Bookstore-logo3.png" />
     <Content Include="Assets\Images\logo\B-Bookstore-logo4.png" />
     <Content Include="Assets\Images\OtherPic\book.jpg" />
     <Content Include="Assets\Images\OtherPic\eraser.png" />
     <Content Include="Assets\Images\OtherPic\KaBi.png" />
+    <Content Include="Assets\Images\SChinese\030001.jpg" />
+    <Content Include="Assets\Images\SChinese\030002.jpg" />
+    <Content Include="Assets\Images\SChinese\030003.jpg" />
+    <Content Include="Assets\Images\SChinese\030004.jpg" />
     <Content Include="Assets\Images\top-sp-sales\book1.jpg" />
     <Content Include="Assets\Images\top-sp-sales\book2.jpg" />
     <Content Include="Assets\Images\top-sp-sales\book3.jpeg" />
@@ -257,6 +273,13 @@
       <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

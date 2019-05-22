@@ -28,7 +28,7 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select * ,AuthorName From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID"; 
+                string sql = "Select * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID"; 
                 books = conn.Query<Book>(sql).ToList();
             }
             return books;
@@ -39,7 +39,7 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select TOP 4 * ,AuthorName From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID ORDER BY b.InStock";
+                string sql = "Select TOP 4 *From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID ORDER BY b.InStock";
                 books = conn.Query<Book>(sql).ToList();
             }
             return books;

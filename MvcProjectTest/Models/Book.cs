@@ -10,6 +10,7 @@ namespace MvcProjectTest.Models
         public string BookId { get; set; }
         public string BooksName { get; set; }
         public string AuthorName { get; set; }
+        public string CategoryEngName { get; set; }
         public string UnitPrice { get; set; }
         public string InStock { get; set; }
         public string Discount { get; set; }
