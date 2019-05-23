@@ -56,5 +56,43 @@ namespace MvcProjectTest.Models
 
         public bool EmailConfirmed { get; set; }
     }
-    
+
+    public class CustomerViewModel
+    {
+        public int CustomerId { get; set; }
+
+        [Display(Name = "會員姓名")]
+        [Required]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "必填欄位")]
+        public string CustomerName { get; set; }
+
+        [Display(Name = "連絡電話")]
+        [Required]
+        [RegularExpression(@"^\d{4}\-?\d{3}\-?\d{3}$", ErrorMessage = "需為09xx-xxx-xxx")]
+        public string CustomerPhone { get; set; }
+
+        [Display(Name = "會員生日")]
+        [DisplayFormat(DataFormatString ="{0:yyyy/MM/dd}",ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "請選擇生日")]
+        [DataType(DataType.Date)]
+        public DateTime CustomerBirth { get; set; }
+
+        [Display(Name = "地址")]
+        [Required]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "必填欄位")]
+        public string CustomerAddress { get; set; }
+
+        [Display(Name = "Email")]
+        [EmailAddress]
+        [Required(ErrorMessage = "請輸入Email")]
+        [DataType(DataType.EmailAddress)]
+        [Remote("CheckCustomerEmail", "Account", ErrorMessage = "信箱已存在")]
+        public string CustomerEmail { get; set; }
+
+        [Display(Name = "會員帳號")]
+        [Required]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "最少需要8個字元")]
+        [Remote("CheckCustomerAccount", "Account", ErrorMessage = "遠端驗證失敗")]
+        public string CustomerAccount { get; set; }
+    }
 }

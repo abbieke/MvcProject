@@ -1,0 +1,164 @@
+.books_section .breadcrumb {
+  background-color: #fff;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.sidebar_section {
+  border-bottom: 1px solid #e9ecef;
+  margin: 5px 0;
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.sidebar_title h5 {
+  font-weight: bold;
+}
+
+.sidebar_categories {
+  display: block;
+}
+
+.sidebar_categories .active {
+  color: red;
+}
+
+.sidebar_categories li {
+  margin: 10px 0;
+}
+
+#slider-range {
+  margin-left: 7px !important;
+}
+
+#amount {
+  margin-top: 8px;
+  color: #1e1e27 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+.filter_button {
+  width: 100%;
+  height: 30px;
+  background: #1e1e27;
+  text-align: center;
+  margin-top: 25px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.filter_button:hover {
+  background: #34343f;
+}
+
+.filter_button span {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 30px;
+  color: #ffffff;
+}
+
+/**/
+.product_sorting {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.product_sorting > li {
+  display: inline-block;
+  position: relative;
+  width: 185px;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  border: solid 1px #ecedee;
+  padding-left: 20px;
+  padding-right: 7px;
+  margin-right: 16px;
+}
+
+.product_sorting li i {
+  float: right;
+  line-height: 40px;
+  color: #51545f;
+}
+
+.product_sorting li ul {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 120%;
+  margin: 0;
+  width: 100%;
+  background: #ffffff;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+  -webkit-box-shadow: 0 15px 25px rgba(63, 78, 100, 0.15);
+          box-shadow: 0 15px 25px rgba(63, 78, 100, 0.15);
+  -webkit-transition: opacity 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.product_sorting > li:hover ul {
+  visibility: visible;
+  opacity: 1;
+  top: calc(100% + 1px);
+}
+
+.product_sorting li ul li {
+  display: block;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.product_sorting li ul li span {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  border-bottom: solid 1px #dddddd;
+  color: #51545f;
+  -webkit-transition: opacity 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.product_sorting li ul li span:hover {
+  color: #b5aec4;
+}
+
+.present-sorting {
+  display: inline-block;
+}
+
+.present-sorting i {
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.present-sorting i:hover {
+  cursor: pointer;
+}
+
+.present-sorting i.active {
+  color: red;
+}
+
+.books-block {
+  margin-left: 50px;
+}
+
+.row {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/*===================================================*/
+/*# sourceMappingURL=AllBooks_stylesheet.css.map */

@@ -1,0 +1,159 @@
+﻿@model IEnumerable<MvcProjectTest.Models.Book>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+<div class="block-for-header-wrapper">
+    <!-- 注意這塊與Header保持同高，若有修改頁首的留意 -->
+</div>
+<div class="books_section">
+    <div class="container">
+        <!-- Breadcrumbs  套版bootstrap-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home.html">首頁</a></li>
+                <li class="breadcrumb-item active" aria-current="page">瀏覽商品</li>
+            </ol>
+        </nav>
+        <!-- 分類 -->
+        <div class="allbooks d-flex">
+            <div class="sidebar">
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>商品總類</h5>
+                    </div>
+                    <ul class="sidebar_categories">
+                        <li class="active">
+                            <a href="#">
+                                <span>
+                                    <i class="fa fa-angle-double-right"
+                                       aria-hidden="true"></i>
+                                </span>優惠特區
+                            </a>
+                        </li>
+                        <li><a href="#">新品</a></li>
+                        <li><a href="#">分類1</a></li>
+                        <li><a href="#">分類2</a></li>
+                        <li><a href="#">分類3</a></li>
+                    </ul>
+                </div>
+
+                <!-- Price Range Filtering -->
+                <div class="sidebar_section">
+                    <div class="sidebar_title">
+                        <h5>價格範圍</h5>
+                    </div>
+                    <p>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+                    <div id="slider-range"></div>
+                    <div class="filter_button"><span>篩選</span></div>
+                </div>
+            </div>
+            <div class="books-block">
+                <div class="sort-div">
+                    <ul class="product_sorting">
+                        <li>
+                            <span class="type_sorting_text">預設排序</span>
+                            <i class="fa fa-angle-down"></i>
+                            <ul class="sorting_type">
+                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'>
+                                    <span>預設排序</span>
+                                </li>
+                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "priceLtoH" }'>
+                                    <span>價格低至高</span>
+                                </li>
+                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "priceHtoL" }'>
+                                    <span>價格高至低</span>
+                                </li>
+                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "bestseller" }'>
+                                    <span>熱銷書</span>
+                                </li>
+                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "bookISBN" }'>
+                                    <span>ISBN</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>顯示數量</span>
+                            <span class="num_sorting_text">24</span>
+                            <i class="fa fa-angle-down"></i>
+                            <ul class="sorting_num">
+                                <li class="num_sorting_btn"><span>24</span></li>
+                                <li class="num_sorting_btn"><span>48</span></li>
+                                <li class="num_sorting_btn"><span>96</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="present-sorting">
+                        <i class="fas fa-list-ul active"></i>
+                        <i class="fas fa-th"></i>
+
+                    </div>
+                </div>
+                <!-- 書 -->
+                <div class="row">
+                    <!-- Product 1 -->
+                    @foreach (var item in Model)
+                    {
+                        <div class="product-card-out-block">
+                            <div class="product-card-block">
+
+                                <div class="product-card-img-block">
+                                    <a href="#" class="product-link">
+                                        <img class="pc-img"
+                                             src="~/Assets/Images/@Html.DisplayFor(modelItem => item.CategoryEngName)/@Html.DisplayFor(modelItem => item.BookImage)"
+                                             alt="1">
+                                    </a>
+                                    <div class="product-card-visual-cart-block">
+                                        <form action="add-cart">
+
+                                            <input type="hidden" name="id" value="1">
+                                            <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                            <button class="product-card-cart-button card-quick-button-style"
+                                                    type="submit">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                <span class="product-card-cart-tip pc-quick-tip-style">
+                                                    Add To
+                                                    Cart
+                                                </span>
+                                            </button>
+                                        </form>
+                                        <a href="#" class="product-card-quick-view">
+                                            <i class="far fa-eye card-quick-button-style"></i>
+                                            <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                                Quick
+                                                View
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-card-description-block">
+                                    <a href="#" class="product-link">
+                                        <h3 class="product-card-title">
+                                            @Html.DisplayFor(modelItem => item.BooksName)
+                                        </h3>
+                                        <div class="product-writter-block">
+                                            <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => item.AuthorName)</span>
+                                        </div>
+                                        <div class="product-price-block">
+                                            <span class="product-price-span product-card-des-text">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }                        
+                        <!-- Product Sorting -->                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section topCss {
+    <link href="~/Assets/Css/AllBooks_stylesheet.css" rel="stylesheet" />
+    <link href="~/Assets/Css/product-item-block-stylesheet.css" rel="stylesheet" />
+    <link href="~/Assets/Css/ui-slider-ramge.css" rel="stylesheet" />
+    <link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
+}
