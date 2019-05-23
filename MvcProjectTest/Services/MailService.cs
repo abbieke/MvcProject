@@ -24,7 +24,7 @@ namespace MvcProjectTest.Services
                 //PlainTextContent = "Hello, Email bobo!", //純文字
                 HtmlContent = "<p>感謝註冊會員,為了....點擊下方按鈕驗證</p><a href='http://localhost:49572/Account/Test2'>驗證</a>"
             };
-            msg.AddTo(new EmailAddress("jay5eternal@gmail.com", "Test User"));
+            msg.AddTo(new EmailAddress("abbieke0222@gmail.com", "Test User"));
             var response = await client.SendEmailAsync(msg);
         }
     }
