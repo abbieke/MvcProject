@@ -110,10 +110,13 @@ namespace MvcProjectTest.Controllers
             await MailService.SendMailToVerify();
             return Content("123");
         }
-        public ActionResult Test2()
+        public ActionResult EmailConfirmed()
         {
-            return Content("2344444");
+            //_repo.UpdateEmailConfirmed(1,true);
+            //_repo.CustomerRemoveRole(1, "4");
+            return Content(_repo.CustomerRemoveRole(1, "4"));
         }
+        
 
 
         [HttpGet]
