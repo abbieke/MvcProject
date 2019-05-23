@@ -125,5 +125,21 @@ namespace MvcProjectTest.Repositories
             }
         }
 
+        public void UpdateCustomer(CustomerViewModel cust)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress, CustomerBirth=@CustomerBirth WHERE CustomerAccount=@CustomerAccount";
+                conn.Execute(sql, new {
+                    CustomerName = cust.CustomerName,
+                    CustomerAccount = cust.CustomerAccount,
+                    CustomerEmail = cust.CustomerEmail,
+                    CustomerPhone = cust.CustomerPhone,
+                    CustomerAddress = cust.CustomerAddress,
+                    CustomerBirth = cust.CustomerBirth });
+            }
+
+        }
+
     }
 }
