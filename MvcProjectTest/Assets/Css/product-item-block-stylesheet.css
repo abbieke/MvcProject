@@ -1,0 +1,93 @@
+.product-card-style {
+    width: 25%;
+    padding: .5rem;
+}
+
+.product-card.outside {
+    text-decoration: none;
+    color: rgba(0,0,0,.8);
+    display: block;
+    box-shadow: 0 0.0625rem 0.125rem 0 rgba(0,0,0,.1);
+    border-radius: .125rem;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    padding: 0;
+    transition: transform .1s cubic-bezier(.4,0,.6,1),box-shadow .1s cubic-bezier(.4,0,.6,1),-webkit-transform .1s cubic-bezier(.4,0,.6,1);
+}
+
+.product-card.firstout{
+    overflow:visible;
+    border:1px solid transparent;
+}
+.product-card.firstS{
+    margin-bottom:.625rem;
+}
+.product-card.thebigpic{
+    position:relative;
+}
+.product-card.picelement{
+    padding-top:100%;
+    width:100%;
+}
+.product-card.pictureitem{
+    opacity:1;
+    transition:opacity 1s ease;
+}
+.product-card.buttombox {
+    padding: .625rem;
+    overflow: hidden;
+}
+.product-card.buttomupbox {
+    word-wrap: break-word;
+    line-height: 1.125rem;
+    height: 2.25rem;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.product-card.buttomuptext{
+    line-height:18px;
+}
+
+.product-card.bbbox {
+    padding: .3125rem 0 0;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    display: flex;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    overflow: hidden;
+}
+
+.product-card.inline{
+    display:inline;
+}
+
+.product-card.bblo {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 0;
+    color: #ee4d2d;
+}
+
+.product-card.bblt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1rem;
+    color: #ee4d2d;
+}
+.product-card.bbro {
+    margin-left: .3125rem;
+    font-size: .75rem;
+}
+
+.product-card.bbrt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

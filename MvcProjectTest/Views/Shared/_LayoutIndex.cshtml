@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    @*<header class="dropdowns">
+    <header class="dropdowns">
             <div class="dropdowns-top">
                 <div class="container">
                     <div class="bookshopping-menu flex">
@@ -41,6 +41,10 @@
                                                 <li class=" book-last-item"> <a href="#">Checkout</a></li>
                                                 <li class=" book-last-item"> <a href="#">Checkout</a></li>
                                                 <li class=" book-last-item"> <a href="#">Checkout</a></li>
+
+                                                @{ 
+                                                    MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                                }
                                             </ul>
                                         </li>
                                         <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
@@ -63,8 +67,7 @@
                                 <li class="book-item">
                                     <a href="#"><i class="fas fa-user top-icon"></i></a>
                                     <ul class="book-item-list book-item-list-right">
-                                        <li class="book-item book-item-has-children">@Html.ActionLink(" Sign In", "Login", "Account")</li>
-                                        <li class="book-item book-item-has-children">@Html.ActionLink(" Sign Up", "Registration", "Account")</li>
+                                        @Html.Partial("_LoginPartial")
                                     </ul>
                                 </li>
                                 <li class="book-item">
@@ -86,8 +89,7 @@
                     </div>
                 </div>
             </div>
-        </header>*@
-    @Html.Partial("_LoginPartial")
+        </header>
     <div class="block-for-header-wrapper">
         <!-- 注意這塊與Header保持同高，若有修改頁首的留意 -->
     </div>
@@ -251,9 +253,6 @@
             // });
         });
     </script>
-
-
-
 </body>
 
 </html>

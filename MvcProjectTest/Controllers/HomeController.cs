@@ -26,9 +26,7 @@ namespace MvcProjectTest.Controllers
         public ActionResult Test()
         {
             var books = _repo.SelectBooks();
-            var topbooks = _repo.SelectTopBooks();
-            Mix mix = new Mix() { Books = books, SecBooks = topbooks };
-            return View(mix);
+            return View(books);
         }
     }
 }
