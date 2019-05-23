@@ -1,4 +1,5 @@
 ﻿
+
 @if (Request.IsAuthenticated)
 {
     <header class="dropdowns">
@@ -47,6 +48,7 @@
                                 <ul class="book-item-list book-item-list-right">
                                     <li class="book-item book-item-has-children">Hello,MotherFucker</li>
                                     <li class="book-item book-item-has-children">@Html.ActionLink(" 登出 ", "SignOut", "Account")</li>
+                                    <li class="book-item book-item-has-children">@User.IsInRole("EmailIsNotConfirmed")</li>
                                 </ul>
                             </li>
                             <li class="book-item">

@@ -3,6 +3,7 @@ using MvcProjectTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -25,11 +26,24 @@ namespace MvcProjectTest.Repositories
 
         public void InsertCustomer(Customer cust)
         {
+            int customerId;
             using (conn)
             {
                 string sql = "INSERT INTO Customers(CustomerName, CustomerAccount, CustomerPassword, CustomerEmail, CustomerPhone, CustomerAddress, CustomerBirth) VALUES ( @CustomerName, @CustomerAccount, @CustomerPassword, @CustomerEmail, @CustomerPhone, @CustomerAddress, @CustomerBirth)";
                 conn.Execute(sql, new { cust.CustomerName,cust.CustomerAccount, cust.CustomerPassword, cust.CustomerEmail, cust.CustomerPhone, cust.CustomerAddress, cust.CustomerBirth });
+                //ROLE TEST
+                customerId = conn.Query<int>("GetCustomerID",
+                                new { customerAccount = cust.CustomerAccount },
+                                commandType: CommandType.StoredProcedure
+                                ).SingleOrDefault();
+                UserRoles userRoles = new UserRoles
+                {
+                    UserID = customerId,
+                    RolesID = "1,4"
+                };
+                CustomerAddRole(userRoles);
             }
+            
         }
 
         public bool SelectCustomer(string CustomerAccount)
@@ -69,5 +83,36 @@ namespace MvcProjectTest.Repositories
 
             }
         }
+
+        public bool IsEmailConfirmed(string account)
+        {
+            using (conn)
+            {
+                string sql = "Select EmailConfirmed From Customers Where CustomerAccount= '" + account + "' ;";
+                var result = conn.QueryFirstOrDefault<bool>(sql);
+                return result;
+
+            }
+        }
+        public void CustomerAddRole(UserRoles userRoles)
+        {
+            
+                string sql = "INSERT INTO UserRoles(UserID,RolesID) VALUES ( @UserID,@RolesID) ;";
+                conn.Execute(sql, new {userRoles.UserID, userRoles.RolesID });
+            
+        }
+
+        public int GetCusromerID(string account)
+        {
+            using (conn)
+            {
+                int customerId= conn.Query<int>("GetCustomerID",
+                                new { customerAccount =account },
+                                commandType: CommandType.StoredProcedure
+                                ).SingleOrDefault();
+                return customerId;
+            }
+        }
+
     }
 }
