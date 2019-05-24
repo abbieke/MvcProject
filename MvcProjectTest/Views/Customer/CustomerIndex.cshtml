@@ -1,0 +1,240 @@
+﻿@model MvcProjectTest.Models.CustomerViewModel
+
+@{
+    ViewBag.Title = "CustomerIndex";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()  
+    <div class="member-body">
+        <div class="container margintop" id="member-tab">
+            <div class="flex">
+                <div class="membercentre-laft">
+
+                    <div class="membercentre-laft-title">
+                        Welcome !!
+                    </div>
+                    <div class="memberpage-brief">
+                        <div class="membercentre-laft-title">使用者: @User.Identity.Name</div>
+                        <!-- <div class="member-edit">
+                            <a href="#tab-MemberProfile" class="member-edit">
+                                <i class="fas fa-pen"></i>
+                                personal information
+                            </a>
+                            </ul>
+                        </div> -->
+                    </div>
+
+                    <div class="member-menu">
+                        <div class="member-menu-block">
+                            <ul class="memebr-menu-row">
+                                <li class="memebr-menu-li">
+                                    <a href="#tab-MemberProfile"
+                                       class="memebr-menu-a-text">會員資料</a>
+                                </li>
+                                <li class="memebr-menu-li">
+                                    <a href="#tab-OrderDetail"
+                                       class="memebr-menu-a-text">訂單資訊</a>
+                                </li>
+                                <li class="memebr-menu-li">
+                                    <a href="#tab-Coupon" class="memebr-menu-a-text">優惠券專區</a>
+                                </li>
+                                <li class="memebr-menu-li">
+                                    <a href="#tab-Modifypassword"
+                                       class="memebr-menu-a-text">修改密碼</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="membercentre-right">
+                    <div class="membercentre-titletext">
+                        <h2>會員專區</h2>
+                    </div>
+                    <div id="tab-MemberProfile" class="member-content">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <form action="#">
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.CustomerAccount)
+                                    </div>
+                                    <div class="member-input-textbox">
+                                        @Html.EditorFor(model => model.CustomerAccount, new { htmlAttributes = new { @class = "member-input-textbox-input", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerAccount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.CustomerName)
+                                    </div>
+                                    <div class="member-input-textbox">
+                                        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.CustomerPhone)
+                                    </div>
+                                    <div class="member-input-textbox">
+                                        @Html.EditorFor(model => model.CustomerPhone, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerPhone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.CustomerBirth)
+                                    </div>
+                                    <div class="member-input-textbox">
+                                        @Html.EditorFor(model => model.CustomerBirth, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerBirth, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.CustomerEmail)
+                                    </div>
+                                    <div class="member-input-textbox">
+                                        @Html.EditorFor(model => model.CustomerEmail, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.CustomerAddress)
+                                    </div>
+                                    <div class="member-input-textbox ">
+                                        @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+                                        @*<select class="member-input-selectbox">
+                            <option>縣市</option>
+                            <option></option>
+                            <option></option>
+
+                        </select>
+                        <select class="member-input-selectbox">
+                            <option>鄉/市區</option>
+                            <option></option>
+                            <option></option>
+                        </select>*@
+
+                                    </div>
+                                </div>
+                                @*<input class="member-input-textbox-input textbox-width" type="text">*@
+                            </div>
+                            <div class="membercentre-footerbuttonbox member-row">
+                                <input class="membercentre-submit-button " type="submit" value="修改會員" />
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="tab-OrderDetail">
+                        tab-OrderDetail
+                    </div>
+                    <div id="tab-Coupon">
+                        tab-Coupon
+                    </div>
+                    <div id="tab-Modifypassword">
+                        <form action="">
+                            <div class="member-row flex modify-password-row-block">
+                                <div class="member-input-label">
+                                    <label>當前密碼:</label>
+                                </div>
+                                <div class="member-input-textbox flex">
+                                    <input id="show-password-textbox1" class="member-input-textbox-input" type="password">
+                                    <input type="button" id="show-password-button1" class="member-show-button" value="Show">
+                                </div>
+                            </div>
+                            <div class="member-row flex modify-password-row-block">
+                                <div class="member-input-label">
+                                    <label>新密碼:</label>
+                                </div>
+                                <div class="member-input-textbox flex">
+                                    <input id="show-password-textbox2" class="member-input-textbox-input" type="password">
+                                    <input type="button" id="show-password-button2" class="member-show-button" value="Show">
+                                </div>
+                            </div>
+                            <div class="member-row flex modify-password-row-block">
+                                <div class="member-input-label">
+                                    <label>確認新密碼:</label>
+                                </div>
+                                <div class="member-input-textbox flex">
+                                    <input id="show-password-textbox3" class="member-input-textbox-input" type="password">
+                                    <input type="button" id="show-password-button3" class="member-show-button" value="Show">
+                                </div>
+                            </div>
+                            <div class="membercentre-footerbuttonbox member-row">
+                                <button class="membercentre-submit-button " type="submit">確認</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section topCss {
+    <link href="~/Assets/Css/member-stylesheet.css" rel="stylesheet" />
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#member-tab").tabs();
+            // var $li = $('.newest-tab-title-row li');
+            // $($li.eq(0).addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
+
+            // $li.click(function () {
+            //     $($(this).find('a').attr('href')).show().siblings('.tab-inner').hide();
+            //     $(this).addClass('active').siblings('.active').removeClass('active');
+            // });
+        });
+    </script>
+
+    <script>
+        var buttonDom;
+        var buttonIdName = "show-password-button";
+        setShowOnClick();
+
+        function setShowOnClick(){
+            for(var i = 1;; i++){
+                
+                buttonDom = document.getElementById(buttonIdName + i);
+                if (!buttonDom) {
+                    break;
+                }
+            
+                buttonDom.addEventListener("click", showPassWord);
+            
+            }
+        }
+        
+
+        function showPassWord() {
+            var index = this.id.split("show-password-button")[1];
+            var passwordInputDom = document.getElementById("show-password-textbox" + index);
+            if (passwordInputDom.type === "password") {
+                passwordInputDom.type = "text";
+                this.value = "Hide";
+            } else {
+                passwordInputDom.type = "password";
+                this.value = "Show";
+            }
+        }
+    </script>
+}

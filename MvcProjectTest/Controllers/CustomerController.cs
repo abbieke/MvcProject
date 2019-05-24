@@ -39,5 +39,28 @@ namespace MvcProjectTest.Controllers
             _repo.UpdateCustomer(customer);
             return RedirectToAction("Index","Home");
         }
+
+        public ActionResult CustomerIndex()
+        {
+            var cust = _repo.SelectCustomerView(User.Identity.Name);
+            return View(cust);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CustomerIndex(CustomerViewModel cust)
+        {
+            CustomerViewModel customer = new CustomerViewModel
+            {
+                CustomerName = cust.CustomerName,
+                CustomerAddress = cust.CustomerAddress,
+                CustomerAccount = cust.CustomerAccount,
+                CustomerEmail = cust.CustomerEmail,
+                CustomerBirth = cust.CustomerBirth,
+                CustomerPhone = cust.CustomerPhone
+            };
+            _repo.UpdateCustomer(customer);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
