@@ -141,5 +141,30 @@ namespace MvcProjectTest.Repositories
 
         }
 
+        public void UpdateEmailConfirmed(int customerId,bool isConfirmed)
+        {
+            using (conn)
+            {
+                string sql = "UPDATE Customers SET EmailConfirmed= @isConfirmed WHERE CustomerID=@customerId;";
+                conn.Execute(sql, new { isConfirmed , customerId });
+            }
+        }
+        public string CustomerRemoveRole(int customerId, string roleId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from UserRoles where UserID=@customerId;";
+                string result = conn.QueryFirstOrDefault<string>(sql,new { customerId });
+                List<string> roles = result.Split(',').ToList(); 
+
+                if (roles.IndexOf("roleId") != -1)
+                {
+                    roles.Remove(roleId);
+                }
+                return string.Join(", ", roles.ToArray()); 
+
+            }
+        }
+
     }
 }
