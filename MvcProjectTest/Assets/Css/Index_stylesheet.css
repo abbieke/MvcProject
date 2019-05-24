@@ -4,22 +4,19 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway','Microsoft JhengHei',sans-serif;
   font-size: 16px;
 }
 
 .container {
-  width: 1400px;
+  width: 1200px;
   margin-left: auto;
   margin-right: auto;
-}
-
-a:visited {
-  color: #fff;
+  max-width: none;
 }
 
 a, a:visited, a:hover, a:active {
-  color: inherit;
+  color: #000;
   text-decoration: none;
 }
 

@@ -1,0 +1,278 @@
+﻿
+@{
+    ViewBag.Title = "BookDetail";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+<div class="productdetail">
+    <div class="container">
+        <div class="productdetail-all">
+            <div class="product-left">
+                <div class="product-big-picture">
+                    <img src="~/Assets/Images/ProductDetail/24-large_default.jpg" alt="商品圖"/>
+                </div>
+                <div class="product-little-picture">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i></a></li>
+                        <li>
+                            <a href="#">
+                                <img src="~/Assets/Images/ProductDetail/24-large_default.jpg" alt="商品圖"
+                                     style="width:100px;height:100px;"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/Assets/Images/ProductDetail/25-large_default.jpg" alt="商品圖"
+                                     style="width:100px;height:100px;"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/Assets/Images/ProductDetail/26-large_default.jpg" alt="商品圖"
+                                     style="width:100px;height:100px;"/>
+                            </a>
+                        </li>
+                        <li><a href="#"><i class="fas fa-angle-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="product-right">
+                <h2 class="pd-product-name-title">ProductName</h2>
+                <div class="pd-product-price">TWD 300$</div>
+                <div class="pd-product-information">
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    </p>
+                </div>
+                <div class="productlist">
+                    <ul>
+                        <li><span class="pd-productlist-title">作者</span><span class="pd-productlist-content">王小明</span></li>
+                        <li><span class="pd-productlist-title">語言</span><span class="pd-productlist-content">中文</span></li>
+                        <li><span class="pd-productlist-title">出版社</span><span class="pd-productlist-content">那間出版社</span></li>
+                        <li><span class="pd-productlist-title">出版日期</span><span class="pd-productlist-content">2019/01/01</span></li>
+                        <li><span class="pd-productlist-title">ISBN 13</span><span class="pd-productlist-content">9789577411952</span></li>
+                    </ul>
+                </div>
+
+                <div class="pd-order-block">
+                    <form action="ActionName">
+                        <div class="pd-order-block-style">
+                            <p class="pd-order-title-text">單價</p>
+                            <p class="pd-order-content-text">$300</p>
+                        </div>
+                        <div class=" pd-order-block-style">
+                            <p class="pd-order-title-text">訂購數量</p>
+                            <input type="text" class="pd-quantity-textbox" value="1">
+                        </div>
+                        <div class="pd-order-block-style">
+                            <p class="pd-order-title-text">總價</p>
+                            <p class="pd-order-content-text">$300</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="other-product">
+    <div class="container">
+        <h2 class="pd-recomment-title-h2">You Might Also Like</h2>
+        <div class="pd-product-card-list-block">
+            <div class="pd-product-recommend-left-block">
+                <a href="#"><i class="fas fa-angle-left"></i></a>
+            </div>
+            <div class="pd-recommend-item-block">
+                <div class="product-card-out-block">
+                    <div class="product-card-block">
+                        <div class="product-card-img-block">
+                            <a href="#" class="product-link">
+                                <img class="pc-img"
+                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                     alt="1">
+                            </a>
+                            <div class="product-card-visual-cart-block">
+                                <form action="add-cart">
+
+                                    <input type="hidden" name="id" value="1">
+                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="product-card-cart-tip pc-quick-tip-style">
+                                            Add To
+                                            Cart
+                                        </span>
+                                    </button>
+                                </form>
+                                <a href="#" class="product-card-quick-view">
+                                    <i class="far fa-eye card-quick-button-style"></i>
+                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                        Quick
+                                        View
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-description-block">
+                            <a href="#" class="product-link">
+                                <h3 class="product-card-title">
+                                    有可能的任務
+                                </h3>
+                                <div class="product-writter-block">
+                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                </div>
+                                <div class="product-price-block">
+                                    <span class="product-price-span product-card-des-text">$300</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card-out-block">
+                    <div class="product-card-block">
+                        <div class="product-card-img-block">
+                            <a href="#" class="product-link">
+                                <img class="pc-img"
+                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                     alt="1">
+                            </a>
+                            <div class="product-card-visual-cart-block">
+                                <form action="add-cart">
+
+                                    <input type="hidden" name="id" value="1">
+                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="product-card-cart-tip pc-quick-tip-style">
+                                            Add To
+                                            Cart
+                                        </span>
+                                    </button>
+                                </form>
+                                <a href="#" class="product-card-quick-view">
+                                    <i class="far fa-eye card-quick-button-style"></i>
+                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                        Quick
+                                        View
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-description-block">
+                            <a href="#" class="product-link">
+                                <h3 class="product-card-title">
+                                    有可能的任務
+                                </h3>
+                                <div class="product-writter-block">
+                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                </div>
+                                <div class="product-price-block">
+                                    <span class="product-price-span product-card-des-text">$300</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card-out-block">
+                    <div class="product-card-block">
+                        <div class="product-card-img-block">
+                            <a href="#" class="product-link">
+                                <img class="pc-img"
+                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                     alt="1">
+                            </a>
+                            <div class="product-card-visual-cart-block">
+                                <form action="add-cart">
+
+                                    <input type="hidden" name="id" value="1">
+                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="product-card-cart-tip pc-quick-tip-style">
+                                            Add To
+                                            Cart
+                                        </span>
+                                    </button>
+                                </form>
+                                <a href="#" class="product-card-quick-view">
+                                    <i class="far fa-eye card-quick-button-style"></i>
+                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                        Quick
+                                        View
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-description-block">
+                            <a href="#" class="product-link">
+                                <h3 class="product-card-title">
+                                    有可能的任務
+                                </h3>
+                                <div class="product-writter-block">
+                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                </div>
+                                <div class="product-price-block">
+                                    <span class="product-price-span product-card-des-text">$300</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card-out-block">
+                    <div class="product-card-block">
+                        <div class="product-card-img-block">
+                            <a href="#" class="product-link">
+                                <img class="pc-img"
+                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                     alt="1">
+                            </a>
+                            <div class="product-card-visual-cart-block">
+                                <form action="add-cart">
+
+                                    <input type="hidden" name="id" value="1">
+                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="product-card-cart-tip pc-quick-tip-style">
+                                            Add To
+                                            Cart
+                                        </span>
+                                    </button>
+                                </form>
+                                <a href="#" class="product-card-quick-view">
+                                    <i class="far fa-eye card-quick-button-style"></i>
+                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                        Quick
+                                        View
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-description-block">
+                            <a href="#" class="product-link">
+                                <h3 class="product-card-title">
+                                    有可能的任務
+                                </h3>
+                                <div class="product-writter-block">
+                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                </div>
+                                <div class="product-price-block">
+                                    <span class="product-price-span product-card-des-text">$300</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-product-recommend-right-block">
+                <a href="#"><i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section topCss {
+    <link href="~/Assets/Css/productdetail_stylesheet.css" rel="stylesheet" />
+    <link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
+}

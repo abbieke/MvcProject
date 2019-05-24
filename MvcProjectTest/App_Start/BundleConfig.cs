@@ -30,7 +30,7 @@ namespace MvcProjectTest
                 "~/Assets/Css/index_stylesheet.css"));
 
             bundles.Add(new StyleBundle("~/css/indexView").Include().Include(
-                "~/Assets/Css/indexView_stylesheet.css",
+                
                 "~/Assets/Css/new-product-card.css",
                 "~/Assets/Css/newest-tab-block.css",
                 "~/Assets/Css/index-bigimage.css"));

@@ -149,6 +149,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,7 +177,22 @@
     <Content Include="Assets\Css\newest-tab-block.css" />
     <Content Include="Assets\Css\normalize.css" />
     <Content Include="Assets\Css\product-item-block-stylesheet.css" />
+    <Content Include="Assets\Css\productdetail_stylesheet.css" />
     <Content Include="Assets\Css\ui-slider-ramge.css" />
+    <Content Include="Assets\Images\ProductDetail\24-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\24-large_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\25-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\25-large_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\26-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\26-large_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\27-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\27-large_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\28-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\28-large_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\29-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\29-large_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\30-home_default.jpg" />
+    <Content Include="Assets\Images\ProductDetail\30-large_default.jpg" />
     <Content Include="Assets\Images\TChinese\010001.jpg" />
     <Content Include="Assets\Images\TChinese\010002.jpg" />
     <Content Include="Assets\Images\TChinese\010003.jpg" />
@@ -248,10 +264,12 @@
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\CustomerIndex.cshtml" />
+    <Content Include="Views\Book\BookDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Script\" />
+    <Folder Include="Views\Shopping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
