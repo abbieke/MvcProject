@@ -1,0 +1,85 @@
+.member-singup {
+  margin-bottom: 30px;
+}
+
+.member-singup-title {
+  letter-spacing: 0.4px;
+  margin: 30px 0;
+}
+
+.member-singup-content {
+  border: 1px solid #dddddd;
+  padding: 30px;
+}
+
+.member-singup-content p {
+  margin-left: 20px;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.Log-in-instead:hover {
+  color: #49bcab;
+}
+
+.member-singup-content-all {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 20px;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.member-singup-content-all .member-singup-content-title {
+  width: 25%;
+  text-align: right;
+  margin-right: 30px;
+  font-weight: bold;
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.member-singup-right {
+  width: 50%;
+}
+
+.member-singup-right .member-singup-enter-information {
+  width: 100%;
+  line-height: 30px;
+  padding: 0 5px;
+}
+
+.member-singup-right .birth-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.member-singup-right .member-singup-right-select {
+  margin-bottom: 10px;
+}
+
+.save-infomation {
+  text-align: end;
+}
+
+.save-infomation .save-button {
+  padding: 10px 20px;
+  margin: 30px;
+  border-radius: 5px;
+  background: #000000;
+  color: #dddddd;
+  font-weight: bold;
+}
+
+.save-infomation .save-button:hover {
+  background: #49bcab;
+  color: #000000;
+}
+/*# sourceMappingURL=member-singup.css.map */

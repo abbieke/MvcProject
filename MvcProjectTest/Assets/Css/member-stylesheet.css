@@ -1,0 +1,153 @@
+.member-body {
+  width: 100%;
+  height: 840px;
+}
+
+.margintop {
+  margin-top: 30px;
+}
+
+.membercentre-laft {
+  width: 35%;
+}
+
+.membercentre-right {
+  width: 100%;
+  padding-left: 50px;
+}
+
+.membercentre-titletext {
+  margin-top: 10px;
+  text-align: center;
+  height: 79px;
+  margin-bottom: 30px;
+}
+
+.membercentre-titletext h2 {
+  font-weight: bold;
+}
+
+.member-menu {
+  margin-top: 20px;
+}
+
+.memberpage-brief {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+  padding: 10px 0 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.membercentre-laft-title {
+  text-overflow: ellipsis;
+  color: #000;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.member-edit a {
+  font-weight: 600;
+  text-align: center;
+  color: #888;
+}
+
+.memebr-menu-row {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.memebr-menu-li {
+  margin: 10px 0;
+  padding: 0 25%;
+}
+
+.memebr-menu-a-text {
+  font-size: 15px;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  width: auto;
+  font-weight: 600;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.memebr-menu-a-text:hover {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  border-radius: 30px;
+  background: #ddd;
+  -webkit-box-shadow: 1px 1px 1px #888;
+          box-shadow: 1px 1px 1px #888;
+}
+
+.member-row {
+  margin-bottom: 30px;
+  width: 60%;
+}
+
+.member-input-textbox {
+  margin: 0 15px;
+  width: 100%;
+}
+
+.member-input-textbox-input {
+  width: 100%;
+  border: none;
+  border-bottom: #ddd solid 1px;
+}
+
+.member-input-textbox-input:focus {
+  outline: none;
+  border-bottom: #ddd solid 2px;
+}
+
+.textbox-width {
+  width: 480px;
+}
+
+.member-input-selectbox {
+  width: 100px;
+}
+
+.member-show-button {
+  background: #ddd;
+  border: #ddd 1px solid;
+  width: 70px;
+}
+
+.member-show-button:hover {
+  background: #b7b7b7;
+}
+
+.modify-password-row-block {
+  width: 60%;
+}
+
+.member-input-label {
+  width: 40%;
+}
+
+.membercentre-submit-button {
+  background: #ddd;
+  border: #ddd 1px solid;
+  width: 90px;
+}
+
+.membercentre-submit-button:hover {
+  background: #b7b7b7;
+}
+
+.member-input-label-item {
+  width: 20%;
+  font-weight: bold;
+}
+
+.membercentre-footerbuttonbox {
+  margin-top: 90px;
+  text-align: end;
+}
+/*# sourceMappingURL=member-stylesheet.css.map */

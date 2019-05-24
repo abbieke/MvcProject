@@ -169,7 +169,9 @@
     <Content Include="Assets\Css\index-product-list-stylesheet.css" />
     <Content Include="Assets\Css\indexView_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
-    <Content Include="Assets\Css\Login_out_stylesheet.css" />
+    <Content Include="Assets\Css\member-Login.css" />
+    <Content Include="Assets\Css\member-singup.css" />
+    <Content Include="Assets\Css\member-stylesheet.css" />
     <Content Include="Assets\Css\new-product-card.css" />
     <Content Include="Assets\Css\newest-tab-block.css" />
     <Content Include="Assets\Css\normalize.css" />
@@ -235,7 +237,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -245,6 +247,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\CustomerIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

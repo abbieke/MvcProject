@@ -2,14 +2,14 @@
 
 @{
     ViewBag.Title = "Registration";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="user-login">
+    @*<div class="user-login">
         <div class="container">
             <div class="user-info-block-row">
                 <div class="Registration">
@@ -62,14 +62,125 @@
 
             </div>
         </div>
+    </div>*@
+    <div class="member-singup">
+        <div class="container">
+            @Html.ValidationSummary(true, "", new { @class = "prompt-text" })
+            <section>
+                <div class="member-singup-title">
+                    <h1>Create an account</h1>
+                </div>
+                <div class="member-singup-content">
+                    <p>Already have an account? <a href='@Url.Action("Login","Account", null)' class="Log-in-instead">Log in instead!</a></p>
+                    <form action="">
+                        <div class="member-singup-name member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerName)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.TextBoxFor(m => m.CustomerName, new { placeholder = "請輸入會員姓名", @class = "member-singup-enter-information" })
+                                @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-account member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerAccount)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.TextBoxFor(m => m.CustomerAccount, new { placeholder = "請輸入會員帳號", @class = "member-singup-enter-information" })
+                                @Html.ValidationMessageFor(m => m.CustomerAccount, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-account member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerPassword)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.PasswordFor(m => m.CustomerPassword, new { placeholder = "請輸入會員密碼", @class = "member-singup-enter-information" })
+                                <span id="passwordtext" class="text-dan">字串長度在 6 ~ 30 個字之間</span>
+                                @Html.ValidationMessageFor(m => m.CustomerPassword, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-account member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "請輸入確認密碼", @class = "member-singup-enter-information" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-phone member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerPhone)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.TextBoxFor(m => m.CustomerPhone, new { placeholder = "請輸入手機號碼", @class = "member-singup-enter-information" })
+                                @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-email member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerEmail)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.TextBoxFor(m => m.CustomerEmail, new { placeholder = "請輸入電子郵件", @type = "email", @class = "member-singup-enter-information" })
+                                @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-birth member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerBirth)
+                            </div>
+                            <div class="member-singup-right birth-line">
+                                @Html.TextBoxFor(m => m.CustomerBirth, new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CustomerBirth, "", new { @class = "prompt-text text-dan" })
+                                @*<input type="text" placeholder="YYYY/MM/DD" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                        <div class="member-singup-address member-singup-content-all">
+                            <div class="member-singup-content-title">
+                                @Html.LabelFor(m => m.CustomerAddress)
+                            </div>
+                            <div class="member-singup-right">
+                                @Html.TextBoxFor(m => m.CustomerAddress, new { placeholder = "請輸入地址", @class = "member-singup-enter-information" })
+                                @Html.ValidationMessageFor(m => m.CustomerAddress, "", new { @class = "prompt-text text-dan" })
+                                @*<div class="member-singup-right-select">
+                                    <select>
+                                        <option value="" selected="selected">請選擇縣市</option>
+                                        <option value="">台北市</option>
+                                        <option value="">新北市</option>
+                                    </select>
+                                    <select name="">
+                                        <option value="" selected="selected">請選擇鄉鎮市區</option>
+                                        <option value="">中正區</option>
+                                        <option value="">大同區</option>
+                                    </select>
+                                </div>
+                                <input type="text" class="member-singup-enter-information">*@
+                            </div>
+                        </div>
+                    </form>
+                    <div class="save-infomation">
+                        <input type="submit" class="save-button" value="註冊">
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 }
 
-@section topCss 
+@section topCss
 {
-    <link href="~/Assets/Css/Login_out_stylesheet.css" rel="stylesheet" />
+    <link href="~/Assets/Css/member-singup.css" rel="stylesheet" />
 }
-@section scripts 
+@section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
 }
