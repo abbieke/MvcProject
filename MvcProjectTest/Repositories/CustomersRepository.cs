@@ -128,12 +128,13 @@ namespace MvcProjectTest.Repositories
             {
                 string sql = "select * from UserRoles where UserID=@customerId;";
                 string result = conn.QueryFirstOrDefault<string>(sql,new { customerId });
-                List<string> roles = result.Split(',').ToList();
+                List<string> roles = result.Split(',').ToList(); 
+
                 if (roles.IndexOf("roleId") != -1)
                 {
                     roles.Remove(roleId);
                 }
-                return String.Join(", ", roles.ToArray()); 
+                return string.Join(", ", roles.ToArray()); 
 
             }
         }
