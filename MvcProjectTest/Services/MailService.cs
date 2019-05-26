@@ -12,18 +12,8 @@ namespace MvcProjectTest.Services
 {
     public class MailService
     {
-        public static async Task SendMailToVerify()
+        public static async Task SendMailToVerify(string callbackUrl,string mail)
         {
-            //var apiKey = ConfigurationManager.AppSettings["SendGrid_1G"];
-            //var client = new SendGridClient(apiKey);
-            //var from = new EmailAddress("Hello1G", "1G Chou");
-            //var subject = "Sending with SendGrid is Fun";
-            //var to = new EmailAddress("jay5eternal@gmail.com", "Example User");
-            //var plainTextContent = "and easy to do anywhere, even with C#";
-            //var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-            //var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            //var response = await client.SendEmailAsync(msg);
-            //await Task.FromResult(0);
             var apiKey = ConfigurationManager.AppSettings["SendGrid_1G"];
             var client = new SendGridClient(apiKey);
 
@@ -31,10 +21,10 @@ namespace MvcProjectTest.Services
             {
                 From = new EmailAddress("Hi1GLOL@gmail.com", "1G Team"),
                 Subject = "Hello World from the SendGrid CSharp SDK!666",
-                PlainTextContent = "Hello, Email bobo!", 
-                HtmlContent = "<p>感謝註冊會員,為了....點擊下方按鈕驗證</p><a href='http://localhost:49572/Account/Test2'>驗證</a>"
+                PlainTextContent = "", 
+                HtmlContent = "<p>感謝註冊會員,為了....點擊下方按鈕驗證</p><a href="+ callbackUrl + ">驗證</a>"
             };
-            msg.AddTo(new EmailAddress("jay5eternal@gmail.com", "Test User"));
+            msg.AddTo(new EmailAddress(mail, null));
             var response = await client.SendEmailAsync(msg);
 
             //var msg = new SendGridMessage()
@@ -46,6 +36,21 @@ namespace MvcProjectTest.Services
             //};
             //msg.AddTo(new EmailAddress("ruth265820@gmail.com", "Test User"));
             //var response = await client.SendEmailAsync(msg);
+        }
+        public static async Task SendMailToResetPwd(string callbackUrl, string mail)
+        {
+            var apiKey = ConfigurationManager.AppSettings["SendGrid_1G"];
+            var client = new SendGridClient(apiKey);
+
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("Hi1GLOL@gmail.com", "1G Team"),
+                Subject = "重設密碼 - 新知書櫥",
+                PlainTextContent = "",
+                HtmlContent = "<p>信件內容........點擊連結重設密碼</p><a href=" + callbackUrl + "></a>"
+            };
+            msg.AddTo(new EmailAddress(mail, null));
+            var response = await client.SendEmailAsync(msg);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MvcProjectTest.Models;
+using MvcProjectTest.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -83,6 +84,16 @@ namespace MvcProjectTest.Repositories
 
             }
         }
+        public Customer CustomerLogin(string account)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Customers Where CustomerAccount= @account ;";
+                var cust = conn.QueryFirstOrDefault<Customer>(sql,new { account});
+                return cust;
+
+            }
+        }
 
         public bool IsEmailConfirmed(string account)
         {
@@ -101,10 +112,17 @@ namespace MvcProjectTest.Repositories
                 conn.Execute(sql, new {userRoles.UserID, userRoles.RolesID });
             
         }
+        public void CustomerUpdateRole(UserRoles userRoles)
+        {
+
+            string sql = "UPDATE UserRoles SET RolesID= @RolesID WHERE UserID=@UserID ;";
+            conn.Execute(sql, new { userRoles.RolesID, userRoles.UserID  });
+
+        }
 
         public int GetCusromerID(string account)
         {
-            using (conn)
+            using (conn = new SqlConnection(connString))
             {
                 int customerId= conn.Query<int>("GetCustomerID",
                                 new { customerAccount =account },
@@ -116,28 +134,45 @@ namespace MvcProjectTest.Repositories
 
         public void UpdateEmailConfirmed(int customerId,bool isConfirmed)
         {
-            using (conn)
+            using (conn = new SqlConnection(connString))
             {
                 string sql = "UPDATE Customers SET EmailConfirmed= @isConfirmed WHERE CustomerID=@customerId;";
                 conn.Execute(sql, new { isConfirmed , customerId });
             }
         }
-        public string CustomerRemoveRole(int customerId, string roleId)
+        public void CustomerRemoveRole(int customerId, string roleId)
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "select * from UserRoles where UserID=@customerId;";
+                string sql = "select RolesID from UserRoles where UserID=@customerId;";
                 string result = conn.QueryFirstOrDefault<string>(sql,new { customerId });
-                List<string> roles = result.Split(',').ToList(); 
-
-                if (roles.IndexOf("roleId") != -1)
+                List<string> roles = result.Split(',').ToList();
+                if (roles.IndexOf(roleId) != -1)
                 {
                     roles.Remove(roleId);
                 }
-                return string.Join(", ", roles.ToArray()); 
+                
+                UserRoles userRoles = new UserRoles
+                {
+                    UserID = customerId,
+                    RolesID = string.Join(", ", roles.ToArray())
+                };
+
+                CustomerUpdateRole(userRoles);
 
             }
         }
+
+        public void UpdatePassword(string account,string password)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sha256pwd = HashService.SHA256Hash(password);
+                string sql = "UPDATE Customers SET CustomerPassword= @sha256pwd WHERE CustomerAccount=@account;";
+                conn.Execute(sql, new { sha256pwd, account });
+            }
+        }
+
 
     }
 }
