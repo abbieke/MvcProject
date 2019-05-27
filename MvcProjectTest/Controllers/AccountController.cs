@@ -71,7 +71,7 @@ namespace MvcProjectTest.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registration(Customer cust)
+        public async Task<ActionResult> Registration(Customer cust)
         {
             if(String.IsNullOrEmpty(cust.ConfirmPassword))
             {
@@ -98,25 +98,31 @@ namespace MvcProjectTest.Controllers
                             CustomerPhone = cust.CustomerPhone
                         };
                         _repo.InsertCustomer(customer);
-                                               
+                        var callbackUrl = Url.Action("EmailConfirmed", "Account",new { userAccount = cust.CustomerAccount },protocol: Request.Url.Scheme);
+                        await MailService.SendMailToVerify(callbackUrl,cust.CustomerEmail);
+
                         return RedirectToAction("Index");
                     }
                     return Content("密碼不符");
                 }
             }
         }
-        public async Task<ActionResult> TesttAsync()
-        {
-            await MailService.SendMailToVerify();
-            return Content("123");
-        }
-        public ActionResult EmailConfirmed()
-        {
-            //_repo.UpdateEmailConfirmed(1,true);
-            //_repo.CustomerRemoveRole(1, "4");
-            return Content(_repo.CustomerRemoveRole(1, "4"));
-        }
         
+        public ActionResult EmailConfirmed(string userAccount)
+        {
+            int userId=_repo.GetCusromerID(userAccount);
+            _repo.UpdateEmailConfirmed(userId, true);
+            _repo.CustomerRemoveRole(userId, "4");
+
+            return RedirectToAction("Index","Home",null);
+        }
+
+        //public ActionResult test()
+        //{
+        //    //return Content( _repo.CustomerRemoveRole(3, "4"));
+        //}
+
+
 
 
         [HttpGet]
@@ -181,6 +187,71 @@ namespace MvcProjectTest.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public ActionResult ForgetPassword()
+        {         
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> ForgetPassword(ForgetPwdViewModel forgetPwdVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(forgetPwdVM);
+            }
+
+            string account = HttpUtility.HtmlEncode(forgetPwdVM.CustomerAccount); //編碼成純文字
+            string birthday = HttpUtility.HtmlEncode(forgetPwdVM.CustomerBirth.ToString("yyyy/MM/dd"));
+            //return Content(birthday);
+
+            //dapper
+            Customer cust = _repo.CustomerLogin(account);
+            if (cust==null)
+            {
+                ModelState.AddModelError("", "無效的帳號。");
+                return View();
+            }
+            if (cust.CustomerBirth.ToString("yyyy/MM/dd") == birthday)
+            {
+                ViewData["IsPass"] = true;
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userAccount = cust.CustomerAccount }, protocol: Request.Url.Scheme);
+                await MailService.SendMailToResetPwd(callbackUrl, cust.CustomerEmail);
+
+            }
+            return View();
+        }
+        [HttpGet]
+        public ActionResult ResetPassword(string userAccount)
+        {
+            Customer cust= _repo.CustomerLogin(userAccount);
+            var ticket = new FormsAuthenticationTicket(
+            version: 1,
+            name: cust.CustomerAccount.ToString(), //可以放使用者Id
+            issueDate: DateTime.UtcNow,//現在UTC時間
+            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+            isPersistent: true,// 是否要記住我 true or false
+            userData: cust.EmailConfirmed.ToString(), //可以放使用者角色名稱
+            cookiePath: FormsAuthentication.FormsCookiePath);
+
+            // Encrypt the ticket.
+            var encryptedTicket = FormsAuthentication.Encrypt(ticket); //把驗證的表單加密
+
+            // Create the cookie.
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            Response.Cookies.Add(cookie);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPwdViewModel ResetPwdVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(ResetPwdVM);
+            }
+            _repo.UpdatePassword(User.Identity.Name, ResetPwdVM.ConfirmPassword);
+
             return RedirectToAction("Index", "Home");
         }
 
