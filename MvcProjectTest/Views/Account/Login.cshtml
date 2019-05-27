@@ -72,7 +72,9 @@
                             </div>
                         </div>
                         <div class="member-Login-forget-account">
-                            <p><a href="#" class="member-Login-forget-button">忘記密碼?</a></p>
+                            <p>
+                                @Html.ActionLink("忘記密碼?", "ForgetPassword", "Account", new { }, new { @class = "member-Login-forget-button" })                                                        
+                            </p>
                         </div>
                         <div class="save-infomation">
                             <input type="submit" class="save-button" value="登入" />

@@ -220,6 +220,10 @@ namespace MvcProjectTest.Controllers
                 await MailService.SendMailToResetPwd(callbackUrl, cust.CustomerEmail);
 
             }
+            else
+            {
+                ModelState.AddModelError("", "會員生日不符。");
+            }
             return View();
         }
         [HttpGet]
