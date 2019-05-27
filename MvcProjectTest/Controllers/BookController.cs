@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcProjectTest.Models;
 
 namespace MvcProjectTest.Controllers
 {
@@ -21,9 +22,13 @@ namespace MvcProjectTest.Controllers
             return View(books);
         }
 
-        public ActionResult BookDetail()
+        public ActionResult BookDetail(string id)
         {
-            return View();
+            var book = _repo.SelectBook(id);
+            var books = _repo.SelectTopBooks();
+            BookMix mix = new BookMix(){ Book = book, SelectBooks = books };
+            //return View();
+            return View(mix);
         }
     }
 }

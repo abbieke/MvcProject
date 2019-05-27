@@ -44,5 +44,15 @@ namespace MvcProjectTest.Repositories
             }
             return books;
         }
+
+        public Book SelectBook(string id)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID Inner Join Press AS p ON b.PressID = p.PressID WHERE b.BookID = '" + id +"'";
+                var book = conn.QueryFirstOrDefault<Book>(sql);
+                return book;
+            }
+        }
     }
 }
