@@ -162,10 +162,13 @@
     <Compile Include="Repositories\CustomersRepository.cs" />
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\MailService.cs" />
+    <Compile Include="ViewModels\ForgetPwdViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ResetPwdViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />
+    <Content Include="Assets\Css\forget-password.css" />
     <Content Include="Assets\Css\index-bigimage.css" />
     <Content Include="Assets\Css\index-product-list-stylesheet.css" />
     <Content Include="Assets\Css\indexView_stylesheet.css" />
@@ -265,6 +268,8 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\CustomerIndex.cshtml" />
     <Content Include="Views\Book\BookDetail.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
