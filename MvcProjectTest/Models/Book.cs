@@ -32,4 +32,11 @@ namespace MvcProjectTest.Models
     //public string Description { get; set; }
     //public string ISBN { get; set; }
     //public string BookImage { get; set; }
+
+    public class Category
+    {
+        public string CategoryID { get; set; }
+        public string CategoryName { get; set; }
+        public string CategoryEngName { get; set; }
+    }
 }

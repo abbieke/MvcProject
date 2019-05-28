@@ -11,7 +11,7 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @Styles.Render("~/css/base")
@@ -20,83 +20,94 @@
 
 <body>
     <header class="dropdowns">
-            <div class="dropdowns-top">
-                <div class="container">
-                    <div class="bookshopping-menu flex">
-                        <div class="bkshop-logo flex ">
-                            <a href="#" class="dropdowns-top-logo-link flex">
-                                <img class="dropdowns-logo-book" src="~/Assets/Images/logo/B-Bookstore-logo3.png" alt="">
-                                <img class="dropdowns-logo-text" src="~/Assets/Images/logo/B-Bookstore-logo4.png" alt="">
-                            </a>
-                        </div>
-                        <nav class="bkshop-nav boxfloat">
-                            <ul class="bookmenu">
-                                <li class="book-item">
-                                    <a href="#">home</a>
-                                    <ul class="book-item-list">
-                                        <li class="book-item book-item-has-children">
-                                            <a href="#"> Checkout</a>
-                                            <ul class="book-last-list">
+        <div class="dropdowns-top">
+            <div class="container">
+                <div class="bookshopping-menu flex">
+                    <div class="bkshop-logo flex ">
+                        <a href="#" class="dropdowns-top-logo-link flex">
+                            <img class="dropdowns-logo-book" src="~/Assets/Images/logo/B-Bookstore-logo3.png" alt="">
+                            <img class="dropdowns-logo-text" src="~/Assets/Images/logo/B-Bookstore-logo4.png" alt="">
+                        </a>
+                    </div>
+                    <nav class="bkshop-nav boxfloat">
+                        <ul class="bookmenu">
+                            @{
+                                MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                var cate = _repo.SelectCategory();
+                            }
+                            @foreach (var item in cate)
+                            {
+                                <li class="book-item"> <a href="#">@item.CategoryName</a></li>
+                            }
+                            @*<li class="book-item">
+                                <a href="#">home</a>
+                                <ul class="book-item-list">
+                                    <li class="book-item book-item-has-children">
+                                        <a href="#"> 類別</a>
+                                        <ul class="book-last-list">
+                                            @{
+                                                MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                                var cate = _repo.SelectCategory();
+                                            }
+                                            @foreach (var item in cate)
+                                            {
+                                                <li class=" book-last-item"> <a href="#"> @item.CategoryName</a></li>
+                                                @*<li class=" book-last-item"> <a href="#">Checkout</a></li>
                                                 <li class=" book-last-item"> <a href="#">Checkout</a></li>
                                                 <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                                <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                                <li class=" book-last-item"> <a href="#">Checkout</a></li>
-
-                                                @{ 
-                                                    MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
-                                                }
-                                            </ul>
-                                        </li>
-                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
-                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
-                                    </ul>
-                                </li>
-                                <li class="book-item"> <a href="#">home</a></li>
-                                <li class="book-item"> <a href="#">home</a></li>
-                                <li class="book-item"> <a href="#">home</a></li>
-                            </ul>
-                        </nav>
-                        <div class="bkshop-searchbox">
-                            <form action="#" class="search">
-                                <i class="fas fa-search"></i>
-                                <input type="text">
-                            </form>
-                        </div>
-                        <div class="bkshop-member-carbox">
-                            <ul class="bookmenu">
-                                <li class="book-item">
-                                    @if (Request.IsAuthenticated)
-                                    {    
-                                        <a href='@Url.Action("CustomerIndex","Customer", null)'><i class="fas fa-user top-icon"></i></a>
-                                    }
-                                    else
-                                    {    
-                                        <a href='@Url.Action("Login","Account", null)'><i class="fas fa-user top-icon"></i></a>                               
-                                    }
-                                    <ul class="book-item-list book-item-list-right">
-                                        @Html.Partial("_LoginPartial")
-                                    </ul>
-                                </li>
-                                <li class="book-item">
-                                    <a href="#"><i class="fas fa-shopping-cart top-icon"></i></a>
-                                    <ul class="book-item-list book-item-list-right">
-                                        <li class="book-item book-item-has-children">
-                                            <a href="#">car</a>
-                                            <ul class="book-last-list">
-                                                <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                                <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                                <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                                <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                                            }
+                                        </ul>
+                                    </li>
+                                    <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                    <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                </ul>
+                            </li>
+                            <li class="book-item"> <a href="#">home</a></li>
+                            <li class="book-item"> <a href="#">home</a></li>
+                            <li class="book-item"> <a href="#">home</a></li>*@
+                        </ul>
+                    </nav>
+                    <div class="bkshop-searchbox">
+                        <form action="#" class="search">
+                            <i class="fas fa-search"></i>
+                            <input type="text">
+                        </form>
+                    </div>
+                    <div class="bkshop-member-carbox">
+                        <ul class="bookmenu">
+                            <li class="book-item">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <a href='@Url.Action("CustomerIndex","Customer", null)'><i class="fas fa-user top-icon"></i></a>
+                                }
+                                else
+                                {
+                                    <a href='@Url.Action("Login","Account", null)'><i class="fas fa-user top-icon"></i></a>
+                                }
+                                <ul class="book-item-list book-item-list-right">
+                                    @Html.Partial("_LoginPartial")
+                                </ul>
+                            </li>
+                            <li class="book-item">
+                                <a href="#"><i class="fas fa-shopping-cart top-icon"></i></a>
+                                <ul class="book-item-list book-item-list-right">
+                                    <li class="book-item book-item-has-children">
+                                        <a href="#">car</a>
+                                        <ul class="book-last-list">
+                                            <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                            <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                            <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                            <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
     <div class="block-for-header-wrapper">
         <!-- 注意這塊與Header保持同高，若有修改頁首的留意 -->
     </div>

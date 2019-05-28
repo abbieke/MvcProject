@@ -54,5 +54,14 @@ namespace MvcProjectTest.Repositories
                 return book;
             }
         }
+        public List<Category> SelectCategory()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select CategoryName From Category ";
+                var category = conn.Query<Category>(sql).ToList();
+                return category;
+            }
+        }
     }
 }
