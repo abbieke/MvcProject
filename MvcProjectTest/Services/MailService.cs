@@ -47,7 +47,7 @@ namespace MvcProjectTest.Services
                 From = new EmailAddress("Hi1GLOL@gmail.com", "1G Team"),
                 Subject = "重設密碼 - 新知書櫥",
                 PlainTextContent = "",
-                HtmlContent = "<p>信件內容........點擊連結重設密碼</p><a href=" + callbackUrl + "></a>"
+                HtmlContent = "<p>信件內容........點擊連結重設密碼</p><a href=" + callbackUrl + ">點擊重設</a>"
             };
             msg.AddTo(new EmailAddress(mail, null));
             var response = await client.SendEmailAsync(msg);
