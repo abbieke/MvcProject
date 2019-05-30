@@ -22,10 +22,10 @@ namespace MvcProjectTest.Controllers
         //    return View(books);
         //}
 
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            var book = _repo.SelectCategoryBooks(id);
-            return View(book);
+            var books = _repo.SelectBooks();
+            return View(books);
         }
 
         public ActionResult BookDetail(string id)

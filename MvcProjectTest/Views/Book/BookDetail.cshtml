@@ -143,146 +143,148 @@
                 <div class="product-card-outside-slideblock">
                     @foreach (var item in Model.SelectBooks)
                     {
-                        <div class="product-card-out-block">
-                            <div class="product-card-block">
-                                <div class="product-card-img-block">
-                                    <a href='@Url.Action("BookDetail","Book", new {id = @Html.DisplayFor(modelItem => item.BookId)})' class="product-link">
-                                        <img class="pc-img"
-                                             src="~/Assets/Images/@Html.DisplayFor(modelItem => item.CategoryEngName)/@Html.DisplayFor(modelItem => item.BookImage)"
-                                             alt="1">
-                                    </a>
-                                    <div class="product-card-visual-cart-block">
-                                        <form action="add-cart">
-                                            <input type="hidden" name="id" value="1">
-                                            <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                            <button class="product-card-cart-button card-quick-button-style"
-                                                    type="submit">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                <span class="product-card-cart-tip pc-quick-tip-style">
-                                                    Add To Cart
-                                                </span>
-                                            </button>
-                                        </form>
-                                        <a href="#" class="product-card-quick-view">
-                                            <i class="far fa-eye card-quick-button-style"></i>
-                                            <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                                Quick View
+                    <div class="product-card-out-block">
+                        <div class="product-card-block">
+                            <div class="product-card-img-block">
+                                <a href='@Url.Action("BookDetail","Book", new {id = @Html.DisplayFor(modelItem => item.BookId)})' class="product-link">
+                                    <img class="pc-img"
+                                         src="~/Assets/Images/@Html.DisplayFor(modelItem => item.CategoryEngName)/@Html.DisplayFor(modelItem => item.BookImage)"
+                                         alt="1">
+                                </a>
+                                <div class="product-card-visual-cart-block">
+                                    <form action="add-cart">
+                                        <input type="hidden" name="id" value="1">
+                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                        <button class="product-card-cart-button card-quick-button-style"
+                                                type="submit">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span class="product-card-cart-tip pc-quick-tip-style">
+                                                Add To Cart
                                             </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-card-description-block">
-                                    <a href="#" class="product-link">
-                                        <h3 class="product-card-title">
-                                            @Html.DisplayFor(modelItem => item.BooksName)
-                                        </h3>
-                                        <div class="product-writter-block">
-                                            <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => item.AuthorName)</span>
-                                        </div>
-                                        <div class="product-price-block">
-                                            <span class="product-price-span product-card-des-text">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
-                                        </div>
+                                        </button>
+                                    </form>
+                                    <a href="#" class="product-card-quick-view">
+                                        <i class="far fa-eye card-quick-button-style"></i>
+                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                            Quick View
+                                        </span>
                                     </a>
                                 </div>
                             </div>
+                            <div class="product-card-description-block">
+                                <a href="#" class="product-link">
+                                    <h3 class="product-card-title">
+                                        @Html.DisplayFor(modelItem => item.BooksName)
+                                    </h3>
+                                    <div class="product-writter-block">
+                                        <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => item.AuthorName)</span>
+                                    </div>
+                                    <div class="product-price-block">
+                                        <span class="product-price-span product-card-des-text">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
+                    </div>
                     }
                 </div>
             </div>
             <div class="pd-product-recommend-right-block">
-                <a href="#"><i class="fas fa-angle-right"></i></a>
+                <button type="button" class="pd-product-recommend-button slide-right">
+                    <i class="fas fa-angle-right"></i>
+                </button>
             </div>
         </div>
     </div>
 </section>
 
 @section topCss {
-    <link href="~/Assets/Css/productdetail_stylesheet.css" rel="stylesheet" />
-    <link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
-    <link href="~/Assets/Css/slide-card.css" rel="stylesheet" />
+<link href="~/Assets/Css/productdetail_stylesheet.css" rel="stylesheet" />
+<link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
+<link href="~/Assets/Css/slide-card.css" rel="stylesheet" />
 }
 @section scripts {
-    <script>
-        $(document).ready(function () {
-            var docw = $(".container").width() * 0.9;
-            $(".slide-right").click(moveRight);
-            $(".slide-left").click(moveLeft);
+<script>
+    $(document).ready(function () {
+        var docw = $(".container").width() * 0.9;
+        $(".slide-right").click(moveRight);
+        $(".slide-left").click(moveLeft);
 
 
-            function moveRight() {
-                $(".slide-right").off("click");
-                $(".slide-main").animate({
-                    scrollLeft: $(".slide-main").scrollLeft() + docw
-                }, 500, function () { $(".slide-right").click(moveRight); });
+        function moveRight() {
+            $(".slide-right").off("click");
+            $(".slide-main").animate({
+                scrollLeft: $(".slide-main").scrollLeft() + docw
+            }, 500, function () { $(".slide-right").click(moveRight); });
+        }
+
+        function moveLeft() {
+            $(".slide-left").off("click");
+            $(".slide-main").animate({
+                scrollLeft: $(".slide-main").scrollLeft() - docw
+            }, 500, function () { $(".slide-left").click(moveLeft); });
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var docw = $(".product-left").width() * 0.3;
+        $(".product-little-picture-slide-right").click(moveRight);
+        $(".product-little-picture-slide-left").click(moveLeft);
+
+
+        function moveRight() {
+            $(".product-little-picture-slide-right").off("click");
+            $(".product-little-picture-slide-main").animate({
+                scrollLeft: $(".product-little-picture-slide-main").scrollLeft() + docw
+            }, 500, function () { $(".product-little-picture-slide-right").click(moveRight); });
+        }
+
+        function moveLeft() {
+            $(".product-little-picture-slide-left").off("click");
+            $(".product-little-picture-slide-main").animate({
+                scrollLeft: $(".product-little-picture-slide-main").scrollLeft() - docw
+            }, 500, function () { $(".product-little-picture-slide-left").click(moveLeft); });
+        }
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var burron = true;
+        $(".heart-click-button").click(clickheartbutton);
+
+        function clickheartbutton() {
+            if (burron == true) {
+
+                $(".heart-click-button i").removeClass("far").addClass("fas");
+                burron = false;
             }
-
-            function moveLeft() {
-                $(".slide-left").off("click");
-                $(".slide-main").animate({
-                    scrollLeft: $(".slide-main").scrollLeft() - docw
-                }, 500, function () { $(".slide-left").click(moveLeft); });
+            else {
+                $(".heart-click-button i").removeClass("fas").addClass("far");
+                burron = true;
             }
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            var docw = $(".product-left").width() * 0.3;
-            $(".product-little-picture-slide-right").click(moveRight);
-            $(".product-little-picture-slide-left").click(moveLeft);
-
-
-            function moveRight() {
-                $(".product-little-picture-slide-right").off("click");
-                $(".product-little-picture-slide-main").animate({
-                    scrollLeft: $(".product-little-picture-slide-main").scrollLeft() + docw
-                }, 500, function () { $(".product-little-picture-slide-right").click(moveRight); });
-            }
-
-            function moveLeft() {
-                $(".product-little-picture-slide-left").off("click");
-                $(".product-little-picture-slide-main").animate({
-                    scrollLeft: $(".product-little-picture-slide-main").scrollLeft() - docw
-                }, 500, function () { $(".product-little-picture-slide-left").click(moveLeft); });
-            }
-        });
-    </script>
-
-    <script>
-
-        $(document).ready(function () {
-            var burron = true;
-            $(".heart-click-button").click(clickheartbutton);
-
-            function clickheartbutton() {
-                if (burron == true) {
-
-                    $(".heart-click-button i").removeClass("far").addClass("fas");
-                    burron = false;
-                }
-                else {
-                    $(".heart-click-button i").removeClass("fas").addClass("far");
-                    burron = true;
-                }
-            }
-        });
+        }
+    });
 
 
 
-    </script>
+</script>
 
-    <!-- 小圖替換大圖 -->
-    <script>
+<!-- 小圖替換大圖 -->
+<script>
 
-        $(function () {
-            $(".pd-little-pic-button").click(little_pic_change_event);
+    $(function () {
+        $(".pd-little-pic-button").click(little_pic_change_event);
 
-            function little_pic_change_event() {
-                var littleImgSrc = $(this).children("img").attr("src");
+        function little_pic_change_event() {
+            var littleImgSrc = $(this).children("img").attr("src");
 
 
-                $("#pd-large-pic").attr("src", littleImgSrc);
-            }
-        });
-    </script>
+            $("#pd-large-pic").attr("src", littleImgSrc);
+        }
+    });
+</script>
 
 }
