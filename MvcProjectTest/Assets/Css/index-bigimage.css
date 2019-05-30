@@ -4,7 +4,7 @@
     height: 600px;
     background-position: 50% 50%;
     background-size: cover;
-    background-image: url('../Images/block/backgroundbook.jpg');
+    background-image: url('https://demoprestashop.aeipix.com/AX04/mybook75/modules/aei_imageslider/views/img/sample-3.jpg');
 }
 
 .index-bigimage-box:hover::after {
