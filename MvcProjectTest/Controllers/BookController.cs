@@ -16,10 +16,16 @@ namespace MvcProjectTest.Controllers
             _repo = new BooksRepository();
         }
         // GET: Book
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var books = _repo.SelectBooks();
+        //    return View(books);
+        //}
+
+        public ActionResult Index(string id)
         {
-            var books = _repo.SelectBooks();
-            return View(books);
+            var book = _repo.SelectCategoryBooks(id);
+            return View(book);
         }
 
         public ActionResult BookDetail(string id)

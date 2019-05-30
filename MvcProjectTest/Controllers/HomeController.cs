@@ -30,20 +30,6 @@ namespace MvcProjectTest.Controllers
             return View(books);
         }
 
-        public ActionResult ChooseBookByCategoryName(string CategoryEngName)
-        {
-            List<Book> books = new List<Book>();
-            foreach (var s in _repo.SelectBooks())
-            {
-                Console.WriteLine(s.CategoryEngName+ CategoryEngName);
-                if (s.CategoryEngName == CategoryEngName)
-                {
-                    books.Add(s);
-                }
-            }
-            var topbooks = _repo.SelectTopBooks();
-            Mix mix = new Mix() { Books = books, SecBooks = topbooks };
-            return View("../Home/Index", mix);
-        }
+        
     }
 }
