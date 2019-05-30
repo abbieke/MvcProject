@@ -11,12 +11,20 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylesheets/member-Login.css">
     @Styles.Render("~/css/base")
     @RenderSection("topCss", required: false)
     <style>
         .bookshopping-menu {
             height: 5rem;
+        }
+        body {
+            position: relative;
+            min-height: 840px;
+        }
+        .index-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -155,6 +163,11 @@
         </div>
     </footer>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    document.getElementsByTagName("body")[0].setAttribute("style", "min-height:"+ window.innerHeight +"px;" );
+            
+</script>
     <script>
         $(function () {
             $(window).scroll(function () {
@@ -166,21 +179,7 @@
             });
         });
     </script>
-    <!-- newest tab -->
-    <script>
-        $(function () {
-            $("#newest-tab").tabs();
-            // var $li = $('.newest-tab-title-row li');
-            // $($li.eq(0).addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
-
-            // $li.click(function () {
-            //     $($(this).find('a').attr('href')).show().siblings('.tab-inner').hide();
-            //     $(this).addClass('active').siblings('.active').removeClass('active');
-            // });
-        });
-    </script>
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
 </body>
 </html>
 

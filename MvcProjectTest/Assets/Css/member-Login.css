@@ -17,9 +17,6 @@
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 20px;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
 }
 
 .member-Login-content-all .member-Login-content-title {
@@ -38,10 +35,28 @@
   width: 50%;
 }
 
+.member-Login-enter-information {
+    width: 100%;
+    border: none;
+    border-bottom: #ddd solid 1px;
+}
+
+.member-Login-enter-information:focus {
+    outline: none;
+    border-bottom: #ddd solid 2px;
+}
+
 .member-Login-right .member-Login-enter-information {
   width: 100%;
   line-height: 30px;
   padding: 0 10px;
+  border: none;
+  border-bottom: #ddd solid 1px;
+}
+
+.member-Login-right .member-Login-enter-information:focus {
+  outline: none;
+  border-bottom: #ddd solid 2px;
 }
 
 .member-Login-right .birth-line {
@@ -65,14 +80,8 @@
 .save-infomation .save-button {
   padding: 10px 20px;
   border-radius: 5px;
-  background: #000000;
-  color: #dddddd;
+  border: none;
   font-weight: bold;
-}
-
-.save-infomation .save-button:hover {
-  background: #49bcab;
-  color: #000000;
 }
 
 .member-Login-forget-account {
@@ -111,5 +120,18 @@
 
 .member-Login-show-button:hover {
   background: #b7b7b7;
+}
+
+.button-style-Login {
+  border: #ddd 1px solid;
+}
+
+.button-style-Login:focus {
+  outline: none;
+}
+
+.button-style-Login:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
 /*# sourceMappingURL=member-Login.css.map */

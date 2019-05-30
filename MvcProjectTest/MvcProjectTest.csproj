@@ -167,9 +167,11 @@
     <Compile Include="ViewModels\ResetPwdViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\block\services.png" />
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />
     <Content Include="Assets\Css\forget-password.css" />
     <Content Include="Assets\Css\index-bigimage.css" />
+    <Content Include="Assets\Css\index-block.css" />
     <Content Include="Assets\Css\index-product-list-stylesheet.css" />
     <Content Include="Assets\Css\indexView_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />

@@ -8,39 +8,6 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    @*<div class="user-login">
-            <div class="container">
-                <div class="user-info-block-row">
-                    <div class="Login">
-                        @Html.ValidationSummary(true, "", new { @class = "prompt-text" })
-                        <form class="dropdown-menu">
-                            <div class="U-form-group">
-                                <p>@Html.LabelFor(m => m.CustomerAccount)</p>
-                                @Html.TextBoxFor(m => m.CustomerAccount, new { placeholder = "請輸入會員帳號", @class = "U-form-control" })
-                                @Html.ValidationMessageFor(m => m.CustomerAccount, "", new { @class = "prompt-text text-dan" })
-                            </div>
-                            <div class="U-form-group">
-                                <p>@Html.LabelFor(m => m.CustomerPassword)</p>
-                                @Html.PasswordFor(m => m.CustomerPassword, new { placeholder = "請輸入會員密碼", @class = "U-form-control" })
-                                @Html.ValidationMessageFor(m => m.CustomerPassword, "", new { @class = "prompt-text text-dan" })
-                            </div>
-                            <div class="U-form-check">
-                                <div>
-                                    @Html.CheckBoxFor(m => m.RememberMe)
-                                    @Html.LabelFor(m => m.RememberMe)
-                                </div>
-                                <div>
-                                    <a href="#">忘記密碼?</a>
-                                </div>
-                            </div>
-                            <input type="submit" value="登入" />
-                        </form>
-                        <p>還不是沒有會員? @Html.ActionLink("加入會員", "Registration", "Account")</p>
-                    </div>
-                </div>
-            </div>
-        </div>*@
     <div class="member-Login">
         <div class="container">
             @Html.ValidationSummary(true, "", new { @class = "prompt-text" })
@@ -55,35 +22,30 @@
                                 @Html.LabelFor(m => m.CustomerAccount)
                             </div>
                             <div class="member-Login-right">
-                                @Html.TextBoxFor(m => m.CustomerAccount, new { placeholder = "請輸入會員帳號", @class = "member-Login-enter-information" })
+                                @Html.EditorFor(m => m.CustomerAccount, new { htmlAttributes = new { placeholder = "請輸入會員帳號", @class = "member-Login-enter-information" } })
                                 @Html.ValidationMessageFor(m => m.CustomerAccount, "", new { @class = "prompt-text text-dan" })
-                                @*<input type="text" class="member-Login-enter-information">*@
                             </div>
                         </div>
                         <div class="member-Login-password member-Login-content-all">
                             <div class="member-Login-content-title">
-                                <label>@Html.LabelFor(m => m.CustomerPassword)</label>
+                                @Html.LabelFor(m => m.CustomerPassword)
                             </div>
                             <div class="member-Login-right">
-                                @Html.PasswordFor(m => m.CustomerPassword, new { placeholder = "請輸入會員密碼", @class = "member-Login-enter-input" })
+                                @Html.PasswordFor(m => m.CustomerPassword, new { placeholder = "請輸入會員密碼", @class = "member-Login-enter-input member-Login-enter-information" })
                                 @Html.ValidationMessageFor(m => m.CustomerPassword, "", new { @class = "prompt-text text-dan" })
-                                @*<input type="password" class="member-Login-enter-input" id="show-password-textbox1">*@
-                                <input type="button" class="member-Login-show-button" id="show-password-button1" value="Show">
+                                <input type="button" class="member-Login-show-button button-style" id="show-password-button1" value="Show">
                             </div>
                         </div>
                         <div class="member-Login-forget-account">
-                            <p>
-                                @Html.ActionLink("忘記密碼?", "ForgetPassword", "Account", new { }, new { @class = "member-Login-forget-button" })                                                        
-                            </p>
-                        </div>
-                        <div class="save-infomation">
-                            <input type="submit" class="save-button" value="登入" />
+                            @Html.ActionLink("忘記密碼?", "ForgetPassword", "Account", new { }, new { @class = "member-Login-forget-button" })
                         </div>
                     </form>
+                    <div class="save-infomation">
+                        <input type="submit" class="save-button button-style-Login">
+                    </div>
                 </div>
                 <div class="member-Login-Create-account">
-                    <p>還沒有帳號? @Html.ActionLink("加入會員", "Registration", "Account")</p>
-                    @*<p><a href="#" class="member-Login-forget-button">還沒有帳號?註冊</a></p>*@
+                    <p>還沒有帳號? @Html.ActionLink("註冊", "Registration", "Account", new { }, new { @class = "member-Login-forget-button" })</p>
                 </div>
             </section>
         </div>
@@ -94,5 +56,36 @@
     <link href="~/Assets/Css/member-Login.css" rel="stylesheet" />
 }
 @section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        var buttonDom;
+        var buttonIdName = "show-password-button";
+        setShowOnClick();
+
+        function setShowOnClick() {
+            for (var i = 1; ; i++) {
+
+                buttonDom = document.getElementById(buttonIdName + i);
+                if (!buttonDom) {
+                    break;
+                }
+
+                buttonDom.addEventListener("click", showPassWord);
+
+            }
+        }
+
+
+        function showPassWord() {
+            var index = this.id.split("show-password-button1");
+            var passwordInputDom = document.getElementById( "CustomerPassword" );
+            if (passwordInputDom.type === "password") {
+                passwordInputDom.type = "text";
+                this.value = "Hide";
+            } else {
+                passwordInputDom.type = "password";
+                this.value = "Show";
+            }
+        }
+    </script>
 }

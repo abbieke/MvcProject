@@ -48,7 +48,14 @@
 .member-singup-right .member-singup-enter-information {
   width: 100%;
   line-height: 30px;
-  padding: 0 5px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: #ddd solid 1px;
+}
+
+.member-singup-right .member-singup-enter-information:focus {
+  outline: none;
+  border-bottom: #ddd solid 2px;
 }
 
 .member-singup-right .birth-line {
@@ -65,21 +72,88 @@
   margin-bottom: 10px;
 }
 
+.member-singup-right-password {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
+}
+
+.member-singup-right-password .member-singup-enter-input {
+  width: 100%;
+  line-height: 30px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: #ddd solid 1px;
+}
+
+.member-singup-right-password .member-singup-enter-input:focus {
+  outline: none;
+  border-bottom: #ddd solid 2px;
+}
+
+.member-singup-right-password .birth-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.member-singup-right-password .member-singup-right-select {
+  margin-bottom: 10px;
+}
+
 .save-infomation {
-  text-align: end;
+  text-align: right;
+  width: 80%;
 }
 
 .save-infomation .save-button {
   padding: 10px 20px;
-  margin: 30px;
+  margin: 20px;
   border-radius: 5px;
-  background: #000000;
-  color: #dddddd;
-  font-weight: bold;
 }
 
-.save-infomation .save-button:hover {
-  background: #49bcab;
-  color: #000000;
+.member-singup-enter-input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.member-singup-show-button {
+  background: #ddd;
+  border: #ddd 1px solid;
+  width: 70px;
+}
+
+.member-singup-show-button:hover {
+  background: #b7b7b7;
+}
+
+.bookshopping-menu {
+  height: 5rem;
+}
+
+.button-style {
+  border: #ddd 1px solid;
+}
+
+.button-style:focus {
+  outline: none;
+}
+
+.button-style:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
 /*# sourceMappingURL=member-singup.css.map */
+
+.prompt-text {
+    color: red;
+}
+.text-dan {
+    font-size: 8px;
+}
