@@ -213,9 +213,9 @@
     <Content Include="Assets\Images\Foreign\040004.jpg" />
     <Content Include="Assets\Images\logo\B-Bookstore-logo3.png" />
     <Content Include="Assets\Images\logo\B-Bookstore-logo4.png" />
-    <Content Include="Assets\Images\OtherPic\book.jpg" />
-    <Content Include="Assets\Images\OtherPic\eraser.png" />
-    <Content Include="Assets\Images\OtherPic\KaBi.png" />
+    <Content Include="Assets\Images\block\backgroundbook.jpg" />
+    <Content Include="Assets\Images\OPic\eraser.png" />
+    <Content Include="Assets\Images\OPic\KaBi.png" />
     <Content Include="Assets\Images\SChinese\030001.jpg" />
     <Content Include="Assets\Images\SChinese\030002.jpg" />
     <Content Include="Assets\Images\SChinese\030003.jpg" />
