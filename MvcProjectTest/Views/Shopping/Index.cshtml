@@ -1,0 +1,400 @@
+﻿@using MvcProjectTest.ViewModels;
+@model List<ShoppingCartViewModel>
+@{
+    ViewBag.Title = "新知書櫥";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    int bookCount=0;
+    int total = 0;
+
+}
+
+@Styles.Render("~/css/cartAndWishView")
+<div class="container">
+    <div class="cart-tab-block">
+        <div class="shipping-status">
+            <div class="container">
+                <ul class="shipping-progress">
+                    <li>購物車</li>
+                    <li>運送資訊</li>
+                    <li>訂單確認</li>
+                    <li>訂單成立</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="cart-tab">
+            <div class="cart-tab-title-row-block">
+                <ul>
+                    <li class="cart-tab-title-li">
+                        <a href="#cart-tabs-1" class="cart-tab-text active">購物車</a>
+                    </li>
+                    <li class="cart-tab-title-li">
+                        <a href="#cart-tabs-2" class="cart-tab-text">願望清單</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 購物車 -->
+            <div id="cart-tabs-1" class="tab-inner">
+                <div class="section">
+                    <div class="cart-nav">
+                        <ul>
+                            <li>
+                                <div class="switch">
+                                    <input type="checkbox" id="switch" checked />
+                                    <label for="switch"></label>
+                                </div>
+                            </li>
+                            <li>結帳後清空</li>
+                            <li><a href="#"><i class="fas fa-eraser"></i>清空購物車</a></li>
+                        </ul>
+                    </div>
+
+                    <table onchange="cheaked()">
+                        <tr class="ordercheck-titlelist-height">
+                            <th>
+                                <input type="checkbox" id="two" onclick="first()">
+                                <label for="two">全選</label>
+                            </th>
+                            <th>商品圖片</th>
+                            <th>商品名稱</th>
+                            <th>數量</th>
+                            <th>單價</th>
+                            <th>變更</th>
+                        </tr>
+                        @foreach (var book in Model)
+                        {
+                            total = total + (int)@book.UnitPrice;
+                            bookCount++;
+                            string field = "quantity" + bookCount;
+
+                            <tr class="ordercheck-list-height">
+                                <td class="item-checkbox-list">
+                                    <input type="checkbox" name="one" onclick="cheaked()">
+                                </td>
+                                <td class="cart-item-img">
+                                    <div class="cart-item-imgbox"><img src="~/Assets/Images/@book.CategoryEngName/@book.BookImage" alt=""></div>
+                                </td>
+                                <td class="item-name-list"><a href="#">這是其中一本書</a></td>
+                                <td class="item-qty-list">
+                                    <form id='book1' method='POST' action='#'>
+                                        <input type='button' value='-' class='qtyminus' field='@field' />
+                                        <input type='text' name='@field' value='0' class='qty' />
+                                        <input type='button' value='+' class='qtyplus' field='@field' />
+                                    </form>
+                                </td>
+                                <td class="item-price-list">@book.UnitPrice.ToString("0") 元</td>
+                                <td class="item-delete-list"><a href="#"><i class="far fa-trash-alt"></i></a></td>
+                            </tr>
+
+                        }
+                
+                        
+                    </table>
+
+                    <div class="cart-total-div">
+                        <ul class="float-right">
+                            <li>運費: <span>於下個步驟確認</span></li>
+                            <li>總額: TWD <span>@total</span></li>
+                        </ul>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12 text-center">
+                            @Html.ActionLink("下一步，填寫資訊", "ShippingInfo", "Shopping", new { name = 666, year = 777 },
+        new { @class = "btn btn-dark active",@role= "button" , @style = "text-indent: 0;", })                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 願望清單 -->
+            <div id="cart-tabs-2" class="tab-inner">
+                <div class="product-card-list">
+                    <div class="product-card-out-block">
+                        <div class="product-card-block">
+                            <div class="product-card-img-block">
+                                <a href="#" class="product-link">
+                                    <img class="pc-img"
+                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                         alt="1">
+                                </a>
+                                <div class="product-card-visual-cart-block">
+                                    <form action="add-cart">
+                                        <input type="hidden" name="id" value="1">
+                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                        <button class="product-card-cart-button card-quick-button-style"
+                                                type="submit">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span class="product-card-cart-tip pc-quick-tip-style">
+                                                Add To
+                                                Cart
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <a href="#" class="product-card-quick-view">
+                                        <i class="far fa-eye card-quick-button-style"></i>
+                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                            Quick
+                                            View
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="wish-list-card-remove-icon-block">
+                                    <a href="#" class="product-trash-icon-a">
+                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
+                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-card-description-block">
+                                <a href="#" class="product-link">
+                                    <h3 class="product-card-title">
+                                        有可能的任務
+                                    </h3>
+                                    <div class="product-writter-block">
+                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                    </div>
+                                    <div class="product-price-block">
+                                        <span class="product-price-span product-card-des-text">$300</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-block">
+                            <div class="product-card-img-block">
+                                <a href="#" class="product-link">
+                                    <img class="pc-img"
+                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                         alt="1">
+                                </a>
+                                <div class="product-card-visual-cart-block">
+                                    <form action="add-cart">
+                                        <input type="hidden" name="id" value="1">
+                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                        <button class="product-card-cart-button card-quick-button-style"
+                                                type="submit">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span class="product-card-cart-tip pc-quick-tip-style">
+                                                Add To
+                                                Cart
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <a href="#" class="product-card-quick-view">
+                                        <i class="far fa-eye card-quick-button-style"></i>
+                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                            Quick
+                                            View
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="wish-list-card-remove-icon-block">
+                                    <a href="#" class="product-trash-icon-a">
+                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
+                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-card-description-block">
+                                <a href="#" class="product-link">
+                                    <h3 class="product-card-title">
+                                        有可能的任務
+                                    </h3>
+                                    <div class="product-writter-block">
+                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                    </div>
+                                    <div class="product-price-block">
+                                        <span class="product-price-span product-card-des-text">$300</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-block">
+                            <div class="product-card-img-block">
+                                <a href="#" class="product-link">
+                                    <img class="pc-img"
+                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                         alt="1">
+                                </a>
+                                <div class="product-card-visual-cart-block">
+                                    <form action="add-cart">
+                                        <input type="hidden" name="id" value="1">
+                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                        <button class="product-card-cart-button card-quick-button-style"
+                                                type="submit">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span class="product-card-cart-tip pc-quick-tip-style">
+                                                Add To
+                                                Cart
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <a href="#" class="product-card-quick-view">
+                                        <i class="far fa-eye card-quick-button-style"></i>
+                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                            Quick
+                                            View
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="wish-list-card-remove-icon-block">
+                                    <a href="#" class="product-trash-icon-a">
+                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
+                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-card-description-block">
+                                <a href="#" class="product-link">
+                                    <h3 class="product-card-title">
+                                        有可能的任務
+                                    </h3>
+                                    <div class="product-writter-block">
+                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                    </div>
+                                    <div class="product-price-block">
+                                        <span class="product-price-span product-card-des-text">$300</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-card-block">
+                            <div class="product-card-img-block">
+                                <a href="#" class="product-link">
+                                    <img class="pc-img"
+                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
+                                         alt="1">
+                                </a>
+                                <div class="product-card-visual-cart-block">
+                                    <form action="add-cart">
+                                        <input type="hidden" name="id" value="1">
+                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                        <button class="product-card-cart-button card-quick-button-style"
+                                                type="submit">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span class="product-card-cart-tip pc-quick-tip-style">
+                                                Add To
+                                                Cart
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <a href="#" class="product-card-quick-view">
+                                        <i class="far fa-eye card-quick-button-style"></i>
+                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                            Quick
+                                            View
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="wish-list-card-remove-icon-block">
+                                    <a href="#" class="product-trash-icon-a">
+                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
+                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-card-description-block">
+                                <a href="#" class="product-link">
+                                    <h3 class="product-card-title">
+                                        有可能的任務
+                                    </h3>
+                                    <div class="product-writter-block">
+                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
+                                    </div>
+                                    <div class="product-price-block">
+                                        <span class="product-price-span product-card-des-text">$300</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(function () {
+            // $item_counts = $(".cart-items").find("table").length;
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 0) {          /* 要滑動到選單的距離 */
+                    $('.dropdowns').addClass('navFixed');   /* 幫選單加上固定效果 */
+                } else {
+                    $('.dropdowns').removeClass('navFixed'); /* 移除選單固定效果 */
+                }
+            });
+            // $(".scifiUI").height($(".scifiUI").height() + 80 * $item_counts);
+            // console.log($item_counts, $(".scifiUI").height());
+        });
+
+        $(function () {
+            $("#newest-tab").tabs();
+            $("#cart-tab").tabs();
+        });
+
+        // 數量增減
+        $(function () {
+            // This button will increment the value
+            $('.qtyplus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                fieldName = $(this).attr('field');
+                // Get its current value
+                var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+                // If is not undefined
+                if (!isNaN(currentVal)) {
+                    // Increment
+                    $('input[name=' + fieldName + ']').val(currentVal + 1);
+                } else {
+                    // Otherwise put a 0 there
+                    $('input[name=' + fieldName + ']').val(0);
+                }
+            });
+            // This button will decrement the value till 0
+            $(".qtyminus").click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                fieldName = $(this).attr('field');
+                // Get its current value
+                var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+                // If it isn't undefined or its greater than 0
+                if (!isNaN(currentVal) && currentVal > 0) {
+                    // Decrement one
+                    $('input[name=' + fieldName + ']').val(currentVal - 1);
+                } else {
+                    // Otherwise put a 0 there
+                    $('input[name=' + fieldName + ']').val(0);
+                }
+            });
+        });
+    </script>
+    <!-- 全選功能 -->
+    <script>
+        function first() {
+            var as = document.getElementsByName("one");
+            var a1 = document.getElementById("two");
+            for (var i = 0; i < as.length; i++) {
+                as[i].checked = a1.checked;
+            }
+        }
+        function cheaked() {
+            var count = 0;
+            var aa = document.getElementById("two");
+            var aa1 = document.getElementsByName("one");
+            for (var i = 0; i < aa1.length; i++) {
+                if (aa1[i].checked) {
+                    count += 1;
+                    if (count == aa1.length) {
+                        aa.checked = true;
+                    } else {
+                        aa.checked = false;
+                    }
+                }
+            }
+        }
+    </script>
+}
+

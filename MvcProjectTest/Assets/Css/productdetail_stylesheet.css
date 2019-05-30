@@ -22,12 +22,13 @@
           align-items: center;
 }
 
-.product-little-picture img {
-  border: 1px solid #979797;
+.product-little-picture-slide-li {
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
-.product-little-picture img:hover {
-  border: 1px solid #49bcab;
+.product-little-picture-slide-li:hover {
+  border-color: #49bcab;
 }
 
 .product-right {
@@ -35,23 +36,37 @@
   margin-left: 30px;
 }
 
-.pd-product-price {
-  margin-bottom: 30px;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
-
 .pd-order-block {
   margin-top: 15px;
-  background: rgba(73, 188, 171, 0.3);
   padding: 15px;
   font-family: 'Microsoft JhengHei';
+  border-radius: 5px;
+}
+
+.pd-productdetail-information-h2 {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 5px #ddd;
+          box-shadow: 2px 2px 5px #ddd;
+  background: rgba(73, 188, 171, 0.3);
+}
+
+.pd-productdetail-information-content {
+  line-height: 3rem;
+  font-size: 16px;
+  font-weight: bold;
+  width: 1000px;
+  margin: 0 auto;
 }
 
 .pd-order-block-style {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .pd-order-block-style p {
@@ -68,8 +83,23 @@
 }
 
 .pd-quantity-textbox {
-  width: 60px;
+  width: 40px;
   padding: 0 10px;
+  height: 2rem;
+}
+
+.pd-join-shoppingcart {
+  cursor: pointer;
+  padding: 15px;
+  border: none;
+  background: #f6f6f6;
+  color: #575757;
+  margin-left: 60px;
+  border: 1px solid #000;
+}
+
+.pd-order-button-style {
+  margin-top: 20px;
 }
 
 .productlist {
@@ -131,6 +161,25 @@
   letter-spacing: 2px;
 }
 
+.heart-click-box {
+  margin-left: auto;
+  font-size: 28px;
+  padding-top: 14px;
+}
+
+.heart-click-button {
+  color: red;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background: #fff;
+  border: none;
+}
+
+.heart-click-button:focus {
+  outline: none;
+}
+
 .pd-product-information {
   letter-spacing: 1px;
   line-height: 2rem;
@@ -161,5 +210,59 @@
 
 .pd-product-recommend-left-block i, .pd-product-recommend-right-block i {
   margin: 0 auto;
+}
+
+.pd-product-price-block {
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.1rem;
+}
+
+.pd-product-discount-box {
+  margin-right: 15px;
+  padding-left: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.pd-product-original-text {
+  font-weight: bold;
+}
+
+.pd-product-discount-text {
+  font-weight: bold;
+  color: #49bcab;
+}
+
+.pd-product-discount-textshow {
+  font-weight: bold;
+  color: white;
+  background-color: #49bcab;
+  padding: 8px;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.pd-little-pic-button {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.pd-little-pic-button:focus {
+  outline: none;
 }
 /*# sourceMappingURL=productdetail_stylesheet.css.map */

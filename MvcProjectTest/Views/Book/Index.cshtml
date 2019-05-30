@@ -4,9 +4,7 @@
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
-<div class="block-for-header-wrapper">
-    <!-- 注意這塊與Header保持同高，若有修改頁首的留意 -->
-</div>
+
 <div class="books_section">
     <div class="container">
         <!-- Breadcrumbs  套版bootstrap-->
@@ -45,62 +43,40 @@
                         <h5>價格範圍</h5>
                     </div>
                     <p>
-                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <input type="text" class="all-view-sidebar-price-range-text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                     </p>
+
                     <div id="slider-range"></div>
+
                     <div class="filter_button"><span>篩選</span></div>
                 </div>
             </div>
             <div class="books-block">
                 <div class="sort-div">
-                    <ul class="product_sorting">
-                        <li>
-                            <span class="type_sorting_text">預設排序</span>
-                            <i class="fa fa-angle-down"></i>
-                            <ul class="sorting_type">
-                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'>
-                                    <span>預設排序</span>
-                                </li>
-                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "priceLtoH" }'>
-                                    <span>價格低至高</span>
-                                </li>
-                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "priceHtoL" }'>
-                                    <span>價格高至低</span>
-                                </li>
-                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "bestseller" }'>
-                                    <span>熱銷書</span>
-                                </li>
-                                <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "bookISBN" }'>
-                                    <span>ISBN</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span>顯示數量</span>
-                            <span class="num_sorting_text">24</span>
-                            <i class="fa fa-angle-down"></i>
-                            <ul class="sorting_num">
-                                <li class="num_sorting_btn"><span>24</span></li>
-                                <li class="num_sorting_btn"><span>48</span></li>
-                                <li class="num_sorting_btn"><span>96</span></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <select class="all-book-category-select" name="all-book-category" id="all-book-category-dropdown">
+                        <option value="1" selected>預設排序</option>
+                        <option value="2">價格低至高</option>
+                        <option value="3">價格高至低</option>
+                        <option value="4">熱銷書</option>
+                        <option value="5">ISBN</option>
+
+                    </select>
                     <div class="present-sorting">
-                        <i class="fas fa-list-ul active"></i>
-                        <i class="fas fa-th"></i>
+                        <button class="present-sorting-button sorting-display-js" id="sorting-display-list-button"><i class="fas fa-list-ul"></i></button>
+                        <button class="present-sorting-button sorting-display-js" id="sorting-display-grid-button"><i class="fas fa-th active"></i></button>
+
 
                     </div>
                 </div>
                 <!-- 書 -->
-                <div class="row">
+                <div class="row sorting-display" id="sorting-display-items-block">
                     <!-- Product 1 -->
                     @foreach (var item in Model)
                     {
                         <div class="product-card-out-block">
                             <div class="product-card-block">
-
                                 <div class="product-card-img-block">
+                                    <a href='@Url.Action("BookDetail","Book", new {id=@item.BookId})' class="product-link">
                                     <a href='@Url.Action("BookDetail","Book", new {id = @Html.DisplayFor(modelItem => item.BookId)})' class="product-link">
                                         <img class="pc-img"
                                              src="~/Assets/Images/@Html.DisplayFor(modelItem => item.CategoryEngName)/@Html.DisplayFor(modelItem => item.BookImage)"
@@ -111,22 +87,20 @@
 
                                             <input type="hidden" name="id" value="1">
                                             <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                            <button class="product-card-cart-button card-quick-button-style"
-                                                    type="submit">
+                                            <button class="product-card-cart-button card-quick-button-style" type="submit">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 <span class="product-card-cart-tip pc-quick-tip-style">
-                                                    Add To
-                                                    Cart
+                                                    Add To Cart
                                                 </span>
                                             </button>
                                         </form>
-                                        <a href="#" class="product-card-quick-view">
+                                        <button class="product-card-quick-view quick-view-opener" id="quick-view-opener1">
                                             <i class="far fa-eye card-quick-button-style"></i>
                                             <span class="product-card-quick-view-tip pc-quick-tip-style">
                                                 Quick
                                                 View
                                             </span>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="product-card-description-block">
@@ -138,22 +112,155 @@
                                             <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => item.AuthorName)</span>
                                         </div>
                                         <div class="product-price-block">
-                                            <span class="product-price-span product-card-des-text">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
+                                            <span class="product-price-span product-card-des-text delete-line">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
+                                            <span class="product-card-discount-text">$200</span>
+                                        </div>
+                                        <div class="description-for-list-display-style">
+
+                                            沒辦法承受瞬間注意力、沒辦法被誇獎，會很不好意思、沒辦法邀功、沒辦法拍桌子吵架、不好意思開口請人家幫忙、不好意思打電話怕打擾人家、沒辦法用力行銷自己、沒辦法爭取福利、不想當第一名，因為不想要太多注意力……
+                                            沒辦法承受瞬間注意力、沒辦法被誇獎，會很不好意思、沒辦法邀功、沒辦法拍桌子吵架、不好意思開口請人家幫忙、不好意思打電話怕打擾人家、沒辦法用力行銷自己、沒辦法爭取福利、不想當第一名，因為不想要太多注意力……
+                                            沒辦法承受瞬間注意力、沒辦法被誇獎，會很不好意思、沒辦法邀功、沒辦法拍桌子吵架、不好意思開口請人家幫忙、不好意思打電話怕打擾人家、沒辦法用力行銷自己、沒辦法爭取福利、不想當第一名，因為不想要太多注意力……
+                                            沒辦法承受瞬間注意.
+
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                    }                        
-                        <!-- Product Sorting -->                    
+                    }
+                    <!-- Product Sorting -->
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<!-- for dialog 彈窗自動生成就可以 這個試用而已-->
+<div class="quick-view-dialog quick-view-dialog1" title="Basic dialog">
+
+    <div class="jumpcard-body-box flex">
+        <div class="jumpcard-body-imgbox">
+            <img class="jumpcard-body-img" src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg" alt="">
+            <div class="jumpcard-product-action">
+                <form class="jumpcard-product-actionform flex" action="">
+                    <div class="jumpcard-product-addtocart flex">
+                        <span>數量</span>
+
+                        <div class="jumpcard-product-inputbox">
+                            <input class="jumpcard-product-input" type="text" value="1">
+                        </div>
+
+                        <div class="jumpcard-product-buttonbox ">
+                            <button class="jumpcard-product-button" type="submit">加入購物車</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="jumpcard-body-contentbox">
+            <h2 class="jumpcard-product-title">有可能的任務</h2>
+            <p class="jumpcard-writter-title">湯姆克魯斯</p>
+            <div class="jumpcard-product-price flex">
+                <div class="jumpcard-product-discount-box flex">
+                    <span class="jumpcard-product-original-text">$250</span>
+                </div>
+                <div class="jumpcard-product-discount-box flex">
+                    <span class="jumpcard-product-discount-text">$200</span>
+                    <span class="jumpcard-product-discount-textshow">Save 10%</span>
+                </div>
+            </div>
+            <div class="jumpcard-description-short">
+                <p class="jumpcard-description-contenshort">
+                    沒辦法承受瞬間注意力、沒辦法被誇獎，會很不好意思、沒辦法邀功、沒辦法拍桌子吵架、不好意思開口請人家幫忙、不好意思打電話怕打擾人家、沒辦法用力行銷自己、沒辦法爭取福利、不想當第一名，因為不想要太多注意力……
+                    沒辦法承受瞬間注意力、沒辦法被誇獎，會很不好意思、沒辦法邀功、沒辦法拍桌子吵架、不好意思開口請人家幫忙、不好意思打電話怕打擾人家、沒辦法用力行銷自己、沒辦法爭取福利、不想當第一名，因為不想要太多注意力……
+                    沒辦法承受瞬間注意力、沒辦法被誇獎，會很不好意思、沒辦法邀功、沒辦法拍桌子吵架、不好意思開口請人家幫忙、不好意思打電話怕打擾人家、沒辦法用力行銷自己、沒辦法爭取福利、不想當第一名，因為不想要太多注意力……
+                    沒辦法承受瞬間注意.
+                </p>
+            </div>
+
         </div>
     </div>
 </div>
 @section topCss {
     <link href="~/Assets/Css/AllBooks_stylesheet.css" rel="stylesheet" />
     <link href="~/Assets/Css/product-item-block-stylesheet.css" rel="stylesheet" />
-    <link href="~/Assets/Css/ui-slider-ramge.css" rel="stylesheet" />
     <link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
+    <link href="~/Assets/Css/for-change-style.css" rel="stylesheet" />
+    <link href="~/Assets/Css/item-quick-look.css" rel="stylesheet" />
+    <link href="~/Assets/Css/override-jquery-ui-dialog.css" rel="stylesheet" />
+    <link href="~/Assets/Css/override-jquery-ui-slide-bar.css" rel="stylesheet" />
+}
+@section scripts {
+    <script>
+        $(function () {
+
+
+            // 預設是哪個就留另一個
+            $("#sorting-display-list-button").click(sorting_List_Event);
+            // $("#sorting-display-grid-button").click(sorting_Grid_Event);
+
+
+            function sorting_List_Event() {
+                $(".sorting-display-js i").toggleClass("active");
+                $("#sorting-display-items-block").attr("class", "sorting-display-list-style");
+                $(this).off("click");
+                $("#sorting-display-grid-button").click(sorting_Grid_Event);
+            }
+
+            function sorting_Grid_Event() {
+                $(".sorting-display-js i").toggleClass("active");
+                $("#sorting-display-items-block").attr("class", "row sorting-display");
+                $(this).off("click");
+                $("#sorting-display-list-button").click(sorting_List_Event);
+            }
+
+
+        });
+
+
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $(".quick-view-dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                width: 900,
+                title: "",
+                show: {
+                    effect: "drop",
+                    duration: 300
+                },
+                hide: {
+                    effect: "size",
+                    duration: 300
+                }
+            });
+
+
+            $(".quick-view-opener").on("click", function () {
+                var idIndex = this.id.split("quick-view-opener")[1];
+
+                $(".quick-view-dialog" + idIndex).dialog("open").dialog("option", "modal", true);
+            });
+        });
+    </script>
+
+    <!-- 拉桿用 新板 -->
+    <script>
+        $(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 2000,
+                values: [75, 300],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+                " - $" + $("#slider-range").slider("values", 1));
+        });
+    </script>
 }

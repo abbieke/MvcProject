@@ -1,0 +1,152 @@
+.modal-dialog {
+  max-width: 1024px;
+}
+
+/*=========================================*/
+.modal-header {
+  padding: 15px;
+  border: none;
+  padding: 0.625rem;
+}
+
+/*=========================================*/
+.product-prices {
+  margin: 20px 0 10px;
+}
+
+.product-prices div {
+  margin-bottom: 3px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.product-prices .current-price {
+  display: none;
+  margin-left: 10px;
+  color: red;
+}
+
+.product-prices .discount-percentage {
+  display: none;
+  font-size: 0.8rem;
+  color: red;
+}
+
+.add-to-cart-or-refresh {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.add-to-cart-or-refresh .control-label {
+  margin-right: 10px;
+  padding: .375rem .75rem;
+}
+
+.add-to-cart-or-refresh .qty {
+  width: 5rem;
+  margin-right: 10px;
+}
+
+.jumpcard-body-imgbox {
+  width: 40%;
+  height: 500px;
+  margin: 0 20px;
+}
+
+.jumpcard-body-img {
+  display: inline-block;
+  width: 100%;
+}
+
+.jumpcard-body-contentbox {
+  width: 60%;
+  padding-left: 30px;
+}
+
+.jumpcard-product-price {
+  height: 10%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 15px;
+}
+
+.jumpcard-product-discount-box {
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.jumpcard-product-original-text {
+  font-weight: bold;
+  text-decoration: line-through;
+  font-size: 16px;
+  color: #888;
+  margin-right: 15px;
+  padding-left: 5px;
+}
+
+.jumpcard-product-discount-text {
+  font-weight: bold;
+  font-size: 16px;
+  color: #49bcab;
+  margin-right: 15px;
+}
+
+.jumpcard-product-discount-textshow {
+  font-weight: bold;
+  color: #fff;
+  background-color: #49bcab;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.jumpcard-product-action {
+  width: 100%;
+  height: 50px;
+  margin: 20px 0;
+}
+
+.jumpcard-product-actionform {
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  padding-left: 10%;
+}
+
+.jumpcard-product-addtocart {
+  height: 100%;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.jumpcard-product-inputbox {
+  margin: 0 20px;
+}
+
+.jumpcard-product-input {
+  width: 60px;
+  height: 35px;
+  font-size: 20px;
+  line-height: normal;
+  padding: 0 .5rem;
+}
+
+.jumpcard-description-contenshort {
+  width: 90%;
+}
+
+.jumpcard-product-button {
+  width: 100%;
+  padding: 5px 10px;
+  background: #606060;
+  color: #fff;
+  border: none;
+}
+/*# sourceMappingURL=item-quick-look.css.map */

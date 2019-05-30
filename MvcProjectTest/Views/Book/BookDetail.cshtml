@@ -9,43 +9,81 @@
         <div class="productdetail-all">
             <div class="product-left">
                 <div class="product-big-picture">
-                    <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖" />
+                    <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" id="pd-large-pic" alt="商品圖" />
                 </div>
                 <div class="product-little-picture">
                     <ul>
-                        <li><a href="#"><i class="fas fa-angle-left"></i></a></li>
                         <li>
-                            <a href="#">
-                                <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
-                                     style="width:100px;height:100px;" />
-                            </a>
+                            <button type="button"
+                                    class="product-little-picture-button product-little-picture-slide-left">
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                        </li>
+                        <li class="pd-recommend-item-block product-little-picture-slide-main">
+                            <ul class="product-little-picture-slideblock">
+                                <li class="product-little-picture-slide-li">
+                                    <button class="pd-little-pic-button">
+                                        <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
+                                             style="width:100px;height:100px;">
+                                    </button>
+                                </li>
+                                <li class="product-little-picture-slide-li">
+                                    <button class="pd-little-pic-button">
+                                        <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
+                                             style="width:100px;height:100px;">
+                                    </button>
+                                </li>
+                                <li class="product-little-picture-slide-li">
+                                    <button class="pd-little-pic-button">
+                                        <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
+                                             style="width:100px;height:100px;">
+                                    </button>
+                                </li>
+                                <li class="product-little-picture-slide-li">
+                                    <button class="pd-little-pic-button">
+                                        <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
+                                             style="width:100px;height:100px;">
+                                    </button>
+                                </li>
+                                <li class="product-little-picture-slide-li">
+                                    <button class="pd-little-pic-button">
+                                        <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
+                                             style="width:100px;height:100px;">
+                                    </button>
+                                </li>
+                                <li class="product-little-picture-slide-li">
+                                    <button class="pd-little-pic-button">
+                                        <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
+                                             style="width:100px;height:100px;">
+                                    </button>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
-                                     style="width:100px;height:100px;" />
-                            </a>
+                            <button type="button"
+                                    class="product-little-picture-button product-little-picture-slide-right">
+                                <i class="fas fa-angle-right"></i>
+                            </button>
                         </li>
-                        <li>
-                            <a href="#">
-                                <img src="~/Assets/Images/@Html.DisplayFor(model => model.Book.CategoryEngName)/@Html.DisplayFor(model => model.Book.BookImage)" alt="商品圖"
-                                     style="width:100px;height:100px;" />
-                            </a>
-                        </li>
-                        <li><a href="#"><i class="fas fa-angle-right"></i></a></li>
                     </ul>
                 </div>
             </div>
             <div class="product-right">
-                <h2 class="pd-product-name-title">@Html.DisplayFor(model => model.Book.BooksName)</h2>
-                <div class="pd-product-price">TWD @Html.DisplayFor(model => model.Book.UnitPrice)$</div>
-                <div class="pd-product-information">
-                    @*<p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>*@
-                    @Html.Raw(Model.Book.Description)
+                <div class="flex">
+                    <h2 class="pd-product-name-title">@Html.DisplayFor(model => model.Book.BooksName)</h2>
+                    <div class="heart-click-box flex">
+                        <button class="heart-click-button"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                <div class="pd-product-price-block">
+                    TWD
+                    <div class="pd-product-discount-box">
+                        <span class="pd-product-original-text">$@Html.DisplayFor(model => model.Book.UnitPrice)</span>
+                    </div>
+                    <div class="pd-product-discount-box">
+                        <span class="pd-product-discount-text">$200</span>
+                        <span class="pd-product-discount-textshow">Save 10%</span>
+                    </div>
                 </div>
                 <div class="productlist">
                     <ul>
@@ -53,26 +91,41 @@
                         <li><span class="pd-productlist-title">語言</span><span class="pd-productlist-content">@Html.DisplayFor(model => model.Book.CategoryEngName)</span></li>
                         <li><span class="pd-productlist-title">出版社</span><span class="pd-productlist-content">@Html.DisplayFor(model => model.Book.PressName)</span></li>
                         <li><span class="pd-productlist-title">出版日期</span><span class="pd-productlist-content">2019/01/01</span></li>
-                        <li><span class="pd-productlist-title">ISBN 13</span><span class="pd-productlist-content">@Html.DisplayFor(model => model.Book.ISBN)</span></li>
+                        <li>
+                            <span class="pd-productlist-title">ISBN</span>
+                            <span class="pd-productlist-content">@Html.DisplayFor(model => model.Book.ISBN)</span>
+                        </li>
                     </ul>
                 </div>
-
                 <div class="pd-order-block">
                     <form action="ActionName">
-                        <div class="pd-order-block-style">
-                            <p class="pd-order-title-text">單價</p>
-                            <p class="pd-order-content-text">$@Html.DisplayFor(model => model.Book.UnitPrice)</p>
-                        </div>
                         <div class=" pd-order-block-style">
                             <p class="pd-order-title-text">訂購數量</p>
                             <input type="text" class="pd-quantity-textbox" value="1">
-                        </div>
-                        <div class="pd-order-block-style">
-                            <p class="pd-order-title-text">總價</p>
-                            <p class="pd-order-content-text">$@Html.DisplayFor(model => model.Book.UnitPrice)</p>
+                            <button type="submit" class="pd-join-shoppingcart">
+                                <i class="fas fa-shopping-cart"></i>
+                                加入購物車
+                            </button>
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+        <div class="pd-productdetail-information">
+            <h2 class="pd-productdetail-information-h2">書籍簡介</h2>
+            <div class="pd-productdetail-information-content">
+                <p>
+                    哥吉拉II怪獸之王
+                    Godzilla: King of the Monsters
+                    米莉芭比布朗飾演的麥蒂森羅素試圖透過無線電聯絡生還者，但是在多頭巨獸的瘋狂肆虐下，無線電的另一頭只傳來更多的災情，許多城市似乎已經被破壞殆盡，專家們相信這些巨大的怪獸只是冰山一角，怪獸們早已遍佈世界各地，隨時準備爭奪霸權，而「君主組織」芹澤博士（渡邊謙
+                    飾）甚至提出：我們才是哥吉拉的寵物。究竟哪幾頭怪獸會保護人類免於滅絕，又是哪幾頭要將人類消滅？
+                    封面故事由華納兄弟電影公司提供
+                    哥吉拉II怪獸之王
+                    Godzilla: King of the Monsters
+                    米莉芭比布朗飾演的麥蒂森羅素試圖透過無線電聯絡生還者，但是在多頭巨獸的瘋狂肆虐下，無線電的另一頭只傳來更多的災情，許多城市似乎已經被破壞殆盡，專家們相信這些巨大的怪獸只是冰山一角，怪獸們早已遍佈世界各地，隨時準備爭奪霸權，而「君主組織」芹澤博士（渡邊謙
+                    飾）甚至提出：我們才是哥吉拉的寵物。究竟哪幾頭怪獸會保護人類免於滅絕，又是哪幾頭要將人類消滅？
+                    封面故事由華納兄弟電影公司提供
+                </p>
             </div>
         </div>
     </div>
@@ -80,204 +133,156 @@
 <section class="other-product">
     <div class="container">
         <h2 class="pd-recomment-title-h2">You Might Also Like</h2>
-    <div class="pd-product-card-list-block">
-        <div class="pd-product-recommend-left-block">
-            <a href="#"><i class="fas fa-angle-left"></i></a>
-        </div>
-        <div class="pd-recommend-item-block">
-            @foreach (var item in Model.SelectBooks)
-            {
-                <div class="product-card-out-block">
-                    <div class="product-card-block">
-                        <div class="product-card-img-block">
-                            <a href='@Url.Action("BookDetail","Book", new {id = @Html.DisplayFor(modelItem => item.BookId)})' class="product-link">
-                                <img class="pc-img"
-                                     src="~/Assets/Images/@Html.DisplayFor(modelItem => item.CategoryEngName)/@Html.DisplayFor(modelItem => item.BookImage)"
-                                     alt="1">
-                            </a>
-                            <div class="product-card-visual-cart-block">
-                                <form action="add-cart">
-
-                                    <input type="hidden" name="id" value="1">
-                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="product-card-cart-tip pc-quick-tip-style">
-                                            Add To
-                                            Cart
-                                        </span>
-                                    </button>
-                                </form>
-                                <a href="#" class="product-card-quick-view">
-                                    <i class="far fa-eye card-quick-button-style"></i>
-                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                        Quick
-                                        View
-                                    </span>
-                                </a>
+        <div class="pd-product-card-list-block">
+            <div class="pd-product-recommend-left-block">
+                <button type="button" class="pd-product-recommend-button slide-left">
+                    <i class="fas fa-angle-left"></i>
+                </button>
+            </div>
+            <div class="pd-recommend-item-block slide-main">
+                <div class="product-card-outside-slideblock">
+                    @foreach (var item in Model.SelectBooks)
+                    {
+                        <div class="product-card-out-block">
+                            <div class="product-card-block">
+                                <div class="product-card-img-block">
+                                    <a href='@Url.Action("BookDetail","Book", new {id = @Html.DisplayFor(modelItem => item.BookId)})' class="product-link">
+                                        <img class="pc-img"
+                                             src="~/Assets/Images/@Html.DisplayFor(modelItem => item.CategoryEngName)/@Html.DisplayFor(modelItem => item.BookImage)"
+                                             alt="1">
+                                    </a>
+                                    <div class="product-card-visual-cart-block">
+                                        <form action="add-cart">
+                                            <input type="hidden" name="id" value="1">
+                                            <!-- hidden的可以儲存資料用 根據後端修改 -->
+                                            <button class="product-card-cart-button card-quick-button-style"
+                                                    type="submit">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                <span class="product-card-cart-tip pc-quick-tip-style">
+                                                    Add To Cart
+                                                </span>
+                                            </button>
+                                        </form>
+                                        <a href="#" class="product-card-quick-view">
+                                            <i class="far fa-eye card-quick-button-style"></i>
+                                            <span class="product-card-quick-view-tip pc-quick-tip-style">
+                                                Quick View
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-card-description-block">
+                                    <a href="#" class="product-link">
+                                        <h3 class="product-card-title">
+                                            @Html.DisplayFor(modelItem => item.BooksName)
+                                        </h3>
+                                        <div class="product-writter-block">
+                                            <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => item.AuthorName)</span>
+                                        </div>
+                                        <div class="product-price-block">
+                                            <span class="product-price-span product-card-des-text">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="product-card-description-block">
-                            <a href="#" class="product-link">
-                                <h3 class="product-card-title">
-                                    @Html.DisplayFor(modelItem => item.BooksName)
-                                </h3>
-                                <div class="product-writter-block">
-                                    <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => item.AuthorName)</span>
-                                </div>
-                                <div class="product-price-block">
-                                    <span class="product-price-span product-card-des-text">$@Html.DisplayFor(modelItem => item.UnitPrice)</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    }
                 </div>
-            }
-            @*<div class="product-card-out-block">
-                    <div class="product-card-block">
-                        <div class="product-card-img-block">
-                            <a href="#" class="product-link">
-                                <img class="pc-img"
-                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                     alt="1">
-                            </a>
-                            <div class="product-card-visual-cart-block">
-                                <form action="add-cart">
-
-                                    <input type="hidden" name="id" value="1">
-                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="product-card-cart-tip pc-quick-tip-style">
-                                            Add To
-                                            Cart
-                                        </span>
-                                    </button>
-                                </form>
-                                <a href="#" class="product-card-quick-view">
-                                    <i class="far fa-eye card-quick-button-style"></i>
-                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                        Quick
-                                        View
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-card-description-block">
-                            <a href="#" class="product-link">
-                                <h3 class="product-card-title">
-                                    有可能的任務
-                                </h3>
-                                <div class="product-writter-block">
-                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                </div>
-                                <div class="product-price-block">
-                                    <span class="product-price-span product-card-des-text">$300</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card-out-block">
-                    <div class="product-card-block">
-                        <div class="product-card-img-block">
-                            <a href="#" class="product-link">
-                                <img class="pc-img"
-                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                     alt="1">
-                            </a>
-                            <div class="product-card-visual-cart-block">
-                                <form action="add-cart">
-
-                                    <input type="hidden" name="id" value="1">
-                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="product-card-cart-tip pc-quick-tip-style">
-                                            Add To
-                                            Cart
-                                        </span>
-                                    </button>
-                                </form>
-                                <a href="#" class="product-card-quick-view">
-                                    <i class="far fa-eye card-quick-button-style"></i>
-                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                        Quick
-                                        View
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-card-description-block">
-                            <a href="#" class="product-link">
-                                <h3 class="product-card-title">
-                                    有可能的任務
-                                </h3>
-                                <div class="product-writter-block">
-                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                </div>
-                                <div class="product-price-block">
-                                    <span class="product-price-span product-card-des-text">$300</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card-out-block">
-                    <div class="product-card-block">
-                        <div class="product-card-img-block">
-                            <a href="#" class="product-link">
-                                <img class="pc-img"
-                                     src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                     alt="1">
-                            </a>
-                            <div class="product-card-visual-cart-block">
-                                <form action="add-cart">
-
-                                    <input type="hidden" name="id" value="1">
-                                    <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                    <button class="product-card-cart-button card-quick-button-style" type="submit">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="product-card-cart-tip pc-quick-tip-style">
-                                            Add To
-                                            Cart
-                                        </span>
-                                    </button>
-                                </form>
-                                <a href="#" class="product-card-quick-view">
-                                    <i class="far fa-eye card-quick-button-style"></i>
-                                    <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                        Quick
-                                        View
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-card-description-block">
-                            <a href="#" class="product-link">
-                                <h3 class="product-card-title">
-                                    有可能的任務
-                                </h3>
-                                <div class="product-writter-block">
-                                    <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                </div>
-                                <div class="product-price-block">
-                                    <span class="product-price-span product-card-des-text">$300</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+            </div>
             <div class="pd-product-recommend-right-block">
                 <a href="#"><i class="fas fa-angle-right"></i></a>
             </div>
         </div>
-    </div>
     </div>
 </section>
 
 @section topCss {
     <link href="~/Assets/Css/productdetail_stylesheet.css" rel="stylesheet" />
     <link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
+    <link href="~/Assets/Css/slide-card.css" rel="stylesheet" />
+}
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var docw = $(".container").width() * 0.9;
+            $(".slide-right").click(moveRight);
+            $(".slide-left").click(moveLeft);
+
+
+            function moveRight() {
+                $(".slide-right").off("click");
+                $(".slide-main").animate({
+                    scrollLeft: $(".slide-main").scrollLeft() + docw
+                }, 500, function () { $(".slide-right").click(moveRight); });
+            }
+
+            function moveLeft() {
+                $(".slide-left").off("click");
+                $(".slide-main").animate({
+                    scrollLeft: $(".slide-main").scrollLeft() - docw
+                }, 500, function () { $(".slide-left").click(moveLeft); });
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var docw = $(".product-left").width() * 0.3;
+            $(".product-little-picture-slide-right").click(moveRight);
+            $(".product-little-picture-slide-left").click(moveLeft);
+
+
+            function moveRight() {
+                $(".product-little-picture-slide-right").off("click");
+                $(".product-little-picture-slide-main").animate({
+                    scrollLeft: $(".product-little-picture-slide-main").scrollLeft() + docw
+                }, 500, function () { $(".product-little-picture-slide-right").click(moveRight); });
+            }
+
+            function moveLeft() {
+                $(".product-little-picture-slide-left").off("click");
+                $(".product-little-picture-slide-main").animate({
+                    scrollLeft: $(".product-little-picture-slide-main").scrollLeft() - docw
+                }, 500, function () { $(".product-little-picture-slide-left").click(moveLeft); });
+            }
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            var burron = true;
+            $(".heart-click-button").click(clickheartbutton);
+
+            function clickheartbutton() {
+                if (burron == true) {
+
+                    $(".heart-click-button i").removeClass("far").addClass("fas");
+                    burron = false;
+                }
+                else {
+                    $(".heart-click-button i").removeClass("fas").addClass("far");
+                    burron = true;
+                }
+            }
+        });
+
+
+
+    </script>
+
+    <!-- 小圖替換大圖 -->
+    <script>
+
+        $(function () {
+            $(".pd-little-pic-button").click(little_pic_change_event);
+
+            function little_pic_change_event() {
+                var littleImgSrc = $(this).children("img").attr("src");
+
+
+                $("#pd-large-pic").attr("src", littleImgSrc);
+            }
+        });
+    </script>
+
 }

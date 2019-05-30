@@ -19,9 +19,12 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44318</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -156,34 +159,50 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\MixModel.cs" />
+    <Compile Include="Models\ShoppingCar.cs" />
     <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BooksRepository.cs" />
     <Compile Include="Repositories\CustomersRepository.cs" />
+    <Compile Include="Repositories\ShoppingRepository.cs" />
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="ViewModels\ForgetPwdViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ResetPwdViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\block\services.png" />
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />
+    <Content Include="Assets\Css\for-change-style.css" />
     <Content Include="Assets\Css\forget-password.css" />
     <Content Include="Assets\Css\index-bigimage.css" />
     <Content Include="Assets\Css\index-block.css" />
     <Content Include="Assets\Css\index-product-list-stylesheet.css" />
     <Content Include="Assets\Css\indexView_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
+    <Content Include="Assets\Css\item-quick-look.css" />
     <Content Include="Assets\Css\member-Login.css" />
     <Content Include="Assets\Css\member-singup.css" />
     <Content Include="Assets\Css\member-stylesheet.css" />
     <Content Include="Assets\Css\new-product-card.css" />
     <Content Include="Assets\Css\newest-tab-block.css" />
     <Content Include="Assets\Css\normalize.css" />
+    <Content Include="Assets\Css\override-jquery-ui-dialog.css" />
+    <Content Include="Assets\Css\override-jquery-ui-slide-bar.css" />
     <Content Include="Assets\Css\product-item-block-stylesheet.css" />
     <Content Include="Assets\Css\productdetail_stylesheet.css" />
+    <Content Include="Assets\Css\slide-card.css" />
     <Content Include="Assets\Css\ui-slider-ramge.css" />
+    <Content Include="Assets\Images\jquery-ui-images\ui-icons_444444_256x240.png" />
+    <Content Include="Assets\Images\jquery-ui-images\ui-icons_555555_256x240.png" />
+    <Content Include="Assets\Images\jquery-ui-images\ui-icons_777620_256x240.png" />
+    <Content Include="Assets\Images\jquery-ui-images\ui-icons_777777_256x240.png" />
+    <Content Include="Assets\Images\jquery-ui-images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Assets\Images\jquery-ui-images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\Images\Linepay\linepay_logo_119x39_v3.png" />
+    <Content Include="Assets\Images\Linepay\linepay_logo_98x32_v3.png" />
     <Content Include="Assets\Images\ProductDetail\24-home_default.jpg" />
     <Content Include="Assets\Images\ProductDetail\24-large_default.jpg" />
     <Content Include="Assets\Images\ProductDetail\25-home_default.jpg" />
@@ -198,6 +217,7 @@
     <Content Include="Assets\Images\ProductDetail\29-large_default.jpg" />
     <Content Include="Assets\Images\ProductDetail\30-home_default.jpg" />
     <Content Include="Assets\Images\ProductDetail\30-large_default.jpg" />
+    <Content Include="Assets\Images\QRcode\181risnk.png" />
     <Content Include="Assets\Images\TChinese\010001.jpg" />
     <Content Include="Assets\Images\TChinese\010002.jpg" />
     <Content Include="Assets\Images\TChinese\010003.jpg" />
@@ -234,6 +254,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\Images\jquery-ui-images\Thumbs.db" />
+    <Content Include="Assets\Images\Linepay\Thumbs.db" />
     <None Include="Properties\PublishProfiles\MvcProjectTest20190528070212 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -273,11 +295,14 @@
     <Content Include="Views\Book\BookDetail.cshtml" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Shopping\Index.cshtml" />
+    <Content Include="Views\Shopping\ShippingInfo.cshtml" />
+    <Content Include="Views\Shopping\OrderCheck.cshtml" />
+    <Content Include="Views\Shopping\OrderSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Script\" />
-    <Folder Include="Views\Shopping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,0 +1,50 @@
+.pd-recommend-item-block {
+  overflow: hidden;
+}
+
+.pd-recommend-item-block .product-little-picture-slide-li {
+  width: 100px;
+  margin: 0 20px;
+}
+
+.product-little-picture-button {
+  border: none;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.product-little-picture-button:focus {
+  outline: none;
+}
+
+.pd-recommend-item-block {
+  overflow: hidden;
+}
+
+.pd-recommend-item-block .product-card-outside-slideblock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pd-recommend-item-block .product-card-outside-slideblock .product-card-out-block {
+  width: 240px;
+}
+
+.pd-product-recommend-right-block {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.pd-product-recommend-button {
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.pd-product-recommend-button:focus {
+  outline: none;
+}
+/*# sourceMappingURL=slide-card.css.map */
