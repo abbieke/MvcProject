@@ -27,12 +27,6 @@
   display: inline-block;
 }
 
-.newest-tab-title-li:hover {
-  color: #49bcab;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
 .newest-tab-title-li a:focus {
   color: #49bcab;
   -webkit-transition: all .3s;
@@ -42,6 +36,12 @@
 .newest-tab-text {
   font-size: 1.4rem;
   padding: 15px;
+}
+
+.newest-tab-text:hover {
+  color: #49bcab;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
 
 .tab-inner {

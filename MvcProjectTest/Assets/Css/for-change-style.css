@@ -1,0 +1,22 @@
+.display-block {
+  display: block;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.delete-line {
+  text-decoration: line-through;
+}
+/*# sourceMappingURL=for-change-style.css.map */

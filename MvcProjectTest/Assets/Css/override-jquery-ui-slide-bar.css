@@ -1,0 +1,41 @@
+.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content {
+  border: 0;
+  border-radius: 3px;
+  position: relative;
+  height: .1rem;
+  padding: 0;
+  -webkit-box-sizing: initial;
+          box-sizing: initial;
+  background: #c5c5c5;
+}
+
+.ui-slider-handle.ui-corner-all.ui-state-default {
+  position: absolute;
+  z-index: 2;
+  width: .9rem;
+  height: .9rem;
+  cursor: default;
+  -ms-touch-action: none;
+      touch-action: none;
+  top: -.5em;
+  margin-left: -.6em;
+  border-radius: 50%;
+  background: #fe4c50;
+}
+
+.ui-slider-handle.ui-corner-all.ui-state-default:focus {
+  outline: none;
+}
+
+.ui-slider-range.ui-corner-all.ui-widget-header {
+  background: #fe4c50;
+  position: absolute;
+  z-index: 1;
+  font-size: .7em;
+  display: block;
+  border: 0;
+  background-position: 0 0;
+  top: 0;
+  height: 100%;
+}
+/*# sourceMappingURL=override-jquery-ui-slide-bar.css.map */

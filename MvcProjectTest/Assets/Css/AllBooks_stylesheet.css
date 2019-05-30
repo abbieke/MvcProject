@@ -138,7 +138,6 @@
 }
 
 .present-sorting i {
-  margin: 0 10px;
   font-size: 20px;
 }
 
@@ -150,8 +149,13 @@
   color: red;
 }
 
+.sort-div {
+  margin: 15px 0;
+}
+
 .books-block {
   margin-left: 50px;
+  width: 100%;
 }
 
 .row {
@@ -160,5 +164,90 @@
           align-items: center;
 }
 
+.present-sorting-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.present-sorting-button:focus {
+  outline: none;
+}
+
+.all-view-sidebar-price-range-text:focus {
+  outline: none;
+}
+
+.all-book-category-select {
+  width: 185px;
+  height: 36px;
+  border: 1px solid #b5aec4;
+  margin-right: 10px;
+}
+
+.all-book-category-select:focus {
+  outline: none;
+}
+
 /*===================================================*/
+.sorting-display-list-style {
+  max-height: 1170px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.sorting-display-list-style .product-card-out-block {
+  width: 100%;
+  padding: 10px 5px;
+  height: 280px;
+}
+
+.sorting-display-list-style .product-card-out-block:last-child {
+  margin-bottom: 15px;
+}
+
+.sorting-display-list-style .product-card-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+}
+
+.sorting-display-list-style .product-card-img-block {
+  width: 25%;
+  padding: 15px;
+}
+
+.sorting-display-list-style .pc-img {
+  width: 200px;
+}
+
+.sorting-display-list-style .product-card-description-block {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.sorting-display-list-style .description-for-list-display-style {
+  width: 90%;
+  overflow: hidden;
+  margin: 20px 0;
+  text-overflow: ellipsis;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+.sorting-display-list-style .product-card-img-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 /*# sourceMappingURL=AllBooks_stylesheet.css.map */

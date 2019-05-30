@@ -1,0 +1,169 @@
+﻿@using MvcProjectTest.ViewModels;
+@model List<ShoppingCartViewModel>
+@{
+    ViewBag.Title = "新知書櫥";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+
+
+}
+
+@Styles.Render("~/css/cartAndWishView")
+<div class="container fontweight" style="margin-top: 50px;">
+    <div class="shipping-status">
+        <div class="container">
+            <ul class="shipping-progress">
+                <li class="active">@Html.ActionLink("購物車", "Index", "Shopping") </li>
+                <li class="active">@Html.ActionLink("運送資訊", "ShippingInfo", "Shopping") </li>
+                <li>訂單確認</li>
+                <li>訂單成立</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cart-order-check m-3">
+        <div class="section">
+            <h5>訂單確認</h5>
+            <table class="order-check-goods mt-5">
+                <tr>
+                    <th>商品圖片</th>
+                    <th>商品名稱</th>
+                    <th>數量</th>
+                    <th>單價</th>
+                </tr>
+                <!-- book1 -->
+                <tr class="ordercheck-list-height">
+                    <td class="cart-item-img"><img src="~/Assets/Images/TChinese/010001.jpg" alt=""></td>
+                    <td class="item-name-list"><a href="#">這是其中一本書</a></td>
+                    <td class="item-qty-list"> <span>1本</span> </td>
+                    <td class="item-price-list">666元</td>
+                </tr>
+                <!-- book2 -->
+                <tr class="ordercheck-list-height">
+                    <td class="cart-item-img"><img src="~/Assets/Images/TChinese/010002.jpg" alt=""></td>
+                    <td class="item-name-list"><a href="#">這是其中一本書</a></td>
+                    <td class="item-qty-list"> <span>1本</span> </td>
+                    <td class="item-price-list">666元</td>
+                </tr>
+            </table>
+
+            <div class="orderdetail-and-paymeny">
+                <table class="order-check-detail mt-5">
+                    <tr>
+                        <!-- OrderID -->
+                        <th>訂單編號：</th>
+                        <td>00190525</td>
+                    </tr>
+                    <tr>
+                        <!-- OrderDate -->
+                        <th>下單日期：</th>
+                        <td>2019/5/25</td>
+                    </tr>
+                    <tr>
+                        <!-- TotalPrice -->
+                        <th>收件人姓名：</th>
+                        <td>王曉明</td>
+                    </tr>
+                    <tr>
+                        <!-- RecipientPhone -->
+                        <th>收件人手機：</th>
+                        <td>0912345678</td>
+                    </tr>
+                    <tr>
+                        <!-- RecipientAddress -->
+                        <th>收件人地址：</th>
+                        <td>臺灣國天龍市中正路一段88號</td>
+                    </tr>
+                    <tr>
+                        <!-- RecipientEmail -->
+                        <th>收件人Email：</th>
+                        <td>abc1234@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <th>配送方式：</th>
+                        <td>7-11取貨</td>
+                    </tr>
+                    <tr>
+                        <th>付款方式：</th>
+                        <td>貨到付款</td>
+                    </tr>
+                    <tr>
+                        <th>訂單總金額：</th>
+                        <td>2058元</td>
+                    </tr>
+                </table>
+
+                <div class="visa-card ">
+                    <div class="visa-card-icon">
+                        <i class="fab fa-cc-visa "></i><span class="visa-card-icon-span">信運卡付款</span>
+                    </div>
+                    <div class="visa-card-cardno row mt-3">
+                        <h4>卡號:</h4>
+                        <input type="text" name="" id="" maxlength="4" class="ml-3 col-2">
+                        <input type="text" name="" id="" maxlength="4" class="ml-3 col-2">
+                        <input type="text" name="" id="" maxlength="4" class="ml-3 col-2">
+                        <input type="text" name="" id="" maxlength="4" class="ml-3 col-2">
+                    </div>
+                    <div class="visa-card-good-thru row mt-3">
+                        <h4>有效日期:</h4>
+                        <input type="text" name="" id="" class="ml-3 col-3">
+                        <input type="text" name="" id="" class="ml-3 col-3">
+                    </div>
+                    <div class="visa-card-cvc row mt-3">
+                        <h4>CVC:</h4>
+                        <input type="text" name="" id="" class="ml-3 col-3">
+                    </div>
+
+                </div>
+                <div class="line-pay mt-5 ml-5 active">
+                    <div class="line-pay-logo">
+                        <img src="~/Assets/Images/Linepay/linepay_logo_119x39_v3.png" alt="">
+
+                    </div>
+                    <div class="line-pay-QRcode">
+                        <img src="~/Assets/Images/QRcode/181risnk.png" alt="">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    @Html.ActionLink("確定訂單", "OrderSuccess", "Shopping", null,
+                               new { @class = "btn btn-dark active order-check-detail-button", @role= "button" , @style = "text-indent: 0;", })
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(function () {
+            // $item_counts = $(".cart-items").find("table").length;
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 0) {          /* 要滑動到選單的距離 */
+                    $('.dropdowns').addClass('navFixed');   /* 幫選單加上固定效果 */
+                } else {
+                    $('.dropdowns').removeClass('navFixed'); /* 移除選單固定效果 */
+                }
+            });
+            $('input').keyup(function (e) {
+                if ($(this).val().length == $(this).attr('maxlength'))
+                    $(this).next(':input').focus();
+            });
+            // $(".scifiUI").height($(".scifiUI").height() + 80 * $item_counts);
+            // console.log($item_counts, $(".scifiUI").height());
+        });
+
+
+
+    </script>
+    <!-- 全選功能 -->
+
+}
+
