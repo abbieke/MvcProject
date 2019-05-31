@@ -52,3 +52,11 @@
       flex-wrap: wrap;
 }
 /*# sourceMappingURL=newest-tab-block.css.map */
+
+.newest-tab-block .ui-widget.ui-widget-content {
+    z-index: 0;
+    border: 0;
+    background-color: transparent;
+    color: #000;
+    padding: 0;
+}

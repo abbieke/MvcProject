@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: 'Raleway','Microsoft JhengHei',sans-serif;
+  font-family: 'Raleway','Microsoft JhengHei', sans-serif;
   font-size: 16px;
 }
 
@@ -287,6 +287,7 @@ img {
 }
 
 .book-last-list {
+  letter-spacing: .85px;
   position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -356,6 +357,69 @@ img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.maxheight {
+  height: 370px;
+  overflow: hidden;
+}
+
+.hover-car-product-item {
+  width: 100%;
+}
+
+.hover-car-product-imagebox {
+  width: 50px;
+}
+
+.hover-car-product-image {
+  display: block;
+  width: 50px;
+  height: 50px;
+  max-width: 100%;
+}
+
+.hover-car-product-namebox {
+  width: auto;
+  margin: 0 30px;
+}
+
+.hover-car-product-name {
+  margin-bottom: 5px;
+}
+
+.hover-car-product-price {
+  margin: 0;
+  margin-right: 15px;
+}
+
+.hover-car-product-delete {
+  font-size: .85rem;
+}
+
+.hover-car-product-delete-text:hover {
+  color: red;
+}
+
+.hover-check-car-box {
+  margin-top: 20px;
+}
+
+.hover-gotoshopping-car {
+  margin-top: 20px;
+}
+
+.hover-gotoshoppingcar-button {
+  padding: 5px;
+  background: #ddd;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.hover-check-car-price {
+  text-align: right;
 }
 
 .navFixed {

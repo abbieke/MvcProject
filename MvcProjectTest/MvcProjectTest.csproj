@@ -173,6 +173,7 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Images\block\services.png" />
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />
     <Content Include="Assets\Css\for-change-style.css" />
@@ -181,7 +182,6 @@
     <Content Include="Assets\Css\index-block.css" />
     <Content Include="Assets\Css\index-product-list-stylesheet.css" />
     <Content Include="Assets\Css\indexView_stylesheet.css" />
-    <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Css\item-quick-look.css" />
     <Content Include="Assets\Css\member-Login.css" />
     <Content Include="Assets\Css\member-singup.css" />
@@ -299,6 +299,7 @@
     <Content Include="Views\Shopping\ShippingInfo.cshtml" />
     <Content Include="Views\Shopping\OrderCheck.cshtml" />
     <Content Include="Views\Shopping\OrderSuccess.cshtml" />
+    <Content Include="Views\Shared\_ProductCardPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -40,31 +40,31 @@
                                 <li class="book-item"> <a href="@Url.Action("Index","Book",new { id = item.CategoryEngName})">@item.CategoryName</a></li>
                             }
                             @*<li class="book-item">
-            <a href="#">home</a>
-            <ul class="book-item-list">
-                <li class="book-item book-item-has-children">
-                    <a href="#"> 類別</a>
-                    <ul class="book-last-list">
-                        @{
-                            MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
-                            var cate = _repo.SelectCategory();
-                        }
-                        @foreach (var item in cate)
-                        {
-                            <li class=" book-last-item"> <a href="#"> @item.CategoryName</a></li>
-                            @*<li class=" book-last-item"> <a href="#">Checkout</a></li>
-                            <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                            <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                        }
-                    </ul>
-                </li>
-                <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
-                <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
-            </ul>
-        </li>
-        <li class="book-item"> <a href="#">home</a></li>
-        <li class="book-item"> <a href="#">home</a></li>
-        <li class="book-item"> <a href="#">home</a></li>*@
+                                    <a href="#">home</a>
+                                    <ul class="book-item-list">
+                                        <li class="book-item book-item-has-children">
+                                            <a href="#"> 類別</a>
+                                            <ul class="book-last-list">
+                                                @{
+                                                    MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                                    var cate = _repo.SelectCategory();
+                                                }
+                                                @foreach (var item in cate)
+                                                {
+                                                    <li class=" book-last-item"> <a href="#"> @item.CategoryName</a></li>
+                                                    @*<li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                    </ul>
+                                </li>
+                                <li class="book-item"> <a href="#">home</a></li>
+                                <li class="book-item"> <a href="#">home</a></li>
+                                <li class="book-item"> <a href="#">home</a></li>*@
                         </ul>
                     </nav>
                     <div class="bkshop-searchbox">
@@ -186,7 +186,7 @@
 
                                                 <div class="hover-car-product-item flex">
                                                     <div class="hover-car-product-imagebox"
-                                                        src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                                                         src="~/Assets/Images/TChinese/010001.jpg" alt="">
                                                     </div>
                                                     <div class="hover-car-product-namebox">
                                                         <div class="hover-car-product-name">
@@ -381,6 +381,32 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".quick-view-dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                width: 900,
+                title: "",
+                show: {
+                    effect: "drop",
+                    duration: 300
+                },
+                hide: {
+                    effect: "size",
+                    duration: 300
+                }
+            });
+
+
+            $(".quick-view-opener").on("click", function () {
+                var idIndex = this.id.split("quick-view-opener")[1];
+
+                $(".quick-view-dialog" + idIndex).dialog("open").dialog("option", "modal", true);
+            });
+        });
+    </script>
     <script>
         $(function () {
             $(window).scroll(function () {
