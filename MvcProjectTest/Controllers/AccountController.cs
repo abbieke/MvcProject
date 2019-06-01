@@ -181,7 +181,9 @@ namespace MvcProjectTest.Controllers
 
             //Response.Redirect(FormsAuthentication.GetRedirectUrl(name, true));
             //FormsAuthentication.GetRedirectUrl(account, true)
+
             return RedirectToAction("Index", "Home");
+
             //return Content("Success!");
         }
         public ActionResult SignOut()
@@ -258,6 +260,8 @@ namespace MvcProjectTest.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        
 
 
     }

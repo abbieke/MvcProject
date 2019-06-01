@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Rajdhani:300);
 .fontweight {
   font-weight: bold;
@@ -716,3 +716,16 @@ input.qtyminus {
   text-align: center;
 }
 /*# sourceMappingURL=cart_stylesheet.css.map */
+
+/*0602*/
+
+.item-delete-list button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+
+}
+
+.item-delete-list button:hover {
+    outline: none;
+}

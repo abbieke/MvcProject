@@ -1,12 +1,17 @@
 ﻿@using MvcProjectTest.ViewModels;
+@using MvcProjectTest.Repositories;
 @model List<ShoppingCartViewModel>
 @{
     ViewBag.Title = "新知書櫥";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
-    int bookCount=0;
+    int bookCount = 0;
     int total = 0;
+    var _cusRepo = new CustomersRepository();
 
 }
+
+
+
 
 @Styles.Render("~/css/cartAndWishView")
 <div class="container">
@@ -68,7 +73,7 @@
                             bookCount++;
                             string field = "quantity" + bookCount;
 
-                            <tr class="ordercheck-list-height">
+                            <tr class="ordercheck-list-height @("table-" + book.BookID)">
                                 <td class="item-checkbox-list">
                                     <input type="checkbox" name="one" onclick="cheaked()">
                                 </td>
@@ -84,12 +89,12 @@
                                     </form>
                                 </td>
                                 <td class="item-price-list">@book.UnitPrice.ToString("0") 元</td>
-                                <td class="item-delete-list"><a href="#"><i class="far fa-trash-alt"></i></a></td>
+                                <td class="item-delete-list"><button class="remove-button" value="@book.BookID"><i class="far fa-trash-alt"></i></button></td>
                             </tr>
 
                         }
-                
-                        
+
+
                     </table>
 
                     <div class="cart-total-div">
@@ -101,7 +106,7 @@
                     <div class="row mt-2">
                         <div class="col-12 text-center">
                             @Html.ActionLink("下一步，填寫資訊", "ShippingInfo", "Shopping", new { name = 666, year = 777 },
-        new { @class = "btn btn-dark active",@role= "button" , @style = "text-indent: 0;", })                          
+        new { @class = "btn btn-dark active", @role = "button", @style = "text-indent: 0;", })
                         </div>
                     </div>
                 </div>
@@ -395,6 +400,27 @@
                 }
             }
         }
+    </script>
+
+    @*刪除購物車商品*@
+    <script>
+    $(function () {
+        $(".remove-button").click(removeButtonEvent);
+        alert(@_cusRepo.GetCusromerID(User.Identity.Name));
+
+        function removeButtonEvent() {
+            var buttonValue = this.value;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RemoveCartItem", "Shopping")',
+                data: { customerId: @_cusRepo.GetCusromerID(User.Identity.Name), bookId: buttonValue }
+            })
+                .done(function () {
+                    $(".table-" + buttonValue).remove();
+                });
+        }
+    });
+
     </script>
 }
 

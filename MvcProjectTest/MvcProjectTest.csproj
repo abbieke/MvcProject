@@ -167,6 +167,7 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Css\cart_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Images\block\services.png" />
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />

@@ -13,16 +13,24 @@ namespace MvcProjectTest.Controllers
     public class ShoppingController : Controller
     {
         public readonly ShoppingRepository _repo;
+        public readonly CustomersRepository _cusRepo;
         public ShoppingController()
         {
             _repo = new ShoppingRepository();
+            _cusRepo = new CustomersRepository();
         }
         // GET: Shopping
         public ActionResult Index()
         {
-            var books=_repo.SelectCart(4);
+            if (Request.IsAuthenticated)
+            {
+                var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
 
-            return View(books); 
+                return View(carts);
+            }
+            
+            return Redirect("/Account/Login");
+
         }
         public ActionResult ShippingInfo()
         {
@@ -35,6 +43,12 @@ namespace MvcProjectTest.Controllers
         public ActionResult OrderSuccess()
         {
             return View();
+        }
+
+
+        public void RemoveCartItem(int customerId, string bookId)
+        {
+            _repo.RemoveCartBook(customerId, bookId);
         }
         
     }
