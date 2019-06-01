@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="product-card-description-block">
-            <a href="#" class="product-link">
+            <a href="@Url.Action("BookDetail", "Book", new { id = Model.BookId })" class="product-link">
                 <h3 class="product-card-title">
                     @Html.DisplayFor(modelItem => Model.BooksName)
                 </h3>

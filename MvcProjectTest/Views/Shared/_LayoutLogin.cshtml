@@ -21,6 +21,10 @@
             position: relative;
             min-height: 840px;
         }
+
+        .white-space-for-footer {
+            height: 214px;
+        }
         .index-footer {
             position: absolute;
             bottom: 0;
@@ -48,6 +52,8 @@
         <!-- 注意這塊與Header保持同高，若有修改頁首的留意 -->
     </div>
     @RenderBody()
+
+    <div class="white-space-for-footer"></div>
     <footer class="index-footer">
         <div class="container">
             <div class="footer-info-block-row">
