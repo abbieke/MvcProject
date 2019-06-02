@@ -13,17 +13,17 @@
                      alt="1">
             </a>
             <div class="product-card-visual-cart-block">
-                <form action="add-cart">
 
-                    <input type="hidden" name="id" value="1">
+                
+                    <input type="hidden" name="id" value="1" >
                     <!-- hidden的可以儲存資料用 根據後端修改 -->
-                    <button class="product-card-cart-button card-quick-button-style" type="submit">
+                    <button class="product-card-cart-button card-quick-button-style"  value="@Model.BookId">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="product-card-cart-tip pc-quick-tip-style">
                             Add To Cart
                         </span>
                     </button>
-                </form>
+                
                 <button class="product-card-quick-view quick-view-opener" id=@("quick-view-opener" + ViewBag.cardIndex)>
                     <i class="far fa-eye card-quick-button-style"></i>
                     <span class="product-card-quick-view-tip pc-quick-tip-style">

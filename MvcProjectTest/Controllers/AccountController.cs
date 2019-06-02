@@ -175,6 +175,7 @@ namespace MvcProjectTest.Controllers
             // Create the cookie.
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             Response.Cookies.Add(cookie);
+            Session["userid"] = _repo.GetCusromerID(cust.CustomerAccount);
 
             // Redirect back to original URL.
             //var url = FormsAuthentication.GetRedirectUrl(account, true);
@@ -189,6 +190,7 @@ namespace MvcProjectTest.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
+            Session.RemoveAll();          
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
@@ -261,7 +263,8 @@ namespace MvcProjectTest.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
+
 
 
     }

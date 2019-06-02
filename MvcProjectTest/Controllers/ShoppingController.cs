@@ -9,7 +9,7 @@ namespace MvcProjectTest.Controllers
 {
     
 
-    //[Authorize]
+    [Authorize]
     public class ShoppingController : Controller
     {
         public readonly ShoppingRepository _repo;
@@ -49,6 +49,15 @@ namespace MvcProjectTest.Controllers
         public void RemoveCartItem(int customerId, string bookId)
         {
             _repo.RemoveCartBook(customerId, bookId);
+        }
+       
+        [HttpPost]
+        public void AddToCart(string bookId)
+        {
+
+            int userid = (int)Session["userid"];
+            _repo.InsertCartBook(userid, bookId);
+            
         }
         
     }

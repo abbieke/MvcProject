@@ -37,7 +37,9 @@
                             }
                             @foreach (var item in cate)
                             {
-                                <li class="book-item"> <a href="@Url.Action("Index","Book",new { id = item.CategoryEngName})">@item.CategoryName</a></li>
+                                <li class="book-item">
+                                    <a href="@Url.Action("Index","Book",new { id = item.CategoryEngName})">@item.CategoryName</a>
+                                </li>
                             }
                             @*<li class="book-item">
                                     <a href="#">home</a>
@@ -433,6 +435,39 @@
             // });
         });
     </script>
+    <script>
+        $(function () {
+            $(".product-card-cart-button").click(addBookToCart);
+            function addBookToCart() {
+                
+                var buttonValue = this.value;
+                alert(buttonValue);
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Shopping")',
+                data: {  bookId: buttonValue }
+            })
+                    .done(function () {
+                        alert("DONE")
+                });
+
+            }
+            
+
+        });
+    </script>
+    @*<script>
+            $(function () {
+                window.onbeforeunload = function () {
+                    $.ajax({
+                        url: "@Url.Action("testtes", "Account")",
+                        method: "post",
+                        contentType: 'application/json',
+                        data: ""
+                    });
+                };
+            });
+        </script>*@
 </body>
 
 </html>

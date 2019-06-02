@@ -36,6 +36,15 @@ namespace MvcProjectTest.Repositories
             }
         }
 
+        public void InsertCartBook(int customerId, string bookId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "INSERT INTO [Shopping Car](CustomerID, BookID, Quantity) VALUES (@cusId,@bookid,1) ";
+                conn.Execute(sql, new { cusId = customerId, bookid = bookId });
+            }
+        }
+
         //test
         public void RemoveCartBook(int customerId, string bookId)
         {
