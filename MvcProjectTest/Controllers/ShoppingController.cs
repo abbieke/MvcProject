@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcProjectTest.Repositories;
+using MvcProjectTest.Services;
 
 namespace MvcProjectTest.Controllers
 {
@@ -24,9 +25,12 @@ namespace MvcProjectTest.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
+                //var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
+                var cartSer = new ShoppingCartService();
+                var cartModel = cartSer.GetMemberCart(User.Identity.Name);
 
-                return View(carts);
+
+                return View(cartModel);
             }
             
             return Redirect("/Account/Login");

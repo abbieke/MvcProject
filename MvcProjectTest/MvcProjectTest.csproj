@@ -161,6 +161,7 @@
     <Compile Include="Repositories\ShoppingRepository.cs" />
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\MailService.cs" />
+    <Compile Include="Services\ShoppingCartService.cs" />
     <Compile Include="ViewModels\ForgetPwdViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ResetPwdViewModel.cs" />

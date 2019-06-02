@@ -75,5 +75,24 @@ namespace MvcProjectTest.Repositories
                 return books;
             }
         }
+
+        public Book GetBookById(string bookId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "SELECT * FROM Books WHERE BookID=@bookId";
+                return conn.QueryFirstOrDefault<Book>(sql, new { bookId });
+            }
+            
+        }
+
+        public string GetCategoryEngNameById(int cateId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "SELECT CategoryEngName FROM Category WHERE CategoryID = @cateid";
+                return conn.QueryFirstOrDefault<string>(sql, new { cateId });
+            }
+        }
     }
 }

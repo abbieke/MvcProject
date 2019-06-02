@@ -72,15 +72,16 @@
                             total = total + (int)@book.UnitPrice;
                             bookCount++;
                             string field = "quantity" + bookCount;
+                            var imgurl = book.BookImage;
 
                             <tr class="ordercheck-list-height @("table-" + book.BookID)">
                                 <td class="item-checkbox-list">
                                     <input type="checkbox" name="one" onclick="cheaked()">
                                 </td>
                                 <td class="cart-item-img">
-                                    <div class="cart-item-imgbox"><img src="~/Assets/Images/@book.CategoryEngName/@book.BookImage" alt=""></div>
+                                    <div class="cart-item-imgbox"><img src="@book.BookImage" alt=""></div>
                                 </td>
-                                <td class="item-name-list"><a href="#">這是其中一本書</a></td>
+                                <td class="item-name-list"><a href='@Url.Action("BookDetail", "Book", new { id = book.BookID })'>@book.BooksName</a></td>
                                 <td class="item-qty-list">
                                     <form id='book1' method='POST' action='#'>
                                         <input type='button' value='-' class='qtyminus' field='@field' />

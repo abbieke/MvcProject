@@ -13,6 +13,8 @@ namespace MvcProjectTest.Models
         public string AuthorName { get; set; }
         public string CategoryEngName { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
+
+        public int CategoryID { get; set; }
         public decimal UnitPrice { get; set; }
         public int InStock { get; set; }
         public int Discount { get; set; }
