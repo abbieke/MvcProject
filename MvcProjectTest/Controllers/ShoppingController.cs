@@ -53,7 +53,10 @@ namespace MvcProjectTest.Controllers
         public void RemoveCartItem(int customerId, string bookId)
         {
             _repo.RemoveCartBook(customerId, bookId);
+            
         }
+
         
+
     }
 }
