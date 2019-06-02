@@ -26,6 +26,16 @@ namespace MvcProjectTest.Repositories
             _cusRepo = new CustomersRepository();
         }
 
+        public IEnumerable<ShoppingCar> GetMemberCart(string account)
+        {
+            
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "SELECT * FROM[Shopping Car] pc INNER JOIN Customers c ON  pc.CustomerID = c.CustomerID WHERE c.CustomerAccount = @account";
+                return conn.Query<ShoppingCar>(sql, new { account });
+            }
+        }
+
         public List<ShoppingCartViewModel> SelectCart(int customerID)
         {
             using (conn = new SqlConnection(connString))
@@ -42,8 +52,8 @@ namespace MvcProjectTest.Repositories
             using (conn = new SqlConnection(connString))
             {
                 string sql = "DELETE FROM [Shopping Car] WHERE CustomerID = @cusId AND BookID = @bookid";
-                var carts = conn.Query<ShoppingCartViewModel>(sql, new { cusId=customerId, bookid = bookId  }).ToList();
-                
+                //var carts = conn.Query<ShoppingCartViewModel>(sql, new { cusId=customerId, bookid = bookId  }).ToList();
+                var carts = conn.Execute(sql, new { cusId = customerId, bookid = bookId });
             }
         }
     }
