@@ -60,20 +60,20 @@
         <div class="jumpcard-body-imgbox">
             <img class="jumpcard-body-img" src="~/Assets/Images/@Html.DisplayFor(modelItem => Model.CategoryEngName)/@Html.DisplayFor(modelItem => Model.BookImage)" alt="">
             <div class="jumpcard-product-action">
-                <form class="jumpcard-product-actionform flex" action="">
+                <div class="jumpcard-product-actionform flex" action="">
                     <div class="jumpcard-product-addtocart flex">
                         <span>數量</span>
 
                         <div class="jumpcard-product-inputbox">
-                            <input class="jumpcard-product-input" type="text" value="1">
+                            <input class="jumpcard-product-input" type="number" value="1">
                         </div>
 
                         <div class="jumpcard-product-buttonbox ">
-                            <button class="jumpcard-product-button" type="submit">加入購物車</button>
+                            <button class="jumpcard-product-button" value="@Model.BookId">加入購物車</button>
                         </div>
 
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <div class="jumpcard-body-contentbox">
