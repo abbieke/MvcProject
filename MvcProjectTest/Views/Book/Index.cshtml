@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
     ViewBag.cardIndex = 0;
+    
 }
 
 
@@ -44,13 +45,22 @@
                     <div class="sidebar_title">
                         <h5>價格範圍</h5>
                     </div>
-                    <p>
-                        <input type="text" class="all-view-sidebar-price-range-text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                    </p>
+                    <form action='@Url.Action("Index","Book")' method="post">
+                        <p>
+                            <input type="hidden" name="bookKind" value="@ViewBag.catEngName" />
+                            <input type="hidden" id="maxValue" name="maxValue" value="" />
+                            <input type="hidden" id="minValue" name="minValue" value="" />
+                            <input type="text" class="all-view-sidebar-price-range-text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        </p>
 
-                    <div id="slider-range"></div>
 
-                    <div class="filter_button"><span>篩選</span></div>
+
+
+
+                        <div id="slider-range"></div>
+                        <button class="filter_button" type="submit">篩選</button>
+                        @*<div class="filter_button"><span>篩選</span></div>*@
+                    </form>
                 </div>
             </div>
             <div class="books-block">
@@ -122,6 +132,48 @@
 
         });
 
+        $(".filter_button").click(function () {
+            var bookKind = location.pathname.split("/").pop();
+            var valmin = $("#slider-range").slider("values", 0);
+            var valmax = $("#slider-range").slider("values", 1);
+
+
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '@Url.Action("Index", "Book")',
+                    data: { bookKind: bookKind, valmin: valmin, valmax: valmax }
+                })
+                .done(function (data) {
+                    $("#sorting-display-items-block").html(data);
+
+                    //alert(bookKind + "+" + valmin + "+" + valmax);
+                    $(".quick-view-dialog").dialog({
+                        autoOpen: false,
+                        modal: true,
+                        width: 900,
+                        title: "",
+                        show: {
+                            effect: "drop",
+                            duration: 300
+                        },
+                        hide: {
+                            effect: "size",
+                            duration: 300
+                        }
+                    });
+
+
+                    $(".quick-view-opener").on("click", function () {
+                        var idIndex = this.id.split("quick-view-opener")[1];
+
+                        $(".quick-view-dialog" + idIndex).dialog("open").dialog("option", "modal", true);
+                    });
+                });
+        });
+
+
 
     </script>
     
@@ -131,6 +183,8 @@
     <!-- 拉桿用 新板 -->
     <script>
         $(function () {
+            $("#maxValue").val(300);
+            $("#minValue").val(75);
             $("#slider-range").slider({
                 range: true,
                 min: 0,
@@ -138,6 +192,8 @@
                 values: [75, 300],
                 slide: function (event, ui) {
                     $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#maxValue").val(ui.values[1]);
+                    $("#minValue").val(ui.values[0]);
                 }
             });
             $("#amount").val("$" + $("#slider-range").slider("values", 0) +

@@ -1,4 +1,4 @@
-﻿@model MvcProjectTest.Models.CustomerViewModel
+﻿@model MvcProjectTest.Models.CustomerMix
 
 @{
     ViewBag.Title = "CustomerIndex";
@@ -30,21 +30,15 @@
                     <div class="member-menu">
                         <div class="member-menu-block">
                             <ul class="memebr-menu-row">
-                                <li class="memebr-menu-li">
-                                    <a href="#tab-MemberProfile"
-                                       class="memebr-menu-a-text">會員資料</a>
+                                <li class="memebr-menu-li"><a href="#tab-MemberProfile"
+                                        class="memebr-menu-a-text">會員資料</a></li>
+                                <li class="memebr-menu-li"><a href="#tab-Modifypassword"
+                                        class="memebr-menu-a-text">修改密碼</a></li>
+                                <li class="memebr-menu-li"><a href="#tab-OrderDetail"
+                                        class="memebr-menu-a-text">訂單資訊</a></li>
+                                <li class="memebr-menu-li"><a href="#tab-Coupon" class="memebr-menu-a-text">優惠券專區</a>
                                 </li>
-                                <li class="memebr-menu-li">
-                                    <a href="#tab-OrderDetail"
-                                       class="memebr-menu-a-text">訂單資訊</a>
-                                </li>
-                                <li class="memebr-menu-li">
-                                    <a href="#tab-Coupon" class="memebr-menu-a-text">優惠券專區</a>
-                                </li>
-                                <li class="memebr-menu-li">
-                                    <a href="#tab-Modifypassword"
-                                       class="memebr-menu-a-text">修改密碼</a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -56,59 +50,60 @@
                     </div>
                     <div id="tab-MemberProfile" class="member-content">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <form action="#">
+                        <form action='@Url.Action("CustomerIndex","Customer",new {id = "1"})'>
                             <div class="member-row">
                                 <div class="flex">
                                     <div class="member-input-label-item">
-                                        @Html.LabelFor(model => model.CustomerAccount)
+                                        @Html.LabelFor(model => model.CustomerView.CustomerAccount)
                                     </div>
                                     <div class="member-input-textbox">
-                                        @Html.EditorFor(model => model.CustomerAccount, new { htmlAttributes = new { @class = "member-input-textbox-input", @readonly = "readonly" } })
-                                        @Html.ValidationMessageFor(model => model.CustomerAccount, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.CustomerView.CustomerAccount, new { htmlAttributes = new { @class = "member-input-textbox-input", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerView.CustomerAccount, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
                             <div class="member-row">
                                 <div class="flex">
                                     <div class="member-input-label-item">
-                                        @Html.LabelFor(model => model.CustomerName)
+                                        @Html.LabelFor(model => model.CustomerView.CustomerName)
                                     </div>
                                     <div class="member-input-textbox">
-                                        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
-                                        @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.CustomerView.CustomerName, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerView.CustomerName, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
                             <div class="member-row">
                                 <div class="flex">
                                     <div class="member-input-label-item">
-                                        @Html.LabelFor(model => model.CustomerPhone)
+                                        @Html.LabelFor(model => model.CustomerView.CustomerPhone)
                                     </div>
                                     <div class="member-input-textbox">
-                                        @Html.EditorFor(model => model.CustomerPhone, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
-                                        @Html.ValidationMessageFor(model => model.CustomerPhone, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.CustomerView.CustomerPhone, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerView.CustomerPhone, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
                             <div class="member-row">
                                 <div class="flex">
                                     <div class="member-input-label-item">
-                                        @Html.LabelFor(model => model.CustomerBirth)
+                                        @Html.LabelFor(model => model.CustomerView.CustomerBirth)
                                     </div>
                                     <div class="member-input-textbox">
-                                        @Html.EditorFor(model => model.CustomerBirth, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
-                                        @Html.ValidationMessageFor(model => model.CustomerBirth, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.CustomerView.CustomerBirth,new { @type = "date",@Value = Model.CustomerView.CustomerBirth.ToString("yyyy/MM/dd"), @class="datepicker member-input-textbox-input", @readonly = "readonly" })
+                                        @*@Html.EditorFor(model => model.CustomerView.CustomerBirth, new {htmlAttributes = new {@type = "text", @class = "member-input-textbox-input", @readonly = "readonly"}})*@
+                                        @Html.ValidationMessageFor(model => model.CustomerView.CustomerBirth, "", new {@class = "text-danger"})
                                     </div>
                                 </div>
                             </div>
                             <div class="member-row">
                                 <div class="flex">
                                     <div class="member-input-label-item">
-                                        @Html.LabelFor(model => model.CustomerEmail)
+                                        @Html.LabelFor(model => model.CustomerView.CustomerEmail)
                                     </div>
                                     <div class="member-input-textbox">
-                                        @Html.EditorFor(model => model.CustomerEmail, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
-                                        @Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.CustomerView.CustomerEmail, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerView.CustomerEmail, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
@@ -116,22 +111,22 @@
                             <div class="member-row">
                                 <div class="flex">
                                     <div class="member-input-label-item">
-                                        @Html.LabelFor(model => model.CustomerAddress)
+                                        @Html.LabelFor(model => model.CustomerView.CustomerAddress)
                                     </div>
                                     <div class="member-input-textbox ">
-                                        @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
-                                        @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.CustomerView.CustomerAddress, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerView.CustomerAddress, "", new { @class = "text-danger" })
                                         @*<select class="member-input-selectbox">
-                            <option>縣市</option>
-                            <option></option>
-                            <option></option>
+                                <option>縣市</option>
+                                <option></option>
+                                <option></option>
 
-                        </select>
-                        <select class="member-input-selectbox">
-                            <option>鄉/市區</option>
-                            <option></option>
-                            <option></option>
-                        </select>*@
+                            </select>
+                            <select class="member-input-selectbox">
+                                <option>鄉/市區</option>
+                                <option></option>
+                                <option></option>
+                            </select>*@
 
                                     </div>
                                 </div>
@@ -144,37 +139,161 @@
                     </div>
 
                     <div id="tab-OrderDetail">
-                        tab-OrderDetail
-                    </div>
-                    <div id="tab-Coupon">
-                        tab-Coupon
+                        <div class="membercenter-orderdetail-block">
+                            <div class="membercenter-orderdetail-block-header">
+                                <ul class="membercenter-orderdetail-list">
+                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
+                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
+                                    <li class="membercenter-order-header-item order-box">總金額</li>
+                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
+                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
+                                </ul>
+                            </div>
+                            <div class="membercenter-orderdetail-center-block">
+                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
+                                    <li class="membercenter-order-center-item order-box">A1234123</li>
+                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
+                                    <li class="membercenter-order-center-item order-box">9478元</li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <div class="visibility-button">
+                                            <i class="fas fa-eye"></i>
+                                            <div class="membercenter-order-shopping-stasus">
+                                                <ul class="membercenter-order-shipping-progress">
+                                                    <li class="active">訂單成立</li>
+                                                    <li>準備出貨</li>
+                                                    <li>運送中</li>
+                                                    <li>待取貨</li>
+                                                    <li>完成取貨</li>
+                                                    <li>交易完成</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <a href="#"
+                                           class="membercente-sohw-orderdatil">詳細資訊</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="membercenter-orderdetail-block">
+                            <div class="membercenter-orderdetail-block-header">
+                                <ul class="membercenter-orderdetail-list">
+                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
+                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
+                                    <li class="membercenter-order-header-item order-box">總金額</li>
+                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
+                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
+                                </ul>
+                            </div>
+                            <div class="membercenter-orderdetail-center-block">
+                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
+                                    <li class="membercenter-order-center-item order-box">A1234123</li>
+                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
+                                    <li class="membercenter-order-center-item order-box">9478元</li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <div class="visibility-button">
+                                            <i class="fas fa-eye"></i>
+                                            <div class="membercenter-order-shopping-stasus">
+                                                <ul class="membercenter-order-shipping-progress">
+                                                    <li class="active">訂單成立</li>
+                                                    <li>準備出貨</li>
+                                                    <li>運送中</li>
+                                                    <li>待取貨</li>
+                                                    <li>完成取貨</li>
+                                                    <li>交易完成</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <a href="#"
+                                           class="membercente-sohw-orderdatil">詳細資訊</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="membercenter-orderdetail-block">
+                            <div class="membercenter-orderdetail-block-header">
+                                <ul class="membercenter-orderdetail-list">
+                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
+                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
+                                    <li class="membercenter-order-header-item order-box">總金額</li>
+                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
+                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
+                                </ul>
+                            </div>
+                            <div class="membercenter-orderdetail-center-block">
+                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
+                                    <li class="membercenter-order-center-item order-box">A1234123</li>
+                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
+                                    <li class="membercenter-order-center-item order-box">9478元</li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <div class="visibility-button">
+                                            <i class="fas fa-eye"></i>
+                                            <div class="membercenter-order-shopping-stasus">
+                                                <ul class="membercenter-order-shipping-progress">
+                                                    <li class="active">訂單成立</li>
+                                                    <li>準備出貨</li>
+                                                    <li>運送中</li>
+                                                    <li>待取貨</li>
+                                                    <li>完成取貨</li>
+                                                    <li>交易完成</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <a href="#"
+                                           class="membercente-sohw-orderdatil">詳細資訊</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div id="tab-Modifypassword">
-                        <form action="">
+                        <form action='@Url.Action("CustomerIndex","Customer",new {id = "2"})'>
+                            <div class="member-row">
+                                <div class="flex">
+                                    <div class="member-input-label-item">
+                                        @Html.LabelFor(model => model.ChangePassword.CustomerAccount)
+                                    </div>
+                                    <div class="member-input-textbox">
+                                        @Html.EditorFor(model => model.ChangePassword.CustomerAccount, new { htmlAttributes = new { @class = "member-input-textbox-input", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.ChangePassword.CustomerAccount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
                             <div class="member-row flex modify-password-row-block">
                                 <div class="member-input-label">
-                                    <label>當前密碼:</label>
+                                    @Html.LabelFor(m => m.ChangePassword.CustomerPassword)
                                 </div>
                                 <div class="member-input-textbox flex">
-                                    <input id="show-password-textbox1" class="member-input-textbox-input" type="password">
+                                    @Html.PasswordFor(m => m.ChangePassword.CustomerPassword, new { placeholder = "請輸入會員密碼", @class = "member-input-textbox-input" })
+                                    @Html.ValidationMessageFor(m => m.ChangePassword.CustomerPassword, "", new { @class = "prompt-text text-dan" })
+                                    @*<input id="show-password-textbox1" class="member-input-textbox-input" type="password">*@
                                     <input type="button" id="show-password-button1" class="member-show-button" value="Show">
                                 </div>
                             </div>
                             <div class="member-row flex modify-password-row-block">
                                 <div class="member-input-label">
-                                    <label>新密碼:</label>
+                                    @Html.LabelFor(m => m.ChangePassword.CustomerNewPassword)
                                 </div>
                                 <div class="member-input-textbox flex">
-                                    <input id="show-password-textbox2" class="member-input-textbox-input" type="password">
+                                    @Html.PasswordFor(m => m.ChangePassword.CustomerNewPassword, new { placeholder = "請輸入新密碼", @class = "member-input-textbox-input" })
+                                    @Html.ValidationMessageFor(m => m.ChangePassword.CustomerNewPassword, "", new { @class = "prompt-text text-dan" })
+                                    @*<input id="show-password-textbox2" class="member-input-textbox-input" type="password">*@
                                     <input type="button" id="show-password-button2" class="member-show-button" value="Show">
                                 </div>
                             </div>
                             <div class="member-row flex modify-password-row-block">
                                 <div class="member-input-label">
-                                    <label>確認新密碼:</label>
+                                    @Html.LabelFor(m => m.ChangePassword.ConfirmPassword)
                                 </div>
                                 <div class="member-input-textbox flex">
-                                    <input id="show-password-textbox3" class="member-input-textbox-input" type="password">
+                                    @Html.PasswordFor(m => m.ChangePassword.ConfirmPassword, new { placeholder = "請輸入確認密碼", @class = "member-input-textbox-input" })
+                                    @Html.ValidationMessageFor(m => m.ChangePassword.ConfirmPassword, "", new { @class = "prompt-text text-dan" })
+                                    @*<input id="show-password-textbox3" class="member-input-textbox-input" type="password">*@
                                     <input type="button" id="show-password-button3" class="member-show-button" value="Show">
                                 </div>
                             </div>
@@ -182,6 +301,9 @@
                                 <button class="membercentre-submit-button " type="submit">確認</button>
                             </div>
                         </form>
+                    </div>
+                    <div id="tab-Coupon">
+                        敬請期待!!
                     </div>
                 </div>
             </div>

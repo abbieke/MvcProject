@@ -171,6 +171,7 @@
     <Content Include="Assets\Css\cart_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
+    <Content Include="Assets\Css\orderdetails.css" />
     <Content Include="Assets\Css\wish-list-product-card-stylesheet.css" />
     <Content Include="Assets\Images\block\services.png" />
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />
@@ -254,7 +255,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assets\Images\jquery-ui-images\Thumbs.db" />
     <Content Include="Assets\Images\Linepay\Thumbs.db" />
-    <None Include="Properties\PublishProfiles\MvcProjectTest20190528070212 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MvcProjectTest20190604123944 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

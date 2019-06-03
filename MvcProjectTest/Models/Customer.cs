@@ -95,4 +95,29 @@ namespace MvcProjectTest.Models
         [Remote("CheckCustomerAccount", "Account", ErrorMessage = "遠端驗證失敗")]
         public string CustomerAccount { get; set; }
     }
+
+    public class CustomerChangePasswordViewModel
+    {
+        public int CustomerId { get; set; }
+        [Display(Name = "會員帳號")]
+        [Required]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "最少需要8個字元")]
+        [Remote("CheckCustomerAccount", "Account", ErrorMessage = "遠端驗證失敗")]
+        public string CustomerAccount { get; set; }
+
+        [Display(Name = "會員密碼")]
+        [Required]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$", ErrorMessage = "至少有一個數字、小寫英文字母、大寫英文字母")]
+        public string CustomerPassword { get; set; }
+
+        [Display(Name = "輸入新密碼")]
+        [Required]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$", ErrorMessage = "至少有一個數字、小寫英文字母、大寫英文字母")]
+        public string CustomerNewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "確認密碼")]
+        [System.ComponentModel.DataAnnotations.Compare("CustomerNewPassword", ErrorMessage = "密碼和確認密碼不相符")]
+        public string ConfirmPassword { get; set; }
+    }
 }
