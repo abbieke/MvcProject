@@ -384,6 +384,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
     <script>
         $(function () {
             $(".quick-view-dialog").dialog({
@@ -420,26 +421,19 @@
             });
         });
     </script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
+    @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
     <!-- newest tab -->
     <script>
         $(function () {
             $("#newest-tab").tabs();
-            // var $li = $('.newest-tab-title-row li');
-            // $($li.eq(0).addClass('active').find('a').attr('href')).siblings('.tab-inner').hide();
-
-            // $li.click(function () {
-            //     $($(this).find('a').attr('href')).show().siblings('.tab-inner').hide();
-            //     $(this).addClass('active').siblings('.active').removeClass('active');
-            // });
         });
     </script>
     <script>
         $(function () {
             $(".product-card-cart-button").click(addBookToCart);
             function addBookToCart() {
-                
+
                 var buttonValue = this.value;
                 alert(buttonValue);
                 $.ajax({
@@ -452,7 +446,7 @@
                 });
 
             }
-            
+
 
         });
     </script>
