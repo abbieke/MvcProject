@@ -147,14 +147,13 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress, CustomerBirth=@CustomerBirth WHERE CustomerAccount=@CustomerAccount";
+                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress WHERE CustomerAccount=@CustomerAccount";
                 conn.Execute(sql, new {
                     CustomerName = cust.CustomerName,
                     CustomerAccount = cust.CustomerAccount,
                     CustomerEmail = cust.CustomerEmail,
                     CustomerPhone = cust.CustomerPhone,
-                    CustomerAddress = cust.CustomerAddress,
-                    CustomerBirth = cust.CustomerBirth });
+                    CustomerAddress = cust.CustomerAddress});
             }
 
         }
@@ -200,6 +199,26 @@ namespace MvcProjectTest.Repositories
             }
         }
 
+        public CustomerChangePasswordViewModel SelectCustomerPasswordView(string account)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Customers Where CustomerAccount= '" + account + "'";
+                var cust = conn.QueryFirstOrDefault<CustomerChangePasswordViewModel>(sql);
+                return cust;
 
+            }
+        }
+
+        public string SelectCustomerPassword(string account)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select CustomerPassword From Customers Where CustomerAccount= '" + account + "'";
+                var cust = conn.QueryFirstOrDefault<string>(sql);
+                return cust;
+
+            }
+        }
     }
 }
