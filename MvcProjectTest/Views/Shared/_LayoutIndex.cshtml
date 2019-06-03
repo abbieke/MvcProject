@@ -70,9 +70,9 @@
                         </ul>
                     </nav>
                     <div class="bkshop-searchbox">
-                        <form action="#" class="search">
-                            <i class="fas fa-search"></i>
-                            <input type="text">
+                        <form action='@Url.Action("Index","Book", null)' class="search">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                            <input type="text" name="id">
                         </form>
                     </div>
                     <div class="bkshop-member-carbox">
