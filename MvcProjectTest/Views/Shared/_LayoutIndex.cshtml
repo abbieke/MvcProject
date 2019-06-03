@@ -432,17 +432,38 @@
     <script>
         $(function () {
             $(".product-card-cart-button").click(addBookToCart);
+            $(".jumpcard-product-button").click(jumpcardAddBookToCart);
             function addBookToCart() {
 
                 var buttonValue = this.value;
-                alert(buttonValue);
+                //alert(buttonValue);
                 $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddToCart", "Shopping")',
-                data: {  bookId: buttonValue }
-            })
-                    .done(function () {
-                        alert("DONE")
+                    data: { quantity: 1,bookId: buttonValue }
+                }).done(function (response) {
+                    //alert(response);
+                    if (response == "fail") {
+                        window.location.assign("/Account/Login");
+                    }
+                });
+
+            }
+            function jumpcardAddBookToCart() {
+
+                var buttonValue = this.value;
+                var qty = $(this).parents(".jumpcard-product-addtocart").children(".jumpcard-product-inputbox").children("input").val();
+                //alert(buttonValue);
+                //alert(qty);
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Shopping")',
+                    data: { quantity: +qty,bookId: buttonValue }
+                }).done(function (response) {
+                    //alert(response);
+                    if (response == "fail") {
+                        window.location.assign("/Account/Login");
+                    }
                 });
 
             }
