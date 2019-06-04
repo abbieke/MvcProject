@@ -38,7 +38,7 @@
                             @foreach (var item in cate)
                             {
                                 <li class="book-item">
-                                    <a href="@Url.Action("Index","Book",new { id = item.CategoryEngName})">@item.CategoryName</a>
+                                    <a href="@Url.Action("Index","Book",new { name = item.CategoryEngName})">@item.CategoryName</a>
                                 </li>
                             }
                             @*<li class="book-item">
@@ -72,10 +72,10 @@
                     <div class="bkshop-searchbox">
                         <form action='@Url.Action("Index","Book", null)' class="search">
                             <button type="submit" style="visibility:hidden"><i class="fas fa-search" style="visibility:visible"></i></button>
-                            <input type="text" name="id">
+                            <input type="text" name="name">
                         </form>
                     </div>
-                    <div class="bkshop-member-carbox">
+                    <div class="bkshop-member-carbox">                                       b  
                         <ul class="bookmenu">
                             <li class="book-item">
                                 @if (Request.IsAuthenticated)

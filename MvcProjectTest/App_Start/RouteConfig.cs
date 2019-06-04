@@ -18,6 +18,12 @@ namespace MvcProjectTest
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Search",
+                url: "Book/{name}",
+                defaults: new { controller = "Book", action = "Index", name = UrlParameter.Optional }
+            );
         }
     }
 }
