@@ -1,7 +1,6 @@
 ﻿@model Book
 
 
-
 @*card主體*@
 <div class="product-card-out-block">
     <div class="product-card-block">
@@ -13,17 +12,17 @@
                      alt="1">
             </a>
             <div class="product-card-visual-cart-block">
-                <form action="add-cart">
 
-                    <input type="hidden" name="id" value="1">
+                
+                    <input type="hidden" name="id" value="1" >
                     <!-- hidden的可以儲存資料用 根據後端修改 -->
-                    <button class="product-card-cart-button card-quick-button-style" type="submit">
+                    <button class="product-card-cart-button card-quick-button-style"  value="@Model.BookId">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="product-card-cart-tip pc-quick-tip-style">
                             Add To Cart
                         </span>
                     </button>
-                </form>
+                
                 <button class="product-card-quick-view quick-view-opener" id=@("quick-view-opener" + ViewBag.cardIndex)>
                     <i class="far fa-eye card-quick-button-style"></i>
                     <span class="product-card-quick-view-tip pc-quick-tip-style">
@@ -43,7 +42,7 @@
                 </div>
                 <div class="product-price-block">
                     <span class="product-price-span product-card-des-text delete-line">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
-                    <span class="product-card-discount-text">$@(Model.UnitPrice * (1-Model.Discount))</span>
+                    <span class="product-card-discount-text ">$@(Model.UnitPrice * (1-Model.Discount))</span>
                 </div>
                 <div class="description-for-list-display-style">
                     @Html.Raw(Model.Description)
@@ -60,20 +59,20 @@
         <div class="jumpcard-body-imgbox">
             <img class="jumpcard-body-img" src="~/Assets/Images/@Html.DisplayFor(modelItem => Model.CategoryEngName)/@Html.DisplayFor(modelItem => Model.BookImage)" alt="">
             <div class="jumpcard-product-action">
-                <form class="jumpcard-product-actionform flex" action="">
+                <div class="jumpcard-product-actionform flex" action="">
                     <div class="jumpcard-product-addtocart flex">
                         <span>數量</span>
 
                         <div class="jumpcard-product-inputbox">
-                            <input class="jumpcard-product-input" type="text" value="1">
+                            <input class="jumpcard-product-input" type="number" value="1">
                         </div>
 
                         <div class="jumpcard-product-buttonbox ">
-                            <button class="jumpcard-product-button" type="submit">加入購物車</button>
+                            <button class="jumpcard-product-button" value="@Model.BookId">加入購物車</button>
                         </div>
 
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <div class="jumpcard-body-contentbox">

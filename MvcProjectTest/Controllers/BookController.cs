@@ -22,10 +22,30 @@ namespace MvcProjectTest.Controllers
         //    return View(books);
         //}
 
-        public ActionResult Index(string id)
+        public ActionResult Index(string name)
         {
-            var books = _repo.SelectCategoryBooks(id);
+            var books = _repo.SelectCategoryBooks(name);
+            ViewBag.catEngName = name;
             return View(books);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string bookKind,string maxValue, string minValue)
+        {
+
+            var books = _repo.SelectCategoryBooks(bookKind);
+            var result = new List<Book>();
+            foreach (var i in books)
+            {
+                if ((i.UnitPrice >= Convert.ToInt32(minValue)) && (i.UnitPrice <=Convert.ToInt32(maxValue)))
+                {
+                    result.Add(i);
+                }
+            }
+            ViewBag.cardIndex = 0;
+            ViewBag.catEngName = bookKind;
+            //return PartialView("BookByRange", result);
+            return View(result);
         }
 
 
@@ -37,5 +57,18 @@ namespace MvcProjectTest.Controllers
             //return View();
             return View(mix);
         }
+        //public ActionResult BookByRange(string bookKind, int valmin, int valmax)
+        //{
+        //    var books = _repo.SelectCategoryBooks(bookKind);
+        //    var result = new List<Book>();
+        //    foreach (var i in books)
+        //    {
+        //        if ((i.UnitPrice >= valmin) && (i.UnitPrice <= valmax))
+        //        {
+        //            result.Add(i);
+        //        }
+        //    }
+        //    return View("Index",result);
+        //}
     }
 }

@@ -21,4 +21,10 @@ namespace MvcProjectTest.Models
         public Book Book { get; set; }
         public List<Book> SelectBooks { get; set; }
     }
+
+    public class CustomerMix
+    {
+        public CustomerViewModel CustomerView { get; set; }
+        public CustomerChangePasswordViewModel ChangePassword { get; set; }
+    }
 }

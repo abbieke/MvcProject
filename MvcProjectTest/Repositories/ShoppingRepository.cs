@@ -45,6 +45,39 @@ namespace MvcProjectTest.Repositories
                 return carts;
             }
         }
+        public ShoppingCartViewModel SelectCart(int customerID, string bookId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select sc.BookID,Quantity,BooksNo,b.BooksName,b.UnitPrice,b.InStock,b.Discount,b.BookImage,c.CategoryEngName from [Shopping Car] sc inner join Books b on sc.BookID=b.BookID inner join Category c on b.CategoryID=c.CategoryID where CustomerID=@customerID and  b.BookID=@bookId;";
+                var carts = conn.QueryFirstOrDefault<ShoppingCartViewModel>(sql, new { customerID, bookId });
+                return carts;
+            }
+        }
+
+        public void InsertCartBook(int customerId, string bookId,int qty)
+        {
+            var cart = SelectCart(customerId, bookId);
+
+            if (cart == null)
+            {
+                using (conn = new SqlConnection(connString))
+                {
+                    string sql = "INSERT INTO [Shopping Car](CustomerID, BookID, Quantity) VALUES (@cusId,@bookid,@quantity) ";
+                    conn.Execute(sql, new { cusId = customerId, bookid = bookId, quantity = qty });
+                }
+            }
+            else
+            {
+                qty = qty + cart.Quantity;
+                using (conn = new SqlConnection(connString))
+                {                 
+                    string sql = "UPDATE[Shopping Car] SET Quantity = @quantity WHERE CustomerID = @cusId and BookID = @bookid;" ;
+                    conn.Execute(sql, new { cusId = customerId, bookid = bookId, quantity = qty });
+                }
+            }
+            
+        }
 
         //test
         public void RemoveCartBook(int customerId, string bookId)

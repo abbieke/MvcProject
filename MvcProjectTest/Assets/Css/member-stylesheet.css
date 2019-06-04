@@ -1,3 +1,11 @@
+.bookshopping-menu {
+  height: 5rem;
+}
+
+.bkshop-logo {
+  margin-right: auto;
+}
+
 .member-body {
   width: 100%;
   height: 840px;
@@ -19,8 +27,8 @@
 .membercentre-titletext {
   margin-top: 10px;
   text-align: center;
-  height: 79px;
-  margin-bottom: 30px;
+  height: 70px;
+  margin-bottom: 20px;
 }
 
 .membercentre-titletext h2 {
@@ -105,8 +113,9 @@
   border-bottom: #ddd solid 2px;
 }
 
-.textbox-width {
-  width: 480px;
+.member-input-label-item {
+  width: 20%;
+  font-weight: bold;
 }
 
 .member-input-selectbox {
@@ -124,6 +133,7 @@
 }
 
 .modify-password-row-block {
+  font-weight: bold;
   width: 60%;
 }
 
@@ -141,13 +151,140 @@
   background: #b7b7b7;
 }
 
-.member-input-label-item {
-  width: 20%;
-  font-weight: bold;
-}
-
 .membercentre-footerbuttonbox {
   margin-top: 90px;
   text-align: end;
+}
+
+.membercentre-centerbuttonbox {
+  margin-top: 5px;
+  text-align: end;
+}
+
+.membercenter-orderdetail-block {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.membercenter-orderdetail-block-header {
+  font-weight: bold;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#000), color-stop(100%, rgba(0, 0, 0, 0.5)), to(rgba(255, 255, 255, 0.3)));
+  background: linear-gradient(#000, rgba(0, 0, 0, 0.5) 100%, rgba(255, 255, 255, 0.3));
+  -webkit-box-shadow: 1px 1px 1px #888;
+          box-shadow: 1px 1px 1px #888;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 1px 1px 1px #888;
+}
+
+.membercenter-orderdetail-center-block {
+  font-weight: bold;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: rgba(221, 221, 221, 0.5);
+  -webkit-transition: background .3s;
+  transition: background .3s;
+  border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 1px #888;
+          box-shadow: 1px 1px 1px #888;
+}
+
+.membercenter-orderdetail-center-block:hover {
+  -webkit-transition: background .3s;
+  transition: background .3s;
+  background: #ddd;
+}
+
+.order-box {
+  width: 25%;
+  margin: 0 20PX;
+  padding: 10px;
+}
+
+.membercenter-order-center-item {
+  text-align: center;
+}
+
+.membercente-sohw-orderdatil:hover {
+  font-size: 15px;
+}
+
+.visibility-button {
+  cursor: pointer;
+}
+
+.visibility-button:hover .membercenter-order-shopping-stasus {
+  border-radius: 10px;
+  display: block;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.membercenter-order-shopping-stasus {
+  background-color: rgba(49, 56, 63, 0.95);
+  width: 600px;
+  height: 90px;
+  z-index: 5;
+  display: none;
+  position: absolute;
+  left: 49%;
+}
+
+.membercenter-order-shipping-progress {
+  counter-reset: step;
+}
+
+.membercenter-order-shipping-progress li.active {
+  color: #8cff91;
+}
+
+.membercenter-order-shipping-progress li.active::before {
+  border-color: #8cff91;
+}
+
+.membercenter-order-shipping-progress li.active + li::after {
+  background-color: #8cff91;
+}
+
+.membercenter-order-shipping-progress li {
+  list-style-type: none;
+  float: left;
+  width: 25%;
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+.membercenter-order-shipping-progress li::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ddd;
+  display: block;
+  text-align: center;
+  margin: 10px auto;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #31383f;
+}
+
+.membercenter-order-shipping-progress li::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: #ddd;
+  top: 25px;
+  left: -50%;
+  z-index: -1;
+}
+
+.membercenter-order-shipping-progress li:first-child:after {
+  content: none;
 }
 /*# sourceMappingURL=member-stylesheet.css.map */

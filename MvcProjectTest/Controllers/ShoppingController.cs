@@ -53,10 +53,21 @@ namespace MvcProjectTest.Controllers
         public void RemoveCartItem(int customerId, string bookId)
         {
             _repo.RemoveCartBook(customerId, bookId);
-            
         }
+       
+        [HttpPost]
+        public string AddToCart(int quantity, string bookId)
+        {
+            if (Request.IsAuthenticated)
+            {
+                int userid = (int)Session["userid"];
+                _repo.InsertCartBook(userid, bookId, quantity);
+                return "success"+ quantity;
+            }
+            return "fail";
 
+
+        }
         
-
     }
 }

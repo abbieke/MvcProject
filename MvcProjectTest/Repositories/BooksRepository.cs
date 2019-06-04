@@ -70,7 +70,7 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select TOP 4 * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID WHERE c.CategoryEngName = '" + id +"' ORDER BY b.InStock";
+                string sql = "Select * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID WHERE c.CategoryEngName = '" + id + "'OR b.BooksName like N'%" + id + "%'";
                 books = conn.Query<Book>(sql).ToList();
                 return books;
             }
