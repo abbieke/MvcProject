@@ -738,3 +738,12 @@ input[type="number"] {
     -moz-appearance: textfield;
     background: #f00;
 }*/
+
+.prompt-block-about-stock {
+    
+}
+
+.instock-span {
+    font-size: .875rem;
+    display: inline-block;
+}

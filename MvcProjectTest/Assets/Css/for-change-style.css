@@ -19,4 +19,12 @@
 .delete-line {
   text-decoration: line-through;
 }
+
+.red-text {
+    color: #f00;
+}
+
+.red-text-2 {
+    color: #ff5d5d;
+}
 /*# sourceMappingURL=for-change-style.css.map */
