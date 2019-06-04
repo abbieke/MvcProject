@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="orderdetails">
+    <div class="container">
+        <a href="#">
+            <h3><i class="fas fa-angle-left"></i> 返回交易紀錄</h3>
+        </a>
+        <div class="order-container">
+
+            <div class="orderdetails-transport ">
+                <div class="titlename">訂單狀態</div>
+                <div class="shipping-status">
+                    <ul class="shipping-progress">
+                        <li class="active">訂單成立</li>
+                        <li>準備出貨</li>
+                        <li>運送中</li>
+                        <li>待取貨</li>
+                        <li>完成取貨</li>
+                        <li>交易完成</li>
+                    </ul>
+                </div>
+                <div class="orderdetails-transport-down flex">
+                    <div class="orderdetails-transport-ulbox">
+                        <ul class="orderdetails-transport-list">
+                            <li class="orderdetails-transport-list-item width100">訂單成立</li>
+                            <li class="orderdetails-transport-list-item width100">準備出貨</li>
+                            <li class="orderdetails-transport-list-item width100">運送中</li>
+                            <li class="orderdetails-transport-list-item width100">待取貨</li>
+                            <li class="orderdetails-transport-list-item width100">完成取貨</li>
+                            <li class="orderdetails-transport-list-item width100">交易完成</li>
+                        </ul>
+                    </div>
+                    <div class="orderdetails-transport-ulbox">
+                        <ul class="orderdetails-transport-list">
+                            <li class="orderdetails-transport-list-item width100">2019/5/10 00:04</li>
+                            <li class="orderdetails-transport-list-item width100">2019/5/12 20:30</li>
+                            <li class="orderdetails-transport-list-item width100">2019/5/13 21:36</li>
+                            <li class="orderdetails-transport-list-item width100">2019/5/14 06:25</li>
+                            <li class="orderdetails-transport-list-item width100">2019/5/15 18:30</li>
+                            <li class="orderdetails-transport-list-item width100">2019/5/16 18:30</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="orderdetails-customer">
+                <div class="titlename ">收件人資料</div>
+                <div class="customer-detail flex">
+                    <div class="orderdetails-transport-ulbox">
+                        <ul class="orderdetails-transport-list">
+                            <li class="orderdetails-customer-item width100 ">收件人姓名</li>
+                            <li class="orderdetails-customer-item width100 ">收件人電話</li>
+                            <li class="orderdetails-customer-item width100 ">取貨方式</li>
+                            <li class="orderdetails-customer-item width100 ">付款方式</li>
+                            <li class="orderdetails-customer-item width100 ">取貨地點</li>
+                        </ul>
+                    </div>
+                    <div class="orderdetails-transport-ulbox">
+                        <ul class="orderdetails-transport-list">
+                            <li class="orderdetails-customer-item width100 textleft">OOO</li>
+                            <li class="orderdetails-customer-item width100 textleft">0912-345678</li>
+                            <li class="orderdetails-customer-item width100 textleft">超商取貨</li>
+                            <li class="orderdetails-customer-item width100 textleft">信用卡/VISA金融卡</li>
+                            <li class="orderdetails-customer-item width100 textleft">300 新竹市香山區五福路二段707號</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="orderdetails-productsdetail">
+                <div class="orderdetails-productsdetail-header">
+                    <ul class="orderdetails-productsdetail-header-list width100">
+                        <li class="orderdetails-productsdetail-item">商品名稱</li>
+                        <li class="orderdetails-productsdetail-item">訂購數量</li>
+                        <li class="orderdetails-productsdetail-item">商品價格</li>
+                        <li class="orderdetails-productsdetail-item">折扣</li>
+                        <li class="orderdetails-productsdetail-item">總金額</li>
+                    </ul>
+                </div>
+                <div class="orderdetails-productsdetail-bodt">
+                    <ul class="orderdetails-productsdetail-body-list">
+                        <li class="orderdetails-productsdetail-item">情緒重建</li>
+                        <li class="orderdetails-productsdetail-item">2</li>
+                        <li class="orderdetails-productsdetail-item">150$</li>
+                        <li class="orderdetails-productsdetail-item">0$</li>
+                        <li class="orderdetails-productsdetail-item">300$</li>
+                    </ul>
+                </div>
+                <!-- <div class="orderdetails-productsdetail-total">
+                    <ul class="width100">
+                        <li class="orderdetails-productsdetail-total-item width100">目前商品:</li>
+                        <li class="orderdetails-productsdetail-total-item width100">300$</li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section topCss {
+    <link href="~/Assets/Css/orderdetails.css" rel="stylesheet" />
+}
