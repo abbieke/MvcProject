@@ -90,7 +90,7 @@
                                         @Html.LabelFor(model => model.CustomerView.CustomerBirth)
                                     </div>
                                     <div class="member-input-textbox">
-                                        @Html.TextBoxFor(model => model.CustomerView.CustomerBirth,new { @type = "date",@Value = Model.CustomerView.CustomerBirth.ToString("yyyy/MM/dd"), @class="datepicker member-input-textbox-input", @readonly = "readonly" })
+                                        @Html.TextBoxFor(model => model.CustomerView.CustomerBirth,new { @Value = Model.CustomerView.CustomerBirth.ToString("yyyy/MM/dd"), @class="datepicker member-input-textbox-input", @readonly = "readonly" })
                                         @*@Html.EditorFor(model => model.CustomerView.CustomerBirth, new {htmlAttributes = new {@type = "text", @class = "member-input-textbox-input", @readonly = "readonly"}})*@
                                         @Html.ValidationMessageFor(model => model.CustomerView.CustomerBirth, "", new {@class = "text-danger"})
                                     </div>
