@@ -1,7 +1,6 @@
 ﻿@model Book
 
 
-
 @*card主體*@
 <div class="product-card-out-block">
     <div class="product-card-block">
@@ -43,7 +42,7 @@
                 </div>
                 <div class="product-price-block">
                     <span class="product-price-span product-card-des-text delete-line">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
-                    <span class="product-card-discount-text">$@(Model.UnitPrice * (1-Model.Discount))</span>
+                    <span class="product-card-discount-text ">$@(Model.UnitPrice * (1-Model.Discount))</span>
                 </div>
                 <div class="description-for-list-display-style">
                     @Html.Raw(Model.Description)
