@@ -11,14 +11,21 @@
   display: inline-block;
 }
 
-.product-trash-icon-a {
+.product-trash-icon-button {
   width: 35px;
   height: 35px;
   position: relative;
   display: block;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
 }
 
-.product-trash-icon-a:hover .trash-quick-tip {
+.product-trash-icon-button:focus {
+  outline: none;
+}
+
+.product-trash-icon-button:hover .trash-quick-tip {
   opacity: 1;
   visibility: visible;
 }

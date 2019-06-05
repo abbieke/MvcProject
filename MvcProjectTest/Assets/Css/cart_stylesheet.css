@@ -297,20 +297,9 @@
 .cart-tab-block #cart-tabs-2 .product-card-list {
   border: 1px solid #a0a0a0;
   padding: 50px;
+  width:100%;
 }
 
-.cart-tab-block #cart-tabs-2 .product-card-out-block {
-  padding: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-}
-
-.cart-tab-block #cart-tabs-2 .product-card-block {
-  margin: 10px;
-  width: 25%;
-}
 
 /*============以上為新的購物車/願望清單============*/
 .cart-total-div {

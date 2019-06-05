@@ -7,6 +7,8 @@
     int bookCount = 0;
     int total = 0;
     var _cusRepo = new CustomersRepository();
+    var _shoppingRepo = new ShoppingRepository();
+    var wishbooks = _shoppingRepo.SelectWish((int)Session["userid"]);
 
 }
 
@@ -118,8 +120,12 @@
             </div>
             <!-- 願望清單 -->
             <div id="cart-tabs-2" class="tab-inner">
-                <div class="product-card-list">
-                    <div class="product-card-out-block">
+                <div class="product-card-list flex">
+                    @foreach (var book in wishbooks)
+                    {                       
+                        @Html.Partial("_WishProductCardPartial", book)
+                    }
+                    @*<div class="product-card-out-block">
                         <div class="product-card-block">
                             <div class="product-card-img-block">
                                 <a href="#" class="product-link">
@@ -169,154 +175,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="product-card-block">
-                            <div class="product-card-img-block">
-                                <a href="#" class="product-link">
-                                    <img class="pc-img"
-                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                         alt="1">
-                                </a>
-                                <div class="product-card-visual-cart-block">
-                                    <form action="add-cart">
-                                        <input type="hidden" name="id" value="1">
-                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                        <button class="product-card-cart-button card-quick-button-style"
-                                                type="submit">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span class="product-card-cart-tip pc-quick-tip-style">
-                                                Add To
-                                                Cart
-                                            </span>
-                                        </button>
-                                    </form>
-                                    <a href="#" class="product-card-quick-view">
-                                        <i class="far fa-eye card-quick-button-style"></i>
-                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                            Quick
-                                            View
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="wish-list-card-remove-icon-block">
-                                    <a href="#" class="product-trash-icon-a">
-                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
-                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-card-description-block">
-                                <a href="#" class="product-link">
-                                    <h3 class="product-card-title">
-                                        有可能的任務
-                                    </h3>
-                                    <div class="product-writter-block">
-                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                    </div>
-                                    <div class="product-price-block">
-                                        <span class="product-price-span product-card-des-text">$300</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-card-block">
-                            <div class="product-card-img-block">
-                                <a href="#" class="product-link">
-                                    <img class="pc-img"
-                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                         alt="1">
-                                </a>
-                                <div class="product-card-visual-cart-block">
-                                    <form action="add-cart">
-                                        <input type="hidden" name="id" value="1">
-                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                        <button class="product-card-cart-button card-quick-button-style"
-                                                type="submit">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span class="product-card-cart-tip pc-quick-tip-style">
-                                                Add To
-                                                Cart
-                                            </span>
-                                        </button>
-                                    </form>
-                                    <a href="#" class="product-card-quick-view">
-                                        <i class="far fa-eye card-quick-button-style"></i>
-                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                            Quick
-                                            View
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="wish-list-card-remove-icon-block">
-                                    <a href="#" class="product-trash-icon-a">
-                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
-                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-card-description-block">
-                                <a href="#" class="product-link">
-                                    <h3 class="product-card-title">
-                                        有可能的任務
-                                    </h3>
-                                    <div class="product-writter-block">
-                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                    </div>
-                                    <div class="product-price-block">
-                                        <span class="product-price-span product-card-des-text">$300</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-card-block">
-                            <div class="product-card-img-block">
-                                <a href="#" class="product-link">
-                                    <img class="pc-img"
-                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                         alt="1">
-                                </a>
-                                <div class="product-card-visual-cart-block">
-                                    <form action="add-cart">
-                                        <input type="hidden" name="id" value="1">
-                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                        <button class="product-card-cart-button card-quick-button-style"
-                                                type="submit">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span class="product-card-cart-tip pc-quick-tip-style">
-                                                Add To
-                                                Cart
-                                            </span>
-                                        </button>
-                                    </form>
-                                    <a href="#" class="product-card-quick-view">
-                                        <i class="far fa-eye card-quick-button-style"></i>
-                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                            Quick
-                                            View
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="wish-list-card-remove-icon-block">
-                                    <a href="#" class="product-trash-icon-a">
-                                        <i class="fas fa-trash-alt card-quick-button-style"></i>
-                                        <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-card-description-block">
-                                <a href="#" class="product-link">
-                                    <h3 class="product-card-title">
-                                        有可能的任務
-                                    </h3>
-                                    <div class="product-writter-block">
-                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                    </div>
-                                    <div class="product-price-block">
-                                        <span class="product-price-span product-card-des-text">$300</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
+                    </div>*@
                 </div>
             </div>
         </div>
