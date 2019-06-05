@@ -471,7 +471,10 @@
                 warningText.innerHTML = "目前商品已無庫存";
                 warningText.classList.add("red-text-2");
                 qty[i].removeAttribute("onkeyup");
-                qty[i].readOnly = true;
+                qty[i].disabled = true;
+                qty[i].value = 0;
+                qty[i].parentElement.parentElement.parentElement.parentElement.setAttribute(
+                    "style", "background-color: #f7f7f7")
                 //qty[i].parentElement.children[1].readOnly = true;
                 qty[i].parentElement.children[1].disabled = true;
                 qty[i].parentElement.children[1].removeAttribute("click");
