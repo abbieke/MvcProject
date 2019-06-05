@@ -20,7 +20,8 @@ namespace MvcProjectTest.Controllers
         {
             var books = _repo.SelectBooks();
             var topbooks = _repo.SelectTopBooks();
-            Mix mix = new Mix() { Books = books, SecBooks = topbooks };
+            var author = _repo.SelectAuthor();
+            Mix mix = new Mix() { Books = books, SecBooks = topbooks, TopAuthor = author};
             return View(mix);
         }
 

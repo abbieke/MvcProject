@@ -18,7 +18,7 @@
                 <span class="bottom-text">
                     Become your Bookcase, read everyday, persistent study each day.
                 </span>
-                <a href="#" class="shop-button">About Us</a>
+                @*<a href="#" class="shop-button">About Us</a>*@
             </div>
         </div>
     </div>
@@ -237,13 +237,13 @@
             <div class="flex">
                 <div class="index-block-left">
                     <a href="#" class="block-banner">
-                        <img src="https://demoprestashop.aeipix.com/AX04/mybook75/modules/aei_cmstestimony/views/img/testimony-banner.jpg"
+                        <img src="~/Assets/Images/@Model.TopAuthor.CategoryEngName/@Model.TopAuthor.BookImage"
                              alt="">
                     </a>
                     <div class="index-block-inner">
-                        <span class="banner-title">Apple</span>
+                        @*<span class="banner-title">Apple</span>
                         <span class="banner-desc">happy day</span>
-                        <a href="#" class="banner-button">buy now</a>
+                        <a href="#" class="banner-button">buy now</a>*@
                     </div>
                 </div>
                 <div class="index-block-right">
@@ -252,20 +252,19 @@
                     </div>
                     <div class="block-right-text">
                         <div class="flex">
-                            <span class="icon-image">
+                            @*<span class="icon-image">
                                 <img src="https://demoprestashop.aeipix.com/AX04/mybook75/modules/aei_cmstestimony/views/img/icon.png"
                                      alt="">
-                            </span>
+                            </span>*@
                             <div class="text-right">
-                                <div class="top-text">ipsum</div>
-                                <div class="end-text">consectetur</div>
+                                <div class="top-text">@Model.TopAuthor.AuthorName</div>
+                                <div class="end-text">@Model.TopAuthor.BooksName</div>
                             </div>
                         </div>
 
                         <div class="desc">
                             <p>
-                                posuere sapien eu, ornare nulla. Ut volutpat porttitor urna et laoreet. Fusce
-                                porttitor mauris magna, ac pretium mauris tempus id. Nulla ut arcu urna.
+                                We recommend this book.
                             </p>
                         </div>
                     </div>
