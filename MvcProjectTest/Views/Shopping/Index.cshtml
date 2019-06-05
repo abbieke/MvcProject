@@ -72,30 +72,30 @@
                         {
                             total = total + (int)@book.UnitPrice;
                             bookCount++;
-                            string field = "quantity" + bookCount;
-
-                            <tr class="ordercheck-list-height @("table-" + book.BookID)">
-                                <td class="item-checkbox-list">
-                                    <input type="checkbox" name="one" onclick="cheaked()">
-                                </td>
-                                <td class="cart-item-img">
-                                    <div class="cart-item-imgbox"><img src="@book.BookImage" alt=""></div>
-                                </td>
-                                <td class="item-name-list"><a href='@Url.Action("BookDetail", "Book", new { id = book.BookID })'>@book.BooksName</a></td>
-                                <td class="item-qty-list">
-                                    <div class="prompt-block-about-stock">
-                                        <form id='book1' method='POST' action='#'>
-                                            <input type="hidden" name="inStock" value=@book.InStock />
-                                            <input type='button' value='-' class='qtyminus' field='@field' />
-                                            <input type='text' name='@field' value=@book.Quantity class='qty' />
-                                            <input type='button' value='+' class='qtyplus' field='@field' />
-                                        </form>
-                                        <span class="instock-span">庫存：@book.InStock 個</span>
-                                    </div>
-                                </td>
-                                <td class="item-price-list">@book.UnitPrice.ToString("0") 元</td>
-                                <td class="item-delete-list"><button class="remove-button" value="@book.BookID"><i class="far fa-trash-alt"></i></button></td>
-                            </tr>
+                            ViewBag.field = "quantity" + bookCount;
+                            
+                    <tr class="ordercheck-list-height @("table-" + book.BookID)">
+                        <td class="item-checkbox-list">
+                            <input type="checkbox" name="one" onclick="cheaked()">
+                        </td>
+                        <td class="cart-item-img">
+                            <div class="cart-item-imgbox"><img src=@book.BookImage alt=""></div>
+                        </td>
+                        <td class="item-name-list"><a href=@Url.Action("BookDetail", "Book", new { id = book.BookID })>@book.BooksName</a></td>
+                        <td class="item-qty-list">
+                            <div class="prompt-block-about-stock">
+                                <form id='book1' method='POST' action='#'>
+                                    <input type="hidden" name="inStock" value=@book.InStock />
+                                    <input type='button' value='-' class='qtyminus' field='@ViewBag.field' />
+                                    <input type='text' name='@ViewBag.field' value=@book.Quantity class='qty' />
+                                    <input type='button' value='+' class='qtyplus' field='@ViewBag.field' />
+                                </form>
+                                <span class="instock-span">庫存：@book.InStock 個</span>
+                            </div>
+                        </td>
+                        <td class="item-price-list">@book.UnitPrice.ToString("0") 元</td>
+                        <td class="item-delete-list"><button class="remove-button" value="@book.BookID"><i class="far fa-trash-alt"></i></button></td>
+                    </tr>
 
                         }
 
@@ -398,6 +398,9 @@
         //$(".qty").change(qtyOnkeyupValue);
         var isWarning = false;
 
+        
+
+
         function qtyOnkeyupValue() {
             var inStock = $(this).siblings("input[name='inStock']").val();
             this.value = this.value.replace(/[^1-9]/g, '');
@@ -457,12 +460,41 @@
             });
         });
 
-        
+        @*剛進入時搜尋庫存與對應購物車數量*@
+        @*此JS區塊有大量採樣順序，若商品區塊結構改變可能會需要調整*@
+        var qty = document.getElementsByClassName("qty");
+        for (var i = 0; i < qty.length; i++) {
+            var inStock = qty[i].parentElement.children[0].value;
+            var warningText = qty[i].parentElement.parentElement.children[1];
+
+            if (inStock == 0) {
+                warningText.innerHTML = "目前商品已無庫存";
+                warningText.classList.add("red-text-2");
+                qty[i].removeAttribute("onkeyup");
+                qty[i].readOnly = true;
+                //qty[i].parentElement.children[1].readOnly = true;
+                qty[i].parentElement.children[1].disabled = true;
+                qty[i].parentElement.children[1].removeAttribute("click");
+                //qty[i].parentElement.children[3].readOnly = true;
+                qty[i].parentElement.children[3].disabled = true;
+                qty[i].parentElement.children[3].removeAttribute("click");
+            }
+
+            else if (parseInt(qty[i].value) > parseInt(inStock)) {
+                warningText.innerHTML = "庫存數量不足，目前庫存：" + inStock;
+                warningText.classList.add("red-text-2");
+            }
+
+            
+        };
         
 
     });
     
 
     </script>
+
+
+
 }
 

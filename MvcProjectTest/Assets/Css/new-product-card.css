@@ -9,6 +9,7 @@
           box-sizing: border-box;
   position: relative;
   margin-bottom: 20px;
+  height: 432px;
 }
 
 .product-card-block:hover .product-card-visual-cart-block {
@@ -29,6 +30,8 @@
   -webkit-transition: all .3s;
   transition: all .3s;
   color: #5fbfb6;
+
+
 }
 
 .product-card-img-block {
@@ -45,6 +48,14 @@
   font-size: 1.25rem;
   font-weight: 400;
   color: #959595;
+
+    overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .product-card-description-block {

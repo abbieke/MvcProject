@@ -21,6 +21,7 @@ namespace MvcProjectTest.Services
                 var book = bookRepo.GetBookById(item.BookID);
                 var target = new ShoppingCartViewModel
                 {
+                    CartID = item.ShoppingCarID,
                     BookID = item.BookID,
                     BooksName = book.BooksName,
                     Discount = book.Discount,

@@ -429,6 +429,9 @@
     <Content Include="Views\Shopping\OrderSuccess.cshtml" />
     <Content Include="Views\Shared\_ProductCardPartial.cshtml" />
     <Content Include="Views\Customer\OrderDetail.cshtml" />
+    <Content Include="Views\Shared\_CartProductPartial1.cshtml" />
+    <Content Include="Views\Shared\_CartProductPartial.cshtml" />
+    <Content Include="Views\Shared\_WishProductCardPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

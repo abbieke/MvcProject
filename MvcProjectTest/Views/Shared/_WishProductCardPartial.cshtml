@@ -1,17 +1,5 @@
-﻿@model Book
-@{ 
-    string disstyle="";
-    string pricestyle="";
-    var discount = Model.Discount;
-    if (discount == 0)
-    {
-        disstyle = "display-none";
-    }
-    else {
-        pricestyle = "delete-line";
-
-    }
-}
+﻿
+@model Book
 
 
 @*card主體*@
@@ -26,22 +14,28 @@
             </a>
             <div class="product-card-visual-cart-block">
 
-                
-                    <input type="hidden" name="id" value="1" >
-                    <!-- hidden的可以儲存資料用 根據後端修改 -->
-                    <button class="product-card-cart-button card-quick-button-style"  value="@Model.BookId">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="product-card-cart-tip pc-quick-tip-style">
-                            Add To Cart
-                        </span>
-                    </button>
-                
+
+                <input type="hidden" name="id" value="1">
+                <!-- hidden的可以儲存資料用 根據後端修改 -->
+                <button class="product-card-cart-button card-quick-button-style" value="@Model.BookId">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="product-card-cart-tip pc-quick-tip-style">
+                        Add To Cart
+                    </span>
+                </button>
+
                 <button class="product-card-quick-view quick-view-opener" id=@("quick-view-opener" + ViewBag.cardIndex)>
                     <i class="far fa-eye card-quick-button-style"></i>
                     <span class="product-card-quick-view-tip pc-quick-tip-style">
                         Quick
                         View
                     </span>
+                </button>
+            </div>
+            <div class="wish-list-card-remove-icon-block">
+                <button href="#" class="product-trash-icon-button">
+                    <i class="fas fa-trash-alt card-quick-button-style"></i>
+                    <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
                 </button>
             </div>
         </div>
@@ -53,9 +47,9 @@
                 <div class="product-writter-block">
                     <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => Model.AuthorName)</span>
                 </div>
-                <div class="product-price-block ">
-                    <span class="product-price-span product-card-des-text @pricestyle">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
-                    <span class="product-card-discount-text @disstyle">$@((Model.UnitPrice * (1-Model.Discount)).ToString("0"))</span>
+                <div class="product-price-block">
+                    <span class="product-price-span product-card-des-text delete-line">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
+                    <span class="product-card-discount-text ">$@(Model.UnitPrice * (1 - Model.Discount))</span>
                 </div>
                 <div class="description-for-list-display-style">
                     @Html.Raw(Model.Description)
@@ -93,16 +87,16 @@
             <p class="jumpcard-writter-title">@Html.DisplayFor(modelItem => Model.AuthorName)</p>
             <div class="jumpcard-product-price flex">
                 <div class="jumpcard-product-discount-box flex">
-                    <span class="jumpcard-product-original-text @pricestyle">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
+                    <span class="jumpcard-product-original-text">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
                 </div>
-                <div class="jumpcard-product-discount-box flex @disstyle">
-                    <span class="jumpcard-product-discount-text ">$@((Model.UnitPrice * (1-Model.Discount)).ToString("0"))</span>
-                    <span class="jumpcard-product-discount-textshow">Save @(Model.Discount*100)%</span>
+                <div class="jumpcard-product-discount-box flex">
+                    <span class="jumpcard-product-discount-text">$@(Model.UnitPrice * (1 - Model.Discount))</span>
+                    <span class="jumpcard-product-discount-textshow">Save @(Model.Discount * 100)%</span>
                 </div>
             </div>
             <div class="jumpcard-description-short">
                 <p class="jumpcard-description-contenshort">
-                    @Html.Raw( Model.Description)
+                    @Html.Raw(Model.Description)
                 </p>
             </div>
 

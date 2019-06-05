@@ -94,5 +94,16 @@ namespace MvcProjectTest.Repositories
                 return conn.QueryFirstOrDefault<string>(sql, new { cateId });
             }
         }
+
+        public List<Book> GetAllBook()
+        {
+            List<Book> books;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Books";
+                books = conn.Query<Book>(sql).ToList();
+                return books;
+            }
+        }
     }
 }
