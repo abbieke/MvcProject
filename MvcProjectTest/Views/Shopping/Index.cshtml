@@ -81,7 +81,7 @@
                         <td class="cart-item-img">
                             <div class="cart-item-imgbox"><img src=@book.BookImage alt=""></div>
                         </td>
-                        <td class="item-name-list"><a href=@Url.Action("Book", "BookDetail", new { id = book.BookID })>@book.BooksName</a></td>
+                        <td class="item-name-list"><a href=@Url.Action("BookDetail", "Book", new { id = book.BookID })>@book.BooksName</a></td>
                         <td class="item-qty-list">
                             <div class="prompt-block-about-stock">
                                 <form id='book1' method='POST' action='#'>
@@ -472,9 +472,11 @@
                 warningText.classList.add("red-text-2");
                 qty[i].removeAttribute("onkeyup");
                 qty[i].readOnly = true;
-                qty[i].parentElement.children[1].readOnly = true;
+                //qty[i].parentElement.children[1].readOnly = true;
+                qty[i].parentElement.children[1].disabled = true;
                 qty[i].parentElement.children[1].removeAttribute("click");
-                qty[i].parentElement.children[3].readOnly = true;
+                //qty[i].parentElement.children[3].readOnly = true;
+                qty[i].parentElement.children[3].disabled = true;
                 qty[i].parentElement.children[3].removeAttribute("click");
             }
 
