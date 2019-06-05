@@ -8,6 +8,7 @@ namespace MvcProjectTest.ViewModels
 {
     public class ShoppingCartViewModel
     {
+        public int CartID { get; set; }
         public string BookID { get; set; }
         public int Quantity { get; set; }
         public int BooksNo { get; set; }

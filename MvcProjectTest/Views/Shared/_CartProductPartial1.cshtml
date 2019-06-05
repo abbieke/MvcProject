@@ -1,0 +1,27 @@
+﻿@using MvcProjectTest.ViewModels;
+@model ShoppingCartViewModel
+
+@*陣亡代號1*@
+
+<tr class="ordercheck-list-height @("table-" + Model.BookID)">
+    <td class="item-checkbox-list">
+        <input type="checkbox" name="one" onclick="cheaked()">
+    </td>
+    <td class="cart-item-img">
+        <div class="cart-item-imgbox"><img src=@Model.BookImage alt=""></div>
+    </td>
+    <td class="item-name-list"><a href='/Book/BookDetail/?id=@Model.BookID'>@Model.BooksName</a></td>
+    <td class="item-qty-list">
+        <div class="prompt-block-about-stock">
+            <form id='book1' method='POST' action='#'>
+                <input type="hidden" name="inStock" value=@Model.InStock />
+                <input type='button' value='-' class='qtyminus' field='@ViewBag.field' />
+                <input type='text' name='@ViewBag.field' value=@Model.Quantity class='qty' />
+                <input type='button' value='+' class='qtyplus' field='@ViewBag.field' />
+            </form>
+            <span class="instock-span">庫存：@Model.InStock 個</span>
+        </div>
+    </td>
+    <td class="item-price-list">@Model.UnitPrice.ToString("0") 元</td>
+    <td class="item-delete-list"><button class="remove-button" value="@Model.BookID"><i class="far fa-trash-alt"></i></button></td>
+</tr>
