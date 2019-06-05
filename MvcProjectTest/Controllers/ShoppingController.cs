@@ -69,5 +69,21 @@ namespace MvcProjectTest.Controllers
 
         }
         
+        [HttpPost]
+        public ActionResult HeadCartView()
+        {
+            if (Request.IsAuthenticated)
+            {
+                var cartSer = new ShoppingCartService();
+                var cartModel = cartSer.GetMemberCart(User.Identity.Name);
+                
+                return PartialView("_CartHoverPartial", cartModel);
+                // return View(cartModel);
+            }
+            else
+            {
+                return new EmptyResult();
+            }
+        }
     }
 }

@@ -299,6 +299,7 @@
     <Content Include="Views\Shopping\OrderCheck.cshtml" />
     <Content Include="Views\Shopping\OrderSuccess.cshtml" />
     <Content Include="Views\Shared\_ProductCardPartial.cshtml" />
+    <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

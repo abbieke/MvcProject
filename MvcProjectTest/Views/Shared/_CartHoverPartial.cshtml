@@ -1,0 +1,111 @@
+﻿@*@using MvcProjectTest.ViewModels;
+
+@model IEnumerable<ShoppingCartViewModel>
+
+@{
+    int bookCount = 0;
+    int total = 0;
+}*@
+
+
+@*<a href='@Url.Action("Index","Shopping", null)'><i class="fas fa-shopping-cart top-icon"></i></a>
+<ul class="book-item-list book-item-list-right">
+    <li class="book-item book-item-has-children">
+        <a href="#">最近加入的商品</a>
+        <ul class="book-last-list maxheight">
+            <li class=" book-last-item">
+                <div class="hover-car-product-item flex">
+                    @foreach (var book in Model)
+                    {
+                        var subtotal = (int)@book.UnitPrice * book.UnitPrice;
+                        total = total + (int)subtotal;
+                        bookCount++;
+                        //string field = "quantity" + bookCount;
+                        //var imgurl = book.BookImage;
+
+                        <div class="hover-car-product-imagebox">
+                            <img class="hover-car-product-image" src="@book.BookImage" alt="">
+                        </div>
+
+                        <div class="hover-car-product-namebox">
+                            <div class="hover-car-product-name">
+                                <span>@book.BooksName</span>
+                            </div>
+                            <div class="hover-car-product-text flex">
+                                <p class="hover-car-product-price">@{ ((int)book.Quantity * book.UnitPrice).ToString("0"); } 元</p>
+                                <div class="hover-car-product-delete">
+                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </li>
+        </ul>
+        <div class="hover-check-car-box">
+            <div class="hover-check-car-price">
+                <span>當前商品數: @bookCount 本</span>
+                <span>當前總金額:</span>
+                <span>@total 元</span>
+            </div>
+            <div class="hover-gotoshopping-car flex">
+                <a class="hover-gotoshoppingcar-button" href="~/Views/Shopping/Index.cshtml">查看購物車</a>
+            </div>
+        </div>
+    </li>
+</ul>*@
+<ul class="book-item-list book-item-list-right">
+    <li class="book-item book-item-has-children">
+        <a href="#">最近加入的商品</a>
+        <ul class="book-last-list maxheight">
+            <li class=" book-last-item">
+
+                <div class="hover-car-product-item flex">
+                    <div class="hover-car-product-imagebox">
+                        <img class="hover-car-product-image"
+                             src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                    </div>
+                    <div class="hover-car-product-namebox">
+                        <div class="hover-car-product-name">
+                            <span>安靜是種超能力</span>
+                        </div>
+                        <div class="hover-car-product-text flex">
+                            <p class="hover-car-product-price">9487 元</p>
+                            <div class="hover-car-product-delete">
+                                <a class="hover-car-product-delete-text" href="#">刪除</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+        <div class="hover-check-car-box">
+            <div class="hover-check-car-price">
+                <span>當前總金額:</span>
+                <span>100000元</span>
+            </div>
+            <div class="hover-gotoshopping-car flex">
+                <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
+            </div>
+        </div>
+    </li>
+</ul>
+
+@*顯示購物車商品*@
+
+<script>
+    $(function () {
+        cartHover();
+        function cartHover() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("HeadCartView", "Shopping")'
+            }).done(function (respone) {
+                $("#header-cart-block").html(respone)
+            })
+        };
+    });
+
+</script>
