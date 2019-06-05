@@ -89,6 +89,35 @@ namespace MvcProjectTest.Repositories
                 var carts = conn.Execute(sql, new { cusId = customerId, bookid = bookId });
             }
         }
+        public bool SelectWish(int customerId, string bookId)
+        {
+            
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select Count(*) From WishList WHERE CustomerID = @cusId AND BookID = @bookid ";
+                int count=conn.Query<int>(sql, new { cusId = customerId, bookid = bookId }).FirstOrDefault();
+                if (count == 0) { return false; }
+                else { return true; }
+            }
+        }
 
+
+        public void InsertWish(int customerId, string bookId)
+        {          
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "INSERT INTO WishList(CustomerID, BookID, WishDate) VALUES (@cusId,@bookid,@wishdate) ";
+                conn.Execute(sql, new { cusId = customerId, bookid = bookId, wishdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") });
+            }
+        }
+
+        public void RemoveWish(int customerId, string bookId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "DELETE FROM WishList WHERE CustomerID = @cusId AND BookID = @bookid";
+                conn.Execute(sql, new { cusId = customerId, bookid = bookId });
+            }
+        }
     }
 }

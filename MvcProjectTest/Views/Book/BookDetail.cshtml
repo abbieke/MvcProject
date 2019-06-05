@@ -73,7 +73,7 @@
                 <div class="flex">
                     <h2 class="pd-product-name-title">@Html.DisplayFor(model => model.Book.BooksName)</h2>
                     <div class="heart-click-box flex">
-                        <button class="heart-click-button"><i class="far fa-heart"></i></button>
+                        <button class="heart-click-button" value="@Model.Book.BookId"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
                 <div class="pd-product-price-block">
@@ -197,23 +197,73 @@
     </script>
 
     <script>
-
-        $(document).ready(function () {
-            var burron = true;
-            $(".heart-click-button").click(clickheartbutton);
-
-            function clickheartbutton() {
-                if (burron == true) {
-
+        $(window).on('load', function () {
+            var buttonValue = $('.heart-click-button').val();            
+            //alert(buttonValue);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("isInWish", "Shopping")',
+                data: { bookId: buttonValue }
+            }).done(function (response) {
+                //alert(response);
+                if (response) {
                     $(".heart-click-button i").removeClass("far").addClass("fas");
-                    burron = false;
+                }
+            });
+
+        });
+
+        //$(document).ready(function () {
+        //    var burron = true;
+        //    $(".heart-click-button").click(clickheartbutton);
+
+        //    function clickheartbutton() {
+        //        if (burron == true) {
+
+        //            $(".heart-click-button i").removeClass("far").addClass("fas");
+        //            burron = false;
+        //        }
+        //        else {
+        //            $(".heart-click-button i").removeClass("fas").addClass("far");
+        //            burron = true;
+        //        }
+        //    }
+        //});
+        $(document).ready(function () {
+            $(".heart-click-button").click(clickheartbutton);
+            $detailheart = $(".heart-click-button i");
+            function clickheartbutton() {
+                if ($detailheart.hasClass('far')) {
+                    $detailheart.removeClass("far").addClass("fas");
+                    var buttonValue = this.value;                  
+                    //alert(buttonValue);
+                    $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddToWish", "Shopping")',
+                        data: {bookId: buttonValue }
+                    }).done(function (response) {
+                        //alert(response);
+                        if (response == "fail") {
+                            window.location.assign("/Account/Login");
+                        }
+                    });
                 }
                 else {
-                    $(".heart-click-button i").removeClass("fas").addClass("far");
-                    burron = true;
+                    $detailheart.removeClass("fas").addClass("far");
+                    var buttonValue = this.value;
+                    $.ajax({                        
+                    type: "POST",
+                    url: '@Url.Action("RemoveFromWish", "Shopping")',
+                        data: { bookId: buttonValue }                        
+                    }).done(function (response) {
+                        if (response == "fail") {
+                            window.location.assign("/Account/Login");
+                        }
+                    });
                 }
             }
         });
+
 
 
 

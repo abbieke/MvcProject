@@ -66,10 +66,47 @@ namespace MvcProjectTest.Controllers
             }
             return "fail";
 
+        }
+
+        [HttpPost]
+        public string AddToWish(string bookId)
+        {
+            if (Request.IsAuthenticated)
+            {
+                int userid = (int)Session["userid"];
+                _repo.InsertWish(userid, bookId);
+                return "success";
+            }
+            return "fail";
 
         }
 
-        
-        
+        [HttpPost]
+        public string RemoveFromWish(string bookId)
+        {
+            if (Request.IsAuthenticated)
+            {
+                int userid = (int)Session["userid"];
+                _repo.RemoveWish(userid, bookId);
+                return "success";
+            }
+            return "fail";
+
+        }
+        [HttpPost]
+        public bool isInWish(string bookId)
+        {
+            if (Request.IsAuthenticated)
+            {
+                int userid = (int)Session["userid"];
+                return _repo.SelectWish(userid, bookId);
+                             
+            }
+            else {
+                return false;
+            }
+
+        }
+
     }
 }
