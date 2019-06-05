@@ -47,7 +47,8 @@ namespace MvcProjectTest.Controllers
             {
                 var custom = _repo.SelectCustomerView(User.Identity.Name);
                 var custpass = _repo.SelectCustomerPasswordView(User.Identity.Name);
-                CustomerMix mix = new CustomerMix() { CustomerView = custom, ChangePassword = custpass };
+                var custorder = _repo.SelectOrders(User.Identity.Name);
+                CustomerMix mix = new CustomerMix() { CustomerView = custom, ChangePassword = custpass , Order = custorder};
                 return View(mix);
             }
             if (id == "1")
@@ -78,9 +79,14 @@ namespace MvcProjectTest.Controllers
             return RedirectToAction("CustomerIndex");
         }
 
-        public ActionResult OrderDetail()
+        public ActionResult OrderDetail(int? id)
         {
-            return View();
+            var order = _repo.SelectOrder(id);
+            var orderDetail = _repo.SelectOrderDetails(id);
+            var orderStatus = _repo.SelectOrderStatus(id);
+
+            OrderDetailMix mix = new OrderDetailMix(){ Order = order, OrderDetails = orderDetail, OrderStatus = orderStatus};
+            return View(mix);
         }
 
         //[HttpPost]

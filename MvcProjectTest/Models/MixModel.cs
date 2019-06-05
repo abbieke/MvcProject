@@ -26,5 +26,19 @@ namespace MvcProjectTest.Models
     {
         public CustomerViewModel CustomerView { get; set; }
         public CustomerChangePasswordViewModel ChangePassword { get; set; }
+        public List<Order> Order { get; set; }
+    }
+
+    //public class OrderMix
+    //{
+    //    public List<Order> Order { get; set; }
+    //    public List<OrderStatusModel> OrderStatus { get; set; }
+    //}
+
+    public class OrderDetailMix
+    {
+        public Order Order { get; set; }
+        public List<OrderDetailModel> OrderDetails { get; set; }
+        public OrderStatusModel OrderStatus { get; set; }
     }
 }

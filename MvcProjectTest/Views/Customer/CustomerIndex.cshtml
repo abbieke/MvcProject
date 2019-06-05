@@ -138,119 +138,122 @@
                         </form>
                     </div>
 
-                    <div id="tab-OrderDetail">
-                        <div class="membercenter-orderdetail-block">
-                            <div class="membercenter-orderdetail-block-header">
-                                <ul class="membercenter-orderdetail-list">
-                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
-                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
-                                    <li class="membercenter-order-header-item order-box">總金額</li>
-                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
-                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
-                                </ul>
-                            </div>
-                            <div class="membercenter-orderdetail-center-block">
-                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
-                                    <li class="membercenter-order-center-item order-box">A1234123</li>
-                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
-                                    <li class="membercenter-order-center-item order-box">9478元</li>
-                                    <li class="membercenter-order-center-item order-box">
-                                        <div class="visibility-button">
-                                            <i class="fas fa-eye"></i>
-                                            <div class="membercenter-order-shopping-stasus">
-                                                <ul class="membercenter-order-shipping-progress">
-                                                    <li class="active">訂單成立</li>
-                                                    <li>準備出貨</li>
-                                                    <li>運送中</li>
-                                                    <li>待取貨</li>
-                                                    <li>完成取貨</li>
-                                                    <li>交易完成</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="membercenter-order-center-item order-box">
-                                        <a href="#"
-                                           class="membercente-sohw-orderdatil">詳細資訊</a>
-                                    </li>
-                                </ul>
-                            </div>
+                <div id="tab-OrderDetail">
+                    @foreach (var item in Model.Order)
+                    { 
+                    <div class="membercenter-orderdetail-block">
+                        <div class="membercenter-orderdetail-block-header">
+                            <ul class="membercenter-orderdetail-list">
+                                <li class="membercenter-order-header-item order-box">訂單編號</li>
+                                <li class="membercenter-order-header-item order-box">訂單日期</li>
+                                <li class="membercenter-order-header-item order-box">總金額</li>
+                                <li class="membercenter-order-header-item order-box">訂單狀態</li>
+                                <li class="membercenter-order-header-item order-box">訂單明細</li>
+                            </ul>
                         </div>
-                        <div class="membercenter-orderdetail-block">
-                            <div class="membercenter-orderdetail-block-header">
-                                <ul class="membercenter-orderdetail-list">
-                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
-                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
-                                    <li class="membercenter-order-header-item order-box">總金額</li>
-                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
-                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
-                                </ul>
-                            </div>
-                            <div class="membercenter-orderdetail-center-block">
-                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
-                                    <li class="membercenter-order-center-item order-box">A1234123</li>
-                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
-                                    <li class="membercenter-order-center-item order-box">9478元</li>
-                                    <li class="membercenter-order-center-item order-box">
-                                        <div class="visibility-button">
-                                            <i class="fas fa-eye"></i>
-                                            <div class="membercenter-order-shopping-stasus">
-                                                <ul class="membercenter-order-shipping-progress">
-                                                    <li class="active">訂單成立</li>
-                                                    <li>準備出貨</li>
-                                                    <li>運送中</li>
-                                                    <li>待取貨</li>
-                                                    <li>完成取貨</li>
-                                                    <li>交易完成</li>
-                                                </ul>
-                                            </div>
+                        <div class="membercenter-orderdetail-center-block">
+                            <ul class="membercenter-orderdetail-list orderdetail-list-hover">
+                                <li class="membercenter-order-center-item order-box">@item.OrderNo</li>
+                                <li class="membercenter-order-center-item order-box">@item.OrderDate.ToString("yyyy-MM-dd HH:mm:ss")</li>
+                                <li class="membercenter-order-center-item order-box">@item.TotalPrice</li>
+                                <li class="membercenter-order-center-item order-box">
+                                    <div class="visibility-button">
+                                        <i class="fas fa-eye"></i>
+                                        <div class="membercenter-order-shopping-stasus">
+                                            <ul class="membercenter-order-shipping-progress">
+                                                <li class="active">訂單成立</li>
+                                                <li>準備出貨</li>
+                                                <li>運送中</li>
+                                                <li>待取貨</li>
+                                                <li>完成取貨</li>
+                                                <li>交易完成</li>
+                                            </ul>
                                         </div>
-                                    </li>
-                                    <li class="membercenter-order-center-item order-box">
-                                        <a href="#"
-                                           class="membercente-sohw-orderdatil">詳細資訊</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="membercenter-orderdetail-block">
-                            <div class="membercenter-orderdetail-block-header">
-                                <ul class="membercenter-orderdetail-list">
-                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
-                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
-                                    <li class="membercenter-order-header-item order-box">總金額</li>
-                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
-                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
-                                </ul>
-                            </div>
-                            <div class="membercenter-orderdetail-center-block">
-                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
-                                    <li class="membercenter-order-center-item order-box">A1234123</li>
-                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
-                                    <li class="membercenter-order-center-item order-box">9478元</li>
-                                    <li class="membercenter-order-center-item order-box">
-                                        <div class="visibility-button">
-                                            <i class="fas fa-eye"></i>
-                                            <div class="membercenter-order-shopping-stasus">
-                                                <ul class="membercenter-order-shipping-progress">
-                                                    <li class="active">訂單成立</li>
-                                                    <li>準備出貨</li>
-                                                    <li>運送中</li>
-                                                    <li>待取貨</li>
-                                                    <li>完成取貨</li>
-                                                    <li>交易完成</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="membercenter-order-center-item order-box">
-                                        <a href="#"
-                                           class="membercente-sohw-orderdatil">詳細資訊</a>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                                <li class="membercenter-order-center-item order-box">
+                                    <a href='@Url.Action("OrderDetail","Customer",new{id = item.OrderID})'
+                                       class="membercente-sohw-orderdatil">詳細資訊</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    }
+                    @*<div class="membercenter-orderdetail-block">
+                            <div class="membercenter-orderdetail-block-header">
+                                <ul class="membercenter-orderdetail-list">
+                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
+                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
+                                    <li class="membercenter-order-header-item order-box">總金額</li>
+                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
+                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
+                                </ul>
+                            </div>
+                            <div class="membercenter-orderdetail-center-block">
+                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
+                                    <li class="membercenter-order-center-item order-box">A1234123</li>
+                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
+                                    <li class="membercenter-order-center-item order-box">9478元</li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <div class="visibility-button">
+                                            <i class="fas fa-eye"></i>
+                                            <div class="membercenter-order-shopping-stasus">
+                                                <ul class="membercenter-order-shipping-progress">
+                                                    <li class="active">訂單成立</li>
+                                                    <li>準備出貨</li>
+                                                    <li>運送中</li>
+                                                    <li>待取貨</li>
+                                                    <li>完成取貨</li>
+                                                    <li>交易完成</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <a href="#"
+                                           class="membercente-sohw-orderdatil">詳細資訊</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="membercenter-orderdetail-block">
+                            <div class="membercenter-orderdetail-block-header">
+                                <ul class="membercenter-orderdetail-list">
+                                    <li class="membercenter-order-header-item order-box">訂單編號</li>
+                                    <li class="membercenter-order-header-item order-box">訂單日期</li>
+                                    <li class="membercenter-order-header-item order-box">總金額</li>
+                                    <li class="membercenter-order-header-item order-box">訂單狀態</li>
+                                    <li class="membercenter-order-header-item order-box">訂單明細</li>
+                                </ul>
+                            </div>
+                            <div class="membercenter-orderdetail-center-block">
+                                <ul class="membercenter-orderdetail-list orderdetail-list-hover">
+                                    <li class="membercenter-order-center-item order-box">A1234123</li>
+                                    <li class="membercenter-order-center-item order-box">2019/05/25</li>
+                                    <li class="membercenter-order-center-item order-box">9478元</li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <div class="visibility-button">
+                                            <i class="fas fa-eye"></i>
+                                            <div class="membercenter-order-shopping-stasus">
+                                                <ul class="membercenter-order-shipping-progress">
+                                                    <li class="active">訂單成立</li>
+                                                    <li>準備出貨</li>
+                                                    <li>運送中</li>
+                                                    <li>待取貨</li>
+                                                    <li>完成取貨</li>
+                                                    <li>交易完成</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="membercenter-order-center-item order-box">
+                                        <a href="#"
+                                           class="membercente-sohw-orderdatil">詳細資訊</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>*@
+                </div>
                     <div id="tab-Modifypassword">
                         <form action='@Url.Action("CustomerIndex","Customer",new {id = "2"})'>
                             <div class="member-row">
