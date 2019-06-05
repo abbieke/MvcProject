@@ -467,3 +467,22 @@ img {
   transition: 0.3s;
 }
 /*# sourceMappingURL=Index_stylesheet.css.map */
+
+.hover-car-product-imagebox img{
+    max-width:none;
+    width:50px;
+    height:50px;
+}
+
+.hover-car-product-name span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    white-space:normal;
+    word-break:break-all;
+}
