@@ -5,6 +5,21 @@
     ViewBag.cardIndex = 0;
 }
 
+@{
+    string disstyle = "";
+    string pricestyle = "";
+    var discount = Model.Book.Discount;
+    if (discount == 0)
+    {
+        disstyle = "display-none";
+    }
+    else
+    {
+        pricestyle = "delete-line";
+
+    }
+}
+
 <div class="productdetail">
     <div class="container">
         <div class="productdetail-all">
@@ -79,11 +94,11 @@
                 <div class="pd-product-price-block">
                     TWD
                     <div class="pd-product-discount-box">
-                        <span class="pd-product-original-text">$@Html.DisplayFor(model => model.Book.UnitPrice)</span>
+                        <span class="pd-product-original-text @pricestyle">$@Html.DisplayFor(model => model.Book.UnitPrice)</span>
                     </div>
                     <div class="pd-product-discount-box">
-                        <span class="pd-product-discount-text">$200</span>
-                        <span class="pd-product-discount-textshow">Save 10%</span>
+                        <span class="pd-product-discount-text @disstyle">$@((Model.Book.UnitPrice * (1 - Model.Book.Discount)).ToString("0"))</span>
+                        <span class="pd-product-discount-textshow">Save @((Model.Book.Discount*100).ToString("0"))%</span>
                     </div>
                 </div>
                 <div class="productlist">

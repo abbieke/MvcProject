@@ -17,7 +17,7 @@ namespace MvcProjectTest.Models
         public int CategoryID { get; set; }
         public decimal UnitPrice { get; set; }
         public int InStock { get; set; }
-        public int Discount { get; set; }
+        public decimal Discount { get; set; }
         public string BookImage { get; set; }
         public string Description { get; set; }
         public string PressName { get; set; }

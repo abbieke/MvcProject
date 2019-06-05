@@ -1,5 +1,17 @@
 ﻿@model Book
+@{ 
+    string disstyle="";
+    string pricestyle="";
+    var discount = Model.Discount;
+    if (discount == 0)
+    {
+        disstyle = "display-none";
+    }
+    else {
+        pricestyle = "delete-line";
 
+    }
+}
 
 
 @*card主體*@
@@ -41,9 +53,9 @@
                 <div class="product-writter-block">
                     <span class="product-writter-span product-card-des-text">@Html.DisplayFor(modelItem => Model.AuthorName)</span>
                 </div>
-                <div class="product-price-block">
-                    <span class="product-price-span product-card-des-text delete-line">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
-                    <span class="product-card-discount-text">$@(Model.UnitPrice * (1-Model.Discount))</span>
+                <div class="product-price-block ">
+                    <span class="product-price-span product-card-des-text @pricestyle">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
+                    <span class="product-card-discount-text @disstyle">$@((Model.UnitPrice * (1-Model.Discount)).ToString("0"))</span>
                 </div>
                 <div class="description-for-list-display-style">
                     @Html.Raw(Model.Description)
@@ -81,10 +93,10 @@
             <p class="jumpcard-writter-title">@Html.DisplayFor(modelItem => Model.AuthorName)</p>
             <div class="jumpcard-product-price flex">
                 <div class="jumpcard-product-discount-box flex">
-                    <span class="jumpcard-product-original-text">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
+                    <span class="jumpcard-product-original-text @pricestyle">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
                 </div>
-                <div class="jumpcard-product-discount-box flex">
-                    <span class="jumpcard-product-discount-text">$@(Model.UnitPrice * (1-Model.Discount))</span>
+                <div class="jumpcard-product-discount-box flex @disstyle">
+                    <span class="jumpcard-product-discount-text ">$@((Model.UnitPrice * (1-Model.Discount)).ToString("0"))</span>
                     <span class="jumpcard-product-discount-textshow">Save @(Model.Discount*100)%</span>
                 </div>
             </div>
