@@ -78,6 +78,11 @@ namespace MvcProjectTest.Controllers
             return RedirectToAction("CustomerIndex");
         }
 
+        public ActionResult OrderDetail()
+        {
+            return View();
+        }
+
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult CustomerIndex(CustomerMix cust)
