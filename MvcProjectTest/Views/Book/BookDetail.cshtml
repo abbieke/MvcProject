@@ -220,8 +220,7 @@
                 url: '@Url.Action("isInWish", "Shopping")',
                 data: { bookId: buttonValue }
             }).done(function (response) {
-                //alert(response);
-                if (response) {
+                if (response=="True") {
                     $(".heart-click-button i").removeClass("far").addClass("fas");
                 }
             });
