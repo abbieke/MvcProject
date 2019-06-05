@@ -28,7 +28,7 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID"; 
+                string sql = "Select TOP 8 * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID ORDER BY b.BooksNo DESC"; 
                 books = conn.Query<Book>(sql).ToList();
             }
             return books;
@@ -39,7 +39,7 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select TOP 4 * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID ORDER BY b.InStock";
+                string sql = "Select TOP 8 * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID ORDER BY b.InStock";
                 books = conn.Query<Book>(sql).ToList();
             }
             return books;
@@ -103,6 +103,22 @@ namespace MvcProjectTest.Repositories
                 string sql = "Select * From Books";
                 books = conn.Query<Book>(sql).ToList();
                 return books;
+            }
+        }
+
+        public Author SelectAuthor()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select Top 1 od.BooksNo ,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName ,SUM(od.Counts)as TopSUM " + 
+                             "from [Order Detail] As od " +
+                             "Inner Join Books As b On od.BooksNo = b.BooksNo " +
+                             "Inner Join Author As a On a.AuthorID = b.AuthorID " +
+                             "Inner Join Category As c On c.CategoryID = b.CategoryID " +
+                             "Group By od.BooksNo,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName " +
+                             "Order By SUM(od.Counts)";
+                var author = conn.QueryFirstOrDefault<Author>(sql);
+                return author;
             }
         }
     }

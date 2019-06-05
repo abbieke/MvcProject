@@ -240,6 +240,11 @@
     <Content Include="Assets\Images\Ebook\020046.jpg" />
     <Content Include="Assets\Images\Ebook\020047.jpg" />
     <Content Include="Assets\Images\Ebook\020048.jpg" />
+    <Content Include="Assets\Images\Foreign\040005.jpg" />
+    <Content Include="Assets\Images\Foreign\040006.jpg" />
+    <Content Include="Assets\Images\Foreign\040007.jpg" />
+    <Content Include="Assets\Images\Foreign\040008.jpg" />
+    <Content Include="Assets\Images\Foreign\040009.jpg" />
     <Content Include="Assets\Images\jquery-ui-images\ui-icons_444444_256x240.png" />
     <Content Include="Assets\Images\jquery-ui-images\ui-icons_555555_256x240.png" />
     <Content Include="Assets\Images\jquery-ui-images\ui-icons_777620_256x240.png" />
@@ -263,6 +268,10 @@
     <Content Include="Assets\Images\ProductDetail\30-home_default.jpg" />
     <Content Include="Assets\Images\ProductDetail\30-large_default.jpg" />
     <Content Include="Assets\Images\QRcode\181risnk.png" />
+    <Content Include="Assets\Images\SChinese\030005.jpg" />
+    <Content Include="Assets\Images\SChinese\030006.jpg" />
+    <Content Include="Assets\Images\SChinese\030007.jpg" />
+    <Content Include="Assets\Images\SChinese\030008.jpg" />
     <Content Include="Assets\Images\SChinese\030009.jpg" />
     <Content Include="Assets\Images\SChinese\030010.jpg" />
     <Content Include="Assets\Images\SChinese\030011.jpg" />
