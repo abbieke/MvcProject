@@ -121,5 +121,36 @@ namespace MvcProjectTest.Repositories
                 return author;
             }
         }
+
+        public List<BookType> SelectBookType(string Category)
+        {
+            List<BookType> bookTypes;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select bt.BookTypeName from Books As b " +
+                "Inner Join BookType As bt On b.BookTypeID = bt.BookTypeID " +
+                "Inner Join Category As c On c.CategoryID = b.CategoryID " +
+                "Where c.CategoryEngName = '" + Category + "'" + 
+                "Group By bt.BookTypeName";
+
+                bookTypes = conn.Query<BookType>(sql).ToList();
+                return bookTypes;
+            }
+        }
+
+        public List<Book> SelectBookTypebooks(string Category,string Type)
+        {
+            List<Book> books;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * from Books As b " +
+                "Inner Join BookType As bt On b.BookTypeID = bt.BookTypeID " +
+                "Inner Join Category As c On c.CategoryID = b.CategoryID " +
+                "Where c.CategoryEngName = '" + Category + "' AND bt.BookTypeName = N'" + Type + "'";
+
+                books = conn.Query<Book>(sql).ToList();
+                return books;
+            }
+        }
     }
 }

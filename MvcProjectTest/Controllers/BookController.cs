@@ -1,6 +1,7 @@
 ﻿using MvcProjectTest.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,11 +24,31 @@ namespace MvcProjectTest.Controllers
         //    return View(books);
         //}
 
-        public ActionResult Index(string name)
+        public ActionResult Index(string name,string types)
         {
-            var books = _repo.SelectCategoryBooks(name);
-            ViewBag.catEngName = name;
-            return View(books);
+            if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(types))
+            {
+                var books = _repo.GetAllBook();
+                BookTypeMix mix = new BookTypeMix(){ Books = books};
+                return View(mix);
+            }
+            else if (String.IsNullOrEmpty(types))
+            {
+                var books = _repo.SelectCategoryBooks(name);
+                var bookTypes = _repo.SelectBookType(name);
+                ViewBag.catEngName = name;
+                BookTypeMix mix = new BookTypeMix(){ Books = books, BookTypes = bookTypes};
+                return View(mix);
+            }
+            else
+            {
+                var books = _repo.SelectBookTypebooks(name,types);
+                var bookTypes = _repo.SelectBookType(name);
+                ViewBag.catEngName = name;
+                BookTypeMix mix = new BookTypeMix() { Books = books, BookTypes = bookTypes };
+                return View(mix);
+            }
+            
         }
 
         [HttpPost]
@@ -45,8 +66,12 @@ namespace MvcProjectTest.Controllers
             }
             ViewBag.cardIndex = 0;
             ViewBag.catEngName = bookKind;
+
+            var bookTypes = _repo.SelectBookType(bookKind);
+            ViewBag.catEngName = bookKind;
+            BookTypeMix mix = new BookTypeMix() { Books = result, BookTypes = bookTypes };
             //return PartialView("BookByRange", result);
-            return View(result);
+            return View(mix);
         }
 
 

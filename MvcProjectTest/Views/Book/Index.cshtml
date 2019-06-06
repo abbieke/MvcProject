@@ -1,10 +1,11 @@
-﻿@model IEnumerable<MvcProjectTest.Models.Book>
+﻿@using MvcProjectTest.Models
+@model BookTypeMix
 @{
-    
+
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
     ViewBag.cardIndex = 0;
-    
+
 }
 
 
@@ -34,9 +35,13 @@
                             </a>
                         </li>
                         <li><a href="#">新品</a></li>
-                        <li><a href="#">分類1</a></li>
-                        <li><a href="#">分類2</a></li>
-                        <li><a href="#">分類3</a></li>
+                        @foreach (var item in Model.BookTypes)
+                        {
+                            <li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>
+                            @*<li><a href="#">分類2</a></li>
+                            <li><a href="#">分類3</a></li>*@
+                        }
+
                     </ul>
                 </div>
 
@@ -83,7 +88,7 @@
                 <!-- 書 -->
                 <div class="row sorting-display" id="sorting-display-items-block">
                     <!-- Product 1 -->
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Books)
                     {
                         ViewBag.cardIndex++;
                         @Html.Partial("_ProductCardPartial", item)
@@ -176,9 +181,9 @@
 
 
     </script>
-    
 
-    
+
+
 
     <!-- 拉桿用 新板 -->
     <script>

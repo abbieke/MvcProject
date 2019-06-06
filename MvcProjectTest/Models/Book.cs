@@ -49,4 +49,10 @@ namespace MvcProjectTest.Models
         public string CategoryEngName { get; set; }
         public string BookImage { get; set; }
     }
+
+    public class BookType
+    {
+        public int BookTypeID { get; set; }
+        public string BookTypeName { get; set; }
+    }
 }
