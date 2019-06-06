@@ -42,4 +42,10 @@ namespace MvcProjectTest.Models
         public List<OrderDetailModel> OrderDetails { get; set; }
         public OrderStatusModel OrderStatus { get; set; }
     }
+
+    public class BookTypeMix
+    {
+        public List<Book> Books { get; set; }
+        public List<BookType> BookTypes { get; set; }
+    }
 }

@@ -24,6 +24,12 @@ namespace MvcProjectTest
                 url: "Book/{name}",
                 defaults: new { controller = "Book", action = "Index", name = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "BookTypeSearch",
+                url: "Book/{name}/{type}",
+                defaults: new { controller = "Book", action = "Index", name = UrlParameter.Optional,types = UrlParameter.Optional }
+            );
         }
     }
 }
