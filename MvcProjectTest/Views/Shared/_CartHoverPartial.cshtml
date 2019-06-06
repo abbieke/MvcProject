@@ -1,0 +1,120 @@
+﻿@using MvcProjectTest.ViewModels;
+
+@model IEnumerable<ShoppingCartViewModel>
+
+@{
+    int bookCount = 0;
+    int total = 0;
+}
+
+
+<ul class="book-item-list book-item-list-right">
+    <li class="book-item book-item-has-children">
+        <a href="#">最近加入的商品</a>
+
+        <ul class="book-last-list maxheight">
+            @foreach (var book in Model)
+            {
+
+                var subtotal = (int)@book.UnitPrice * book.Quantity;
+                total = total + (int)subtotal;
+                bookCount++;
+                //bookCount = bookCount + book.Quantity;
+                //string field = "quantity" + bookCount;
+                //var imgurl = book.BookImage;
+
+                <li class=" book-last-item">
+                    <div class="hover-car-product-item flex">
+
+                        <div class="hover-car-product-imagebox">
+                            <img class="hover-car-product-image" src="@book.BookImage" alt="">
+                        </div>
+
+                        <div class="hover-car-product-namebox">
+                            <div class="hover-car-product-name">
+                                <span>@book.BooksName</span>
+                            </div>
+                            <div class="hover-car-product-text flex">
+                                <p class="hover-car-product-price">@subtotal 元</p>
+                                <div class="hover-car-product-delete">
+                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+             }
+        </ul>
+        <div class="hover-check-car-box">
+            <div class="hover-check-car-price">
+                <span>當前商品數: @bookCount 項</span><br />
+                <span>當前總金額:</span>
+                <span>@total 元</span>
+            </div>
+            <div class="hover-gotoshopping-car flex">
+                <a class="hover-gotoshoppingcar-button" href="~/Views/Shopping/Index.cshtml">查看購物車</a>
+            </div>
+        </div>
+    </li>
+</ul>
+@*<ul class="book-item-list book-item-list-right">
+        <li class="book-item book-item-has-children">
+            <a href="#">最近加入的商品</a>
+            <ul class="book-last-list maxheight">
+                <li class="book-last-item">
+
+                    <div class="hover-car-product-item flex">
+                        <div class="hover-car-product-imagebox">
+                            <img class="hover-car-product-image"
+                                 src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                        </div>
+                        <div class="hover-car-product-namebox">
+                            <div class="hover-car-product-name">
+                                <span>安靜是種超能力安靜是種超能力安靜是種超能力安靜是種超能力</span>
+                            </div>
+                            <div class="hover-car-product-text flex">
+                                <p class="hover-car-product-price">9487 元</p>
+                                <div class="hover-car-product-delete">
+                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </li>
+                <li class="book-last-item">
+
+                    <div class="hover-car-product-item flex">
+                        <div class="hover-car-product-imagebox">
+                            <img class="hover-car-product-image"
+                                 src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                        </div>
+                        <div class="hover-car-product-namebox">
+                            <div class="hover-car-product-name">
+                                <span>安靜是種超能力安靜是種超能力安靜是種超能力安靜是種超能力</span>
+                            </div>
+                            <div class="hover-car-product-text flex">
+                                <p class="hover-car-product-price">9487 元</p>
+                                <div class="hover-car-product-delete">
+                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+            <div class="hover-check-car-box">
+                <div class="hover-check-car-price">
+                    <span>當前總金額:</span>
+                    <span>100000元</span>
+                </div>
+                <div class="hover-gotoshopping-car flex">
+                    <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
+                </div>
+            </div>
+        </li>
+    </ul>*@

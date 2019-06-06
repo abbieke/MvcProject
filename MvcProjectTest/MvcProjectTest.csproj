@@ -444,6 +444,7 @@
     <Content Include="Views\Shared\_CartProductPartial.cshtml" />
     <Content Include="Views\Shared\_WishProductCardPartial.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

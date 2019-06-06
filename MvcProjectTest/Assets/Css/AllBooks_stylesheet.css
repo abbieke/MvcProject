@@ -191,7 +191,7 @@
 
 /*===================================================*/
 .sorting-display-list-style {
-  max-height: 1170px;
+  max-height: 1130px;
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -211,6 +211,7 @@
   display: -ms-flexbox;
   display: flex;
   margin: 0;
+  height: auto;
 }
 
 .sorting-display-list-style .product-card-img-block {
