@@ -101,6 +101,17 @@ namespace MvcProjectTest.Repositories
             }
         }
 
+        public List<Book> SelectWish(int customerId)
+        {
+
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From WishList w inner join Books b on w.BookID=b.BookID inner join Category c on b.CategoryID=c.CategoryID WHERE CustomerID = @cusId Order By WishDate DESC;";
+                List<Book> books = conn.Query<Book>(sql, new { cusId = customerId}).ToList();
+                return books;
+            }
+        }
+
 
         public void InsertWish(int customerId, string bookId)
         {          
