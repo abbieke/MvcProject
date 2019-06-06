@@ -28,7 +28,7 @@ namespace MvcProjectTest.Controllers
                 //var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
                 var cartSer = new ShoppingCartService();
                 var cartModel = cartSer.GetMemberCart(User.Identity.Name);
-
+                
 
                 return View(cartModel);
                 
