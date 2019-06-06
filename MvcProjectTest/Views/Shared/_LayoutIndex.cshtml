@@ -16,9 +16,33 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @Styles.Render("~/css/base")
     @RenderSection("topCss", required: false)
+<style>
+    .no-js #loader {
+        display: none;
+    }
+
+    .js #loader {
+        display: block;
+        position: absolute;
+        left: 100px;
+        top: 0;
+    }
+
+    .loading-icon {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
+    }
+</style>
 </head>
 
 <body>
+    <div class="loading-icon"></div>
+
     <header class="dropdowns">
         <div class="dropdowns-top">
             <div class="container">
@@ -71,7 +95,7 @@
                     </nav>
                     <div class="bkshop-searchbox">
                         <form action='@Url.Action("Index","Book", null)' class="search">
-                            <button type="submit" style="visibility:hidden"><i class="fas fa-search" style="visibility:visible"></i></button>
+                            <button type="submit" style="        visibility: hidden"><i class="fas fa-search" style="        visibility: visible"></i></button>
                             <input type="text" name="name">
                         </form>
                     </div>
@@ -391,6 +415,21 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    @*loading*@
+    <script>
+ //       $(function () {
+ //           $(window).load(function() {
+ //               // Animate loader off screen
+ //               $(".loading-icon").hide();
+ //       });
+        
+        //});
+        window.onload = function () {
+            document.getElementsByClassName("loading-icon")[0].setAttribute("style", "width: 0; transition: 1s;");
+        }
+
+    </script>
    
     <script>
         $(function () {
