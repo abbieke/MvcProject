@@ -165,6 +165,7 @@
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\ShoppingCartService.cs" />
+    <Compile Include="ViewModels\CartErrorModel.cs" />
     <Compile Include="ViewModels\ForgetPwdViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ResetPwdViewModel.cs" />
@@ -445,6 +446,7 @@
     <Content Include="Views\Shared\_WishProductCardPartial.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
+    <Content Include="Views\Shopping\ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

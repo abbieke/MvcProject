@@ -39,6 +39,7 @@ namespace MvcProjectTest.Services
 
         public void DeleteCartByAccount(string account)
         {
+
             if(account != null)
             {
                 cartRepo.DeleteByAccount(account);
@@ -49,6 +50,27 @@ namespace MvcProjectTest.Services
             }
             
         }
+
+        public static string GetErrorText(Error error)
+        {
+            switch (error)
+            {
+                case Error.accountError:
+                    return "會員資料認證錯誤，請重試";
+                case Error.inStockError:
+                    return "商品庫存不足，請重試";
+                case Error.otherError:
+                    return "意外錯誤，請重試";
+                
+            }
+            return "錯誤資訊未標明，請重試";
+        }
+
+        public enum Error
+        {
+            accountError, inStockError, otherError
+        }
+
 
     }
 }

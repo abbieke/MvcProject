@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using MvcProjectTest.Repositories;
 using MvcProjectTest.Services;
 using MvcProjectTest.ViewModels;
@@ -28,10 +29,20 @@ namespace MvcProjectTest.Controllers
         {
             if (Request.IsAuthenticated)
             {
+                
                 //var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
                 //var cartSer = new ShoppingCartService();
                 var cartModel = cartSer.GetMemberCart(User.Identity.Name);
                 
+                //if (TempData.Keys.Contains("message") && TempData["message"] != null)
+                //{
+                //    ViewBag.isWarning = "True";
+                //    ViewBag.warningText = TempData["message"];
+                //}
+                //else
+                //{
+                //    ViewBag.isWarning = "False";
+                //}
 
                 return View(cartModel);
                 
@@ -45,8 +56,9 @@ namespace MvcProjectTest.Controllers
         }
         public ActionResult ShippingInfo(string cusAccount, [Bind (Include = "BookID, Quantity")]IEnumerable<ShoppingCartViewModel> orderProducts, bool isNeedingClear)
         {
+            
             var a = orderProducts;
-
+            return Redirect("/Shopping/ErrorPage/" + ShoppingCartService.Error.accountError.ToString());
             if (isNeedingClear)
             {
                 cartSer.DeleteCartByAccount(cusAccount);
@@ -60,6 +72,15 @@ namespace MvcProjectTest.Controllers
         public ActionResult OrderSuccess()
         {
             return View();
+        }
+
+        
+        [Route("/Shopping/ErrorPage/{error}")]
+        public ActionResult ErrorPage(ShoppingCartService.Error error)
+        {
+            var errorModel = new CartErrorModel();
+            errorModel.errorText = ShoppingCartService.GetErrorText(error);
+            return View(errorModel);
         }
 
 

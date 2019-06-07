@@ -14,8 +14,14 @@ namespace MvcProjectTest
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               name: "ErrorPage",
+               url: "Shopping/ErrorPage/{error}",
+               defaults: new { controller = "Shopping", action = "ErrorPage", error = "otherError" }
+           );
+
+            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{controller}/{action}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
@@ -30,6 +36,7 @@ namespace MvcProjectTest
                 url: "Book/{name}/{type}",
                 defaults: new { controller = "Book", action = "Index", name = UrlParameter.Optional,types = UrlParameter.Optional }
             );
+           
         }
     }
 }

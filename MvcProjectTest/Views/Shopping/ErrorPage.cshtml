@@ -1,0 +1,18 @@
+﻿@model MvcProjectTest.ViewModels.CartErrorModel
+@{
+    ViewBag.Title = "ErrorPage";
+    Layout = null;
+}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <div class="container">
+        <div class="card" style="width: 30rem;">
+            <div class="card-body">
+                @*<h5 class="card-title">Special title treatment</h5>*@
+                <p class="card-text">@Model.errorText</p>
+                <a href='@Url.Action("Index", "Shopping")' class="btn btn-primary">返回購物車</a>
+            </div>
+        </div>
+    </div>
+
