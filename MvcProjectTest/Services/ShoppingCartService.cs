@@ -10,11 +10,12 @@ namespace MvcProjectTest.Services
 {
     public class ShoppingCartService
     {
+        ShoppingRepository cartRepo = new ShoppingRepository();
+        BooksRepository bookRepo = new BooksRepository();
         public IEnumerable<ShoppingCartViewModel> GetMemberCart(string account)
         {
             var model = new List<ShoppingCartViewModel>();
-            var cartRepo = new ShoppingRepository();
-            var bookRepo = new BooksRepository();
+            
 
             foreach(var item in cartRepo.GetMemberCart(account))
             {
@@ -34,6 +35,19 @@ namespace MvcProjectTest.Services
             }
             
             return model;
+        }
+
+        public void DeleteCartByAccount(string account)
+        {
+            if(account != null)
+            {
+                cartRepo.DeleteByAccount(account);
+            }
+            else
+            {
+                throw new Exception("沒有成功取得用戶帳號名稱，請檢查");
+            }
+            
         }
 
     }

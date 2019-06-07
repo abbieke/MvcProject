@@ -79,6 +79,17 @@ namespace MvcProjectTest.Repositories
             
         }
 
+        public void DeleteByAccount(string account)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var id = _cusRepo.GetCusromerID(account);
+                var sql = "DELETE FROM [Shopping Car] WHERE CustomerID = @customerID";
+                conn.Execute(sql, new { customerID = id });
+            }
+            
+        }
+
         //test
         public void RemoveCartBook(int customerId, string bookId)
         {

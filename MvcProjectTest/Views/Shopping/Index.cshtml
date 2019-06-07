@@ -14,7 +14,7 @@
     }
     var wishbooks = _shoppingRepo.SelectWish((int)Session["userid"]);
 
-
+    ViewBag.isNeedClear = true;
 
 }
 
@@ -60,7 +60,7 @@
                                 </div>
                             </li>
                             <li>結帳後清空</li>
-                            <li><a href="#"><i class="fas fa-eraser"></i>清空購物車</a></li>
+                            <li><button style="background-color: transparent; border: 1px solid #000;" id="clear-cart"><i class="fas fa-eraser"></i>清空購物車</button></li>
                         </ul>
                     </div>
 
@@ -100,7 +100,7 @@
                                         <span class="instock-span">庫存：@book.InStock 個</span>
                                     </div>
                                 </td>
-                                <td class="item-price-list" field=@(book.BookID + "/price")>@((book.UnitPrice * (1-book.Discount)).ToString("0")) 元</td>
+                                <td class="item-price-list" field=@(book.BookID + "/price")>@((book.UnitPrice * (1 - book.Discount)).ToString("0")) 元</td>
                                 <td class="item-delete-list"><button class="remove-button" value="@book.BookID" field=@(book.BookID + "/remove")><i class="far fa-trash-alt"></i></button></td>
                             </tr>
 
@@ -117,8 +117,9 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-12 text-center">
-                            @Html.ActionLink("下一步，填寫資訊", "ShippingInfo", "Shopping", new { name = 666, year = 777 },
-        new { @class = "btn btn-dark active", @role = "button", @style = "text-indent: 0;", })
+                            <button class="btn btn-dark active" style = "text-indent: 0;" id="order-button">
+                                下一步，填寫資訊
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -130,58 +131,7 @@
                     {
                         @Html.Partial("_WishProductCardPartial", book)
                     }
-                    @*<div class="product-card-out-block">
-                            <div class="product-card-block">
-                                <div class="product-card-img-block">
-                                    <a href="#" class="product-link">
-                                        <img class="pc-img"
-                                             src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                             alt="1">
-                                    </a>
-                                    <div class="product-card-visual-cart-block">
-                                        <form action="add-cart">
-                                            <input type="hidden" name="id" value="1">
-                                            <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                            <button class="product-card-cart-button card-quick-button-style"
-                                                    type="submit">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                <span class="product-card-cart-tip pc-quick-tip-style">
-                                                    Add To
-                                                    Cart
-                                                </span>
-                                            </button>
-                                        </form>
-                                        <a href="#" class="product-card-quick-view">
-                                            <i class="far fa-eye card-quick-button-style"></i>
-                                            <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                                Quick
-                                                View
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="wish-list-card-remove-icon-block">
-                                        <a href="#" class="product-trash-icon-a">
-                                            <i class="fas fa-trash-alt card-quick-button-style"></i>
-                                            <span class="pc-quick-tip-style trash-quick-tip">Remove Wish</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-card-description-block">
-                                    <a href="#" class="product-link">
-                                        <h3 class="product-card-title">
-                                            有可能的任務
-                                        </h3>
-                                        <div class="product-writter-block">
-                                            <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                        </div>
-                                        <div class="product-price-block">
-                                            <span class="product-price-span product-card-des-text">$300</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
 
-                        </div>*@
                 </div>
             </div>
         </div>
@@ -234,131 +184,136 @@
 
     @*輸入數字限制*@
     @*<script>
-    $(function () {
-        $(".qty").keyup(qtyOnkeyupValue);
-        //$(".qty").change(qtyOnkeyupValue);
-        var isWarning = false;
+        $(function () {
+            $(".qty").keyup(qtyOnkeyupValue);
+            //$(".qty").change(qtyOnkeyupValue);
+            var isWarning = false;
 
 
 
 
-        function qtyOnkeyupValue() {
-            let id = $(this).attr("name").split("/")[0];
-            var inStock = $("input[name='" + id + "/inStock']").val();
-            //var inStock = $(this).siblings("input[name='inStock']").val();
+            function qtyOnkeyupValue() {
+                let id = $(this).attr("name").split("/")[0];
+                var inStock = $("input[name='" + id + "/inStock']").val();
+                //var inStock = $(this).siblings("input[name='inStock']").val();
 
-            this.value = this.value.replace(/[^1-9]/g, '');
-            if (parseInt(this.value) > parseInt(inStock)) {
-                this.value = inStock;
-            }
-
-        };
-
-        $(".qtyplus").click(function () {
-            let id = $(this).attr("name").split("/")[0];
-            var inStock = $("input[name='" + id + "/inStock']").val();
-            var num = +$(this).siblings(".qty").val() + 1;
-
-            $(this).siblings(".qty").val(function () {
-                if (parseInt(num) > parseInt(inStock)) {
-
-                    if (!isWarning) {
-                        $(this).parent().siblings(".instock-span").html("數量不能超過庫存！");
-                        $(this).parent().siblings(".instock-span").addClass("red-text-2");
-                        isWarning = true;
-                    }
-
-                    return inStock;
+                this.value = this.value.replace(/[^1-9]/g, '');
+                if (parseInt(this.value) > parseInt(inStock)) {
+                    this.value = inStock;
                 }
-                else {
-                    if (isWarning) {
-                        $(this).parent().siblings(".instock-span").html("庫存：" + inStock);
-                        $(this).parent().siblings(".instock-span").removeClass("red-text-2");
-                        isWarning = false;
+
+            };
+
+            $(".qtyplus").click(function () {
+                let id = $(this).attr("name").split("/")[0];
+                var inStock = $("input[name='" + id + "/inStock']").val();
+                var num = +$(this).siblings(".qty").val() + 1;
+
+                $(this).siblings(".qty").val(function () {
+                    if (parseInt(num) > parseInt(inStock)) {
+
+                        if (!isWarning) {
+                            $(this).parent().siblings(".instock-span").html("數量不能超過庫存！");
+                            $(this).parent().siblings(".instock-span").addClass("red-text-2");
+                            isWarning = true;
+                        }
+
+                        return inStock;
                     }
-                    return num;
-                };
+                    else {
+                        if (isWarning) {
+                            $(this).parent().siblings(".instock-span").html("庫存：" + inStock);
+                            $(this).parent().siblings(".instock-span").removeClass("red-text-2");
+                            isWarning = false;
+                        }
+                        return num;
+                    };
+                });
             });
+
+            $(".qtyminus").click(function () {
+                let id = $(this).attr("name").split("/")[0];
+                var inStock = $("input[name='" + id + "/inStock']").val();
+                var num = +$(this).siblings(".qty").val() - 1;
+
+                $(this).siblings(".qty").val(function () {
+                    if (parseInt(num) <= 0) {
+                        if (!isWarning) {
+                            $(this).parent().siblings(".instock-span").html("數量不能小於1！");
+                            $(this).parent().siblings(".instock-span").addClass("red-text-2");
+                            isWarning = true;
+                        }
+                        return 1;
+                    }
+                    else {
+                        if (isWarning) {
+                            $(this).parent().siblings(".instock-span").html("庫存：" + inStock);
+                            $(this).parent().siblings(".instock-span").removeClass("red-text-2");
+                            isWarning = false;
+                        }
+                        return num;
+                    };
+                });
+            });
+
+            @*剛進入時搜尋庫存與對應購物車數量*@
+    @*此JS區塊暫時大量採樣順序，若商品區塊結構改變可能會需要調整*@
+    @*var qty = document.getElementsByClassName("qty");
+
+            for (var i = 0; i < qty.length; i++) {
+                var inStock = qty[i].parentElement.children[0].value;
+                var warningText = qty[i].parentElement.parentElement.children[1];
+
+                if (inStock == 0) {
+                    let id = qty[i].getAttribute("name").split("/")[0];
+                    warningText.innerHTML = "目前商品已無庫存";
+                    warningText.classList.add("red-text-2");
+                    qty[i].removeAttribute("onkeyup");
+                    qty[i].disabled = true;
+                    qty[i].value = 0;
+                    qty[i].parentElement.parentElement.parentElement.parentElement.setAttribute(
+                        "style", "background-color: #f7f7f7")
+                    //qty[i].parentElement.children[1].readOnly = true;
+                    qty[i].parentElement.children[1].disabled = true;
+                    qty[i].parentElement.children[1].removeAttribute("click");
+                    //qty[i].parentElement.children[3].readOnly = true;
+                    qty[i].parentElement.children[3].disabled = true;
+                    qty[i].parentElement.children[3].removeAttribute("click");
+                    document.getElementsByName(id + "/check")[0].disabled = true;
+                }
+
+                else if (parseInt(qty[i].value) > parseInt(inStock)) {
+                    warningText.innerHTML = "庫存數量不足，目前庫存：" + inStock;
+                    warningText.classList.add("red-text-2");
+                }
+
+
+            };
+
+
         });
 
-        $(".qtyminus").click(function () {
-            let id = $(this).attr("name").split("/")[0];
-            var inStock = $("input[name='" + id + "/inStock']").val();
-            var num = +$(this).siblings(".qty").val() - 1;
 
-            $(this).siblings(".qty").val(function () {
-                if (parseInt(num) <= 0) {
-                    if (!isWarning) {
-                        $(this).parent().siblings(".instock-span").html("數量不能小於1！");
-                        $(this).parent().siblings(".instock-span").addClass("red-text-2");
-                        isWarning = true;
-                    }
-                    return 1;
-                }
-                else {
-                    if (isWarning) {
-                        $(this).parent().siblings(".instock-span").html("庫存：" + inStock);
-                        $(this).parent().siblings(".instock-span").removeClass("red-text-2");
-                        isWarning = false;
-                    }
-                    return num;
-                };
-            });
-        });
-
-        @*剛進入時搜尋庫存與對應購物車數量*@
-        @*此JS區塊暫時大量採樣順序，若商品區塊結構改變可能會需要調整*@
-        @*var qty = document.getElementsByClassName("qty");
-
-        for (var i = 0; i < qty.length; i++) {
-            var inStock = qty[i].parentElement.children[0].value;
-            var warningText = qty[i].parentElement.parentElement.children[1];
-
-            if (inStock == 0) {
-                let id = qty[i].getAttribute("name").split("/")[0];
-                warningText.innerHTML = "目前商品已無庫存";
-                warningText.classList.add("red-text-2");
-                qty[i].removeAttribute("onkeyup");
-                qty[i].disabled = true;
-                qty[i].value = 0;
-                qty[i].parentElement.parentElement.parentElement.parentElement.setAttribute(
-                    "style", "background-color: #f7f7f7")
-                //qty[i].parentElement.children[1].readOnly = true;
-                qty[i].parentElement.children[1].disabled = true;
-                qty[i].parentElement.children[1].removeAttribute("click");
-                //qty[i].parentElement.children[3].readOnly = true;
-                qty[i].parentElement.children[3].disabled = true;
-                qty[i].parentElement.children[3].removeAttribute("click");
-                document.getElementsByName(id + "/check")[0].disabled = true;
-            }
-
-            else if (parseInt(qty[i].value) > parseInt(inStock)) {
-                warningText.innerHTML = "庫存數量不足，目前庫存：" + inStock;
-                warningText.classList.add("red-text-2");
-            }
-
-
-        };
-
-
-    });
-
-
-    </script>*@
+        </script>*@
 
 
     @*總價邏輯*@
     <script>
         $(function () {
             var cartList = [];
+            var isNeedingClear;
             init();
+            setDefaultValue();
             //setClickEvent();
             checkBoxChange();
             //valueChange();
-            changeTotalDisplay();
-
-
             
+            switchClearClick();
+            orderButtonClick();
+            changeTotalDisplay();
+            
+
+
 
 
             function init() {
@@ -372,8 +327,21 @@
                 }
             }
 
-            function singleProduct(productId, unitprice, quantity, discount, isCheck) {
-                this.productId = productId;
+            function setDefaultValue() {
+                defaultClearSetting();
+            }
+
+            function defaultClearSetting() {
+                if (document.getElementById("switch").checked ) {
+                    isNeedingClear = true;
+                }
+                else {
+                    isNeedingClear = false;
+                }
+            }
+
+            function singleProduct(bookID, unitprice, quantity, discount, isCheck) {
+                this.bookID = bookID;
                 this.unitprice = parseInt(unitprice);
                 this.quantity = parseInt(quantity);
                 this.discount = parseFloat(discount);
@@ -386,15 +354,15 @@
                 return result;
             }
 
-            function cartList_findIndex(productId) {
+            function cartList_findIndex(bookID) {
                 for (var index = 0; index < cartList.length; index++) {
-                    if (cartList[index].productId == productId) {
+                    if (cartList[index].bookID == bookID) {
                         return index;
                     }
                 }
             }
 
-            //算總價
+            //計算總價並顯示
             function changeTotalDisplay() {
                 var total = 0;
                 cartList.forEach(function (element) {
@@ -405,21 +373,17 @@
                 $("#total").html(total);
             }
 
-            function valueChange() {
+            //function valueChange() {
 
-                $(".qty").change(function () {
+            //    $(".qty").change(function () {
 
-                    var id = $(this).attr("name").split("/")[0];
-                    var listIndex = cartList_findIndex(id);
-                    cartList[listIndex].quantity = $(this).val();
-                    changeTotalDisplay();
-                });
+            //        var id = $(this).attr("name").split("/")[0];
+            //        var listIndex = cartList_findIndex(id);
+            //        cartList[listIndex].quantity = $(this).val();
+            //        changeTotalDisplay();
+            //    });
 
-            }
-
-            function valueChangeEvent() {
-
-            }
+            //}
 
             function checkBoxChange() {
                 $(".checkbox-class").change(function () {
@@ -431,6 +395,47 @@
                 });
             }
 
+            //是否清空購物車
+            function switchClearClick() {
+                $("#switch").change(function () {
+                    isNeedingClear = !isNeedingClear;
+                });
+            }
+
+            function orderButtonClick() {
+                $("#order-button").click(orderButtonClickEvent);
+            }
+
+            function orderButtonClickEvent() {
+                let detail = [];
+                let product = function (bookID, Quantity) { this.bookID = bookID, this.Quantity = Quantity };
+
+                cartList.forEach(function (element) {
+                    if (element.isCheck && element.Quantity != 0) {
+                        let p = new product(element.bookID, element.quantity);
+
+                        detail.push(p);
+                    }
+                });
+                
+                $("#order-button").off("click");
+                $.ajax({
+                type: "POST",
+                    url: '@Url.Action("ShippingInfo", "Shopping")',
+                    data: { cusAccount: '@User.Identity.Name', orderProducts: detail, isNeedingClear: isNeedingClear }
+            })
+                .done(function () {
+                    
+                });
+
+                
+            }
+
+
+
+
+
+            //上面是架構整理比較好的物件計算邏輯 下面趕進度先不整理
 
             //全選功能 先用芷婷的
             $(".checkbox-class").click(cheaked);
@@ -639,6 +644,24 @@
 
 
 
+    </script>
+    <script>
+
+        $(function () {
+            $("#clear-cart").click(function () {
+
+                let userSure = confirm("你確定要清除購物車嗎？");
+                if (userSure) {
+                    $.post('@Url.Action("DeleteCartFromAccount", "Shopping")', { account: '@User.Identity.Name'})
+                        .done(function () {
+                            $(".ordercheck-list-height").remove();
+                        });
+                }
+                else {
+                    return;
+                }
+            });
+        })
     </script>
 
 

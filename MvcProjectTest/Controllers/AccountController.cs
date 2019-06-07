@@ -129,6 +129,12 @@ namespace MvcProjectTest.Controllers
         public ActionResult Login()
         {
             ViewData["Titlett"] = "會員登入";
+            //if(TempData["PageFrom"] is null)
+            //{
+            //    TempData["PageFrom"] = Url.Action("Index", "Home");
+            //}
+            ////TempData.Keep();
+            //TempData["PageFrom"] = TempData["PageFrom"];
             return View();
         }
         
@@ -183,7 +189,12 @@ namespace MvcProjectTest.Controllers
             //Response.Redirect(FormsAuthentication.GetRedirectUrl(name, true));
             //FormsAuthentication.GetRedirectUrl(account, true)
 
+
+            //string pageFrom = TempData["PageFrom"].ToString();
+            //TempData["PageFrom"] = null;
+            
             return RedirectToAction("Index", "Home");
+            //return Redirect(pageFrom);
 
             //return Content("Success!");
         }

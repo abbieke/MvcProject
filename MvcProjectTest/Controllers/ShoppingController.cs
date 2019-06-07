@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MvcProjectTest.Repositories;
 using MvcProjectTest.Services;
+using MvcProjectTest.ViewModels;
 
 namespace MvcProjectTest.Controllers
 {
@@ -15,10 +16,12 @@ namespace MvcProjectTest.Controllers
     {
         public readonly ShoppingRepository _repo;
         public readonly CustomersRepository _cusRepo;
+        private readonly ShoppingCartService cartSer;
         public ShoppingController()
         {
             _repo = new ShoppingRepository();
             _cusRepo = new CustomersRepository();
+            cartSer = new ShoppingCartService();
         }
         // GET: Shopping
         public ActionResult Index()
@@ -26,7 +29,7 @@ namespace MvcProjectTest.Controllers
             if (Request.IsAuthenticated)
             {
                 //var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
-                var cartSer = new ShoppingCartService();
+                //var cartSer = new ShoppingCartService();
                 var cartModel = cartSer.GetMemberCart(User.Identity.Name);
                 
 
@@ -34,11 +37,20 @@ namespace MvcProjectTest.Controllers
                 
             }
             
+                //TempData["PageFrom"] = Url.Action("Index", "Shopping");
+            
+            TempData["Message"] = "請先登入會員";
             return Redirect("/Account/Login");
 
         }
-        public ActionResult ShippingInfo()
+        public ActionResult ShippingInfo(string cusAccount, [Bind (Include = "BookID, Quantity")]IEnumerable<ShoppingCartViewModel> orderProducts, bool isNeedingClear)
         {
+            var a = orderProducts;
+
+            if (isNeedingClear)
+            {
+                cartSer.DeleteCartByAccount(cusAccount);
+            }
             return View(); 
         }
         public ActionResult OrderCheck()
@@ -68,6 +80,17 @@ namespace MvcProjectTest.Controllers
             return "fail";
 
         }
+
+        [HttpPost]
+        public void DeleteCartFromAccount(string account)
+        {
+            cartSer.DeleteCartByAccount(account);
+        }
+
+        
+
+        //1g的wish
+
 
         [HttpPost]
         public string AddToWish(string bookId)
