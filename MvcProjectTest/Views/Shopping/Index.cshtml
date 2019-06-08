@@ -14,7 +14,7 @@
     }
     var wishbooks = _shoppingRepo.SelectWish((int)Session["userid"]);
 
-    
+
 
 }
 
@@ -55,7 +55,7 @@
                         <ul>
                             <li>
                                 <div class="switch">
-                                    <input type="checkbox" id="switch" checked />
+                                    <input type="checkbox" id="switch"  />
                                     <label for="switch"></label>
                                 </div>
                             </li>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-12 text-center">
-                            <button class="btn btn-dark active" style = "text-indent: 0;" id="order-button">
+                            <button class="btn btn-dark active" style="text-indent: 0;" id="order-button">
                                 下一步，填寫資訊
                             </button>
                         </div>
@@ -140,18 +140,18 @@
 @section scripts
 {
     @*<script>
-        $(function () {
-            
-            let isWarning = '@ViewBag.isWarning';
-            if (isWarning == "True") {
-            alert(1);
-            alert('@ViewBag.warningText');
-        }
-        })
-        
-    </script>*@
+            $(function () {
+
+                let isWarning = '@ViewBag.isWarning';
+                if (isWarning == "True") {
+                alert(1);
+                alert('@ViewBag.warningText');
+            }
+            })
+
+        </script>*@
     <script>
-        
+
         $(function () {
             // $item_counts = $(".cart-items").find("table").length;
             $(window).scroll(function () {
@@ -194,7 +194,7 @@
 
     </script>
 
-   
+
 
 
     @*總價邏輯*@
@@ -207,11 +207,11 @@
             //setClickEvent();
             checkBoxChange();
             //valueChange();
-            
+
             switchClearClick();
             orderButtonClick();
             changeTotalDisplay();
-            
+
 
 
 
@@ -306,29 +306,34 @@
                 $("#order-button").click(orderButtonClickEvent);
             }
 
+
+            //結帳鈕點擊事件
             function orderButtonClickEvent() {
                 let detail = [];
                 let product = function (bookID, Quantity) { this.bookID = bookID, this.Quantity = Quantity };
-
                 cartList.forEach(function (element) {
                     if (element.isCheck && element.Quantity != 0) {
                         let p = new product(element.bookID, element.quantity);
-
                         detail.push(p);
                     }
                 });
-                
+
                 $("#order-button").off("click");
                 $.ajax({
                 type: "POST",
-                    url: '@Url.Action("ShippingInfo", "Shopping")',
+                    url: '@Url.Action("CheckCartResult", "Shopping")',
                     data: { cusAccount: '@User.Identity.Name', orderProducts: detail, isNeedingClear: isNeedingClear }
             })
-                .done(function () {
-                    
+                    .done(function (checkResult) {
+                        if (checkResult.IsError) {
+                            location.href = "/Shopping/ErrorPage/" + checkResult.ErrorType;
+                        }
+                        else {
+                            location.href = "/Shopping/ShippingInfo/?" + this.data;
+                        }
                 });
 
-                
+
             }
 
 

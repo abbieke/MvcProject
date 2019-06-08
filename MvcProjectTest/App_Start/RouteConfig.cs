@@ -16,7 +16,7 @@ namespace MvcProjectTest
             routes.MapRoute(
                name: "ErrorPage",
                url: "Shopping/ErrorPage/{error}",
-               defaults: new { controller = "Shopping", action = "ErrorPage", error = "otherError" }
+               defaults: new { controller = "Shopping", action = "ErrorPage", error = MvcProjectTest.Services.ShoppingCartService.Error.otherError }
            );
 
             routes.MapRoute(
