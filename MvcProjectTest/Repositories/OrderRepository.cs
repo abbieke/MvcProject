@@ -35,5 +35,44 @@ namespace MvcProjectTest.Repositories
 
             }
         }
+
+
+        //加訂單寫在這之下
+
+        public void CreateOrder(Order model)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "放你的SQL語法小老鼠就是變數名稱 大概像下面那樣可以運用Model傳進變數 @aa";
+                conn.Execute(sql, new { aa = model.TotalPrice });
+
+            }
+        }
+
+        public void CreateOrderStatus(Order model)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "只要傳orderID跟setup哦 其他不用裡他應該可以null 不行去群組喊救命 @aa";
+                conn.Execute(sql, new { aa = model.SetUp });
+
+            }
+        }
+
+        public void CreateOrderDetail(IEnumerable<ViewModels.ShoppingCartViewModel> model)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                foreach(var item in model)
+                {
+                    string sql = "他的count看起來像是..Quantity? 先把Quantity傳過去 @aa";
+                    conn.Execute(sql, new { aa = model.Quantity });
+                }
+                
+
+            }
+        }
+
+
     }
 }

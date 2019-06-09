@@ -1,10 +1,10 @@
 ﻿@using MvcProjectTest.ViewModels;
-@model List<ShoppingCartViewModel>
+@model Order
 @{
     ViewBag.Title = "新知書櫥";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 
-
+    
 }
 
 @Styles.Render("~/css/cartAndWishView")
@@ -23,7 +23,7 @@
     <div class="cart-order-check m-3">
         <div class="section">
             <h5>訂單確認</h5>
-            <table class="order-check-goods mt-5">
+            <table class="order-check-goods mt-5" id="product-list-block">
                 <tr>
                     <th>商品圖片</th>
                     <th>商品名稱</th>
@@ -31,19 +31,19 @@
                     <th>單價</th>
                 </tr>
                 <!-- book1 -->
-                <tr class="ordercheck-list-height">
+                @*<tr class="ordercheck-list-height">
                     <td class="cart-item-img"><img src="~/Assets/Images/TChinese/010001.jpg" alt=""></td>
                     <td class="item-name-list"><a href="#">這是其中一本書</a></td>
                     <td class="item-qty-list"> <span>1本</span> </td>
                     <td class="item-price-list">666元</td>
-                </tr>
+                </tr>*@
                 <!-- book2 -->
-                <tr class="ordercheck-list-height">
+                @*<tr class="ordercheck-list-height">
                     <td class="cart-item-img"><img src="~/Assets/Images/TChinese/010002.jpg" alt=""></td>
                     <td class="item-name-list"><a href="#">這是其中一本書</a></td>
                     <td class="item-qty-list"> <span>1本</span> </td>
                     <td class="item-price-list">666元</td>
-                </tr>
+                </tr>*@
             </table>
 
             <div class="orderdetail-and-paymeny">
@@ -51,48 +51,48 @@
                     <tr>
                         <!-- OrderID -->
                         <th>訂單編號：</th>
-                        <td>00190525</td>
+                        <td>@Model.OrderNo</td>
                     </tr>
                     <tr>
                         <!-- OrderDate -->
                         <th>下單日期：</th>
-                        <td>2019/5/25</td>
+                        <td>@Model.OrderDate</td>
                     </tr>
                     <tr>
                         <!-- TotalPrice -->
                         <th>收件人姓名：</th>
-                        <td>王曉明</td>
+                        <td>@Model.Recipient</td>
                     </tr>
                     <tr>
                         <!-- RecipientPhone -->
                         <th>收件人手機：</th>
-                        <td>0912345678</td>
+                        <td>@Model.RecipientPhone</td>
                     </tr>
                     <tr>
                         <!-- RecipientAddress -->
                         <th>收件人地址：</th>
-                        <td>臺灣國天龍市中正路一段88號</td>
+                        <td>@Model.RecipientAddress</td>
                     </tr>
                     <tr>
                         <!-- RecipientEmail -->
                         <th>收件人Email：</th>
-                        <td>abc1234@gmail.com</td>
+                        <td>@Model.RecipientEmail</td>
                     </tr>
                     <tr>
                         <th>配送方式：</th>
-                        <td>7-11取貨</td>
+                        <td>@Model.DeliveryMethod</td>
                     </tr>
                     <tr>
                         <th>付款方式：</th>
-                        <td>貨到付款</td>
+                        <td>@Model.PayWay</td>
                     </tr>
                     <tr>
                         <th>訂單總金額：</th>
-                        <td>2058元</td>
+                        <td>@Model.TotalPrice</td>
                     </tr>
                 </table>
 
-                <div class="visa-card ">
+                @*<div class="visa-card ">
                     <div class="visa-card-icon">
                         <i class="fab fa-cc-visa "></i><span class="visa-card-icon-span">信運卡付款</span>
                     </div>
@@ -124,7 +124,7 @@
 
                     </div>
 
-                </div>
+                </div>*@
 
             </div>
 
@@ -163,7 +163,31 @@
 
 
     </script>
-    <!-- 全選功能 -->
+    <script>
+        $(function () {
+            $.ajax({
+                type: "POST",
+                    url: '@Url.Action("GetOpList", "Shopping")',
+            })
+                .done(function (opList) {
+                    for (var i = 0; i < opList.length; i++) {
+
+
+                        $("#product-list-block").append(
+                            '<tr class="ordercheck-list-height">\
+                    <td class="cart-item-img"><img src="' + opList[i].BookImage + '" alt=""></td>\
+                    <td class="item-name-list"><a href="#">'+ opList[i].BooksName +'</a></td>\
+                    <td class="item-qty-list"> <span>'+ opList[i].Quantity + '</span> </td>\
+                    <td class="item-price-list">'+ parseInt( parseInt(opList[i].Quantity) * parseInt(opList[i].UnitPrice) * (1-parseFloat(opList[i].Discount))) +'</td>\
+                </tr>'
+                        );
+                    }
+                });
+
+
+
+        })
+    </script>
 
 }
 

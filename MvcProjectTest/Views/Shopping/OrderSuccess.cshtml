@@ -1,11 +1,23 @@
 ﻿@using MvcProjectTest.ViewModels;
-@model List<ShoppingCartViewModel>
+@model Order
 @{
     ViewBag.Title = "新知書櫥";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 
 
 }
+
+<style>
+    .product-name{
+         overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+    }
+</style>
 
 @Styles.Render("~/css/cartAndWishView")
 <div class="container" style="margin-top: 50px;">
@@ -27,7 +39,7 @@
             <h5>請密切注意您的信箱是否有到貨通知！</h5>
             <center>
                 @Html.ActionLink("繼續購物！", "Index", "Book", null,
-                               new { @class = "btn btn-dark m-3", @role= "button" , @style = "text-indent: 0;", })
+                               new { @class = "btn btn-dark m-3", @role = "button", @style = "text-indent: 0;", })
                 @*<button class="btn btn-dark m-3">繼續購物！</button>*@
             </center>
             <div class="order-success-info row">
@@ -38,11 +50,11 @@
                             <!-- 內文 -->
                             <div class="card-body">
                                 <h5 class="card-title">訂單編號</h5>
-                                <p class="card-text">00190525</p>
+                                <p class="card-text">@Model.OrderNo</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">訂單日期</h5>
-                                <p class="card-text">2019-05-25</p>
+                                <p class="card-text">@Model.OrderDate</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">訂單狀態</h5>
@@ -57,27 +69,27 @@
                             <!-- 內文 -->
                             <div class="card-body">
                                 <h5 class="card-title">收件人姓名</h5>
-                                <p class="card-text">王曉明</p>
+                                <p class="card-text">@Model.Recipient</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">收件人手機</h5>
-                                <p class="card-text">0912345678</p>
+                                <p class="card-text">@Model.RecipientPhone</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">收件人地址</h5>
-                                <p class="card-text">臺灣國天龍市中正路一段88號</p>
+                                <p class="card-text">@Model.RecipientAddress</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">收件人Email</h5>
-                                <p class="card-text">abc1234@gmail.com</p>
+                                <p class="card-text">@Model.RecipientEmail</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">配送方式</h5>
-                                <p class="card-text">7-11取貨</p>
+                                <p class="card-text">@Model.DeliveryMethod</p>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">付款方式</h5>
-                                <p class="card-text">貨到付款</p>
+                                <p class="card-text">@Model.PayWay</p>
                             </div>
                         </div>
                     </div>
@@ -90,8 +102,8 @@
                             <p class="card-title">安靜是種超能力：寫給內向者的職場進擊指南，話不多，但大家都會聽你說</p>
                             <p class="card-text">1本 x NT$666 = NT$666</p>
                         </div> -->
-                        <ul class="media-list card-body">
-                            <li class="media">
+                        <ul class="media-list card-body" id="product-list-block">
+                            @*<li class="media">
                                 <div class="media-left">
                                     <a href="#" title="安靜是種超能力：寫給內向者的職場進擊指南，話不多，但大家都會聽你說">
                                         <img class="media-object" src="~/Assets/Images/TChinese/010001.jpg"
@@ -120,24 +132,24 @@
                                     <span class="product-total">= NT$666</span>
                                     <br>
                                 </div>
-                            </li>
+                            </li>*@
                         </ul>
 
                         <table class="order-check-detail">
-                            <tr>
-                                <!-- OrderID -->
+                            @*<tr>
+                                 OrderID 
                                 <th>小計：</th>
-                                <td>NT$1332</td>
-                            </tr>
+                                <td>NT$000</td>
+                            </tr>*@
                             <tr>
                                 <!-- OrderDate -->
                                 <th>運費：</th>
-                                <td>NT$60</td>
+                                <td>NT$@Model.ShippingRate</td>
                             </tr>
                             <tr>
                                 <!-- OrderDate -->
                                 <th>總金額：</th>
-                                <td>NT$1392</td>
+                                <td>NT$@Model.TotalPrice</td>
                             </tr>
                         </table>
                     </div>
@@ -169,7 +181,33 @@
 
 
     </script>
-    <!-- 全選功能 -->
+
+
+    <script>
+        $(function () {
+            $.ajax({
+                type: "POST",
+                    url: '@Url.Action("GetOpList", "Shopping")',
+            })
+                .done(function (opList) {
+                    for (var i = 0; i < opList.length; i++) {
+
+
+                        $("#product-list-block").append(
+                            '<tr class="ordercheck-list-height">\
+                    <td class="cart-item-img"><img src="' + opList[i].BookImage + '" alt=""></td>\
+                    <td class="item-name-list"><a class="product-name" href="#">'+ opList[i].BooksName +'</a></td>\
+                    <td class="item-qty-list"> <span>'+ opList[i].Quantity + '</span> </td>\
+                    <td class="item-price-list">'+ parseInt( parseInt(opList[i].Quantity) * parseInt(opList[i].UnitPrice) * (1-parseFloat(opList[i].Discount))) +'</td>\
+                </tr>'
+                        );
+                    }
+                });
+
+
+
+        })
+    </script>
 
 }
 

@@ -9,6 +9,7 @@ using MvcProjectTest.Services;
 using MvcProjectTest.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using MvcProjectTest.Models;
 
 namespace MvcProjectTest.Controllers
 
@@ -21,16 +22,23 @@ namespace MvcProjectTest.Controllers
     {
         private readonly ShoppingRepository _repo;
         private readonly CustomersRepository _cusRepo;
+        private readonly BooksRepository _bookRepo;
         private readonly ShoppingCartService _cartSer;
         private readonly OrderService _orderSer;
+        private readonly OrderRepository _orderRepo;
+
+        //先頂著用
+        private static Order _order;
         private static IEnumerable<ShoppingCartViewModel> opList;
         
         public ShoppingController()
         {
             _repo = new ShoppingRepository();
             _cusRepo = new CustomersRepository();
+            _bookRepo = new BooksRepository();
             _cartSer = new ShoppingCartService();
             _orderSer = new OrderService();
+            _orderRepo = new OrderRepository();
         }
         // GET: Shopping
         public ActionResult Index()
@@ -86,13 +94,66 @@ namespace MvcProjectTest.Controllers
             
             return View(opList);
         }
-        public ActionResult OrderCheck(OrderService.PayWay payWay, OrderService.DeliveryMethod deliveryMethod, string name, string phone, string email, string address, int shippingRate)
+        public ActionResult OrderCheck(OrderService.PayWay payWay, OrderService.DeliveryMethod deliveryMethod, string name, string phone, string email, string address)
         {
-            return View(); 
+            int shippingRate = 60;
+
+            Order orderModel = new Order();
+            orderModel.PayWay = payWay.ToString();
+            orderModel.DeliveryMethod = deliveryMethod.ToString();
+            orderModel.Recipient = name;
+            orderModel.RecipientPhone = phone;
+            orderModel.RecipientEmail = email;
+            orderModel.RecipientAddress = address;
+
+            orderModel.OrderNo = _orderSer.GetFakeOrderNo();
+            orderModel.CustomerID = _cusRepo.GetCusromerID(User.Identity.Name);
+            orderModel.ShippingRate = shippingRate;
+
+            orderModel.OrderDate = DateTime.Now;
+
+            int total = 0;
+            foreach(var item in opList)
+            {
+                var book = _bookRepo.GetBookById(item.BookID);
+                item.UnitPrice = book.UnitPrice;
+                item.Discount = book.Discount;
+                item.BookImage = "/Assets/Images/" + _bookRepo.GetCategoryEngNameById(book.CategoryID) + "/" + book.BookImage;
+                item.BooksName = book.BooksName;
+            }
+
+            orderModel.TotalPrice = 
+                opList.Sum((x) => Math.Round(x.UnitPrice * x.Quantity * (1 - x.Discount))) + shippingRate;
+
+
+
+            _order = orderModel;
+            return View(orderModel); 
         }
         public ActionResult OrderSuccess()
         {
-            return View();
+
+
+
+            //加訂單請寫在註解中間
+            _orderRepo.CreateOrder(_order);
+
+            _orderRepo.CreateOrderStatus(_order);
+
+            _orderRepo.CreateOrderDetail(opList);
+
+
+            //
+            _order.SetUp = DateTime.Now;
+
+            Order orderModel = _order;
+            _order = null;
+            return View(orderModel);
+        }
+
+        public JsonResult GetOpList()
+        {
+            return Json(opList, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -102,6 +163,8 @@ namespace MvcProjectTest.Controllers
         {
             
             CartErrorModel checkResult = new CartErrorModel();
+            opList = null;
+
             //驗證帳戶
             if(cusAccount == null || cusAccount!=User.Identity.Name || _cusRepo.GetCusromerID(cusAccount)==0 )
             {
@@ -150,6 +213,7 @@ namespace MvcProjectTest.Controllers
             return new JsonNetResult { Data = checkResult };
 
         }
+
 
 
 
