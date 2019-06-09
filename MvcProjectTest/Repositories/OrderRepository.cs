@@ -66,7 +66,7 @@ namespace MvcProjectTest.Repositories
                 foreach(var item in model)
                 {
                     string sql = "他的count看起來像是..Quantity? 先把Quantity傳過去 @aa";
-                    conn.Execute(sql, new { aa = model.Quantity });
+                    conn.Execute(sql, new { aa = item.Quantity });
                 }
                 
 
