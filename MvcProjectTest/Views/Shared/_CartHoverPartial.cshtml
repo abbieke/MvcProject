@@ -16,7 +16,7 @@
             @foreach (var book in Model)
             {
 
-                var subtotal = (int)@book.UnitPrice * book.Quantity;
+                var subtotal = (int)book.UnitPrice * book.Quantity;
                 total = total + (int)subtotal;
                 bookCount++;
                 //bookCount = bookCount + book.Quantity;

@@ -167,48 +167,48 @@
 
     @RenderBody()
 
-<footer class="index-footer">
-    <div class="container">
-        <div class="footer-info-block-row">
-            <div class="footer-column-list-block">
-                <div class="footer-main-info-block">
-                    新知書櫥
+    <footer class="index-footer">
+        <div class="container">
+            <div class="footer-info-block-row">
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block">
+                        新知書櫥
+                    </div>
+                    <ul class="footer-column-item-list">
+                        <li class="footer-list-item">
+                            <a href="#">
+                                關於我們
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("Index", "Book",null)">
+                                書本總覽
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*客服中心*@
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*管理介面*@
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="footer-column-item-list">
-                    <li class="footer-list-item">
-                        <a href="#">
-                            關於我們
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="@Url.Action("Index", "Book",null)">
-                            書本總覽
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#">
-                            @*客服中心*@
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#">
-                            @*管理介面*@
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-column-list-block">
-                <div class="footer-main-info-block">
-                    會員服務
-                </div>
-                <ul class="footer-column-item-list">
-                    <li class="footer-list-item">
-                        <a href="@Url.Action("Registration", "Account",null)">
-                            加入會員
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="   @if (Request.IsAuthenticated)
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block">
+                        會員服務
+                    </div>
+                    <ul class="footer-column-item-list">
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("Registration", "Account",null)">
+                                加入會員
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="   @if (Request.IsAuthenticated)
                                         {
                                             @Url.Action("CustomerIndex","Customer", null)
                                         }
@@ -216,78 +216,78 @@
                                         {
                                             @Url.Action("Login","Account", null)
                                         }">
-                            會員專區
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="@Url.Action("ForgetPassword", "Account",null)">
-                            忘記密碼
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="@Url.Action("Index", "Shopping",null)">
-                            願望清單(先跳到購物車)
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-column-list-block">
-                <div class="footer-main-info-block">
-                    客服服務
+                                會員專區
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("ForgetPassword", "Account",null)">
+                                忘記密碼
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("Index", "Shopping",null)">
+                                願望清單(先跳到購物車)
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="footer-column-item-list">
-                    <li class="footer-list-item">
-                        <a href="#">
-                            聯絡我們
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#">
-                            @*功能介紹*@
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#">
-                            @*客服中心*@
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#">
-                            @*管理介面*@
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-column-list-block">
-                <div class="footer-main-info-block footer-contact">
-                    關注我們
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block">
+                        客服服務
+                    </div>
+                    <ul class="footer-column-item-list">
+                        <li class="footer-list-item">
+                            <a href="#">
+                                聯絡我們
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*功能介紹*@
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*客服中心*@
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*管理介面*@
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="footer-column-item-list contact-icon-list">
-                    <li class="footer-list-item">
-                        <a href="#" class="footer-contact-icon-animate1">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#" class="footer-contact-icon-animate1">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#" class="footer-contact-icon-animate1">
-                            <i class="fab fa-line"></i>
-                        </a>
-                    </li>
-                    <li class="footer-list-item">
-                        <a href="#" class="footer-contact-icon-animate1">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                </ul>
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block footer-contact">
+                        關注我們
+                    </div>
+                    <ul class="footer-column-item-list contact-icon-list">
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-line"></i>
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -299,30 +299,33 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    @RenderSection("scripts", required: false)
-    @RenderSection("tabs", required: false)
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    @RenderSection("scripts", required: false)
+    @RenderSection("tabs", required: false)
+
+
+
+
 
     @*loading*@
     <script>
- //       $(function () {
- //           $(window).load(function() {
- //               // Animate loader off screen
- //               $(".loading-icon").hide();
- //       });
-        
+        //       $(function () {
+        //           $(window).load(function() {
+        //               // Animate loader off screen
+        //               $(".loading-icon").hide();
+        //       });
+
         //});
         window.onload = function () {
             document.getElementsByClassName("loading-icon")[0].setAttribute("style", "width: 0; transition: 1s;");
         }
 
     </script>
-   
+
     <script>
         $(function () {
             $(".quick-view-dialog").dialog({
@@ -359,8 +362,7 @@
             });
         });
     </script>
-    @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
-    @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+
     <!-- newest tab -->
     <script>
         $(function () {
@@ -409,7 +411,7 @@
 
         });
     </script>
-    
+
     @*<script>
             $(function () {
                 window.onbeforeunload = function () {

@@ -162,9 +162,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BooksRepository.cs" />
     <Compile Include="Repositories\CustomersRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\ShoppingRepository.cs" />
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\MailService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ShoppingCartService.cs" />
     <Compile Include="ViewModels\CartErrorModel.cs" />
     <Compile Include="ViewModels\ForgetPwdViewModel.cs" />
@@ -385,6 +387,7 @@
     <Content Include="Assets\Images\top-sp-sales\book2.jpg" />
     <Content Include="Assets\Images\top-sp-sales\book3.jpeg" />
     <Content Include="Assets\Images\top-sp-sales\sale1.jpg" />
+    <Content Include="Assets\Script\input-values.jquery.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -448,10 +451,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
     <Content Include="Views\Shopping\ErrorPage.cshtml" />
+    <Content Include="Views\Shared\_TemporarilyOrderPCPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\Script\" />
     <Folder Include="Views\JsonNet\" />
   </ItemGroup>
   <ItemGroup>
