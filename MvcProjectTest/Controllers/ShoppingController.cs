@@ -132,19 +132,29 @@ namespace MvcProjectTest.Controllers
         }
         public ActionResult OrderSuccess()
         {
+            //驗證商品清單
+            var a = CheckCartResult(User.Identity.Name, opList, false);
+            var b = JsonConvert.SerializeObject(a);
+            var errorModel = JsonConvert.DeserializeObject<CartErrorModel>(b);
+            if (errorModel.IsError)
+            {
+                return Redirect("/Shopping/ErrorPage/" + errorModel.ErrorType.ToString());
+                //throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
+            }
 
 
-
+            _order.SetUp = DateTime.Now;
             //加訂單請寫在註解中間
+            Order order;
             _orderRepo.CreateOrder(_order);
+            order=_orderRepo.GetOrderFromOrderNo(_order.OrderNo);
 
-            _orderRepo.CreateOrderStatus(_order);
+            _orderRepo.CreateOrderStatus(order.OrderID,_order);
 
-            _orderRepo.CreateOrderDetail(opList);
+         //   _orderRepo.CreateOrderDetail(order.OrderID,opList);
 
 
             //
-            _order.SetUp = DateTime.Now;
 
             Order orderModel = _order;
             _order = null;

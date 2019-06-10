@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BackStageController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -176,11 +177,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Css\cart_stylesheet.css" />
+    <Content Include="Assets\Css\BackStage\custom.min.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
     <Content Include="Assets\Css\orderdetails.css" />
     <Content Include="Assets\Css\RWD.css" />
     <Content Include="Assets\Css\wish-list-product-card-stylesheet.css" />
+    <Content Include="Assets\Images\BackStage\images\american-express.png" />
+    <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo3.png" />
+    <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo4.png" />
+    <Content Include="Assets\Images\BackStage\images\Bookstore-logo3.png" />
+    <Content Include="Assets\Images\BackStage\images\cropper.jpg" />
+    <Content Include="Assets\Images\BackStage\images\favicon.ico" />
+    <Content Include="Assets\Images\BackStage\images\img.jpg" />
+    <Content Include="Assets\Images\BackStage\images\inbox.png" />
+    <Content Include="Assets\Images\BackStage\images\mastercard.png" />
+    <Content Include="Assets\Images\BackStage\images\media.jpg" />
+    <Content Include="Assets\Images\BackStage\images\paypal.png" />
+    <Content Include="Assets\Images\BackStage\images\picture.jpg" />
+    <Content Include="Assets\Images\BackStage\images\prod-1.jpg" />
+    <Content Include="Assets\Images\BackStage\images\prod-2.jpg" />
+    <Content Include="Assets\Images\BackStage\images\prod-3.jpg" />
+    <Content Include="Assets\Images\BackStage\images\prod-4.jpg" />
+    <Content Include="Assets\Images\BackStage\images\prod-5.jpg" />
+    <Content Include="Assets\Images\BackStage\images\user.png" />
+    <Content Include="Assets\Images\BackStage\images\visa.png" />
     <Content Include="Assets\Images\block\services.png" />
     <Content Include="Assets\Css\AllBooks_stylesheet.css" />
     <Content Include="Assets\Css\for-change-style.css" />
@@ -388,6 +409,12 @@
     <Content Include="Assets\Images\top-sp-sales\book2.jpg" />
     <Content Include="Assets\Images\top-sp-sales\book3.jpeg" />
     <Content Include="Assets\Images\top-sp-sales\sale1.jpg" />
+    <Content Include="Assets\Script\BackStage\bootstrap-progressbar.min.js" />
+    <Content Include="Assets\Script\BackStage\Chart.min.js" />
+    <Content Include="Assets\Script\BackStage\custom.js" />
+    <Content Include="Assets\Script\BackStage\date.js" />
+    <Content Include="Assets\Script\BackStage\gauge.min.js" />
+    <Content Include="Assets\Script\BackStage\jquery.flot.js" />
     <Content Include="Assets\Script\input-values.jquery.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -453,6 +480,8 @@
     <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
     <Content Include="Views\Shopping\ErrorPage.cshtml" />
     <Content Include="Views\Shared\_TemporarilyOrderPCPartial.cshtml" />
+    <Content Include="Views\BackStage\Index.cshtml" />
+    <Content Include="Views\Shared\_BackStageLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
