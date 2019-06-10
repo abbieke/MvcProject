@@ -34,7 +34,8 @@ namespace MvcProjectTest
                 
                 "~/Assets/Css/new-product-card.css",
                 "~/Assets/Css/newest-tab-block.css",
-                "~/Assets/Css/index-bigimage.css"));
+                "~/Assets/Css/index-bigimage.css",
+                "~/Assets/Css/RWD.css"));
             bundles.Add(new StyleBundle("~/css/cartAndWishView").Include(
 
                 "~/Assets/Css/new-product-card.css", 

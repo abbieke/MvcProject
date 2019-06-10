@@ -1,0 +1,162 @@
+﻿.bookshopping-sidemenulist {
+    display:none;
+}
+@media screen and (max-width:1140px) {
+    .container {
+        width: 960px;
+    }
+
+    .bkshop-searchbox {
+        margin: 0 25px;
+    }
+
+    .book-item > a {
+        padding: 0 10px;
+    }
+
+    .product-card-block {
+        height: 400px;
+    }
+
+    .pc-img {
+        height: auto;
+    }
+}
+
+@media screen and (max-width:880px) {
+    .container {
+        width: 740px;
+    }
+    .newest-tab-block {
+        margin-bottom:20px;
+    }
+    .bookshopping-sidemenulist {
+        display:block;
+        background-color:transparent;
+        font-size:30px;
+        margin-right:20px;
+        border:none;
+    }
+        .bookshopping-sidemenulist:focus {
+            outline:none;
+        }
+        .bkshop-nav {
+            display: none;
+        }
+    .product-card-out-block {
+        width: 50%;
+    }
+    .product-card-block {
+        height:100%;
+        padding:10px;
+    }
+        .service-block ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-block ul li {
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+    .blockleft {
+        margin-left: 20px;
+        margin-right: 50px;
+    }
+
+    .blockright {
+        font-size: 25px;
+    }
+
+    .index-block-left {
+        height: 400px;
+    }
+
+    .index-block-right {
+        height: 400px;
+    }
+
+    .index-blog {
+        height: 500px;
+    }
+    .product-price-span {
+        padding-right:10px;
+    }
+    .product-card-discount-text {
+        font-size: 25px;
+    }
+    .product-card-des-text {
+        font-size:20px;
+    }
+    .bkshop-nav {
+        position:absolute;
+    }
+}
+@media screen and (max-width:767px) {
+    .container {
+        width: 90%;
+    }
+    .bkshop-logo {
+        margin-right: auto;
+    }
+    .bkshop-searchbox {
+        display: none;
+    }
+    .index-block-left {
+        height: 350px;
+    }
+
+    .index-block-right {
+        height: 350px;
+        padding-right:10px;
+    }
+    .index-blog {
+        height:450px;
+    }
+ 
+}
+@media screen and (max-width:640px) {
+    .product-card-out-block {
+        width:100%;
+    }
+    .index-block-right {
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: 250px;
+        padding: 50px 0 0;
+    }
+    .block-right-image {
+        margin-right:15px;
+    }
+    .index-blog-column {
+        flex-direction: column-reverse;
+        width: 100%;
+        align-items: center;
+    }
+    .index-block-left {
+        width:50%;
+    }
+    .index-blog {
+        height: auto;
+    }
+    .service-block ul li {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .blockright {
+        font-size: 22px;
+    }
+    .blockleft {
+        margin:0;
+    }
+    .footer-column-item-list.contact-icon-list .footer-list-item {
+        width: 50%;
+    }
+    .footer-column-item-list.contact-icon-list {
+        flex-wrap:wrap;
+    }
+ 
+}
