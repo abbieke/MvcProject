@@ -104,11 +104,15 @@
                             <li class="book-item">
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <a href='@Url.Action("CustomerIndex","Customer", null)'><i class="fas fa-user top-icon"></i></a>@HttpContext.Current.User.IsInRole("NotVerified")
-
-                                }
-                                else
-                                {
+                                    <a href='@Url.Action("CustomerIndex", "Customer", null)'><i class="fas fa-user top-icon"></i></a>
+                                        @HttpContext.Current.User.IsInRole(" NotVerified")
+                                        var ticket = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).UserData;
+                                            
+                                            @ticket
+                                    //@HttpContext.Current.User.IsInRole(ticket.Split())
+                                        }
+                                        else
+                                        {
                                     <a href='@Url.Action("Login","Account", null)'><i class="fas fa-user top-icon"></i></a>
                                 }
                                 <ul class="book-item-list book-item-list-right">
