@@ -18,9 +18,16 @@
     HoverCart.Reverse();
     var new5book = new List<ShoppingCartViewModel>();
 
-    for (var i = 0; i < 5; i++)
+    if (HoverCart.Count >= 5)
     {
-        new5book.Add(HoverCart[i]);
+        for (var i = 0; i < 5; i++)
+        {
+            new5book.Add(HoverCart[i]);
+        }
+    }
+    else
+    {
+        new5book = HoverCart;
     }
 }
 
