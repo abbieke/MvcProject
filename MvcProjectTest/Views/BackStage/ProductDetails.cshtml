@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_BackStageLayout.cshtml";
+}
+
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>產品明細</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>產品基本資訊<a href="productIndex.html"><small>Back to list</small></a></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="dropdown" style="visibility: hidden;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+
+                    <!-- start form for validation -->
+                    <!-- 撈資料庫的 -->
+
+                    <div class="form-horizontal form-label-left">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookID">
+                                BookID
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="BookID" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的編號
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookName">
+                                BookName
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="BookName" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的書名
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="PressID">
+                                PressID
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="PressID" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的出版社
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CategoryID">
+                                CategoryID
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="CategoryID" class="control-label col-md-7 col-xs-12"
+                                   style="text-align: left;">這是一本書的種類</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="AuthorID">
+                                AuthorID
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="AuthorID" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的作者名
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UnitPrice">
+                                UnitPrice
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="UnitPrice" class="control-label col-md-7 col-xs-12"
+                                   style="text-align: left;">這是一本書的價錢</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="InStock">
+                                InStock
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="InStock" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的庫存
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Discount">
+                                Discount
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="Discount" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的折扣
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ISBN">
+                                ISBN
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="ISBN" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    這是一本書的ISBN
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookImage">
+                                BookImage
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="BookImage" class="control-label col-md-7 col-xs-12"
+                                   style="text-align: left;">這是一本書的圖片名稱</p>
+                            </div>
+                        </div>
+                        <!-- 產品描述 -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Description">
+                                Description
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12"
+                                 style="border-radius: 5px; border: 1px #f0f0f0 solid; background-color: #f8f8f8;">
+                                <div class="content" style="height:auto;" itemprop="description">
+                                    <div style="text-align: center;">
+                                        <strong>
+                                            同事覺得你很安靜、老闆覺得你沒想法、家人覺得你沒朋友<br>
+                                            內斂、慢熟的人，你可以怎麼做？
+                                        </strong>
+                                    </div> <br> 　　沒辦法承受瞬間注意力、<br> 　　沒辦法被誇獎，會很不好意思、<br> 　　沒辦法邀功、<br>
+                                    沒辦法拍桌子吵架、<br> 　　不好意思開口請人家幫忙、<br> 　　不好意思打電話怕打擾人家、<br> 　　沒辦法用力行銷自己、<br> 　　沒辦法爭取福利、<br>
+                                    不想當第一名，因為不想要太多注意力……<br> <br> 　　一般人總認為這些特質會阻礙內向者的人際往來關係，讓他們不容易成功。<br> 　　真是如此嗎？<br> <br>
+                                    <strong>　　▍這不是一本要你變外向的書！</strong><br> <br>
+                                    誰說安靜的內向者沒有當「行銷專家」的本錢？誰說害羞的內向者無法勝任「國際慈善募款工作」？誰說話不多的內向者成為「職場導師」沒有說服力？本書作者以「內向者」的身分現身說法，描述了她長期以來與外向文化之間的搏鬥史，破解一般人對內向者的既定印象與框架。<br>
+                                    <br>
+                                    事實上，「內向」並不等於「沒有野心」，也不會抵消工作能力，更不會成為成功的絆腳石。內向者擁有優良的協調能力與鉅細靡遺的思考力，能心無旁鶩地專注於自己的專業領域，予主管、客戶及同伴強大的信賴感，同時他們還是非常好的傾聽者，能高度同理及體貼他人，擁有一位內向者好友如獲人生至寶。<br>
+                                    <br> <strong>　　▍誰適合讀這本書？</strong><br> <br> 　　-打電話給客戶要寫小抄的你<br> 　　-向主管口頭報告前得演練半天的你<br>
+                                    -會議上明明游刃有餘還是會暗禱「拜託不要叫到我」的你<br> 　　-跟同事哈拉也繃緊神經，深怕成為句點王的你<br> 　　-升官加薪總擦板不進，苦無出頭天的你<br> <br>
+                                    <strong>　　▍內向者的職場進擊技巧搶先看！</strong><br> <br> 　　✔團隊合作，你可以不喜歡我，但你會相信我<br>
+                                    ✔優雅地自賣自誇，行銷自己一點都不難<br> 　　✔開會要準備，好問題就足於讓大家聽你說<br> 　　✔採取健康衝突，使用讓自己舒服的方式明確表達立場<br>
+                                    ✔出席活動不要怕，那是駕馭社交場合的第一步<br> <br>
+                                    與其強迫自己扮演滿場飛舞的社交花蝴蝶、咄咄逼人的商場強人、叱吒風雲的談判主將，內向者更需要的的是「精心分配自己的能量」與「慎選時機出擊」。了解內向性格，運用這項天賦優勢，你也能夠經營不需要刻意應酬交際，也不刻意討好彼此的新職場關係。<br>
+                                    <br> <strong>本書特色</strong><br> <br> 　　▲台灣第一本由國內作者撰寫、討論內向工作者的書籍<br> 　　▲收錄簡易版MBTI
+                                    職業性向測驗、提出職場各狀況的應對之道<br> 　　▲跨文化、跨領域職場經驗談，破解六大內向者迷思<br> 　　▲脫下迎合社會期望的包袱，發揮特質，你也能夠成為職場佼佼者！<br>
+                                    <br> <strong>國內外一致推薦</strong><br> <br> 　　★《安靜，就是力量》 作者、寧靜革命公司創辦人／蘇珊．坎恩<br>
+                                    ★《內向者的成功密碼》作者／朵麗絲・梅爾丁博士<br> 　　★《用安靜改變世界》作者／珍妮芙．凱威樂<br> 　　★《內向者的優勢》作者／希薇亞．洛肯<br> 　　★
+                                    知名講師、作家、主持人／謝文憲<br> 　　★ 心理諮商師／周慕姿<br> 　　★ 廣播主持人、運動專欄作／方祖涵<br> 　　★ 數學專家／賴以威<br> <br>
+                                    內向者可以在不同文化、各種職場上成功，瀞仁（Jill）就是絕佳範例。她這本實用的新書將帶領台灣讀者進入內向者的安靜革命。藉由大量實際案例，瀞仁展現內向者如何做自己、發揮特質所長，就可以在職場中表現亮眼、成為公司的絕佳資產。本書是現代職場中安靜戰士們的必讀好書。――蘇姍．坎恩（Susan
+                                    Cain，《安靜，就是力量》 作者、寧靜革命公司創辦人、TED 演講逾1500萬點閱人次）<br> <br>
+                                    瀞仁（Jill）的書賦予一群安靜、思慮周全，有時候被不公平低估的人自信與陪伴的力量。身為內向者的她，清楚展現內向者可以為職場帶來的非凡優勢與能力。是一本坦率、精彩的書，讓你內在的內向者閃耀燦爛！――朵麗絲・梅爾丁博士（Dr.
+                                    Doris Martin，《內向者的成功密碼》作者、德國知名企業培訓諮商師）<br> <br>
+                                    謝謝瀞仁（Jill）把職場中的內向者議題帶到繁體中文市場。希望這本書讓內向者了解並運用自己的天賦，也讓外向者更珍惜內向同事們。――Nancy
+                                    Ancowitz（職涯與溝通教練、紐約大學客座講師、《Self-Promotion for Introverts》作者）<br> <br>
+                                    現代職場中，身為內向者通常不是條簡單的路，但這本書可以告訴你如何充滿自信地運用自身優勢，在職場上找到方向。作者工作經驗多元且國際化，她是行銷專家、國際慈善顧問、也是職場導師。她幹練地分享自己同時身為內向者和專業人士的挑戰與成功經驗。你會發現這本書實用而且充滿啟發。――珍妮芙．凱威樂（Jennifer
+                                    B. Kahnweiler，《用安靜改變世界》、《幹掉獅群的小綿羊―內向工作人的沉靜競爭力》作者、美國知名職場人力開發專家）<br> <br>
+                                    這本書向內向者傳遞了重要訊息：我們用自己的方法就可以成功。瀞仁（Jill）運用大量激勵人心的實例與聰明策略，讓這個訊息不只是紙上談兵。――希薇亞．洛肯（Sylvia
+                                    Löhken，《內向者的優勢》作者、德國知名企業講師）<br> <br>
+                                    許多內向者在職場上苦拚，因為他們找不到用自己的個性適應辦公室角力、推銷自己的方法。瀞仁（Jill）提供許多實在的策略，幫助內向者用自己的、安靜的方式閃耀。――Sophia
+                                    Dembling（心理學專欄作家、《The Introvert’s Way》作者）<br> <br>
+                                    我看過許多給職場內向者的職場指南，但瀞仁（Jill）的書與眾不同。她讓成功看起來輕鬆寫意，正因為自在就是她想傳達的概念。透過溫和但實用的方法，讀者可以學習脫下應外向社會期望而生的「厚重盔甲」，當個
+                                    「自在的內向者」。瀞仁是管理多國的專業經理人，她就是這種自在成功的最佳範例。本書是無價的工具。――Dr. Laurie
+                                    Helgoe（臨床心理學家、羅斯大學醫學院助理教授、《Introvert Power》作者）<br> <br>
+                                    讀瀞仁（Jill）的書就像跟好朋友講話：充滿鼓勵、深具啟發、飽含珍貴的深刻見解。她幫內向者拿起鏡子，讓我們看到自己最好那面，並提供幫助發揮所長的豐富建議。她的文字溫暖、幽默、有智慧，透過這本書，你會找到新能量，活出最好的內向自我。――貝斯・畢羅（Beth
+                                    Buelow內向企業家顧問公司創辦人、《The Introvert Entrepreneur》作者）<br> <br>
+                                    一日午後，我們坐在咖啡廳裡，暢談著對彼此的欣賞。瀞仁送了我一份極有參考價值的出書計畫，以及一顆簽有全體中華隊隊員的大顆棒球。離開咖啡廳，她怕我大包小包不方便趕至下個演講會場，還貼心幫我將簽名球拿到便利商店宅配，只要我帶上她親手寫的一封信。搭計程車前，我在中山北路旁看完這封信，眼眶含著淚，目送她離開，或許吧，這就是內向者的溝通方式，溫暖而有愛。<br>
+                                    內向者的文字，像是病中的良藥，舒服且潤喉，不傷腸胃且有療效，這就是瀞仁，誠摯推薦她的文字。──謝文憲（知名講師、作家、主持人）<br> <br>
+                                    雙城隊多茲爾的大學球探報告寫他缺乏長打能力，到大聯盟飛球距離也沒有超過平均很多，卻是美聯單季二壘手全壘打記錄保持人。秘密是打擊時他刻意將球拉到左外野邊線，那是到全壘打牆最短的距離。<br>
+                                    如同多茲爾在瞭解自己後，將不易改變的特點變成長處──瀞仁的書，就是給內向朋友的，一本打擊秘笈。──方祖涵（運動專欄作家、廣播主持人）<br> <br>
+                                    我們都喜歡Google搜尋，但往往跳出來的一堆搜尋結果讓人不知道該如何是好。所以有人想用AI針對你的需求，直接提供一個精準的答案。以職場來說，前者是滔滔不絕的點子王，後者就是抱持著「豫則立」處事態度的內向者。在這喧嘩的時代，內向者將受到前所未有的重視。──賴以威（數學專家）<br>
+                                    &nbsp;
+                                </div>
+                                <!-- 資料庫存的是HTML格式(含CSS) -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end form for validations -->
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@Scripts.Render("~/Back-Script/BackCustomerDetails")
+
