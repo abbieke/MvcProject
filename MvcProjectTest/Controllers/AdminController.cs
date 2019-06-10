@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MvcProjectTest.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         // GET: Admin

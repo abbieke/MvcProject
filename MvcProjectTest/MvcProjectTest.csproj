@@ -452,6 +452,7 @@
     <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
     <Content Include="Views\Shopping\ErrorPage.cshtml" />
     <Content Include="Views\Shared\_TemporarilyOrderPCPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
