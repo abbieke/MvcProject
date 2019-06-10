@@ -141,7 +141,7 @@ namespace MvcProjectTest.Controllers
                 //throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
             }
 
-
+            _order.SetUp = DateTime.Now;
             //加訂單請寫在註解中間
 
             //_orderRepo.CreateOrder(_order);
@@ -152,7 +152,7 @@ namespace MvcProjectTest.Controllers
 
 
             //
-            _order.SetUp = DateTime.Now;
+
 
             Order orderModel = _order;
             _order = null;

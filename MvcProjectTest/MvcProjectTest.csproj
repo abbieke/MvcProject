@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BackStageController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Css\cart_stylesheet.css" />
+    <Content Include="Assets\Css\BackStage\custom.min.css" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
     <Content Include="Assets\Css\orderdetails.css" />
@@ -387,6 +389,12 @@
     <Content Include="Assets\Images\top-sp-sales\book2.jpg" />
     <Content Include="Assets\Images\top-sp-sales\book3.jpeg" />
     <Content Include="Assets\Images\top-sp-sales\sale1.jpg" />
+    <Content Include="Assets\Script\BackStage\bootstrap-progressbar.min.js" />
+    <Content Include="Assets\Script\BackStage\Chart.min.js" />
+    <Content Include="Assets\Script\BackStage\custom.js" />
+    <Content Include="Assets\Script\BackStage\date.js" />
+    <Content Include="Assets\Script\BackStage\gauge.min.js" />
+    <Content Include="Assets\Script\BackStage\jquery.flot.js" />
     <Content Include="Assets\Script\input-values.jquery.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -452,6 +460,8 @@
     <Content Include="Views\Shared\_CartHoverPartial.cshtml" />
     <Content Include="Views\Shopping\ErrorPage.cshtml" />
     <Content Include="Views\Shared\_TemporarilyOrderPCPartial.cshtml" />
+    <Content Include="Views\BackStage\Index.cshtml" />
+    <Content Include="Views\Shared\_BackStageLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

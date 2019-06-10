@@ -41,6 +41,19 @@ namespace MvcProjectTest
                 "~/Assets/Css/wish-list-product-card-stylesheet.css",
                 "~/Assets/Css/cart_stylesheet.css"));
 
+            bundles.Add(new StyleBundle("~/Back-css/BackLayoutIndex").Include(
+                "~/Assets/Css/BackStage/custom.min.css"
+               ));
+
+            bundles.Add(new ScriptBundle("~/Back-Script/BackLayoutIndex").Include(
+                "~/Assets/Script/BackStage/bootstrap-progressbar.min.js",
+                "~/Assets/Script/BackStage/Chart.min.js",
+                "~/Assets/Script/BackStage/custom.js",
+                "~/Assets/Script/BackStage/date.js",
+                "~/Assets/Script/BackStage/gauge.min.js",
+                "~/Assets/Script/BackStage/jquery.flot.js"
+               ));
+
         }
     }
 }
