@@ -9,6 +9,7 @@ using MvcProjectTest.Services;
 using MvcProjectTest.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using MvcProjectTest.Models;
 
 namespace MvcProjectTest.Controllers
 
@@ -21,14 +22,23 @@ namespace MvcProjectTest.Controllers
     {
         private readonly ShoppingRepository _repo;
         private readonly CustomersRepository _cusRepo;
+        private readonly BooksRepository _bookRepo;
         private readonly ShoppingCartService _cartSer;
+        private readonly OrderService _orderSer;
+        private readonly OrderRepository _orderRepo;
+
+        //先頂著用
+        private static Order _order;
+        private static IEnumerable<ShoppingCartViewModel> opList;
         
         public ShoppingController()
         {
             _repo = new ShoppingRepository();
             _cusRepo = new CustomersRepository();
+            _bookRepo = new BooksRepository();
             _cartSer = new ShoppingCartService();
-            
+            _orderSer = new OrderService();
+            _orderRepo = new OrderRepository();
         }
         // GET: Shopping
         public ActionResult Index()
@@ -61,16 +71,18 @@ namespace MvcProjectTest.Controllers
 
         }
         //備忘錄：目前拿不到errortext 雖然不需要 但有空時可以找找原因
+        [HttpPost]
         public ActionResult ShippingInfo(string cusAccount, [Bind (Include = "BookID, Quantity")]IEnumerable<ShoppingCartViewModel> orderProducts, bool isNeedingClear)
         {
+            
             //因為是藉由網址導向此頁，再轉向後進行再次驗證
-            var a = CheckCartResult(cusAccount, orderProducts, isNeedingClear);
-            var b = JsonConvert.SerializeObject(a);
-            var errorModel = JsonConvert.DeserializeObject<CartErrorModel>(b);
-            if (errorModel.IsError)
-            {
-                throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
-            }
+            //var a = CheckCartResult(cusAccount, orderProducts, isNeedingClear);
+            //var b = JsonConvert.SerializeObject(a);
+            //var errorModel = JsonConvert.DeserializeObject<CartErrorModel>(b);
+            //if (errorModel.IsError)
+            //{
+            //    throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
+            //}
 
             
 
@@ -78,15 +90,80 @@ namespace MvcProjectTest.Controllers
             {
                 _cartSer.DeleteCartByAccount(cusAccount);
             }
-            return View(orderProducts);
+
+            
+            return View(opList);
         }
-        public ActionResult OrderCheck()
+        public ActionResult OrderCheck(OrderService.PayWay payWay, OrderService.DeliveryMethod deliveryMethod, string name, string phone, string email, string address)
         {
-            return View(); 
+            int shippingRate = 60;
+
+            Order orderModel = new Order();
+            orderModel.PayWay = payWay.ToString();
+            orderModel.DeliveryMethod = deliveryMethod.ToString();
+            orderModel.Recipient = name;
+            orderModel.RecipientPhone = phone;
+            orderModel.RecipientEmail = email;
+            orderModel.RecipientAddress = address;
+
+            orderModel.OrderNo = _orderSer.GetFakeOrderNo();
+            orderModel.CustomerID = _cusRepo.GetCusromerID(User.Identity.Name);
+            orderModel.ShippingRate = shippingRate;
+
+            orderModel.OrderDate = DateTime.Now;
+
+            int total = 0;
+            foreach(var item in opList)
+            {
+                var book = _bookRepo.GetBookById(item.BookID);
+                item.UnitPrice = book.UnitPrice;
+                item.Discount = book.Discount;
+                item.BookImage = "/Assets/Images/" + _bookRepo.GetCategoryEngNameById(book.CategoryID) + "/" + book.BookImage;
+                item.BooksName = book.BooksName;
+            }
+
+            orderModel.TotalPrice = 
+                opList.Sum((x) => Math.Round(x.UnitPrice * x.Quantity * (1 - x.Discount))) + shippingRate;
+
+
+
+            _order = orderModel;
+            return View(orderModel); 
         }
         public ActionResult OrderSuccess()
         {
-            return View();
+            //驗證商品清單
+            var a = CheckCartResult(User.Identity.Name, opList, false);
+            var b = JsonConvert.SerializeObject(a);
+            var errorModel = JsonConvert.DeserializeObject<CartErrorModel>(b);
+            if (errorModel.IsError)
+            {
+                return Redirect("/Shopping/ErrorPage/" + errorModel.ErrorType.ToString());
+                //throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
+            }
+
+
+            _order.SetUp = DateTime.Now;
+            //加訂單請寫在註解中間
+            Order order;
+            _orderRepo.CreateOrder(_order);
+            order=_orderRepo.GetOrderFromOrderNo(_order.OrderNo);
+
+            _orderRepo.CreateOrderStatus(order.OrderID,_order);
+
+         //   _orderRepo.CreateOrderDetail(order.OrderID,opList);
+
+
+            //
+
+            Order orderModel = _order;
+            _order = null;
+            return View(orderModel);
+        }
+
+        public JsonResult GetOpList()
+        {
+            return Json(opList, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -94,8 +171,10 @@ namespace MvcProjectTest.Controllers
         //覆寫過新增的result
         public JsonNetResult CheckCartResult(string cusAccount, [Bind(Include = "BookID, Quantity")]IEnumerable<ShoppingCartViewModel> orderProducts, bool? isNeedingClear)
         {
-            var a = orderProducts;
+            
             CartErrorModel checkResult = new CartErrorModel();
+            opList = null;
+
             //驗證帳戶
             if(cusAccount == null || cusAccount!=User.Identity.Name || _cusRepo.GetCusromerID(cusAccount)==0 )
             {
@@ -104,8 +183,16 @@ namespace MvcProjectTest.Controllers
                 checkResult.ErrorText = ShoppingCartService.GetErrorText(ShoppingCartService.Error.accountError);
                 return new JsonNetResult { Data = checkResult };
             }
+            //確認購物車是否選中商品為空，要排前面
+            if (orderProducts == null || orderProducts.Count()==0)
+            {
+                checkResult.IsError = true;
+                checkResult.ErrorType = ShoppingCartService.Error.emptyError;
+                checkResult.ErrorText = ShoppingCartService.GetErrorText(ShoppingCartService.Error.emptyError);
+                return new JsonNetResult { Data = checkResult };
+            }
             //驗證項目是否對應用戶購物車
-            if(_cartSer.ProductlistIsNotCorrect(cusAccount, orderProducts))
+            if (_cartSer.ProductlistIsNotCorrect(cusAccount, orderProducts))
             {
                 checkResult.IsError = true;
                 checkResult.ErrorType = ShoppingCartService.Error.cartError;
@@ -129,12 +216,14 @@ namespace MvcProjectTest.Controllers
                 return new JsonNetResult { Data = checkResult };
             }
 
-
+            //先這樣用一下..
+            opList = orderProducts;
 
             checkResult.IsError = false;
             return new JsonNetResult { Data = checkResult };
 
         }
+
 
 
 

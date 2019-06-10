@@ -252,7 +252,7 @@ namespace MvcProjectTest.Repositories
             using (conn = new SqlConnection(connString))
             {
                 string sql =
-                    "Select * from [Order Detail] as od Inner join Books As b On od.BooksNo = b.BooksNo Where od.OrderID = " + orderId;
+                    "Select * from [Order Detail] as od Inner join Books As b On od.BookID = b.BookID Where od.OrderID = " + orderId;
                 orderDetails = conn.Query<OrderDetailModel>(sql).ToList();
                 return orderDetails;
             }

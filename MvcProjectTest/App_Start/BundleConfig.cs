@@ -31,15 +31,74 @@ namespace MvcProjectTest
                 ));
 
             bundles.Add(new StyleBundle("~/css/indexView").Include(
-                
+
                 "~/Assets/Css/new-product-card.css",
                 "~/Assets/Css/newest-tab-block.css",
                 "~/Assets/Css/index-bigimage.css"));
             bundles.Add(new StyleBundle("~/css/cartAndWishView").Include(
 
-                "~/Assets/Css/new-product-card.css", 
+                "~/Assets/Css/new-product-card.css",
                 "~/Assets/Css/wish-list-product-card-stylesheet.css",
                 "~/Assets/Css/cart_stylesheet.css"));
+
+            bundles.Add(new StyleBundle("~/Back-css/BackLayoutIndex").Include(
+                "~/Assets/Css/BackStage/custom.min.css",
+                "~/Assets/Css/BackStage/jquery.min.css",
+                "~/Assets/Css/BackStage/bootstrap.min.css"
+               ));
+
+            bundles.Add(new ScriptBundle("~/Back-Script/BackLayoutIndex").Include(
+                "~/Assets/Script/BackStage/bootstrap-progressbar.min.js",
+                "~/Assets/Script/BackStage/Chart.min.js",
+                "~/Assets/Script/BackStage/custom.js",
+                "~/Assets/Script/BackStage/date.js",
+                "~/Assets/Script/BackStage/gauge.min.js",
+                "~/Assets/Script/BackStage/jquery.flot.js"
+               ));
+            bundles.Add(new ScriptBundle("~/Back-Script/BackCustomerDetails").Include(
+                "~/Assets/Script/BackStage/bootstrap-progressbar.min.js",
+                "~/Assets/Script/BackStage/jquery.min.js",
+                "~/Assets/Script/BackStage/bootstrap.min.js",
+                "~/Assets/Script/BackStage/fastclick.js",
+                "~/Assets/Script/BackStage/nprogress.js",
+                "~/Assets/Script/BackStage/icheck.min.js",
+                "~/Assets/Script/BackStage/moment.min.js",
+                "~/Assets/Script/BackStage/daterangepicker.js",
+                "~/Assets/Script/BackStage/bootstrap-wysiwyg.min.js",
+                "~/Assets/Script/BackStage/jquery.hotkeys.js",
+                "~/Assets/Script/BackStage/prettify.js",
+                "~/Assets/Script/BackStage/jquery.tagsinput.js",
+                "~/Assets/Script/BackStage/switchery.min.js",
+                "~/Assets/Script/BackStage/select2.full.min.js",
+                "~/Assets/Script/BackStage/parsley.min.js",
+                "~/Assets/Script/BackStage/autosize.min.js",
+                "~/Assets/Script/BackStage/jquery.autocomplete.min.js",
+                "~/Assets/Script/BackStage/starrr.js",
+                "~/Assets/Script/BackStage/custom.min.js"
+               ));
+            bundles.Add(new ScriptBundle("~/Back-Script/BackCustomerIndex").Include(                
+                "~/Assets/Script/BackStage/jquery.min.js",
+                "~/Assets/Script/BackStage/bootstrap.min.js",
+                "~/Assets/Script/BackStage/fastclick.js",
+                "~/Assets/Script/BackStage/nprogress.js",
+                "~/Assets/Script/BackStage/icheck.min.js",
+                "~/Assets/Script/BackStage/jquery.dataTables.min.js",
+                "~/Assets/Script/BackStage/dataTables.bootstrap.min.js",
+                "~/Assets/Script/BackStage/dataTables.buttons.min.js",
+                "~/Assets/Script/BackStage/buttons.bootstrap.min.js",
+                "~/Assets/Script/BackStage/buttons.flash.min.js",
+                "~/Assets/Script/BackStage/buttons.html5.min.js",
+                "~/Assets/Script/BackStage/buttons.print.min.js",
+                "~/Assets/Script/BackStage/dataTables.fixedHeader.min.js",
+                "~/Assets/Script/BackStage/dataTables.keyTable.min.js",
+                "~/Assets/Script/BackStage/dataTables.responsive.min.js",
+                "~/Assets/Script/BackStage/responsive.bootstrap.js",
+                "~/Assets/Script/BackStage/dataTables.scroller.min.js",
+                "~/Assets/Script/BackStage/jszip.min.js",
+                "~/Assets/Script/BackStage/pdfmake.min.js",
+                "~/Assets/Script/BackStage/vfs_fonts.js",
+                "~/Assets/Script/BackStage/custom.min.js"
+               ));          
 
         }
     }

@@ -110,12 +110,12 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select Top 1 od.BooksNo ,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName ,SUM(od.Counts)as TopSUM " + 
+                string sql = "Select Top 1 od.BookID ,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName ,SUM(od.Counts)as TopSUM " + 
                              "from [Order Detail] As od " +
-                             "Inner Join Books As b On od.BooksNo = b.BooksNo " +
+                             "Inner Join Books As b On od.BookID = b.BookID " +
                              "Inner Join Author As a On a.AuthorID = b.AuthorID " +
                              "Inner Join Category As c On c.CategoryID = b.CategoryID " +
-                             "Group By od.BooksNo,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName " +
+                             "Group By od.BookID,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName " +
                              "Order By SUM(od.Counts)";
                 var author = conn.QueryFirstOrDefault<Author>(sql);
                 return author;

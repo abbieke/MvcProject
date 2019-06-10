@@ -55,7 +55,7 @@
                         <ul>
                             <li>
                                 <div class="switch">
-                                    <input type="checkbox" id="switch"  />
+                                    <input type="checkbox" id="switch" />
                                     <label for="switch"></label>
                                 </div>
                             </li>
@@ -122,6 +122,15 @@
                             </button>
                         </div>
                     </div>
+                    @using (Html.BeginForm("ShippingInfo", "Shopping", FormMethod.Post, new { style = "display: none;" }))
+                    {
+                        
+                        <input type="hidden" name="cusAccount" id="cusAccount" />
+                        <input type="hidden" name="orderProducts" id="orderProducts" />
+                        <input type="hidden" name="isNeedingClear" id="isNeedingClear" />
+                        <input type="submit" id="goShipping" />
+                        
+                    }
                 </div>
             </div>
             <!-- 願望清單 -->
@@ -195,7 +204,7 @@
     </script>
 
 
-
+    <script src="~/Assets/Script/input-values.jquery.js"></script>
 
     @*總價邏輯*@
     <script>
@@ -329,7 +338,14 @@
                             location.href = "/Shopping/ErrorPage/" + checkResult.ErrorType;
                         }
                         else {
-                            location.href = "/Shopping/ShippingInfo/?" + this.data;
+                            //location.href = "/Shopping/ShippingInfo/?" + this.data;
+                            var click = new MouseEvent("click");
+                            document.getElementById("cusAccount").value = '@User.Identity.Name';
+                            //document.getElementById("orderProducts").inputValues(detail);
+                            $("#orderProducts").inputValues(detail);
+                            document.getElementById("isNeedingClear").value = isNeedingClear;
+                            
+                            document.getElementById("goShipping").dispatchEvent(click);
                         }
                 });
 
@@ -382,7 +398,8 @@
 
             $(".qty").keyup(qtyOnkeyupValue);
         //$(".qty").change(qtyOnkeyupValue);
-        var isWarning = false;
+            var isWarning = false;
+            
 
 
 
@@ -499,7 +516,7 @@
 
         };
 
-            // 寫到一半先不管
+             //寫到一半先不管
             //function allCheckChange() {
             //    $("#all-check").change(function () {
             //        if ($(this).attr("checked") == "checked") {

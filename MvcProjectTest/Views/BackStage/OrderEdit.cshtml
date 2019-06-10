@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "OrderEdit";
+    Layout = "~/Views/Shared/_BackStageLayout.cshtml";
+}
+
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>編輯訂單</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>訂單基本資訊<a href="OrderIndex.html"><small>Back to list</small></a></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="dropdown" style="visibility: hidden;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <!-- start form for validation -->
+                    <form id="product-create-form" data-parsley-validate>
+                        <label for="OrderNo">OrderNo :</label>
+                        <input type="text" id="OrderNo" class="form-control" disabled="disabled" placeholder="AS0000001">
+
+                        <label for="CustomerID">CustomerID :</label>
+                        <input type="text" id="CustomerID" class="form-control" disabled="disabled" placeholder="1">
+
+                        <label for="OrderDate">OrderDate :</label>
+                        <input type="text" id="OrderDate" class="form-control" disabled="disabled" placeholder="2019-06-05 14:00:00">
+
+                        <label for="PayWay">PayWay :</label>
+                        <input type="text" id="PayWay" class="form-control" disabled="disabled" placeholder="信用卡">
+
+                        <label for="DeliveryMethod">DeliveryMethod :</label>
+                        <input type="text" id="DeliveryMethod" class="form-control" disabled="disabled" placeholder="宅配">
+
+                        <label for="TotalPrice">TotalPrice :</label>
+                        <input type="text" id="TotalPrice" class="form-control" disabled="disabled" placeholder="700.0000">
+
+                    </form>
+                    <!-- end form for validations -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>訂單狀態資訊</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="dropdown" style="visibility: hidden;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <!-- start form for validation -->
+                    <form id="product-create-form" data-parsley-validate>
+
+                        <label for="Recipient">Recipient :</label>
+                        <input type="text" id="Recipient" class="form-control" value="王維俊" />
+
+                        <label for="RecipientPhone">RecipientPhone :</label>
+                        <input type="text" id="RecipientPhone" class="form-control" value="0988-055-666" />
+
+                        <label for="RecipientEmail">RecipientEmail :</label>
+                        <input type="text" id="RecipientEmail" class="form-control" value="abbieke0222@gmail.com" />
+
+                        <label for="RecipientAddress">RecipientAddress :</label>
+                        <input type="text" id="RecipientAddress" class="form-control" value="新竹市香山區">
+
+                        <label for="ShippingRate">ShippingRate :</label>
+                        <input type="text" id="ShippingRate" class="form-control" disabled="disabled" placeholder="50.0000">
+
+                        <label for="OrderStatus">訂單狀態 :</label>
+                        <select id="OrderStatus" class="form-control" required>
+                            <option value="">Choose..</option>
+                            <option value="1">已成立</option>
+                            <option value="2">已出貨</option>
+                            <option value="3">已完成</option>
+                            <option value="3">訂單取消</option>
+                        </select>
+                    </form>
+                    <!-- end form for validations -->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@Scripts.Render("~/Back-Script/BackCustomerDetails")
+

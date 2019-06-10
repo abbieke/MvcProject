@@ -87,10 +87,12 @@ namespace MvcProjectTest.Services
         {
             switch (error)
             {
-                case Error.accountError:
-                    return "會員資料認證錯誤，請重試";
+                case Error.emptyError:
+                    return "您並未選擇任何商品。";
                 case Error.inStockError:
                     return "商品庫存不足，有可能在購買過程中庫存有所更新，請重試";
+                case Error.accountError:
+                    return "會員資料認證錯誤，請重試";
                 case Error.cartError:
                     return "訂單商品與購物車不相符，請重試";
                 case Error.clearArgumentError:
@@ -105,7 +107,7 @@ namespace MvcProjectTest.Services
         
         public enum Error
         {
-            accountError, inStockError, cartError, clearArgumentError, otherError
+            accountError, emptyError, inStockError, cartError, clearArgumentError, otherError
         }
 
 

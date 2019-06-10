@@ -1,0 +1,46 @@
+﻿@model MvcProjectTest.ViewModels.ShoppingCartViewModel
+
+
+@{ 
+    string disstyle="";
+    string pricestyle="";
+    var discount = Model.Discount;
+    if (discount == 0)
+    {
+        disstyle = "display-none";
+    }
+    else {
+        pricestyle = "delete-line";
+
+    }
+}
+
+
+@*card主體*@
+<div class="product-card-out-block" style="width: 100%;">
+    <div class="product-card-block" style="height: auto;">
+        <div class="product-card-img-block">
+            <a href='@Url.Action("BookDetail", "Book", new { id = Model.BookID })' class="product-link" style="text-align: center;">
+                @*<a href='@Url.Action("BookDetail","Book", new {id = @Html.DisplayFor(modelItem => item.BookId)})' class="product-link">*@
+                <img class="pc-img"
+                     @*src="Assets/Images/@Html.DisplayFor(modelItem => Model.CategoryEngName)/@Html.DisplayFor(modelItem => Model.BookImage)"*@
+                     src='/@Model.BookImage'
+                     alt="1">
+            </a>
+            
+        </div>
+        <div class="product-card-description-block">
+            <a href="@Url.Action("BookDetail", "Book", new { id = Model.BookID })" class="product-link">
+                <h3 class="product-card-title">
+                    @Html.DisplayFor(modelItem => Model.BooksName)
+                </h3>
+                <div class="product-price-block ">
+                    <span class="product-price-span product-card-des-text @pricestyle">$@Html.DisplayFor(modelItem => Model.UnitPrice)</span>
+                    <span class="product-card-discount-text @disstyle">$@((Model.UnitPrice * (1-Model.Discount)).ToString("0"))</span>
+                    <span>@Model.Quantity 本</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+

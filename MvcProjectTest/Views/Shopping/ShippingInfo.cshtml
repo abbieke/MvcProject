@@ -1,10 +1,12 @@
 ﻿@using MvcProjectTest.ViewModels;
-@model List<ShoppingCartViewModel>
+@model IEnumerable<ShoppingCartViewModel>
 @{
     ViewBag.Title = "新知書櫥";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 
+    var _bookRepo = new MvcProjectTest.Repositories.BooksRepository();
 
+    int total = 0;
 }
 
 @Styles.Render("~/css/cartAndWishView")
@@ -13,150 +15,163 @@
         <div class="container">
             <ul class="shipping-progress">
                 <li class="active">
-                    @Html.ActionLink("購物車", "Index", "Shopping")</li>
+                    @Html.ActionLink("購物車", "Index", "Shopping")
+                </li>
                 <li>運送資訊</li>
                 <li>訂單確認</li>
                 <li>訂單成立</li>
             </ul>
         </div>
     </div>
-
+    
     <div class="cart-shipping-info mt-3">
         <div class="container row">
             <!-- 運送資訊 -->
+            
+
+
             <div class="accordion col-md-8" id="checkoutAccordion">
-                <!-- 配送方式 -->
-                <div class="card">
-                    <div class="card-header" id="deliveryHeading">
-                        <h2 class="mb-0 flex">
-                            <button class="btn btn-link button-flex" type="button" data-toggle="collapse"
-                                    data-target="#deliveryCollapse" aria-expanded="true"
-                                    aria-controls="deliveryCollapse">
-                                配送方式
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="deliveryCollapse" class="collapse show" aria-labelledby="deliveryHeading"
-                         data-parent="#checkoutAccordion">
-                        <div class="card-body">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deliveryRadioOptions"
-                                       id="deliveryOption1" value="option1" required>
-                                <label class="form-check-label" for="deliveryOption1">7-11取貨</label>
-                                <small>運費：60元</small>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input class="form-check-input" type="radio" name="deliveryRadioOptions"
-                                       id="deliveryOption2" value="option2" required>
-                                <label class="form-check-label" for="deliveryOption2">宅配到府</label>
-                                <small>運費：120元</small>
-                            </div>
+                <form action="OrderCheck">
+                    <!-- 配送方式 -->
+                    <div class="card">
+                        <div class="card-header" id="deliveryHeading">
+                            <h2 class="mb-0 flex">
+                                <button class="btn btn-link button-flex" type="button" data-toggle="collapse"
+                                        data-target="#deliveryCollapse" aria-expanded="true"
+                                        aria-controls="deliveryCollapse">
+                                    配送方式
+                                </button>
+                            </h2>
                         </div>
-                    </div>
-                </div>
 
-
-                <!-- 付款方式 -->
-                <div class="card">
-                    <div class="card-header" id="paymentHeading">
-                        <h2 class="mb-0 flex">
-                            <button class="btn btn-link collapsed button-flex" type="button" data-toggle="collapse"
-                                    data-target="#paymentCollapse" aria-expanded="false"
-                                    aria-controls="paymentCollapse">
-                                付款方式
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="paymentCollapse" class="collapse" aria-labelledby="paymentHeading"
-                         data-parent="#checkoutAccordion">
-                        <div class="card-body">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentRadioOptions"
-                                       id="paymentOption1" value="option1" required>
-                                <label class="form-check-label" for="paymentOption1">貨到付款</label>
-                                <small>需額外支付運費：60元</small>
-                            </div>
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="radio" name="paymentRadioOptions"
-                                       id="paymentOption2" value="option2" required>
-                                <label class="form-check-label" for="paymentOption2">信用卡</label>
-                            </div>
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="radio" name="paymentRadioOptions"
-                                       id="paymentOption3" value="option3" required>
-                                <label class="form-check-label" for="paymentOption4">
-                                    <img src="~/Assets/Images/Linepay/linepay_logo_98x32_v3.png" alt="LinePay">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- 訂購人資訊 -->
-                <div class="card">
-                    <div class="card-header" id="purchaserHeading">
-                        <h2 class="mb-0 flex">
-                            <button class="btn btn-link collapsed button-flex" type="button" data-toggle="collapse"
-                                    data-target="#purchaserCollapse" aria-expanded="false"
-                                    aria-controls="purchaserCollapse">
-                                訂購人資訊
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="purchaserCollapse" class="collapse" aria-labelledby="purchaserHeading"
-                         data-parent="#checkoutAccordion">
-                        <div class="card-body">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputName">收件人姓名</label>
-                                    <input type="text" class="form-control" id="inputName" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputTel">連絡電話</label>
-                                    <input type="tel" class="form-control" id="inputTel" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputAdr">宅配地址</label>
-                                    <input type="text" class="form-control" id="inputAdr" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
+                        <div id="deliveryCollapse" class="collapse show" aria-labelledby="deliveryHeading"
+                             data-parent="#checkoutAccordion">
+                            <div class="card-body">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="sameAsMemInfoCheck">
-                                    <label class="form-check-label" for="sameAsMemInfoCheck">
-                                        同會員資料
+                                    <input class="form-check-input" type="radio" name="deliveryMethod"
+                                           id="deliveryOption1" value="超商取貨" required>
+                                    <label class="form-check-label" for="deliveryOption1">超商取貨</label>
+                                    <small>運費：60元</small>
+                                </div>
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="radio" name="deliveryMethod"
+                                           id="deliveryOption2" value="宅配" required>
+                                    <label class="form-check-label" for="deliveryOption2">宅配到府</label>
+                                    <small>運費：60元</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- 付款方式 -->
+                    <div class="card">
+                        <div class="card-header" id="paymentHeading">
+                            <h2 class="mb-0 flex">
+                                <button class="btn btn-link collapsed button-flex" type="button" data-toggle="collapse"
+                                        data-target="#paymentCollapse" aria-expanded="false"
+                                        aria-controls="paymentCollapse">
+                                    付款方式
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="paymentCollapse" class="collapse" aria-labelledby="paymentHeading"
+                             data-parent="#checkoutAccordion">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payWay"
+                                           id="paymentOption1" value="貨到付款" required>
+                                    <label class="form-check-label" for="paymentOption1">貨到付款</label>
+                                    @*<small>需額外支付運費：60元</small>*@
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="radio" name="payWay"
+                                           id="paymentOption2" value="信用卡" required>
+                                    <label class="form-check-label" for="paymentOption2">信用卡</label>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="radio" name="payWay"
+                                           id="paymentOption3" value="LinePay" required>
+                                    <label class="form-check-label" for="paymentOption4">
+                                        <img src="~/Assets/Images/Linepay/linepay_logo_98x32_v3.png" alt="LinePay">
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="noteTextarea">備註</label>
-                                    <textarea class="form-control" id="noteTextarea" rows="4"></textarea>
-                                </div>
-                            </div>
-
-                            <div>
-                                @Html.ActionLink("結帳", "OrderCheck", "Shopping", null,
-                               new { @class = "btn btn-dark active",@role= "button" , @style = "text-indent: 0;", })
-                            </div>
-
                         </div>
                     </div>
-                </div>
+
+
+                    <!-- 訂購人資訊 -->
+                    <div class="card">
+                        <div class="card-header" id="purchaserHeading">
+                            <h2 class="mb-0 flex">
+                                <button class="btn btn-link collapsed button-flex" type="button" data-toggle="collapse"
+                                        data-target="#purchaserCollapse" aria-expanded="false"
+                                        aria-controls="purchaserCollapse">
+                                    訂購人資訊
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="purchaserCollapse" class="collapse" aria-labelledby="purchaserHeading"
+                             data-parent="#checkoutAccordion">
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputName">收件人姓名</label>
+                                        <input type="text" class="form-control" id="inputName" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputTel">連絡電話</label>
+                                        <input type="tel" class="form-control" id="inputTel" name="phone" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputTel">Email</label>
+                                        <input type="tel" class="form-control" id="inputTel" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputAdr">收件人地址</label>
+                                        <input type="text" class="form-control" id="inputAdr" name="address" required>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sameAsMemInfoCheck">
+                <label class="form-check-label" for="sameAsMemInfoCheck">
+                    同會員資料
+                </label>
             </div>
+        </div>*@
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="noteTextarea">備註</label>
+                                        <textarea class="form-control" id="noteTextarea" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div>
+
+                                    <input type="submit" class="btn btn-dark active" style="text-indent: 0;" value="結帳" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+                
             <!-- 商品檢視 -->
             <div class="cart-info-box col-md-4">
                 <section id="js-checkout-summary" class="card js-cart"
                          data-refresh-url="https://demoprestashop.aeipix.com/AX04/mybook75/index.php?controller=cart?ajax=1&amp;action=refresh">
                     <div class="card-block">
                         <div class="cart-summary-products">
-                            <p>2 項商品</p>
+                            <p>@Model.Count() 項商品</p>
                             <p>
                                 <a href="#" data-toggle="collapse" data-target="#cart-summary-product-list" class=""
                                    aria-expanded="true">
@@ -166,41 +181,66 @@
 
                             <div class="collapse in" id="cart-summary-product-list" aria-expanded="true">
                                 <ul class="media-list">
-                                    <li class="media">
-                                        <div class="media-left">
-                                            <a href="" title="這是其中一本書">
-                                                <img class="media-object" src="~/Assets/Images/TChinese/010001.jpg"
-                                                     alt="這是其中一本書">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="product-name">這是其中一本書這是其中一本書這是其中一本書這是其中一本書這是其中一本書這是其中一本書</span>
-                                            <span class="product-quantity">1本</span>
-                                            <span class="product-price">NTD 666</span>
-                                            <br>
-                                        </div>
+                                    
+                                    
+                                        
+                                        @foreach (var item in Model)
+                                        {
+                                            var book = _bookRepo.GetBookById(item.BookID);
+                                            var target = new ShoppingCartViewModel
+                                            {
+                                                BookID = item.BookID,
+                                                BooksName = book.BooksName,
+                                                Discount = book.Discount,
+                                                InStock = book.InStock,
+                                                Quantity = item.Quantity,
+                                                BookImage = "Assets/Images/" + _bookRepo.GetCategoryEngNameById(book.CategoryID) + "/" + book.BookImage,
+                                                UnitPrice = book.UnitPrice
+                                            };
+                                            total += (int)Math.Round(target.UnitPrice * target.Quantity * (1 - target.Discount) );
+                                            <li class="media">
+                                                <div class="media-body">
 
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-left">
-                                            <a href="" title="這是其中一本書">
-                                                <img class="media-object" src="~/Assets/Images/TChinese/010002.jpg"
-                                                     alt="這是其中一本書">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="product-name">這是其中一本書</span>
-                                            <span class="product-quantity">1本</span>
-                                            <span class="product-price">NTD 666</span>
-                                            <br>
-                                        </div>
-                                    </li>
+                                                    @Html.Partial("_TemporarilyOrderPCPartial", target);
+                                                </div>
+                                            </li>
+                                        }
+                                        @*<li class="media">
+                <div class="media-left">
+                    <a href="" title="這是其中一本書">
+                        <img class="media-object" src="~/Assets/Images/TChinese/010001.jpg"
+                             alt="這是其中一本書">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <span class="product-name">這是其中一本書這是其中一本書這是其中一本書這是其中一本書這是其中一本書這是其中一本書</span>
+                    <span class="product-quantity">1本</span>
+                    <span class="product-price">NTD 666</span>
+                    <br>
+                </div>
+
+            </li>
+            <li class="media">
+                <div class="media-left">
+                    <a href="" title="這是其中一本書">
+                        <img class="media-object" src="~/Assets/Images/TChinese/010002.jpg"
+                             alt="這是其中一本書">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <span class="product-name">這是其中一本書</span>
+                    <span class="product-quantity">1本</span>
+                    <span class="product-price">NTD 666</span>
+                    <br>
+                </div>
+            </li>*@
                                 </ul>
+
                             </div>
                         </div>
                         <div class="cart-summary-line cart-summary-subtotals" id="cart-subtotal-products">
                             <span class="label">小計</span>
-                            <span class="value">1332元</span>
+                            <span class="value">@total 元</span>
                         </div>
                         <div class="cart-summary-line cart-summary-subtotals" id="cart-subtotal-shipping">
                             <span class="label">運費</span>
@@ -210,26 +250,26 @@
 
 
 
-                    <div class="block-promo">
-                        <div class="cart-voucher">
-                            <p>
-                                <a class="collapse-button promo-code-button" data-toggle="collapse"
-                                   href="#promo-code" aria-expanded="false" aria-controls="promo-code">
-                                    已有折價券
-                                </a>
-                            </p>
-                            <div class="promo-code collapse" id="promo-code">
+                    @*<div class="block-promo">
+                            <div class="cart-voucher">
+                                <p>
+                                    <a class="collapse-button promo-code-button" data-toggle="collapse"
+                                       href="#promo-code" aria-expanded="false" aria-controls="promo-code">
+                                        已有折價券
+                                    </a>
+                                </p>
+                                <div class="promo-code collapse" id="promo-code">
 
-                                <form action="#" data-link-action="add-voucher" method="post">
-                                    <input type="hidden" name="token" value="cf31b2ff2f584cb51d498cdcfa095f38">
-                                    <input type="hidden" name="addDiscount" value="1">
-                                    <input class="promo-input" type="text" name="discount_name"
-                                           placeholder="輸入折扣代碼">
-                                    <button type="submit" class="btn btn-dark"><span>使用</span></button>
-                                </form>
+                                    <form action="#" data-link-action="add-voucher" method="post">
+                                        <input type="hidden" name="token" value="cf31b2ff2f584cb51d498cdcfa095f38">
+                                        <input type="hidden" name="addDiscount" value="1">
+                                        <input class="promo-input" type="text" name="discount_name"
+                                               placeholder="輸入折扣代碼">
+                                        <button type="submit" class="btn btn-dark"><span>使用</span></button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
 
 
                     <hr class="separator">
@@ -238,12 +278,12 @@
                     <div class="card-block cart-summary-totals">
                         <div class="cart-summary-line cart-total">
                             <span class="label">總金額</span>
-                            <span class="value">1392元</span>
+                            <span class="value">@(total+60) 元</span>
                         </div>
-                        <div class="cart-summary-line">
-                            <span class="label sub">本次紅利點數</span>
-                            <span class="value sub">13點</span>
-                        </div>
+                        @*<div class="cart-summary-line">
+                                <span class="label sub">本次紅利點數</span>
+                                <span class="value sub">13點</span>
+                            </div>*@
                     </div>
                 </section>
                 <!-- <div id="block-reassurance">
@@ -292,9 +332,9 @@
         });
 
 
-        
+
     </script>
     <!-- 全選功能 -->
-    
+
 }
 
