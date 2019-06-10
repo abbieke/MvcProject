@@ -39,12 +39,13 @@ namespace MvcProjectTest.Repositories
 
         //加訂單寫在這之下
 
-        public void CreateOrder(Order model)
+        public Order CreateOrder(Order model)
         {
             using (conn = new SqlConnection(connString))
             {
                 string sql = "放你的SQL語法小老鼠就是變數名稱 大概像下面那樣可以運用Model傳進變數 @aa";
-                conn.Execute(sql, new { aa = model.TotalPrice });
+                var order = conn.QueryFirstOrDefault<Order>(sql);
+                return order;
 
             }
         }
