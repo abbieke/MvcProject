@@ -124,12 +124,12 @@
                     </div>
                     @using (Html.BeginForm("ShippingInfo", "Shopping", FormMethod.Post, new { style = "display: none;" }))
                     {
-                        
+
                         <input type="hidden" name="cusAccount" id="cusAccount" />
                         <input type="hidden" name="orderProducts" id="orderProducts" />
                         <input type="hidden" name="isNeedingClear" id="isNeedingClear" />
                         <input type="submit" id="goShipping" />
-                        
+
                     }
                 </div>
             </div>
@@ -183,25 +183,9 @@
     </script>
 
 
-    @*刪除購物車商品*@
-    <script>
-    $(function () {
-        $(".remove-button").click(removeButtonEvent);
 
-        function removeButtonEvent() {
-            var buttonValue = this.value;
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("RemoveCartItem", "Shopping")',
-                data: { customerId: @_cusRepo.GetCusromerID(User.Identity.Name), bookId: buttonValue }
-            })
-                .done(function () {
-                    $(".table-" + buttonValue).remove();
-                });
-        }
-    });
 
-    </script>
+
 
 
     <script src="~/Assets/Script/input-values.jquery.js"></script>
@@ -259,7 +243,7 @@
             }
 
             function thisProductTotal() {
-                let result = Math.round(this.unitprice * this.quantity * (1 - this.discount));
+                let result = parseInt( Math.round(this.unitprice * this.quantity * (1 - this.discount)));
                 return result;
             }
 
@@ -344,7 +328,7 @@
                             //document.getElementById("orderProducts").inputValues(detail);
                             $("#orderProducts").inputValues(detail);
                             document.getElementById("isNeedingClear").value = isNeedingClear;
-                            
+
                             document.getElementById("goShipping").dispatchEvent(click);
                         }
                 });
@@ -361,7 +345,7 @@
             //全選功能 先用芷婷的
             $(".checkbox-class").click(cheaked);
             $("#all-check").click(first);
-
+            var defaultAll = false;
             function first() {
                 var as = document.getElementsByClassName("checkbox-class");
                 var a1 = document.getElementById("all-check");
@@ -370,7 +354,9 @@
                         as[i].checked = a1.checked;
                         let id = as[i].name.split("/")[0];
                         let listIndex = cartList_findIndex(id);
-                        cartList[listIndex].isCheck = !(cartList[listIndex].isCheck);
+                        defaultAll = !defaultAll ;
+                        //cartList[listIndex].isCheck = !(cartList[listIndex].isCheck);
+                        cartList[listIndex].isCheck = defaultAll ;
                     }
 
                 }
@@ -399,7 +385,7 @@
             $(".qty").keyup(qtyOnkeyupValue);
         //$(".qty").change(qtyOnkeyupValue);
             var isWarning = false;
-            
+
 
 
 
@@ -514,7 +500,32 @@
             }
 
 
-        };
+            };
+
+             @*刪除購物車商品*@
+
+
+        $(".remove-button").click(removeButtonEvent);
+
+        function removeButtonEvent() {
+            var buttonValue = this.value;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RemoveCartItem", "Shopping")',
+                data: { customerId: @_cusRepo.GetCusromerID(User.Identity.Name), bookId: buttonValue }
+            })
+                .done(function () {
+                    $(".table-" + buttonValue).remove();
+
+                    //之後可改寫法
+                    cartList.forEach(function (element) {
+                        if (element.bookID) {
+                            element.isCheck = false;
+                        }
+                    })
+                });
+        }
+
 
              //寫到一半先不管
             //function allCheckChange() {
