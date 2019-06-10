@@ -132,19 +132,18 @@ namespace MvcProjectTest.Controllers
         }
         public ActionResult OrderSuccess()
         {
-
-
-
+            _order.SetUp = DateTime.Now;
             //加訂單請寫在註解中間
+            Order order;
             _orderRepo.CreateOrder(_order);
+            order=_orderRepo.GetOrderFromOrderNo(_order.OrderNo);
 
-            _orderRepo.CreateOrderStatus(_order);
+            _orderRepo.CreateOrderStatus(order.OrderID,_order);
 
-            _orderRepo.CreateOrderDetail(opList);
+         //   _orderRepo.CreateOrderDetail(order.OrderID,opList);
 
 
             //
-            _order.SetUp = DateTime.Now;
 
             Order orderModel = _order;
             _order = null;
