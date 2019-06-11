@@ -47,7 +47,7 @@ namespace MvcProjectTest.Repositories
             }
             
         }
-
+        
         public bool SelectCustomer(string CustomerAccount)
         {
             using (conn = new SqlConnection(connString))
@@ -60,6 +60,18 @@ namespace MvcProjectTest.Repositories
                 }
                 else { return false; }
             }
+        }
+
+        public IEnumerable<Customer> ReadAllCustomer()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Customers";
+                var cus = conn.Query<Customer>(sql);
+
+                return cus;
+            }
+                
         }
 
         public bool SelectCustomerEmail(string CustomerEmail)
