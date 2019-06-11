@@ -164,7 +164,8 @@ namespace MvcProjectTest.Controllers
 
             //FormsAuthenticationTicket Class
             //https://docs.microsoft.com/zh-tw/dotnet/api/system.web.security.formsauthenticationticket?view=netframework-4.8
-
+            Session["userid"] = _repo.GetCusromerID(cust.CustomerAccount);
+            string roles = GetRoles((int)Session["userid"]);
             //Create FormsAuthenticationTicket 以下
             var ticket = new FormsAuthenticationTicket(
             version: 1,
@@ -172,7 +173,7 @@ namespace MvcProjectTest.Controllers
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
-            userData: cust.EmailConfirmed.ToString(), //可以放使用者角色名稱
+            userData: roles, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             // Encrypt the ticket.
@@ -181,7 +182,7 @@ namespace MvcProjectTest.Controllers
             // Create the cookie.
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             Response.Cookies.Add(cookie);
-            Session["userid"] = _repo.GetCusromerID(cust.CustomerAccount);
+            
 
             // Redirect back to original URL.
             //var url = FormsAuthentication.GetRedirectUrl(account, true);
@@ -245,13 +246,15 @@ namespace MvcProjectTest.Controllers
         public ActionResult ResetPassword(string userAccount)
         {
             Customer cust= _repo.CustomerLogin(userAccount);
+            Session["userid"] = _repo.GetCusromerID(cust.CustomerAccount);
+            string roles = GetRoles((int)Session["userid"]);
             var ticket = new FormsAuthenticationTicket(
             version: 1,
             name: cust.CustomerAccount.ToString(), //可以放使用者Id
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
-            userData: cust.EmailConfirmed.ToString(), //可以放使用者角色名稱
+            userData: roles, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             // Encrypt the ticket.
@@ -273,10 +276,20 @@ namespace MvcProjectTest.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        public string GetRoles(int userid)
+        {
+            List<string> roles = _repo.SelectRoles(userid);
+            List<string> names = new List<string>();
+            foreach (string role in roles)
+            {
+                string rolename = _repo.SelectRolesName(role);
+                names.Add(rolename);
+            }
+            string rolesEngNames = String.Join(",", names.ToArray());
 
 
-
-
+            return rolesEngNames;
+        }
 
     }
 }

@@ -276,7 +276,7 @@
                                     @Html.PasswordFor(m => m.ChangePassword.CustomerPassword, new { placeholder = "請輸入會員密碼", @class = "member-input-textbox-input" })
                                     @Html.ValidationMessageFor(m => m.ChangePassword.CustomerPassword, "", new { @class = "prompt-text text-dan" })
                                     @*<input id="show-password-textbox1" class="member-input-textbox-input" type="password">*@
-                                    <input type="button" id="show-password-button1" class="member-show-button" value="Show">
+                                
                                 </div>
                             </div>
                             <div class="member-row flex modify-password-row-block">
@@ -287,7 +287,7 @@
                                     @Html.PasswordFor(m => m.ChangePassword.CustomerNewPassword, new { placeholder = "請輸入新密碼", @class = "member-input-textbox-input" })
                                     @Html.ValidationMessageFor(m => m.ChangePassword.CustomerNewPassword, "", new { @class = "prompt-text text-dan" })
                                     @*<input id="show-password-textbox2" class="member-input-textbox-input" type="password">*@
-                                    <input type="button" id="show-password-button2" class="member-show-button" value="Show">
+                                    
                                 </div>
                             </div>
                             <div class="member-row flex modify-password-row-block">
@@ -298,7 +298,7 @@
                                     @Html.PasswordFor(m => m.ChangePassword.ConfirmPassword, new { placeholder = "請輸入確認密碼", @class = "member-input-textbox-input" })
                                     @Html.ValidationMessageFor(m => m.ChangePassword.ConfirmPassword, "", new { @class = "prompt-text text-dan" })
                                     @*<input id="show-password-textbox3" class="member-input-textbox-input" type="password">*@
-                                    <input type="button" id="show-password-button3" class="member-show-button" value="Show">
+                                    
                                 </div>
                             </div>
                             <div class="membercentre-footerbuttonbox member-row">
@@ -332,7 +332,7 @@
         });
     </script>
 
-    <script>
+    @*<script>
         var buttonDom;
         var buttonIdName = "show-password-button";
         setShowOnClick();
@@ -362,5 +362,5 @@
                 this.value = "Show";
             }
         }
-    </script>
+    </script>*@
 }

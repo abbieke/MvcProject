@@ -120,6 +120,7 @@ namespace MvcProjectTest.Repositories
                 var author = conn.QueryFirstOrDefault<Author>(sql);
                 return author;
             }
+
         }
 
         public List<BookType> SelectBookType(string Category)
