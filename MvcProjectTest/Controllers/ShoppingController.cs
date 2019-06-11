@@ -47,7 +47,10 @@ namespace MvcProjectTest.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                
+                if (User.IsInRole("NotVerified"))
+                {
+                    return RedirectToAction("CustomerIndex", "Customer");
+                }
                 //var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
                 //var cartSer = new ShoppingCartService();
                 var cartModel = _cartSer.GetMemberCart(User.Identity.Name);
