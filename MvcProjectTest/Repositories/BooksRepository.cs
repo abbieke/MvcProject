@@ -180,5 +180,15 @@ namespace MvcProjectTest.Repositories
                 return books;
             }
         }
+        public List<Book> SelectRandomBooks()
+        {
+            List<Book> books;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select TOP 8 * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID ORDER BY NEWID()";
+                books = conn.Query<Book>(sql).ToList();
+            }
+            return books;
+        }
     }
 }
