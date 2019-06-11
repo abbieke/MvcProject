@@ -100,7 +100,7 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select * From Books";
+                string sql = "Select * From Books As b Inner Join Category As c On c.CategoryID = b.CategoryID";
                 books = conn.Query<Book>(sql).ToList();
                 return books;
             }
@@ -138,6 +138,20 @@ namespace MvcProjectTest.Repositories
             }
         }
 
+        public List<BookType> SelectAllBookType()
+        {
+            List<BookType> bookTypes;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select bt.BookTypeName from Books As b " +
+                             "Inner Join BookType As bt On b.BookTypeID = bt.BookTypeID " +
+                             "Group By bt.BookTypeName";
+
+                bookTypes = conn.Query<BookType>(sql).ToList();
+                return bookTypes;
+            }
+        }
+
         public List<Book> SelectBookTypebooks(string Category,string Type)
         {
             List<Book> books;
@@ -147,6 +161,20 @@ namespace MvcProjectTest.Repositories
                 "Inner Join BookType As bt On b.BookTypeID = bt.BookTypeID " +
                 "Inner Join Category As c On c.CategoryID = b.CategoryID " +
                 "Where c.CategoryEngName = '" + Category + "' AND bt.BookTypeName = N'" + Type + "'";
+
+                books = conn.Query<Book>(sql).ToList();
+                return books;
+            }
+        }
+        public List<Book> SelectBookTypeAllbooks(string Type)
+        {
+            List<Book> books;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * from Books As b " +
+                             "Inner Join BookType As bt On b.BookTypeID = bt.BookTypeID " +
+                             "Inner Join Category As c On c.CategoryID = b.CategoryID " +
+                             "Where bt.BookTypeName = N'" + Type + "'";
 
                 books = conn.Query<Book>(sql).ToList();
                 return books;

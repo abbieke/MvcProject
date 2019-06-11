@@ -118,7 +118,7 @@
 
                     @foreach (var item in Model.OrderDetails)
                     {
-                        decimal sum = item.Counts * item.UnitPrice;
+                        decimal sum = item.Counts * item.UnitPrice * (1 - item.Discount);
                         <div class="orderdetails-productsdetail-bodt">
                             <ul class="orderdetails-productsdetail-body-list">
                                 <li class="orderdetails-productsdetail-item">@item.BooksName</li>

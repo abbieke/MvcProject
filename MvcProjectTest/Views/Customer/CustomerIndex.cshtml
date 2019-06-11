@@ -172,7 +172,8 @@
                                     </div>
                                 </li>
                                 <li class="membercenter-order-center-item order-box">
-                                    <a href='@Url.Action("OrderDetail","Customer",new{id = item.OrderID})'
+                                    @*@Html.ActionLink("詳細資訊", "OrderDetail", "Customer", new { id = item.OrderID }, new { @class = "membercente-sohw-orderdatil" })*@
+                                    <a href='@Url.Action("OrderDetail", "Customer", new {id = item.OrderID})'
                                        class="membercente-sohw-orderdatil">詳細資訊</a>
                                 </li>
                             </ul>
