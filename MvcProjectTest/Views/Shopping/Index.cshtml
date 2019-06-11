@@ -346,17 +346,21 @@
             $(".checkbox-class").click(cheaked);
             $("#all-check").click(first);
             var defaultAll = false;
+            
             function first() {
                 var as = document.getElementsByClassName("checkbox-class");
                 var a1 = document.getElementById("all-check");
+                defaultAll = !defaultAll;
+
                 for (var i = 0; i < as.length; i++) {
                     if (!as[i].disabled) {
                         as[i].checked = a1.checked;
                         let id = as[i].name.split("/")[0];
                         let listIndex = cartList_findIndex(id);
-                        defaultAll = !defaultAll ;
+                        
                         //cartList[listIndex].isCheck = !(cartList[listIndex].isCheck);
-                        cartList[listIndex].isCheck = defaultAll ;
+                        cartList[listIndex].isCheck = defaultAll;
+                        
                     }
 
                 }
