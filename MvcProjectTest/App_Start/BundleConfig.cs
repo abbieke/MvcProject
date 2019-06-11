@@ -28,6 +28,7 @@ namespace MvcProjectTest
             bundles.Add(new StyleBundle("~/css/base").Include(
                 "~/Assets/Css/index_stylesheet.css",
                 "~/Assets/Css/for-change-style.css"
+                
                 ));
 
             bundles.Add(new StyleBundle("~/css/indexView").Include(

@@ -98,7 +98,7 @@
                     </div>
                     <div class="pd-product-discount-box">
                         <span class="pd-product-discount-text @disstyle">$@((Model.Book.UnitPrice * (1 - Model.Book.Discount)).ToString("0"))</span>
-                        <span class="pd-product-discount-textshow">Save @((Model.Book.Discount*100).ToString("0"))%</span>
+                        <span class="pd-product-discount-textshow @disstyle">Save @((Model.Book.Discount*100).ToString("0"))%</span>
                     </div>
                 </div>
                 <div class="productlist">
@@ -164,6 +164,9 @@
     <link href="~/Assets/Css/productdetail_stylesheet.css" rel="stylesheet" />
     <link href="~/Assets/Css/new-product-card.css" rel="stylesheet" />
     <link href="~/Assets/Css/slide-card.css" rel="stylesheet" />
+    <link href="~/Assets/Css/item-quick-look.css" rel="stylesheet" />
+    <link href="~/Assets/Css/override-jquery-ui-dialog.css" rel="stylesheet" />
+
 }
 @section scripts {
     <script>
@@ -300,6 +303,15 @@
     @*加入購物車*@
     <script>
         $(function () {
+             
+        function cartHover() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("HeadCartView", "Shopping")'
+            }).done(function (respone) {
+                $("#header-cart-block").append(respone)
+            })
+        };
             $(".pd-join-shoppingcart").click(detailAddBookToCart);
             function detailAddBookToCart() {
                 var buttonValue = this.value;
@@ -311,6 +323,7 @@
                 url: '@Url.Action("AddToCart", "Shopping")',
                     data: { quantity: qty,bookId: buttonValue }
                 }).done(function (response) {
+                    cartHover();
                     //alert(response);
                     if (response == "fail") {
                         window.location.assign("/Account/Login");

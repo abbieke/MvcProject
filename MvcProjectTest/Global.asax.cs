@@ -27,21 +27,14 @@ namespace MvcProjectTest
                 FormsIdentity id = (FormsIdentity)User.Identity;
                 // 再取出使用者的 FormsAuthenticationTicket
                 FormsAuthenticationTicket ticket = id.Ticket;
-                // 將儲存在 FormsAuthenticationTicket 中的角色定義取出，並轉成字串陣列
-                List<string> roles= new List<string>(){ };
-                if (Convert.ToBoolean(ticket.UserData))
-                {
-                    roles.Add("User");
-                }
-                else
-                {
-                    roles.Add("EmailIsNotConfirmed");
-                }
-                
+
+
+                // 將儲存在 FormsAuthenticationTicket 中的角色定義取出，並轉成字串陣列                
+                string[] roles= ticket.UserData.Split(',');              
                 // 指派角色到目前這個 HttpContext 的 User 物件去
                 //剛剛在創立表單的時候，你的UserData 放使用者名稱就是取名稱，我放的是群組代號，所以取出來就是群組代號
                 //然後會把這個資料放到Context.User內
-                Context.User = new GenericPrincipal(Context.User.Identity, roles.ToArray());
+                Context.User = new GenericPrincipal(Context.User.Identity, roles);
             }
 
         }

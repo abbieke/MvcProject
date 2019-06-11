@@ -47,7 +47,7 @@ namespace MvcProjectTest.Repositories
             }
             
         }
-
+        
         public bool SelectCustomer(string CustomerAccount)
         {
             using (conn = new SqlConnection(connString))
@@ -60,6 +60,18 @@ namespace MvcProjectTest.Repositories
                 }
                 else { return false; }
             }
+        }
+
+        public IEnumerable<Customer> ReadAllCustomer()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Customers";
+                var cus = conn.Query<Customer>(sql);
+
+                return cus;
+            }
+                
         }
 
         public bool SelectCustomerEmail(string CustomerEmail)
@@ -266,6 +278,25 @@ namespace MvcProjectTest.Repositories
                 string sql = "Select * from [Order Status] Where OrderID = " + orderId;
                 orders = conn.QueryFirstOrDefault<OrderStatusModel>(sql);
                 return orders;
+            }
+        }
+        public List<string> SelectRoles(int userid)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select RolesID from UserRoles where UserID=@userid";
+                string result = conn.QueryFirstOrDefault<string>(sql,new { userid });
+                string[] rolesArr= result.Split(',');
+                return rolesArr.ToList();
+            }
+        }
+        public string SelectRolesName(string roleid)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select RoleName from Roles where RoleId=@roleid";
+                string roleName = conn.QueryFirstOrDefault<string>(sql, new { roleid });
+                return roleName;
             }
         }
     }
