@@ -47,7 +47,35 @@ namespace MvcProjectTest
                 "~/Assets/Css/BackStage/bootstrap.min.css"
                ));
 
-            bundles.Add(new ScriptBundle("~/Back-Script/BackLayoutIndex").Include(
+            bundles.Add(new StyleBundle("~/Back-css/BackCustomerDetails").Include(
+                "~/Assets/Css/BackStage/bootstrap.min.css",
+                "~/Assets/Css/BackStage/font-awesome.min.css",
+                "~/Assets/Css/BackStage/nprogress.css",
+                 "~/Assets/Css/BackStage/green.css",
+                 "~/Assets/Css/BackStage/prettify.min.css",
+                 "~/Assets/Css/BackStage/select2.min.css",
+                 "~/Assets/Css/BackStage/switchery.min.css",
+                 "~/Assets/Css/BackStage/starrr.css",
+                 "~/Assets/Css/BackStage/daterangepicker.css",
+                 "~/Assets/Css/BackStage/custom.min.css",
+                 "~/Assets/Css/BackStage/productCRUD.scss"
+               ));
+            bundles.Add(new StyleBundle("~/Back-css/BackCustomerIndex").Include(
+                "~/Assets/Css/BackStage/bootstrap.min.css",
+                "~/Assets/Css/BackStage/font-awesome.min.css",
+                "~/Assets/Css/BackStage/nprogress.css",
+                 "~/Assets/Css/BackStage/green.css",
+                 "~/Assets/Css/BackStage/dataTables.bootstrap.min.css",
+                 "~/Assets/Css/BackStage/buttons.bootstrap.min.css",
+                 "~/Assets/Css/BackStage/fixedHeader.bootstrap.min.css",
+                 "~/Assets/Css/BackStage/responsive.bootstrap.min.css",
+                 "~/Assets/Css/BackStage/scroller.bootstrap.min.css",
+                 "~/Assets/Css/BackStage/custom.min.css"
+               ));
+
+            bundles.Add(new ScriptBundle("~/Back-Script/BackIndex").Include(
+                 "~/Assets/Script/BackStage/jquery.min.js",
+                 "~/Assets/Script/BackStage/bootstrap.min.js",
                 "~/Assets/Script/BackStage/bootstrap-progressbar.min.js",
                 "~/Assets/Script/BackStage/Chart.min.js",
                 "~/Assets/Script/BackStage/custom.js",
@@ -56,11 +84,11 @@ namespace MvcProjectTest
                 "~/Assets/Script/BackStage/jquery.flot.js"
                ));
             bundles.Add(new ScriptBundle("~/Back-Script/BackCustomerDetails").Include(
-                "~/Assets/Script/BackStage/bootstrap-progressbar.min.js",
                 "~/Assets/Script/BackStage/jquery.min.js",
                 "~/Assets/Script/BackStage/bootstrap.min.js",
                 "~/Assets/Script/BackStage/fastclick.js",
                 "~/Assets/Script/BackStage/nprogress.js",
+                "~/Assets/Script/BackStage/bootstrap-progressbar.min.js",
                 "~/Assets/Script/BackStage/icheck.min.js",
                 "~/Assets/Script/BackStage/moment.min.js",
                 "~/Assets/Script/BackStage/daterangepicker.js",

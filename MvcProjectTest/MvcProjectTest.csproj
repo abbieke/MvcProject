@@ -177,16 +177,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Css\BackStage\bootstrap.min.css" />
+    <Content Include="Assets\Css\BackStage\buttons.bootstrap.min.css" />
+    <Content Include="Assets\Css\BackStage\dataTables.bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\daterangepicker.css" />
+    <Content Include="Assets\Css\BackStage\fixedHeader.bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\font-awesome.min.css" />
     <Content Include="Assets\Css\BackStage\green.css" />
     <Content Include="Assets\Css\BackStage\nprogress.css" />
     <Content Include="Assets\Css\BackStage\prettify.min.css" />
+    <Content Include="Assets\Css\BackStage\responsive.bootstrap.min.css" />
+    <Content Include="Assets\Css\BackStage\scroller.bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\select2.min.css" />
     <Content Include="Assets\Css\BackStage\starrr.css" />
     <Content Include="Assets\Css\BackStage\switchery.min.css" />
     <Content Include="Assets\Css\cart_stylesheet.css" />
     <Content Include="Assets\Css\BackStage\custom.min.css" />
+    <Content Include="Assets\Css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
     <Content Include="Assets\Css\orderdetails.css" />
@@ -469,6 +476,15 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assets\Images\jquery-ui-images\Thumbs.db" />
     <Content Include="Assets\Images\Linepay\Thumbs.db" />
+    <Content Include="Assets\Css\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\Css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Css\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\Css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\Css\fonts\FontAwesome.otf" />
+    <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\MvcProjectTest20190604123944 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

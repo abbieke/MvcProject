@@ -10,10 +10,10 @@
     <link rel="icon" href="/Assets/BackStage/images/B-Bookstore-logo3.png" type="image/ico" />
 
     <title>新知書櫥 | 後台管理系統</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">*@
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
 
     @Styles.Render("~/Back-css/BackLayoutIndex")
     @RenderSection("topCss", required: false)
@@ -26,8 +26,8 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title">
-                            <img src="/Assets/BackStage/images/Bookstore-logo3.png"
-                                 style="width: 40px;margin:0 10px 0 5px;"><img src="/Assets/BackStage/images/B-Bookstore-logo4.png"
+                            <img src="~/Assets/Images/BackStage/images/Bookstore-logo3.png"
+                                 style="width: 40px;margin:0 10px 0 5px;"><img src="~/Assets/Images/BackStage/images/B-Bookstore-logo4.png"
                                                                                style="width: 150px;margin:0 10px 0 5px;">
                         </a>
                     </div>
@@ -37,7 +37,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="/Assets/BackStage/images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="~/Assets/Images/BackStage/images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -99,7 +99,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="/Assets/BackStage/images/img.jpg" alt="">John Doe
+                                    <img src="/Assets/Images/BackStage/images/img.jpg" alt="">John Doe
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -123,7 +123,7 @@
                                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                     <li>
                                         <a>
-                                            <span class="image"><img src="/Assets/BackStage/images/img.jpg" alt="Profile Image" /></span>
+                                            <span class="image"><img src="~/Assets/Images/BackStage/images/img.jpg" alt="Profile Image" /></span>
                                             <span>
                                                 <span>John Smith</span>
                                                 <span class="time">3 mins ago</span>
@@ -135,7 +135,7 @@
                                     </li>
                                     <li>
                                         <a>
-                                            <span class="image"><img src="/Assets/BackStage/images/img.jpg" alt="Profile Image" /></span>
+                                            <span class="image"><img src="~/Assets/Images/BackStage/images/img.jpg" alt="Profile Image" /></span>
                                             <span>
                                                 <span>John Smith</span>
                                                 <span class="time">3 mins ago</span>
@@ -147,7 +147,7 @@
                                     </li>
                                     <li>
                                         <a>
-                                            <span class="image"><img src="/Assets/BackStage/images/img.jpg" alt="Profile Image" /></span>
+                                            <span class="image"><img src="~/Assets/Images/BackStage/images/img.jpg" alt="Profile Image" /></span>
                                             <span>
                                                 <span>John Smith</span>
                                                 <span class="time">3 mins ago</span>
@@ -159,7 +159,7 @@
                                     </li>
                                     <li>
                                         <a>
-                                            <span class="image"><img src="/Assets/BackStage/images/img.jpg" alt="Profile Image" /></span>
+                                            <span class="image"><img src="~/Assets/Images/BackStage/images/img.jpg" alt="Profile Image" /></span>
                                             <span>
                                                 <span>John Smith</span>
                                                 <span class="time">3 mins ago</span>
@@ -199,7 +199,7 @@
             <!-- /footer content -->
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -207,9 +207,9 @@
             crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>*@
 
-    @Scripts.Render("~/Back-Script/BackLayoutIndex")
+    
     @RenderSection("endScript", required: false)
 
 </body>
