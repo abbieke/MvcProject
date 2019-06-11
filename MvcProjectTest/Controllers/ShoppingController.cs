@@ -26,6 +26,7 @@ namespace MvcProjectTest.Controllers
         private readonly ShoppingCartService _cartSer;
         private readonly OrderService _orderSer;
         private readonly OrderRepository _orderRepo;
+        private readonly ShoppingRepository _cartRepo;
 
         //先頂著用
         private static Order _order;
@@ -39,6 +40,7 @@ namespace MvcProjectTest.Controllers
             _cartSer = new ShoppingCartService();
             _orderSer = new OrderService();
             _orderRepo = new OrderRepository();
+            _cartRepo = new ShoppingRepository();
         }
         // GET: Shopping
         public ActionResult Index()
@@ -151,7 +153,12 @@ namespace MvcProjectTest.Controllers
 
             _orderRepo.CreateOrderStatus(order.OrderID,_order);
 
-         //   _orderRepo.CreateOrderDetail(order.OrderID,opList);
+            _orderRepo.CreateOrderDetail(order.OrderID, opList);
+
+            foreach(var item in opList)
+            {
+                _cartRepo.RemoveCartBook(_cusRepo.GetCusromerID(User.Identity.Name), item.BookID);
+            }
 
 
             //

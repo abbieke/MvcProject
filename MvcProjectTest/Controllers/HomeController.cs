@@ -19,9 +19,10 @@ namespace MvcProjectTest.Controllers
         public ActionResult Index()
         {
             var books = _repo.SelectBooks();
+            var randombooks = _repo.SelectRandomBooks();
             var topbooks = _repo.SelectTopBooks();
             var author = _repo.SelectAuthor();
-            Mix mix = new Mix() { Books = books, SecBooks = topbooks, TopAuthor = author};
+            Mix mix = new Mix() { Books = books, SecBooks = randombooks, ThirdBooks = topbooks, TopAuthor = author};
             return View(mix);
         }
 

@@ -295,9 +295,11 @@
 }
 
 .cart-tab-block #cart-tabs-2 .product-card-list {
-  border: 1px solid #a0a0a0;
-  padding: 50px;
-  width:100%;
+    border: 1px solid #a0a0a0;
+    padding: 50px;
+    width: 100%;
+    overflow: overlay;
+    white-space: nowrap;
 }
 
 
