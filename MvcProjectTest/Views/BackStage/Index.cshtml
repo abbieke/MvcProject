@@ -1,23 +1,25 @@
-﻿
+﻿@using MvcProjectTest.Services
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
+
+    BackStageServise _backSer = new BackStageServise();
 }
 
 <div class="">
     <div class="row tile_count">
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> 會員總數</span>
-            <div class="count green">500</div>
+            <div class="count green">@_backSer.GetMember().Count()</div>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> 男性總數</span>
-            <div class="count">230</div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> 女性總數</span>
-            <div class="count">270</div>
-        </div>
+        @*<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> 男性總數</span>
+                <div class="count">230</div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> 女性總數</span>
+                <div class="count">270</div>
+            </div>*@
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-book"></i> 總銷售產品數</span>
             <div class="count">315</div>

@@ -165,6 +165,7 @@
     <Compile Include="Repositories\CustomersRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\ShoppingRepository.cs" />
+    <Compile Include="Services\BackStageServise.cs" />
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\OrderService.cs" />

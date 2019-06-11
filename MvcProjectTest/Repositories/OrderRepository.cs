@@ -108,5 +108,16 @@ namespace MvcProjectTest.Repositories
             }
             return result;
         }
+
+        public IEnumerable<Order> GetOrderDetail()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from[dbo].[Order Detail]";
+                var result = conn.Query<Order>(sql);
+                return result;
+            }
+            
+        }
     }
 }
