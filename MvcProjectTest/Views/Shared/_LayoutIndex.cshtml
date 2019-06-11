@@ -16,28 +16,28 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @Styles.Render("~/css/base")
     @RenderSection("topCss", required: false)
-<style>
-    .no-js #loader {
-        display: none;
-    }
+    <style>
+        .no-js #loader {
+            display: none;
+        }
 
-    .js #loader {
-        display: block;
-        position: absolute;
-        left: 100px;
-        top: 0;
-    }
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
 
-    .loading-icon {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
-    }
-</style>
+        .loading-icon {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,14 +55,14 @@
                         </a>
                     </div>
                     <nav class="bkshop-nav boxfloat">
-                        <ul class="bookmenu">
+                        <ul class="bookmenu bookmobile-menu">
                             @{
                                 MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
                                 var cate = _repo.SelectCategory();
                             }
                             @foreach (var item in cate)
                             {
-                                <li class="book-item">
+                                <li class="book-item bookmobile-menu-item">
                                     <a href="@Url.Action("Index","Book",new { name = item.CategoryEngName})">@item.CategoryName</a>
                                 </li>
                             }
@@ -102,7 +102,7 @@
                     </div>
                     <div class="bkshop-member-carbox">
                         <ul class="bookmenu">
-                            <li class="book-item">
+                            <li class="book-item ">
                                 @if (Request.IsAuthenticated)
                                 {
                                     <a href='@Url.Action("CustomerIndex","Customer", null)'><i class="fas fa-user top-icon"></i></a>
@@ -441,6 +441,34 @@
             })
         };
     });
+
+    </script>
+
+    <script>
+        $(function () {
+            var isShow = true;
+            if ($(".bookshopping-sidemenulist").is(":visible")) {
+                //$(".bkshop-nav").attr("style"), ("width: 0;");
+                $(".bookshopping-sidemenulist").on("click", function () {
+                    var width = 0;
+                    var w = $(window).width()
+                    if (isShow) {
+                        if (w >= 640) {
+                            width = 30;
+                        }
+                        else {
+                            width = 50;
+                        }
+                        
+                        
+                    }
+                    $(".bkshop-nav").attr("style", "width:" + width + "%;");
+                    $(".bkshop-searchbox").attr("style", "width:" + width + "%;");
+                    isShow = !isShow;
+                })
+
+            }
+        });
 
     </script>
 </body>

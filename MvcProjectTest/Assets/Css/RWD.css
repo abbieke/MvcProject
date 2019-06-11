@@ -1,6 +1,7 @@
 ﻿.bookshopping-sidemenulist {
-    display:none;
+    display: none;
 }
+
 @media screen and (max-width:1140px) {
     .container {
         width: 960px;
@@ -27,44 +28,92 @@
     .container {
         width: 740px;
     }
+
+    .bkshop-logo {
+        width: 80%;
+        margin-right: auto;
+    }
+
     .newest-tab-block {
-        margin-bottom:20px;
+        margin-bottom: 20px;
     }
+
     .bookshopping-sidemenulist {
-        display:block;
-        background-color:transparent;
-        font-size:30px;
-        margin-right:20px;
-        border:none;
+        display: block;
+        background-color: transparent;
+        font-size: 30px;
+        margin-right: 35%;
+        border: none;
     }
+
         .bookshopping-sidemenulist:focus {
-            outline:none;
+            outline: none;
         }
-        .bkshop-nav {
-            display: none;
+
+    .bkshop-searchbox {
+        width: 0%;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        margin: 0;
+        background: #ffffff;
+        transition: .3s width;
+        overflow: hidden;
+    }
+
+    .search {
+        width: 90%;
+    }
+
+        .search input {
+            width: 100%;
         }
+
+    .bkshop-nav {
+        position: fixed;
+        top: 160px;
+        left: 0;
+        background: #ffffff;
+        width: 0%;
+        height: 100%;
+        transition: .3s width;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .bookmobile-menu {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bookmobile-menu-item {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
     .product-card-out-block {
         width: 50%;
     }
+
     .product-card-block {
-        height:100%;
-        padding:10px;
+        height: 100%;
+        padding: 10px;
     }
-        .service-block ul {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+
+    .service-block ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
         .service-block ul li {
             width: 80%;
             margin-bottom: 10px;
         }
-
-    .blockleft {
-        margin-left: 20px;
-        margin-right: 50px;
-    }
 
     .blockright {
         font-size: 25px;
@@ -81,46 +130,62 @@
     .index-blog {
         height: 500px;
     }
+
     .product-price-span {
-        padding-right:10px;
+        padding-right: 10px;
     }
+
     .product-card-discount-text {
         font-size: 25px;
     }
+
     .product-card-des-text {
-        font-size:20px;
+        font-size: 20px;
     }
-    .bkshop-nav {
-        position:absolute;
+
+    .function-button-inner {
+        background-color: transparent;
+        flex-direction: column;
+        text-align: center;
+        height: auto;
     }
+
+
+    .principle-out-block:hover .function-button-inner {
+        background-color: transparent;
+        color: black;
+    }
+     
 }
+
 @media screen and (max-width:767px) {
     .container {
         width: 90%;
     }
-    .bkshop-logo {
-        margin-right: auto;
-    }
-    .bkshop-searchbox {
-        display: none;
-    }
+
     .index-block-left {
         height: 350px;
     }
 
     .index-block-right {
         height: 350px;
-        padding-right:10px;
+        padding-right: 10px;
     }
+
     .index-blog {
-        height:450px;
+        height: 450px;
     }
- 
+
+    .bookshopping-sidemenulist {
+        margin-right: 20px;
+    }
 }
+
 @media screen and (max-width:640px) {
     .product-card-out-block {
-        width:100%;
+        width: 100%;
     }
+
     .index-block-right {
         left: 0;
         display: flex;
@@ -128,35 +193,47 @@
         height: 250px;
         padding: 50px 0 0;
     }
+
     .block-right-image {
-        margin-right:15px;
+        margin-right: 15px;
     }
+
     .index-blog-column {
         flex-direction: column-reverse;
         width: 100%;
         align-items: center;
     }
+
     .index-block-left {
-        width:50%;
+        width: 50%;
     }
+
     .index-blog {
         height: auto;
     }
+
     .service-block ul li {
         width: 100%;
         margin-bottom: 10px;
     }
+
     .blockright {
         font-size: 22px;
     }
+
     .blockleft {
-        margin:0;
+        margin: 0;
     }
+
     .footer-column-item-list.contact-icon-list .footer-list-item {
         width: 50%;
     }
+
     .footer-column-item-list.contact-icon-list {
-        flex-wrap:wrap;
+        flex-wrap: wrap;
     }
- 
+    .newest-tab-title-row {
+        display:flex;
+        flex-direction:column;
+    }
 }
