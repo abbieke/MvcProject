@@ -151,7 +151,7 @@ namespace MvcProjectTest.Controllers
 
             _orderRepo.CreateOrderStatus(order.OrderID,_order);
 
-         //   _orderRepo.CreateOrderDetail(order.OrderID,opList);
+            _orderRepo.CreateOrderDetail(order.OrderID, opList);
 
 
             //
