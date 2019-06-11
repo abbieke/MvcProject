@@ -75,153 +75,11 @@
 
                 <!-- tab3 -->
                 <div id="tab-best-sell" class="tab-inner">
-                    <div class="product-card-out-block">
-                        <div class="product-card-block">
-
-                            <div class="product-card-img-block">
-                                <a href="#" class="product-link">
-                                    <img class="pc-img"
-                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                         alt="1">
-                                </a>
-                                <div class="product-card-visual-cart-block">
-                                    <form action="add-cart">
-
-                                        <input type="hidden" name="id" value="1">
-                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                        <button class="product-card-cart-button card-quick-button-style"
-                                                type="submit">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span class="product-card-cart-tip pc-quick-tip-style">
-                                                Add To
-                                                Cart
-                                            </span>
-                                        </button>
-                                    </form>
-                                    <a href="#" class="product-card-quick-view">
-                                        <i class="far fa-eye card-quick-button-style"></i>
-                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                            Quick
-                                            View
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-card-description-block">
-                                <a href="#" class="product-link">
-                                    <h3 class="product-card-title">
-                                        有可能的任務
-                                    </h3>
-                                    <div class="product-writter-block">
-                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                    </div>
-                                    <div class="product-price-block">
-                                        <span class="product-price-span product-card-des-text">$300</span>
-                                    </div>
-                                </a>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="product-card-out-block">
-                        <div class="product-card-block">
-
-                            <div class="product-card-img-block">
-                                <a href="#" class="product-link">
-                                    <img class="pc-img"
-                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                         alt="1">
-                                </a>
-                                <div class="product-card-visual-cart-block">
-                                    <form action="add-cart">
-
-                                        <input type="hidden" name="id" value="1">
-                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                        <button class="product-card-cart-button card-quick-button-style"
-                                                type="submit">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span class="product-card-cart-tip pc-quick-tip-style">
-                                                Add To
-                                                Cart
-                                            </span>
-                                        </button>
-                                    </form>
-                                    <a href="#" class="product-card-quick-view">
-                                        <i class="far fa-eye card-quick-button-style"></i>
-                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                            Quick
-                                            View
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-card-description-block">
-                                <a href="#" class="product-link">
-                                    <h3 class="product-card-title">
-                                        有可能的任務
-                                    </h3>
-                                    <div class="product-writter-block">
-                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                    </div>
-                                    <div class="product-price-block">
-                                        <span class="product-price-span product-card-des-text">$300</span>
-                                    </div>
-                                </a>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="product-card-out-block">
-                        <div class="product-card-block">
-
-                            <div class="product-card-img-block">
-                                <a href="#" class="product-link">
-                                    <img class="pc-img"
-                                         src="https://demoprestashop.aeipix.com/AX04/mybook75/img/p/1/0/8/108-home_default.jpg"
-                                         alt="1">
-                                </a>
-                                <div class="product-card-visual-cart-block">
-                                    <form action="add-cart">
-
-                                        <input type="hidden" name="id" value="1">
-                                        <!-- hidden的可以儲存資料用 根據後端修改 -->
-                                        <button class="product-card-cart-button card-quick-button-style"
-                                                type="submit">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span class="product-card-cart-tip pc-quick-tip-style">
-                                                Add To
-                                                Cart
-                                            </span>
-                                        </button>
-                                    </form>
-                                    <a href="#" class="product-card-quick-view">
-                                        <i class="far fa-eye card-quick-button-style"></i>
-                                        <span class="product-card-quick-view-tip pc-quick-tip-style">
-                                            Quick
-                                            View
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-card-description-block">
-                                <a href="#" class="product-link">
-                                    <h3 class="product-card-title">
-                                        有可能的任務
-                                    </h3>
-                                    <div class="product-writter-block">
-                                        <span class="product-writter-span product-card-des-text">湯姆克魯斯</span>
-                                    </div>
-                                    <div class="product-price-block">
-                                        <span class="product-price-span product-card-des-text">$300</span>
-                                    </div>
-                                </a>
-                            </div>
-
-
-                        </div>
-                    </div>
+                    @foreach (var item in Model.ThirdBooks)
+                    {
+                        ViewBag.cardIndex++;
+                        @Html.Partial("_ProductCardPartial", item)
+                    }
                 </div>
             </div>
         </div>
@@ -282,8 +140,8 @@
                                 <a href="#" class="blockleft-images-one"></a>
                             </span>
                             <span class="blockright">
-                                <a href="#" class="aei-service-title">Free Shipping Worldwide</a>
-                                <span class="aei-service-desc">All Order Over $100 </span>
+                                <a href="#" class="aei-service-title">Fast transportation</a>
+                                <span class="aei-service-desc">Arrival within 24 hours</span>
                             </span>
                         </div>
                     </li>
@@ -293,8 +151,8 @@
                                 <a href="#" class="blockleft-images-two"></a>
                             </span>
                             <span class="blockright">
-                                <a href="#" class="aei-service-title">Free Shipping Worldwide</a>
-                                <span class="aei-service-desc">All Order Over $100 </span>
+                                <a href="#" class="aei-service-title">Quality customer service</a>
+                                <span class="aei-service-desc">Line Bot</span>
                             </span>
                         </div>
                     </li>
@@ -304,8 +162,8 @@
                                 <a href="#" class="blockleft-images-three"></a>
                             </span>
                             <span class="blockright">
-                                <a href="#" class="aei-service-title">Free Shipping Worldwide</a>
-                                <span class="aei-service-desc">All Order Over $100 </span>
+                                <a href="#" class="aei-service-title">Cheaper than other stores</a>
+                                <span class="aei-service-desc">Always on sale</span>
                             </span>
                         </div>
                     </li>

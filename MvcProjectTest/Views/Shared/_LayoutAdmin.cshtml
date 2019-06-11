@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    @Styles.Render("~/css/base")
+    @RenderSection("topCss", required: false)
+<style>
+    .no-js #loader {
+        display: none;
+    }
+
+    .js #loader {
+        display: block;
+        position: absolute;
+        left: 100px;
+        top: 0;
+    }
+
+    .loading-icon {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
+    }
+</style>
+</head>
+
+<body>
+    <div class="loading-icon"></div>
+
+    <header class="dropdowns">
+        <div class="dropdowns-top">
+            <div class="container">
+                <div class="bookshopping-menu flex">
+                    <div class="bkshop-logo flex ">
+                        <a href='@Url.Action("Index","Home", null)' class="dropdowns-top-logo-link flex">
+                            <img class="dropdowns-logo-book" src="~/Assets/Images/logo/B-Bookstore-logo3.png" alt="">
+                            <img class="dropdowns-logo-text" src="~/Assets/Images/logo/B-Bookstore-logo4.png" alt="">
+                        </a>
+                    </div>
+                    <nav class="bkshop-nav boxfloat">
+                        <ul class="bookmenu">
+                            @{
+                                MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                var cate = _repo.SelectCategory();
+                            }
+                            @foreach (var item in cate)
+                            {
+                                <li class="book-item">
+                                    <a href="@Url.Action("Index","Book",new { name = item.CategoryEngName})">@item.CategoryName</a>
+                                </li>
+                            }
+                            @*<li class="book-item">
+                                    <a href="#">home</a>
+                                    <ul class="book-item-list">
+                                        <li class="book-item book-item-has-children">
+                                            <a href="#"> 類別</a>
+                                            <ul class="book-last-list">
+                                                @{
+                                                    MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                                    var cate = _repo.SelectCategory();
+                                                }
+                                                @foreach (var item in cate)
+                                                {
+                                                    <li class=" book-last-item"> <a href="#"> @item.CategoryName</a></li>
+                                                    @*<li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                    </ul>
+                                </li>
+                                <li class="book-item"> <a href="#">home</a></li>
+                                <li class="book-item"> <a href="#">home</a></li>
+                                <li class="book-item"> <a href="#">home</a></li>*@
+                        </ul>
+                    </nav>
+                    <div class="bkshop-searchbox">
+                        <form action='@Url.Action("Index","Book", null)' class="search">
+                            <button type="submit" style="        visibility: hidden"><i class="fas fa-search" style="        visibility: visible"></i></button>
+                            <input type="text" name="name">
+                        </form>
+                    </div>
+                    <div class="bkshop-member-carbox">
+                        <ul class="bookmenu">
+                            <li class="book-item">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <a href='@Url.Action("CustomerIndex","Customer", null)'><i class="fas fa-user top-icon"></i></a>
+                                }
+                                else
+                                {
+                                    <a href='@Url.Action("Login","Account", null)'><i class="fas fa-user top-icon"></i></a>
+                                }
+                                <ul class="book-item-list book-item-list-right">
+                                    @Html.Partial("_LoginPartial")
+                                </ul>
+                            </li>
+                            <li class="book-item" id="header-cart-block">
+                                <a href='@Url.Action("Index","Shopping", null)'><i class="fas fa-shopping-cart top-icon"></i></a>
+                                @*<ul class="book-item-list book-item-list-right">
+                                        <li class="book-item book-item-has-children">
+                                            <a href="#">最近加入的商品</a>
+                                            <ul class="book-last-list maxheight">
+                                                <li class=" book-last-item">
+
+                                                    <div class="hover-car-product-item flex">
+                                                        <div class="hover-car-product-imagebox">
+                                                            <img class="hover-car-product-image"
+                                                                 src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                                                        </div>
+                                                        <div class="hover-car-product-namebox">
+                                                            <div class="hover-car-product-name">
+                                                                <span>安靜是種超能力</span>
+                                                            </div>
+                                                            <div class="hover-car-product-text flex">
+                                                                <p class="hover-car-product-price">9487 元</p>
+                                                                <div class="hover-car-product-delete">
+                                                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                            <div class="hover-check-car-box">
+                                                <div class="hover-check-car-price">
+                                                    <span>當前總金額:</span>
+                                                    <span>100000元</span>
+                                                </div>
+                                                <div class="hover-gotoshopping-car flex">
+                                                    <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>*@
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="block-for-header-wrapper">
+        <!-- 注意這塊與Header保持同高，若有修改頁首的留意 -->
+    </div>
+
+    @RenderBody()
+
+    <footer class="index-footer">
+        <div class="container">
+            <div class="footer-info-block-row">
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block">
+                        新知書櫥
+                    </div>
+                    <ul class="footer-column-item-list">
+                        <li class="footer-list-item">
+                            <a href="#">
+                                關於我們
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("Index", "Book",null)">
+                                書本總覽
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*客服中心*@
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*管理介面*@
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block">
+                        會員服務
+                    </div>
+                    <ul class="footer-column-item-list">
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("Registration", "Account",null)">
+                                加入會員
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="   @if (Request.IsAuthenticated)
+                                        {
+                                            @Url.Action("CustomerIndex","Customer", null)
+                                        }
+                                        else
+                                        {
+                                            @Url.Action("Login","Account", null)
+                                        }">
+                                會員專區
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("ForgetPassword", "Account",null)">
+                                忘記密碼
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="@Url.Action("Index", "Shopping",null)">
+                                願望清單(先跳到購物車)
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block">
+                        客服服務
+                    </div>
+                    <ul class="footer-column-item-list">
+                        <li class="footer-list-item">
+                            <a href="#">
+                                聯絡我們
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*功能介紹*@
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*客服中心*@
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#">
+                                @*管理介面*@
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column-list-block">
+                    <div class="footer-main-info-block footer-contact">
+                        關注我們
+                    </div>
+                    <ul class="footer-column-item-list contact-icon-list">
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-line"></i>
+                            </a>
+                        </li>
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-contact-icon-animate1">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("tabs", required: false)
+
+
+
+
+
+    @*loading*@
+    <script>
+        //       $(function () {
+        //           $(window).load(function() {
+        //               // Animate loader off screen
+        //               $(".loading-icon").hide();
+        //       });
+
+        //});
+        window.onload = function () {
+            document.getElementsByClassName("loading-icon")[0].setAttribute("style", "width: 0; transition: 1s;");
+        }
+
+    </script>
+
+    <script>
+        $(function () {
+            $(".quick-view-dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                width: 900,
+                title: "",
+                show: {
+                    effect: "drop",
+                    duration: 300
+                },
+                hide: {
+                    effect: "size",
+                    duration: 300
+                }
+            });
+
+
+            $(".quick-view-opener").on("click", function () {
+                var idIndex = this.id.split("quick-view-opener")[1];
+
+                $(".quick-view-dialog" + idIndex).dialog("open").dialog("option", "modal", true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 0) {          /* 要滑動到選單的距離 */
+                    $('.dropdowns').addClass('navFixed').removeClass('dropdowns-top');   /* 幫選單加上固定效果 */
+                } else {
+                    $('.dropdowns').removeClass('navFixed').addClass('dropdowns-top'); /* 移除選單固定效果 */
+                }
+            });
+        });
+    </script>
+
+    <!-- newest tab -->
+    <script>
+        $(function () {
+            $("#newest-tab").tabs();
+        });
+    </script>
+    <script>
+        $(function () {
+            $(".product-card-cart-button").click(addBookToCart);
+            $(".jumpcard-product-button").click(jumpcardAddBookToCart);
+            function addBookToCart() {
+
+                var buttonValue = this.value;
+                //alert(buttonValue);
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Shopping")',
+                    data: { quantity: 1,bookId: buttonValue }
+                }).done(function (response) {
+                    //alert(response);
+                    if (response == "fail") {
+                        window.location.assign("/Account/Login");
+                    }
+                });
+
+            }
+            function jumpcardAddBookToCart() {
+
+                var buttonValue = this.value;
+                var qty = $(this).parents(".jumpcard-product-addtocart").children(".jumpcard-product-inputbox").children("input").val();
+                //alert(buttonValue);
+                //alert(qty);
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Shopping")',
+                    data: { quantity: +qty,bookId: buttonValue }
+                }).done(function (response) {
+                    //alert(response);
+                    if (response == "fail") {
+                        window.location.assign("/Account/Login");
+                    }
+                });
+
+            }
+
+
+        });
+    </script>
+
+    @*<script>
+            $(function () {
+                window.onbeforeunload = function () {
+                    $.ajax({
+                        url: "@Url.Action("testtes", "Account")",
+                        method: "post",
+                        contentType: 'application/json',
+                        data: ""
+                    });
+                };
+            });
+        </script>*@
+
+
+    @*顯示購物車商品*@
+
+    <script>
+    $(function () {
+        cartHover();
+        function cartHover() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("HeadCartView", "Shopping")'
+            }).done(function (respone) {
+                $("#header-cart-block").append(respone)
+            })
+        };
+    });
+
+    </script>
+</body>
+
+</html>

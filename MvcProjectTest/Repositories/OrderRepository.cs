@@ -82,13 +82,13 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "insert into[dbo].[Order Detail](OrderID,BooksNo,UnitPrice,Counts,Discount) values(@OrderID,@BooksNo,@UnitPrice,@Counts,@Discount)";
+                string sql = "insert into[dbo].[Order Detail](OrderID,BookID,UnitPrice,Counts,Discount) values(@OrderID,@BookID,@UnitPrice,@Counts,@Discount)";
                 foreach (var item in model)
                 {
                     conn.Execute(sql, new
                     {
                         OrderID=orderID,
-                        BooksNo=item.BooksNo,
+                        BookID=item.BookID,
                         UnitPrice=item.UnitPrice,
                         Counts=item.Quantity,
                         Discount=item.Discount
@@ -107,6 +107,17 @@ namespace MvcProjectTest.Repositories
                 result = conn.QueryFirstOrDefault<Order>(sql);
             }
             return result;
+        }
+
+        public IEnumerable<Order> GetOrderDetail()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from[dbo].[Order Detail]";
+                var result = conn.Query<Order>(sql);
+                return result;
+            }
+            
         }
     }
 }

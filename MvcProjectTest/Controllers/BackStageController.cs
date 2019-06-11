@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using MvcProjectTest.Repositories;
+using MvcProjectTest.Services;
+using MvcProjectTest.ViewModels;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using MvcProjectTest.Models;
 
 namespace MvcProjectTest.Controllers
 {
     public class BackStageController : Controller
     {
+        private readonly CustomersRepository _cusRepo = new CustomersRepository();
         // GET: BackStage
         public ActionResult Index()
         {
@@ -69,7 +77,7 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-
+        
 
 
     }

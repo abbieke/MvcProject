@@ -18,9 +18,16 @@
     HoverCart.Reverse();
     var new5book = new List<ShoppingCartViewModel>();
 
-    for (var i = 0; i < 5; i++)
+    if (HoverCart.Count >= 5)
     {
-        new5book.Add(HoverCart[i]);
+        for (var i = 0; i < 5; i++)
+        {
+            new5book.Add(HoverCart[i]);
+        }
+    }
+    else
+    {
+        new5book = HoverCart;
     }
 }
 
@@ -53,9 +60,9 @@
                             </div>
                             <div class="hover-car-product-text flex">
                                 <p class="hover-car-product-price">@subtotal 元</p>
-                                <div class="hover-car-product-delete">
+                                @*<div class="hover-car-product-delete">
                                     <a class="hover-car-product-delete-text" href="#">刪除</a>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
 
@@ -88,7 +95,7 @@
                 <span>@total 元</span>
             </div>
             <div class="hover-gotoshopping-car flex">
-                <a class="hover-gotoshoppingcar-button" href="Shopping">查看購物車</a>
+                <a class="hover-gotoshoppingcar-button" href='@Url.Action("Index", "Shopping")'>查看購物車</a>
             </div>
         </div>
     </li>
