@@ -285,7 +285,7 @@ namespace MvcProjectTest.Controllers
                 string rolename = _repo.SelectRolesName(role);
                 names.Add(rolename);
             }
-            string rolesEngNames = String.Join(", ", names.ToArray());
+            string rolesEngNames = String.Join(",", names.ToArray());
 
 
             return rolesEngNames;
