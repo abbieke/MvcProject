@@ -29,7 +29,8 @@ namespace MvcProjectTest.Controllers
             if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(types))
             {
                 var books = _repo.GetAllBook();
-                BookTypeMix mix = new BookTypeMix(){ Books = books};
+                var booktypes = _repo.SelectAllBookType();
+                BookTypeMix mix = new BookTypeMix(){ Books = books, BookTypes = booktypes};
                 return View(mix);
             }
             else if (String.IsNullOrEmpty(types))
@@ -38,6 +39,13 @@ namespace MvcProjectTest.Controllers
                 var bookTypes = _repo.SelectBookType(name);
                 ViewBag.catEngName = name;
                 BookTypeMix mix = new BookTypeMix(){ Books = books, BookTypes = bookTypes};
+                return View(mix);
+            }
+            else if (String.IsNullOrEmpty(name))
+            {
+                var books = _repo.SelectBookTypeAllbooks(types);
+                var booktypes = _repo.SelectAllBookType();
+                BookTypeMix mix = new BookTypeMix() { Books = books, BookTypes = booktypes };
                 return View(mix);
             }
             else
