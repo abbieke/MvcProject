@@ -15,26 +15,37 @@ namespace MvcProjectTest.Controllers
 {
     public class BackStageController : Controller
     {
-        private readonly CustomersRepository _cusRepo = new CustomersRepository();
+        private readonly CustomersRepository _cusRepo;
+        public BackStageController()
+        {
+            _cusRepo = new CustomersRepository();
+        }
         // GET: BackStage
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult CustomerDetails()
+        public ActionResult CustomerDetails(string id)
         {
-            return View();
+            var CustDetail = _cusRepo.SelectCustomerDetail(id);
+            var CustCount = _cusRepo.SelectCustomerOrderCount(id);
+            CustomerDetail mix = new CustomerDetail(){ Customer = CustDetail, OrderCount = CustCount};
+            return View(mix);
         }
 
-        public ActionResult CustomerEdit()
+        public ActionResult CustomerEdit(string id)
         {
-            return View();
+            var CustDetail = _cusRepo.SelectCustomerDetail(id);
+            return View(CustDetail);
         }
 
         public ActionResult CustomerIndex()
         {
-            return View();
+            var Customers = _cusRepo.ReadAllCustomer();
+            List<Customer> cust = new List<Customer>();
+            cust = Customers.ToList();
+            return View(cust);
         }
 
         public ActionResult OrderDetails()

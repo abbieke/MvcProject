@@ -105,6 +105,16 @@
                                         @Html.EditorFor(model => model.CustomerView.CustomerEmail, new { htmlAttributes = new { @class = "member-input-textbox-input" } })
                                         @Html.ValidationMessageFor(model => model.CustomerView.CustomerEmail, "", new { @class = "text-danger" })
                                     </div>
+                                    @if (HttpContext.Current.User.IsInRole("NotVerified"))
+                                    {
+                                        <span class="" style="color:red; white-space: nowrap;">未驗證</span>
+                                        @*@Html.ActionLink("重新發信", "testclick", "Account",null, new { @class = "membercentre-submit-button ml-3 btn", @style = "white-space:nowrap;", @role = "button;" })*@
+                                        <button id="btn_resend" class="membercentre-submit-button ml-3" style="white-space:nowrap;">重新發信</button>
+                                    }
+                                    else
+                                    {
+                                        <span class="fas fa-check-circle" style="color:green"></span>
+                                    }
                                 </div>
 
                             </div>
@@ -330,6 +340,21 @@
             //     $(this).addClass('active').siblings('.active').removeClass('active');
             // });
         });
+    </script>
+    <script>
+        $("#btn_resend").click(resendMail);
+        function resendMail() {
+            var usermail = $("#CustomerView_CustomerEmail").val();
+            alert('@User.Identity.Name'+","+usermail);
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("SendAsync", "Account")',
+                    data: { account:'@User.Identity.Name', mail: usermail }
+                }).done(function (response) {
+                    
+                });
+
+            }
     </script>
 
     @*<script>

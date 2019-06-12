@@ -10,6 +10,7 @@ using MvcProjectTest.Services;
 
 namespace MvcProjectTest.Controllers
 {
+    [Authorize(Roles ="User")]
     public class CustomerController : Controller
     {
         public readonly CustomersRepository _repo;
@@ -20,7 +21,7 @@ namespace MvcProjectTest.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var cust = _repo.SelectCustomerView(User.Identity.Name);
+            var cust = _repo.ReadAllCustomer().ToList();
             return View(cust);
         }
 

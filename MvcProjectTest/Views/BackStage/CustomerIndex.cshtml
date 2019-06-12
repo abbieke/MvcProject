@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<MvcProjectTest.Models.Customer>
 @{
     ViewBag.Title = "CustomerIndex";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
@@ -10,17 +10,6 @@
         <div class="title_left">
             <h3>會員管理系統</h3>
         </div>
-
-        <div class="title_right">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="clearfix"></div>
@@ -30,27 +19,6 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>會員總覽</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="dropdown" style="visibility: hidden;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#">Settings 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -59,11 +27,11 @@
                             <tr>
                                 <th>CustomerID</th>
                                 <th>CustomerName</th>
+                                <th>CustomerAccount</th>
                                 <th>CustomerPhone</th>
                                 <th>CustomerBirth</th>
                                 <th>CustomerAddress</th>
                                 <th>CustomerEmail</th>
-                                <th>CustomerAccount</th>
                                 <th>EmailConfirmed</th>
                                 <th>Action</th>
                             </tr>
@@ -71,21 +39,24 @@
 
 
                         <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                <td>1</td>
-                                <td>Abbieke</td>
-                                <td>0972625286</td>
-                                <td>2019-02-22</td>
-                                <td>新北市三重區</td>
-                                <td>abbieke222@gmail.com</td>
-                                <td>Abbieke222</td>
-                                <td>0</td>
+                                <td>@item.CustomerId</td>
+                                <td>@item.CustomerName</td>
+                                <td>@item.CustomerAccount</td>
+                                <td>@item.CustomerPhone</td>
+                                <td>@item.CustomerBirth.ToString("yyyy/MM/dd")</td>
+                                <td>@item.CustomerAddress</td>
+                                <td>@item.CustomerEmail</td>
+                                <td>@item.EmailConfirmed</td>
                                 <td style="text-align: center">
-                                    <a href="CustomerDetails.html" type="button" class="btn btn-info btn-xs">明細</a>
+                                    <a href='@Url.Action("CustomerDetails","BackStage",new { id = item.CustomerAccount})' type="button" class="btn btn-info btn-xs">明細</a>
                                     <a href="CustomerEdit.html" type="button" class="btn btn-warning btn-xs">修改</a>
                                 </td>
                             </tr>
-
+                        }
+                        
                         </tbody>
                     </table>
                 </div>
