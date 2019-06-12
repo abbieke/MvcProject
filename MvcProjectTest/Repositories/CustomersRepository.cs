@@ -73,6 +73,15 @@ namespace MvcProjectTest.Repositories
             }
                 
         }
+        public string SelectCustomerEmail(int custid)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select CustomerEmail From Customers Where CustomerID = @custid";
+                string cust_email = conn.QueryFirstOrDefault<string>(sql,new { custid });
+                return cust_email;
+            }
+        }
 
         public bool SelectCustomerEmail(string CustomerEmail)
         {
