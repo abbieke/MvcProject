@@ -21,7 +21,7 @@ namespace MvcProjectTest.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var cust = _repo.SelectCustomerView(User.Identity.Name);
+            var cust = _repo.ReadAllCustomer().ToList();
             return View(cust);
         }
 
@@ -42,9 +42,9 @@ namespace MvcProjectTest.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        public ActionResult CustomerIndex(CustomerMix cust, string id)
+        public ActionResult CustomerIndex(CustomerMix cust, int? id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 var custom = _repo.SelectCustomerView(User.Identity.Name);
                 var custpass = _repo.SelectCustomerPasswordView(User.Identity.Name);
@@ -52,7 +52,7 @@ namespace MvcProjectTest.Controllers
                 CustomerMix mix = new CustomerMix() { CustomerView = custom, ChangePassword = custpass , Order = custorder};
                 return View(mix);
             }
-            if (id == "1")
+            else if (id == 1)
             {
                 CustomerMix customer = new CustomerMix
                 {
@@ -61,7 +61,7 @@ namespace MvcProjectTest.Controllers
                 _repo.UpdateCustomer(customer.CustomerView);
                 return RedirectToAction("Index", "Home");
             }
-            else if (id == "2")
+            else if (id == 2)
             {
                 CustomerMix customer = new CustomerMix
                 {

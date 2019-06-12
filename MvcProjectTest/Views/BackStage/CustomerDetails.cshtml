@@ -1,4 +1,4 @@
-﻿
+﻿@model MvcProjectTest.Models.CustomerDetail
 @{
     ViewBag.Title = "CustomerDetails";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
@@ -11,17 +11,6 @@
         <div class="title_left">
             <h3>會員明細</h3>
         </div>
-
-        <div class="title_right">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="clearfix"></div>
 
@@ -30,28 +19,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>會員基本資訊<a href="CustomerIndex.html"><small>Back to list</small></a></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="dropdown" style="visibility: hidden;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#">Settings 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
+                    <h2>會員基本資訊<a href='@Url.Action("CustomerIndex","BackStage",null)'><small>Back to list</small></a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -63,102 +31,111 @@
                     <div class="form-horizontal form-label-left">
 
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookID">
-                                BookID
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CustomerAccount">
+                                會員帳號
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="BookID" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的編號
+                                <p type="text" id="CustomerAccount" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    @Model.Customer.CustomerAccount
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookName">
-                                BookName
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CuctomerName">
+                                會員姓名
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="BookName" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的書名
+                                <p type="text" id="CuctomerName" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    @Model.Customer.CustomerName
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="PressID">
-                                PressID
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="EmailConfirmed">
+                                Email認證
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="PressID" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的出版社
+                                <p type="text" id="EmailConfirmed" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    @Model.Customer.EmailConfirmed
                                 </p>
                             </div>
                         </div>
+                        @{
+                            var count = 0;
+                            decimal sum = 0;
+                            if (Model.OrderCount != null)
+                            {
+                                count = Model.OrderCount.Count;
+                                sum = Model.OrderCount.Sum;
+                            }
+                        }
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CategoryID">
-                                CategoryID
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="OrderCount">
+                                訂單筆數
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="CategoryID" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">這是一本書的種類</p>
+                                <p type="text" id="OrderCount" class="control-label col-md-7 col-xs-12"
+                                   style="text-align: left;">@count</p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="AuthorID">
-                                AuthorID
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="OrderTotal">
+                                消費總額
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="AuthorID" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的作者名
+                                <p type="text" id="OrderTotal" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                    @sum
                                 </p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UnitPrice">
-                                UnitPrice
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="UnitPrice" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">這是一本書的價錢</p>
+                        @*<div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UnitPrice">
+                                    UnitPrice
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <p type="text" id="UnitPrice" class="control-label col-md-7 col-xs-12"
+                                       style="text-align: left;">這是一本書的價錢</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="InStock">
-                                InStock
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="InStock" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的庫存
-                                </p>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="InStock">
+                                    InStock
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <p type="text" id="InStock" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                        這是一本書的庫存
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Discount">
-                                Discount
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="Discount" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的折扣
-                                </p>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Discount">
+                                    Discount
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <p type="text" id="Discount" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                        這是一本書的折扣
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ISBN">
-                                ISBN
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="ISBN" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    這是一本書的ISBN
-                                </p>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ISBN">
+                                    ISBN
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <p type="text" id="ISBN" class="control-label col-md-7 col-xs-12" style="text-align: left;">
+                                        這是一本書的ISBN
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookImage">
-                                BookImage
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="BookImage" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">這是一本書的圖片名稱</p>
-                            </div>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BookImage">
+                                    BookImage
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <p type="text" id="BookImage" class="control-label col-md-7 col-xs-12"
+                                       style="text-align: left;">這是一本書的圖片名稱</p>
+                                </div>
+                            </div>*@
                     </div>
 
                     <!-- end form for validations -->

@@ -73,6 +73,15 @@ namespace MvcProjectTest.Repositories
             }
                 
         }
+        public string SelectCustomerEmail(int custid)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select CustomerEmail From Customers Where CustomerID = @custid";
+                string cust_email = conn.QueryFirstOrDefault<string>(sql,new { custid });
+                return cust_email;
+            }
+        }
 
         public bool SelectCustomerEmail(string CustomerEmail)
         {
@@ -121,7 +130,7 @@ namespace MvcProjectTest.Repositories
 
         public bool IsEmailConfirmed(string account)
         {
-            using (conn)
+            using (conn = new SqlConnection(connString))
             {
                 string sql = "Select EmailConfirmed From Customers Where CustomerAccount= '" + account + "' ;";
                 var result = conn.QueryFirstOrDefault<bool>(sql);
@@ -131,16 +140,20 @@ namespace MvcProjectTest.Repositories
         }
         public void CustomerAddRole(UserRoles userRoles)
         {
-            
+            using (conn = new SqlConnection(connString))
+            {
                 string sql = "INSERT INTO UserRoles(UserID,RolesID) VALUES ( @UserID,@RolesID) ;";
-                conn.Execute(sql, new {userRoles.UserID, userRoles.RolesID });
-            
+                conn.Execute(sql, new {userRoles.UserID, userRoles.RolesID});
+            }
+
         }
         public void CustomerUpdateRole(UserRoles userRoles)
         {
-
-            string sql = "UPDATE UserRoles SET RolesID= @RolesID WHERE UserID=@UserID ;";
-            conn.Execute(sql, new { userRoles.RolesID, userRoles.UserID  });
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "UPDATE UserRoles SET RolesID= @RolesID WHERE UserID=@UserID ;";
+                conn.Execute(sql, new {userRoles.RolesID, userRoles.UserID});
+            }
 
         }
 
@@ -160,13 +173,15 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress WHERE CustomerAccount=@CustomerAccount";
+                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress,EmailConfirmed=@EmailConfirmed WHERE CustomerAccount=@CustomerAccount";
                 conn.Execute(sql, new {
                     CustomerName = cust.CustomerName,
                     CustomerAccount = cust.CustomerAccount,
                     CustomerEmail = cust.CustomerEmail,
                     CustomerPhone = cust.CustomerPhone,
-                    CustomerAddress = cust.CustomerAddress});
+                    CustomerAddress = cust.CustomerAddress,
+                    EmailConfirmed = cust.EmailConfirmed
+                });
             }
 
         }
@@ -297,6 +312,31 @@ namespace MvcProjectTest.Repositories
                 string sql = "select RoleName from Roles where RoleId=@roleid";
                 string roleName = conn.QueryFirstOrDefault<string>(sql, new { roleid });
                 return roleName;
+            }
+        }
+
+        public Customer SelectCustomerDetail(string account)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Customers Where CustomerAccount= '" + account + "'";
+                var cust = conn.QueryFirstOrDefault<Customer>(sql);
+                return cust;
+
+            }
+        }
+
+        public CustomerOrderCount SelectCustomerOrderCount(string account)
+        {
+            CustomerOrderCount orders;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select COUNT(*) As Count,SUM(o.TotalPrice) As Sum From Customers As c " +
+                "Inner Join Orders As o On c.CustomerID = o.CustomerID " +
+                "Where c.CustomerAccount = '" + account + "'" +
+                "Group By c.CustomerAccount";
+                orders = conn.QueryFirstOrDefault<CustomerOrderCount>(sql);
+                return orders;
             }
         }
     }

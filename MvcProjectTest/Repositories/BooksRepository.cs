@@ -191,5 +191,14 @@ namespace MvcProjectTest.Repositories
             }
             return books;
         }
+
+        public string GetCategoryName(string engName)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "SELECT CategoryName FROM Category WHERE CategoryEngName = '" + engName + "'";
+                return conn.QueryFirstOrDefault<string>(sql);
+            }
+        }
     }
 }
