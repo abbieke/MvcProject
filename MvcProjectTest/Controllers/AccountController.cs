@@ -296,8 +296,8 @@ namespace MvcProjectTest.Controllers
             var callbackUrl = Url.Action("EmailConfirmed", "Account", new { userAccount =account }, protocol: Request.Url.Scheme);
             await MailService.SendMailToVerify(callbackUrl, mail);
         }
-
         
 
+        
     }
 }
