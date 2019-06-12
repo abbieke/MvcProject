@@ -299,5 +299,30 @@ namespace MvcProjectTest.Repositories
                 return roleName;
             }
         }
+
+        public Customer SelectCustomerDetail(string account)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select * From Customers Where CustomerAccount= '" + account + "'";
+                var cust = conn.QueryFirstOrDefault<Customer>(sql);
+                return cust;
+
+            }
+        }
+
+        public CustomerOrderCount SelectCustomerOrderCount(string account)
+        {
+            CustomerOrderCount orders;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "Select COUNT(*) As Count,SUM(o.TotalPrice) As Sum From Customers As c " +
+                "Inner Join Orders As o On c.CustomerID = o.CustomerID " +
+                "Where c.CustomerAccount = '" + account + "'" +
+                "Group By c.CustomerAccount";
+                orders = conn.QueryFirstOrDefault<CustomerOrderCount>(sql);
+                return orders;
+            }
+        }
     }
 }

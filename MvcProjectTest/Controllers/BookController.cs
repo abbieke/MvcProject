@@ -38,6 +38,7 @@ namespace MvcProjectTest.Controllers
                 var books = _repo.SelectCategoryBooks(name);
                 var bookTypes = _repo.SelectBookType(name);
                 ViewBag.catEngName = name;
+                ViewBag.cateName = _repo.GetCategoryName(name);
                 BookTypeMix mix = new BookTypeMix(){ Books = books, BookTypes = bookTypes};
                 return View(mix);
             }
@@ -45,6 +46,7 @@ namespace MvcProjectTest.Controllers
             {
                 var books = _repo.SelectBookTypeAllbooks(types);
                 var booktypes = _repo.SelectAllBookType();
+                ViewBag.type = types;
                 BookTypeMix mix = new BookTypeMix() { Books = books, BookTypes = booktypes };
                 return View(mix);
             }
@@ -53,6 +55,8 @@ namespace MvcProjectTest.Controllers
                 var books = _repo.SelectBookTypebooks(name,types);
                 var bookTypes = _repo.SelectBookType(name);
                 ViewBag.catEngName = name;
+                ViewBag.cateName = _repo.GetCategoryName(name);
+                ViewBag.type = types;
                 BookTypeMix mix = new BookTypeMix() { Books = books, BookTypes = bookTypes };
                 return View(mix);
             }

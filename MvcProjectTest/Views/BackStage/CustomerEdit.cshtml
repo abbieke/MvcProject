@@ -1,266 +1,112 @@
-﻿
+﻿@model MvcProjectTest.Models.Customer
 @{
     ViewBag.Title = "CustomerEdit";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
 }
 
 @Styles.Render("~/Back-css/BackCustomerDetails")
-<div class="">
-    <div class="page-title">
-        <div class="title_left">
-            <h3>編輯會員</h3>
-        </div>
 
-        <div class="title_right">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-
-    <div class="row">
-        <div class="col-md-6 col-xs-12">
-
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>會員基本資訊<a href="CustomerIndex.html"><small>Back to list</small></a></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="dropdown" style="visibility: hidden;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#">Settings 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-                    <!-- start form for validation -->
-                    <form id="product-create-form" data-parsley-validate>
-                        <label for="BookID">BookID :</label>
-                        <input type="text" id="BookID" class="form-control" disabled="disabled" placeholder="CH0001">
-
-                        <label for="BookName">BookName :</label>
-                        <input type="text" id="BookName" class="form-control" disabled="disabled" placeholder="">
-
-                        <label for="PressID">PressID :</label>
-                        <input type="text" id="PressID" class="form-control" disabled="disabled" placeholder="">
-
-                        <label for="CategoryID">CategoryID :</label>
-                        <input type="text" id="CategoryID" class="form-control" disabled="disabled" placeholder="">
-
-                        <label for="AuthorID">AuthorID :</label>
-                        <!-- 選擇1 -->
-                        <div class="form-group">
-                            <div>
-                                <select class="select2_group form-control">
-                                    <optgroup label="張">
-                                        <option value="1">張瀞仁</option>
-                                    </optgroup>
-                                    <optgroup label="中村">
-                                        <option value="2">中村聡史</option>
-                                    </optgroup>
-                                    <optgroup label="呂">
-                                        <option value="3">呂國泰</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- 選擇2 -->
-                        <div class="form-group">
-                            <div>
-                                <select class="select2_single form-control" tabindex="-1">
-                                    <option></option>
-                                    <option value="1">張瀞仁</option>
-                                    <option value="2">中村聡史</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- 選擇3 -->
-                        <select id="AuthorID" class="form-control" required>
-                            <option value="">Choose..</option>
-                            <option value="1">張瀞仁</option>
-                            <option value="2">中村聡史</option>
-                            <option value="3">呂國泰</option>
-                        </select>
-
-                        <label for="UnitPrice">UnitPrice :</label>
-                        <input type="text" id="UnitPrice" class="form-control" name="UnitPrice" />
-
-                        <label for="InStock">InStock :</label>
-                        <input type="text" id="InStock" class="form-control" name="InStock" />
-
-                        <label for="Discount">Discount :</label>
-                        <input type="text" id="Discount" class="form-control" name="Discount" />
-
-                        <label for="ISBN">ISBN :</label>
-                        <input type="text" id="ISBN" class="form-control" disabled="disabled" placeholder="ISBN">
-
-                        <label for="BookImage">BookImage :</label>
-                        <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                            <input name="BookImage" type="file" accept="image/gif, image/jpeg, image/png">
-                        </form>
-                    </form>
-                    <!-- end form for validations -->
-
-                </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>編輯會員</h3>
             </div>
 
-
         </div>
+        <div class="clearfix"></div>
 
-        <!-- HTML編輯器 -->
-        <div class="col-md-6 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>商品描述<small>Description</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="dropdown" style="visibility: hidden;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#">Settings 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div id="alerts"></div>
-                    <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font">
-                                <i class="fa fa-font"></i><b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu"></ul>
-                        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
 
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size">
-                                <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a data-edit="fontSize 5">
-                                        <p style="font-size:18px">大</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-edit="fontSize 3">
-                                        <p style="font-size:14px">普通</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-edit="fontSize 1">
-                                        <p style="font-size:10px">小</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>會員基本資訊<a href="CustomerIndex.html"><small>Back to list</small></a></h2>
 
-                        <div class="btn-group">
-                            <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
-                            <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
-                            <a class="btn" data-edit="strikethrough" title="Strikethrough">
-                                <i class="fa fa-strikethrough"></i>
-                            </a>
-                            <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)">
-                                <i class="fa fa-underline"></i>
-                            </a>
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn" data-edit="insertunorderedlist" title="Bullet list">
-                                <i class="fa fa-list-ul"></i>
-                            </a>
-                            <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
-                            <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)">
-                                <i class="fa fa-dedent"></i>
-                            </a>
-                            <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)">
-                                <i class="fa fa-align-left"></i>
-                            </a>
-                            <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)">
-                                <i class="fa fa-align-center"></i>
-                            </a>
-                            <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)">
-                                <i class="fa fa-align-right"></i>
-                            </a>
-                            <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)">
-                                <i class="fa fa-align-justify"></i>
-                            </a>
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink">
-                                <i class="fa fa-link"></i>
-                            </a>
-                            <div class="dropdown-menu input-append">
-                                <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
-                                <button class="btn" type="button">Add</button>
-                            </div>
-                            <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn">
-                                <i class="fa fa-picture-o"></i>
-                            </a>
-                            <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
-                            <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
-                        </div>
+                        <div class="clearfix"></div>
                     </div>
+                    <div class="x_content">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <!-- start form for validation -->
+                        <form id="product-create-form" data-parsley-validate>
+                            @Html.LabelFor(model => model.CustomerAccount)
+                            @Html.EditorFor(model => model.CustomerAccount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.CustomerAccount, "", new { @class = "text-danger" })
+                            <label for="BookID">BookID :</label>
+                            <input type="text" id="BookID" class="form-control" disabled="disabled" placeholder="CH0001">
 
-                    <div id="editor-one" class="editor-wrapper"></div>
+                            <label for="BookName">BookName :</label>
+                            <input type="text" id="BookName" class="form-control" disabled="disabled" placeholder="">
 
-                    <textarea name="descr" id="descr" style="display:none;"></textarea>
+                            <label for="PressID">PressID :</label>
+                            <input type="text" id="PressID" class="form-control" disabled="disabled" placeholder="">
 
+                            <label for="CategoryID">CategoryID :</label>
+                            <input type="text" id="CategoryID" class="form-control" disabled="disabled" placeholder="">
 
+                            <label for="AuthorID">AuthorID :</label>
+                            <!-- 選擇1 -->
+                            <div class="form-group">
+                                <div>
+                                    <select class="select2_group form-control">
+                                        <optgroup label="張">
+                                            <option value="1">張瀞仁</option>
+                                        </optgroup>
+                                        <optgroup label="中村">
+                                            <option value="2">中村聡史</option>
+                                        </optgroup>
+                                        <optgroup label="呂">
+                                            <option value="3">呂國泰</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 選擇2 -->
+                            <div class="form-group">
+                                <div>
+                                    <select class="select2_single form-control" tabindex="-1">
+                                        <option></option>
+                                        <option value="1">張瀞仁</option>
+                                        <option value="2">中村聡史</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- 選擇3 -->
+                            <select id="AuthorID" class="form-control" required>
+                                <option value="">Choose..</option>
+                                <option value="1">張瀞仁</option>
+                                <option value="2">中村聡史</option>
+                                <option value="3">呂國泰</option>
+                            </select>
+
+                            <label for="UnitPrice">UnitPrice :</label>
+                            <input type="text" id="UnitPrice" class="form-control" name="UnitPrice" />
+
+                            <label for="InStock">InStock :</label>
+                            <input type="text" id="InStock" class="form-control" name="InStock" />
+
+                            <label for="Discount">Discount :</label>
+                            <input type="text" id="Discount" class="form-control" name="Discount" />
+
+                            <label for="ISBN">ISBN :</label>
+                            <input type="text" id="ISBN" class="form-control" disabled="disabled" placeholder="ISBN">
+
+                        </form>
+                        <!-- end form for validations -->
+
+                    </div>
                 </div>
+
+
             </div>
+
+            <!-- HTML編輯器 -->
+
         </div>
     </div>
-</div>
+}
 
 
 @Scripts.Render("~/Back-Script/BackCustomerDetails")

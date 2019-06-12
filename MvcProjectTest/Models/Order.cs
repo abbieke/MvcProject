@@ -48,4 +48,10 @@ namespace MvcProjectTest.Models
         public DateTime CompletePickup { get; set; }
         public DateTime TransactionComplete { get; set; }
     }
+
+    public class CustomerOrderCount
+    {
+        public int Count { get; set; }
+        public decimal Sum { get; set; }
+    }
 }
