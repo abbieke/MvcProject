@@ -121,7 +121,7 @@ namespace MvcProjectTest.Repositories
 
         public bool IsEmailConfirmed(string account)
         {
-            using (conn)
+            using (conn = new SqlConnection(connString))
             {
                 string sql = "Select EmailConfirmed From Customers Where CustomerAccount= '" + account + "' ;";
                 var result = conn.QueryFirstOrDefault<bool>(sql);
@@ -131,16 +131,20 @@ namespace MvcProjectTest.Repositories
         }
         public void CustomerAddRole(UserRoles userRoles)
         {
-            
+            using (conn = new SqlConnection(connString))
+            {
                 string sql = "INSERT INTO UserRoles(UserID,RolesID) VALUES ( @UserID,@RolesID) ;";
-                conn.Execute(sql, new {userRoles.UserID, userRoles.RolesID });
-            
+                conn.Execute(sql, new {userRoles.UserID, userRoles.RolesID});
+            }
+
         }
         public void CustomerUpdateRole(UserRoles userRoles)
         {
-
-            string sql = "UPDATE UserRoles SET RolesID= @RolesID WHERE UserID=@UserID ;";
-            conn.Execute(sql, new { userRoles.RolesID, userRoles.UserID  });
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "UPDATE UserRoles SET RolesID= @RolesID WHERE UserID=@UserID ;";
+                conn.Execute(sql, new {userRoles.RolesID, userRoles.UserID});
+            }
 
         }
 
@@ -160,13 +164,15 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress WHERE CustomerAccount=@CustomerAccount";
+                string sql = "Update Customers Set CustomerName=@CustomerName, CustomerEmail=@CustomerEmail, CustomerPhone=@CustomerPhone, CustomerAddress=@CustomerAddress,EmailConfirmed=@EmailConfirmed WHERE CustomerAccount=@CustomerAccount";
                 conn.Execute(sql, new {
                     CustomerName = cust.CustomerName,
                     CustomerAccount = cust.CustomerAccount,
                     CustomerEmail = cust.CustomerEmail,
                     CustomerPhone = cust.CustomerPhone,
-                    CustomerAddress = cust.CustomerAddress});
+                    CustomerAddress = cust.CustomerAddress,
+                    EmailConfirmed = cust.EmailConfirmed
+                });
             }
 
         }

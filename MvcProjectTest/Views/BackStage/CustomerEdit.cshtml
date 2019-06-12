@@ -1,112 +1,154 @@
-﻿@model MvcProjectTest.Models.Customer
+﻿@model MvcProjectTest.Models.CustomerViewModel
 @{
     ViewBag.Title = "CustomerEdit";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
+    bool isdamin = ViewBag.isAdmin;
 }
 
 @Styles.Render("~/Back-css/BackCustomerDetails")
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="">
-        <div class="page-title">
-            <div class="title_left">
-                <h3>編輯會員</h3>
-            </div>
 
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>編輯會員</h3>
         </div>
-        <div class="clearfix"></div>
 
-        <div class="row">
-            <div class="col-md-6 col-xs-12">
+    </div>
+    <div class="clearfix"></div>
 
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>會員基本資訊<a href="CustomerIndex.html"><small>Back to list</small></a></h2>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
 
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>會員基本資訊<a href='@Url.Action("CustomerUpdate", "BackStage", null)'><small>Back to list</small></a></h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @using (Html.BeginForm("CustomerUpdate", "BackStage", null))
+                    {
+                        @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <!-- start form for validation -->
                         <form id="product-create-form" data-parsley-validate>
+                            @Html.LabelFor(model => model.CustomerId)
+                            @Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+
                             @Html.LabelFor(model => model.CustomerAccount)
                             @Html.EditorFor(model => model.CustomerAccount, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model => model.CustomerAccount, "", new { @class = "text-danger" })
-                            <label for="BookID">BookID :</label>
-                            <input type="text" id="BookID" class="form-control" disabled="disabled" placeholder="CH0001">
+                            @*<label for="BookID">BookID :</label>
+                                <input type="text" id="BookID" class="form-control" disabled="disabled" placeholder="CH0001">*@
+                            @Html.LabelFor(model => model.CustomerName)
+                            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.CustomerPhone)
+                            @Html.EditorFor(model => model.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CustomerPhone, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.CustomerBirth)
+                            @Html.EditorFor(model => model.CustomerBirth, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.CustomerBirth, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.CustomerEmail)
+                            @Html.EditorFor(model => model.CustomerEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.CustomerAddress)
+                            @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.EmailConfirmed)
+                            @Html.EditorFor(model => model.EmailConfirmed, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EmailConfirmed, "", new { @class = "text-danger" })
+                            @*<label for="BookName">BookName :</label>
+                                <input type="text" id="BookName" class="form-control" disabled="disabled" placeholder="">
 
-                            <label for="BookName">BookName :</label>
-                            <input type="text" id="BookName" class="form-control" disabled="disabled" placeholder="">
+                                <label for="PressID">PressID :</label>
+                                <input type="text" id="PressID" class="form-control" disabled="disabled" placeholder="">
 
-                            <label for="PressID">PressID :</label>
-                            <input type="text" id="PressID" class="form-control" disabled="disabled" placeholder="">
+                                <label for="CategoryID">CategoryID :</label>
+                                <input type="text" id="CategoryID" class="form-control" disabled="disabled" placeholder="">
 
-                            <label for="CategoryID">CategoryID :</label>
-                            <input type="text" id="CategoryID" class="form-control" disabled="disabled" placeholder="">
-
-                            <label for="AuthorID">AuthorID :</label>
-                            <!-- 選擇1 -->
-                            <div class="form-group">
-                                <div>
-                                    <select class="select2_group form-control">
-                                        <optgroup label="張">
+                                <label for="AuthorID">AuthorID :</label>
+                                <!-- 選擇1 -->
+                                <div class="form-group">
+                                    <div>
+                                        <select class="select2_group form-control">
+                                            <optgroup label="張">
+                                                <option value="1">張瀞仁</option>
+                                            </optgroup>
+                                            <optgroup label="中村">
+                                                <option value="2">中村聡史</option>
+                                            </optgroup>
+                                            <optgroup label="呂">
+                                                <option value="3">呂國泰</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- 選擇2 -->
+                                <div class="form-group">
+                                    <div>
+                                        <select class="select2_single form-control" tabindex="-1">
+                                            <option></option>
                                             <option value="1">張瀞仁</option>
-                                        </optgroup>
-                                        <optgroup label="中村">
                                             <option value="2">中村聡史</option>
-                                        </optgroup>
-                                        <optgroup label="呂">
-                                            <option value="3">呂國泰</option>
-                                        </optgroup>
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- 選擇2 -->
-                            <div class="form-group">
-                                <div>
-                                    <select class="select2_single form-control" tabindex="-1">
-                                        <option></option>
-                                        <option value="1">張瀞仁</option>
-                                        <option value="2">中村聡史</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- 選擇3 -->
-                            <select id="AuthorID" class="form-control" required>
-                                <option value="">Choose..</option>
-                                <option value="1">張瀞仁</option>
-                                <option value="2">中村聡史</option>
-                                <option value="3">呂國泰</option>
-                            </select>
+                                <!-- 選擇3 -->
+                                <select id="AuthorID" class="form-control" required>
+                                    <option value="">Choose..</option>
+                                    <option value="1">張瀞仁</option>
+                                    <option value="2">中村聡史</option>
+                                    <option value="3">呂國泰</option>
+                                </select>
 
-                            <label for="UnitPrice">UnitPrice :</label>
-                            <input type="text" id="UnitPrice" class="form-control" name="UnitPrice" />
+                                <label for="UnitPrice">UnitPrice :</label>
+                                <input type="text" id="UnitPrice" class="form-control" name="UnitPrice" />
 
-                            <label for="InStock">InStock :</label>
-                            <input type="text" id="InStock" class="form-control" name="InStock" />
+                                <label for="InStock">InStock :</label>
+                                <input type="text" id="InStock" class="form-control" name="InStock" />
 
-                            <label for="Discount">Discount :</label>
-                            <input type="text" id="Discount" class="form-control" name="Discount" />
+                                <label for="Discount">Discount :</label>
+                                <input type="text" id="Discount" class="form-control" name="Discount" />
 
-                            <label for="ISBN">ISBN :</label>
-                            <input type="text" id="ISBN" class="form-control" disabled="disabled" placeholder="ISBN">
-
+                                <label for="ISBN">ISBN :</label>
+                                <input type="text" id="ISBN" class="form-control" disabled="disabled" placeholder="ISBN">*@
+                            <input class="btn btn-info btn-xs" type="submit" value="Update" />
                         </form>
                         <!-- end form for validations -->
+                    }
 
-                    </div>
                 </div>
-
-
             </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>使用者資訊<a href="productIndex.html"><small>Back to list</small></a></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @Html.AntiForgeryToken()
+                    <!-- start form for validation -->
+                    @using (Html.BeginForm("UpdateAdminRole", "BackStage", null))
+                    {
 
-            <!-- HTML編輯器 -->
+                        @*@Html.LabelFor("isAdmin")*@
+                        <label for="isAdmin">是否為管理員 :</label>
+                        @Html.CheckBox("isAdmin",isdamin,new {@class="form-control"})
+                        <input type="hidden" name="custid" id="custid" value="@Model.CustomerId">
+                        <input class="btn btn-info btn-xs" type="submit" value="Update" />
 
+                    }
+                    <!-- end form for validations -->
+                </div>
+            </div>
         </div>
+
+        <!-- HTML編輯器 -->
+
     </div>
-}
+</div>
 
 
 @Scripts.Render("~/Back-Script/BackCustomerDetails")
