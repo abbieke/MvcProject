@@ -10,6 +10,7 @@ using MvcProjectTest.Services;
 
 namespace MvcProjectTest.Controllers
 {
+    [Authorize(Roles ="User")]
     public class CustomerController : Controller
     {
         public readonly CustomersRepository _repo;

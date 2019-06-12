@@ -291,5 +291,13 @@ namespace MvcProjectTest.Controllers
             return rolesEngNames;
         }
 
+        public async Task SendAsync(string account,string mail)
+        {
+            var callbackUrl = Url.Action("EmailConfirmed", "Account", new { userAccount =account }, protocol: Request.Url.Scheme);
+            await MailService.SendMailToVerify(callbackUrl, mail);
+        }
+
+        
+
     }
 }
