@@ -17,9 +17,11 @@ namespace MvcProjectTest.Controllers
     public class BackStageController : Controller
     {
         private readonly CustomersRepository _cusRepo;
+        private readonly OrderRepository _orderRepo;
         public BackStageController()
         {
             _cusRepo = new CustomersRepository();
+            _orderRepo = new OrderRepository();
         }
         // GET: BackStage
         public ActionResult Index()
@@ -115,14 +117,18 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult OrderEdit()
+        public ActionResult OrderEdit(string id)
         {
-            return View();
+            var orderStatus = _orderRepo.GetOrderStatus(id);
+            return View(orderStatus);
         }
 
         public ActionResult OrderIndex()
         {
-            return View();
+            var getOrders = _orderRepo.GetAllOrders();
+            List<Order> orders = new List<Order>();
+            orders = getOrders.ToList();
+            return View(orders);
         }
 
         public ActionResult ProductCreate()

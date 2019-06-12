@@ -119,5 +119,26 @@ namespace MvcProjectTest.Repositories
             }
             
         }
+
+        public List<Order> GetAllOrders()
+        {
+            List<Order> allOrders;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from Orders As o Inner Join [Order Status] As os On o.OrderID = os.OrderID Inner Join Customers As c On o.CustomerID = c.CustomerID";
+                allOrders = conn.Query<Order>(sql).ToList();
+                return allOrders;
+            }
+        }
+
+        public OrderStatusModel GetOrderStatus(string orderId)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from [Order Status] As od Inner Join Orders As o On od.OrderID = o.OrderID Where od.OrderID = " + orderId + ";";
+                var orderStatus = conn.QueryFirstOrDefault<OrderStatusModel>(sql);
+                return orderStatus;
+            }
+        }
     }
 }
