@@ -52,7 +52,7 @@
                                 <td>@item.EmailConfirmed</td>
                                 <td style="text-align: center">
                                     <a href='@Url.Action("CustomerDetails","BackStage",new { id = item.CustomerAccount})' type="button" class="btn btn-info btn-xs">明細</a>
-                                    <a href="CustomerEdit.html" type="button" class="btn btn-warning btn-xs">修改</a>
+                                    <a href='@Url.Action("CustomerEdit","BackStage",new { id = item.CustomerAccount})' type="button" class="btn btn-warning btn-xs">修改</a>
                                 </td>
                             </tr>
                         }

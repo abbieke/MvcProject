@@ -1,4 +1,6 @@
-﻿
+﻿@using System.Diagnostics.Eventing.Reader
+@using System.Security.Cryptography.X509Certificates
+@model IEnumerable<MvcProjectTest.Models.Order>
 @{
     ViewBag.Title = "OrderIndex";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
@@ -58,7 +60,8 @@
                         <thead>
                             <tr>
                                 <th>OrderID</th>
-                                <th>CustomerID</th>
+                                <th>OrderNo</th>
+                                <th>CustomerName</th>
                                 <th>OrderDate</th>
                                 <th>PayWay</th>
                                 <th>TotalPrice</th>
@@ -71,25 +74,59 @@
 
 
                         <tbody>
-                            <tr>
-                                <td>AS0000001</td>
-                                <td>1</td>
-                                <td>2019-06-05 14:00:00</td>
-                                <td>信用卡</td>
-                                <td>700.0000</td>
-                                <td>王維俊</td>
-                                <td>新竹市香山區</td>
-                                <td>已出貨</td>
-                                <td style="text-align: center">
-                                    <a href="OrderDetails.html" type="button" class="btn btn-info btn-xs">明細</a>
+                            @foreach (var item in Model)
+                            {
+                                string status = "";
+                                DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
 
-                                    <a href="OrderEdit.html" type="button" class="btn btn-warning btn-xs">修改</a>
+                                    if (item.SetUp == fullTime)
+                                    {
+                                        status = "訂單未完成";
 
-                                    <!-- <a href="OrderDelete.html" type="button" class="btn btn-danger btn-xs">刪除</a> -->
-                                </td>
-                            </tr>
+                                    }
+                                    else if ( item.Preparation == fullTime)
+                                    {
+                                        status = "訂單成立";
+                                    }
+                                    else if ( item.Delivery == fullTime)
+                                    {
+                                        status = "出貨準備中";
+                                    }
+                                    else if ( item.PickUp == fullTime)
+                                    {
+                                        status = "宅配中";
+                                    }
+                                    else if ( item.CompletePickup == fullTime)
+                                    {
+                                        status = "待取貨";
+                                    }
+                                    else if ( item.TransactionComplete == fullTime)
+                                    {
+                                        status = "取貨完成";
+                                    }
+                                    else
+                                    {
+                                        status = "交易完成";
+                                    }
 
 
+                                <tr>
+                                    <td>@item.OrderID</td>
+                                    <td>@item.OrderNo</td>
+                                    <td>@item.CustomerName</td>
+                                    <td>@item.OrderDate</td>
+                                    <td>@item.PayWay</td>
+                                    <td>@item.DeliveryMethod</td>
+                                    <td>@item.Recipient</td>
+                                    <td>@item.RecipientAddress</td>
+                                    <td>@status</td>
+                                    <td style="text-align: center">
+                                        <a href="OrderDetails.html" type="button" class="btn btn-info btn-xs">明細</a>
+                                        <a href='@Url.Action("OrderEdit","BackStage",new{ id = item.OrderID})' type="button" class="btn btn-warning btn-xs">修改</a>
+                                        <!-- <a href="OrderDelete.html" type="button" class="btn btn-danger btn-xs">刪除</a> -->
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

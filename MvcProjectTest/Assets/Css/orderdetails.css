@@ -71,6 +71,12 @@
   width: 20%;
   text-align: center;
 }
+.orderdetails-productsdetail-item:first-child {
+        padding: 0 30px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+}
 
 .shipping-status {
   border-bottom: #ddd 1px solid;

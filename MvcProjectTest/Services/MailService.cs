@@ -52,5 +52,30 @@ namespace MvcProjectTest.Services
             msg.AddTo(new EmailAddress(mail, null));
             var response = await client.SendEmailAsync(msg);
         }
+
+        public static async Task SendMailToNoticeOrderSuccess(string mail,string orderno)
+        {
+            var apiKey = ConfigurationManager.AppSettings["SendGrid_1G"];
+            var client = new SendGridClient(apiKey);
+
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("Hi1GLOL@gmail.com", "1G Team"),
+                Subject =DateTime.Now.ToShortDateString()+ "訂單成立通知 - 新知書櫥",
+                PlainTextContent = "",
+                HtmlContent = "<p>你已成功在<a href='https://mvcprojecttest20190604123944.azurewebsites.net/'>新知書櫥網站</a>下訂單!</p>" +
+                "<p>訂單編號為:"+ orderno + "</p>"+
+                "<p>可以搭配 Line Bot(ID:@409hsreg)</p>"+
+                "<p>或網站<a href='https://mvcprojecttest20190604123944.azurewebsites.net/Customer/CustomerIndex'>新知書櫥網站</a>查詢訂單進度喲!</p>" +
+                "<p>謝謝您的下訂，歡迎再次光臨!</p>" +
+                "</br>" +
+                "<p>網站連結:<a href='https://mvcprojecttest20190604123944.azurewebsites.net/'>https://mvcprojecttest20190604123944.azurewebsites.net</a></p>" +
+                "<p>Line Bot ID:@409hsreg (包含@)</p>"
+
+
+            };
+            msg.AddTo(new EmailAddress(mail, null));
+            var response = await client.SendEmailAsync(msg);
+        }
     }
 }
