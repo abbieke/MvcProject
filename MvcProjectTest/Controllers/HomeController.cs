@@ -31,7 +31,11 @@ namespace MvcProjectTest.Controllers
             var books = _repo.SelectBooks();
             return View(books);
         }
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
 
-        
+
     }
 }
