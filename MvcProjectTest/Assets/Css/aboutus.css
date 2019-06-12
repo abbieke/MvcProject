@@ -1,0 +1,94 @@
+.bookshopping-aboutus-container {
+  width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: none;
+}
+
+.about-us-title {
+  font-size: 3.5rem;
+  margin: 20px 0;
+  border-bottom: 2px #ddd solid;
+}
+
+.bookshopping-aboutus-block {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.bookshopping-aboutus-box {
+  margin: 20px;
+  width: 21%;
+}
+
+.bookshopping-aboutus-imagebox {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.usphoto-image {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+}
+
+.bookshopping-aboutus-contentbox {
+  margin-top: 20px;
+}
+
+.bookshopping-aboutus-name {
+  margin: 0;
+  text-align: center;
+}
+
+.bookshopping-aboutus-linkbox {
+  margin-top: 10px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  font-size: 30px;
+}
+
+.hvr-grow:hover {
+  color: #fff;
+}
+
+.bookshopping-aboutus-contactbox {
+  padding: 0 20px;
+  margin-bottom: 20px;
+  line-height: 2;
+  height: 50%;
+}
+
+.bookshopping-aboutus-contactbox p {
+  margin: 0;
+}
+
+.bookshopping-aboutus-textbox {
+  height: 300px;
+  padding: 0 20px 20px 20px;
+  overflow: hidden;
+}
+
+.bookshopping-aboutus-textbox p {
+  margin: 0;
+  line-height: 2em;
+}
+
+.hvr-grow-shadow:hover {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+/*# sourceMappingURL=aboutus.css.map */

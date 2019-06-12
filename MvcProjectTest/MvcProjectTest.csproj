@@ -177,6 +177,7 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Css\aboutus.css" />
     <Content Include="Assets\Css\BackStage\bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\buttons.bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\dataTables.bootstrap.min.css" />
@@ -553,6 +554,7 @@
     <Content Include="Views\BackStage\ProductEdit.cshtml" />
     <Content Include="Views\BackStage\ProductDetails.cshtml" />
     <Content Include="Views\BackStage\ProductIndex.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
