@@ -241,10 +241,10 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                var sql = "select AuthorID from Author where AuthorName = N'@authorName";
+                var sql = "select AuthorID from Author where AuthorName = N'@authorName'";
                 return conn.QueryFirstOrDefault<int>(sql, new
                 {
-                    pressName = authorName
+                    authorName = authorName
                 });
             }
         }
