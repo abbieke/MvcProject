@@ -8,7 +8,7 @@
 
 }
 
-
+@Styles.Render("~/Assets/Css/RWD.css")
 <div class="books_section">
     <div class="container">
         <!-- Breadcrumbs  套版bootstrap-->
@@ -39,7 +39,7 @@
                         {
                             <li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>
                             @*<li><a href="#">分類2</a></li>
-                            <li><a href="#">分類3</a></li>*@
+                                <li><a href="#">分類3</a></li>*@
                         }
 
                     </ul>
@@ -69,6 +69,9 @@
                 </div>
             </div>
             <div class="books-block">
+                <div class="sidebar_title sidebar_title-hidden">
+                    <button>商品總類 <i class="fas fa-chevron-down"></i></button>                    
+                </div>
                 <div class="sort-div">
                     <select class="all-book-category-select" name="all-book-category" id="all-book-category-dropdown">
                         <option value="1" selected>預設排序</option>
@@ -203,6 +206,19 @@
             });
             $("#amount").val("$" + $("#slider-range").slider("values", 0) +
                 " - $" + $("#slider-range").slider("values", 1));
+        });
+    </script>
+    <script>
+        $(function () {
+
+            if ($(".sidebar_title-hidden").is(":visible")) {
+                $(".sidebar_title-hidden").on("click", function () {
+
+                    $(".sidebar_title-hidden button i").toggleClass("fas fa-chevron-down")
+                        .toggleClass("fas fa-chevron-up");
+                })
+
+            }
         });
     </script>
 }

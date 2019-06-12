@@ -1,6 +1,9 @@
 ﻿.bookshopping-sidemenulist {
     display: none;
 }
+.sidebar_title-hidden {
+    display: none;
+}
 
 @media screen and (max-width:1140px) {
     .container {
@@ -96,9 +99,14 @@
     }
 
     .product-card-out-block {
-        width: 50%;
+        width: 50%;        
     }
-
+    .sorting-display-list-style {
+        max-height:none;
+    }
+    .sorting-display-list-style .product-card-out-block {
+        height: auto;
+    }
     .product-card-block {
         height: 100%;
         padding: 10px;
@@ -150,12 +158,31 @@
         height: auto;
     }
 
-
     .principle-out-block:hover .function-button-inner {
         background-color: transparent;
         color: black;
     }
-     
+    .sidebar {
+        display:none;
+    }
+    .books-block {
+        margin:0;
+    }
+    .sidebar_title-hidden {
+        display: block;
+    }
+        .sidebar_title-hidden button {
+            background-color: white;
+            border: none;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        .sidebar_title-hidden button:focus {
+            outline:none;
+        }
+    .forget-password-block {
+        width:80%;
+    }
 }
 
 @media screen and (max-width:767px) {
