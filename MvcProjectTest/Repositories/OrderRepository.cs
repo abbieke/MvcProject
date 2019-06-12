@@ -119,5 +119,15 @@ namespace MvcProjectTest.Repositories
             }
             
         }
+
+        public IEnumerable<Order> GetOrder()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from Orders";
+                var result = conn.Query<Order>(sql);
+                return result;
+            }
+        }
     }
 }
