@@ -58,26 +58,58 @@
                     <form id="product-create-form" data-parsley-validate>
 
                         @Html.LabelFor(model => model.OrderID)
-                        @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-control orderedit-orderid", @readonly = "readonly" } })
 
                         @Html.LabelFor(model => model.SetUp)
-                        @Html.TextBoxFor(model => model.SetUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                        @Html.CheckBox("SetUpname", new { @value = "", @class = "form-control", @readonly = "readonly" })
+                        <div class="orderedit-textboxcontent">
+                            <div class="orderedit-textbox"> @Html.TextBoxFor(model => model.SetUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })</div>
+                            <div class="orderedit-checkbox">
+                                @Html.CheckBox("SetUpname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            </div>
+                        </div>
                         @Html.LabelFor(model => model.Preparation)
-                        @Html.TextBoxFor(model => model.Preparation, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                        @Html.CheckBox("Preparationname", new { @value = "", @class = "form-control", @readonly = "readonly" })
+                        <div class="orderedit-textboxcontent">
+                            <div class="orderedit-textbox">@Html.TextBoxFor(model => model.Preparation, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })</div>
+                            <div class="orderedit-checkbox">
+                                @Html.CheckBox("Preparationname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            </div>
+                        </div>
                         @Html.LabelFor(model => model.Delivery)
-                        @Html.TextBoxFor(model => model.Delivery, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                        @Html.CheckBox("Deliveryname", new { @value = "", @class = "form-control", @readonly = "readonly" })
+                        <div class="orderedit-textboxcontent">
+                            <div class="orderedit-textbox">
+                                @Html.TextBoxFor(model => model.Delivery, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="orderedit-checkbox">
+                                @Html.CheckBox("Deliveryname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            </div>
+                        </div>
                         @Html.LabelFor(model => model.PickUp)
-                        @Html.TextBoxFor(model => model.PickUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                        @Html.CheckBox("PickUpname", new { @value = "", @class = "form-control", @readonly = "readonly" })
+                        <div class="orderedit-textboxcontent">
+                            <div class="orderedit-textbox">
+                                @Html.TextBoxFor(model => model.PickUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="orderedit-checkbox">
+                                @Html.CheckBox("PickUpname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            </div>
+                        </div>
                         @Html.LabelFor(model => model.CompletePickup)
-                        @Html.TextBoxFor(model => model.CompletePickup, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                        @Html.CheckBox("CompletePickupname", new { @value = "", @class = "form-control", @readonly = "readonly" })
+                        <div class="orderedit-textboxcontent">
+                            <div class="orderedit-textbox">
+                                @Html.TextBoxFor(model => model.CompletePickup, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="orderedit-checkbox">
+                                @Html.CheckBox("CompletePickupname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            </div>
+                        </div>
                         @Html.LabelFor(model => model.TransactionComplete)
-                        @Html.TextBoxFor(model => model.TransactionComplete, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                        @Html.CheckBox("TransactionCompletename", new { @value = "", @class = "form-control", @readonly = "readonly" })
+                        <div class="orderedit-textboxcontent">
+                            <div class="orderedit-textbox">
+                                @Html.TextBoxFor(model => model.TransactionComplete, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="orderedit-checkbox">
+                                @Html.CheckBox("TransactionCompletename", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            </div>
+                        </div>
                         <input class="btn btn-info btn-xs" type="submit" value="Update" />
                     </form>
                     <!-- end form for validations -->
@@ -88,6 +120,29 @@
 
     </div>
 </div>
+@section topCss {
+    <style>
+        .orderedit-orderid {
+            margin-bottom:20px;
+        }
+        .orderedit-textboxcontent {
+            display: flex;
+            margin-bottom:20px;
+        }
 
+        .orderedit-textbox {
+            width: 100%;
+        }
+
+        .orderedit-checkbox {
+            width: 10%
+        }
+
+        .orderedit-checkbox .from-check {
+                margin: 0;
+                width:50px;
+        }
+    </style>
+}
 @Scripts.Render("~/Back-Script/BackCustomerDetails")
 
