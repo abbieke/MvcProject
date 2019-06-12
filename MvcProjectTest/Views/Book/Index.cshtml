@@ -30,20 +30,21 @@
                         <h5>商品總類</h5>
                     </div>
                     <ul class="sidebar_categories">
-                        <li class="active">
-                            <a href="#">
-                                <span>
-                                    <i class="fa fa-angle-double-right"
-                                       aria-hidden="true"></i>
-                                </span>優惠特區
-                            </a>
+                        <li>
+                            <span @*class="active fa fa-angle-double-right"*@ aria-hidden="true">
+                                @*<i class="fa fa-angle-double-right"
+            aria-hidden="true"></i>*@
+                            </span>
+                            @Html.ActionLink("優惠特區", "Index", "Book", new { name = ViewBag.catEngName, types = "優惠" }, null)
+                            @*<a href="#" class="active">
+                                優惠特區
+                            </a>*@
                         </li>
-                        <li><a href="#">新品</a></li>
+                        @*<li><a href="#">新品</a></li>*@
                         @foreach (var item in Model.BookTypes)
                         {
-                            <li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>
-                            @*<li><a href="#">分類2</a></li>
-                            <li><a href="#">分類3</a></li>*@
+                            @*<li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>*@
+                            <li><span></span>@Html.ActionLink(@item.BookTypeName, "Index", "Book", new { name = ViewBag.catEngName, types = item.BookTypeName }, null)</li>
                         }
 
                     </ul>
@@ -209,6 +210,43 @@
             });
             $("#amount").val("$" + $("#slider-range").slider("values", 0) +
                 " - $" + $("#slider-range").slider("values", 1));
+        });
+    </script>
+    <script>
+        $(function () {
+            //getUrlVars();
+            //var me = getUrlVars()["name"];
+            //var name2 = getUrlVars()["types"];
+            //alert(me + "," + name2);
+            //function getUrlVars() {
+            //    var vars = [], hash;
+            //    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            //    for (var i = 0; i < hashes.length; i++) {
+            //        hash = hashes[i].split('=');
+            //        vars.push(hash[0]);
+            //        vars[hash[0]] = hash[1];
+            //    }
+            //    return vars;
+            //}
+            ////$(window).load(function () {
+            ////    alert("load event!");
+            ////});
+
+            if (isNaN('@ViewBag.type'))
+            {
+                $(".active").removeClass("active");
+                $(".fa-angle-double-right").removeClass("fa fa-angle-double-right");
+
+                var $type= $('.sidebar_categories').children().find(":contains('@ViewBag.type')");
+                $type.addClass("active");
+                $type.parent().find("span").addClass("active fa fa-angle-double-right");
+
+                console.log($('.sidebar_categories').children().find(":contains('@ViewBag.type')"))
+                console.log($('.sidebar_categories').children().children());
+                //console.log('@ViewBag.type')
+
+            }
+            
         });
     </script>
 }
