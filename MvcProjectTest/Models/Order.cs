@@ -31,7 +31,7 @@ namespace MvcProjectTest.Models
     public class OrderDetailModel
     {
         public int OrderID { get; set; }
-        public int BooksNo { get; set; }
+        public string BookID { get; set; }
         public string BooksName { get; set; }
         public decimal UnitPrice { get; set; }
         public int Counts { get; set; }
