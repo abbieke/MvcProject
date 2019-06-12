@@ -39,7 +39,7 @@
                         {
                             <li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>
                             @*<li><a href="#">分類2</a></li>
-                            <li><a href="#">分類3</a></li>*@
+                                <li><a href="#">分類3</a></li>*@
                         }
 
                     </ul>
@@ -82,7 +82,6 @@
                         <button class="present-sorting-button sorting-display-js" id="sorting-display-list-button"><i class="fas fa-list-ul"></i></button>
                         <button class="present-sorting-button sorting-display-js" id="sorting-display-grid-button"><i class="fas fa-th active"></i></button>
 
-
                     </div>
                 </div>
                 <!-- 書 -->
@@ -94,6 +93,20 @@
                         @Html.Partial("_ProductCardPartial", item)
                     }
                     <!-- Product Sorting -->
+                </div>
+                <div class="flex PageAction">
+                    <button class="PageAction" id="PageReturn">上一頁</button>
+                    <button class="PageAction PageActionNum" id="Page1" value="1">1</button>
+                    <button class="PageAction PageActionNum" id="Page2" value="2">2</button>
+                    <button class="PageAction PageActionNum" id="Page3" value="3">3</button>
+                    <button class="PageAction PageActionNum" id="Page4" value="4">4</button>
+                    <button class="PageAction PageActionNum" id="Page5" value="5">5</button>
+                    <button class="PageAction PageActionNum" id="Page6" value="6">6</button>
+                    <button class="PageAction PageActionNum" id="Page7" value="7">7</button>
+                    <button class="PageAction PageActionNum" id="Page8" value="8">8</button>
+                    <button class="PageAction PageActionNum" id="Page9" value="9">9</button>
+                    <button class="PageAction PageActionNum" id="Page10" value="10">10</button>
+                    <button class="PageAction" id="PageNext">下一頁</button>
                 </div>
             </div>
         </div>
@@ -112,6 +125,9 @@
 }
 @section scripts {
     <script>
+
+        var cubeNumber = 1;
+
         $(function () {
 
 
@@ -121,6 +137,15 @@
 
 
             function sorting_List_Event() {
+
+                //威志寫的
+                //cubeNumber = 4;
+                //$("#sorting-display-items-block").children().hide();
+                //for (var i = 1; i <= 16; i++) {
+                //    $("#sorting-display-items-block :nth-child(" + i + ")").attr("style", "display:block");
+                //}
+                //威志寫的
+
                 $(".sorting-display-js i").toggleClass("active");
                 $("#sorting-display-items-block").attr("class", "sorting-display-list-style");
                 $(this).off("click");
@@ -128,6 +153,8 @@
             }
 
             function sorting_Grid_Event() {
+                //cubeNumber = 1;
+                //$(".description-for-list-display-style").hide();
                 $(".sorting-display-js i").toggleClass("active");
                 $("#sorting-display-items-block").attr("class", "row sorting-display");
                 $(this).off("click");
@@ -179,6 +206,63 @@
         });
 
 
+        //分頁的部分
+        $(".PageActionNum").hide();
+        //$(".description-for-list-display-style").hide();
+        var nowPage = 1;
+        var howMany = 16;
+        var Items = @Model.Books.Count();
+        var pageMuch = Math.ceil(Items / howMany);
+        $("#sorting-display-items-block").children().hide();
+        for (var i = 1; i <= howMany * 2 * cubeNumber; i += 2) {
+            $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+        }
+
+        for (var i = 1; i <= pageMuch; i++)
+        {
+            $("#Page" + i).show();
+            $("#Page" + i).click(function () {
+                $("#sorting-display-items-block").children().hide();
+                for (var j = 1 + (($(this).attr("value") - 1) * howMany); j <= $(this).attr("value") * howMany; j++) 
+                {
+                    nowPage = $(this).attr("value");
+                    $("#sorting-display-items-block .product-card-out-block:nth-child(" + j + ")").attr("style", "display: block;");
+                    //if (cubeNumber == 1)
+                    //{
+                    //    $(".description-for-list-display-style").hide();
+                    //}
+
+                }
+            });
+        }
+
+        $("#PageReturn").click(function () {
+            if (nowPage > 1) {
+                nowPage--;
+                $("#sorting-display-items-block").children().hide();
+                for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
+                    $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+                    //if (cubeNumber == 1) {
+                    //    $(".description-for-list-display-style").hide();
+                    //}
+                }
+            }
+            else { alert("已經是第一頁了") }
+        })
+
+        $("#PageNext").click(function () {
+            if (nowPage < pageMuch) {
+                nowPage++;
+                $("#sorting-display-items-block").children().hide();
+                for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
+                    $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+                    //if (cubeNumber == 1) {
+                    //    $(".description-for-list-display-style").hide();
+                    //}
+                }
+            }
+            else { alert("已經是最後一頁了") }
+        })
 
     </script>
 

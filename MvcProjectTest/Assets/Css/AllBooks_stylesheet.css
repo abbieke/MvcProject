@@ -191,8 +191,8 @@
 
 /*===================================================*/
 .sorting-display-list-style {
-  max-height: 1130px;
-  overflow: hidden;
+  /*max-height: 1130px;*/
+  /*overflow: hidden;*/
   margin-bottom: 20px;
 }
 
