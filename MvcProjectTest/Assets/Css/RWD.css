@@ -162,6 +162,10 @@
         background-color: transparent;
         color: black;
     }
+    .sidebarbox {
+        display: flex;
+        justify-content: center;
+    }
     .sidebar {
         display:none;
     }
@@ -169,7 +173,9 @@
         margin:0;
     }
     .sidebar_title-hidden {
-        display: block;
+        display: flex;
+        align-items:center;
+        margin-right:20px;
     }
         .sidebar_title-hidden button {
             background-color: white;
