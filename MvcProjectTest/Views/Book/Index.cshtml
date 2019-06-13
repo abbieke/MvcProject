@@ -14,7 +14,7 @@
         <!-- Breadcrumbs  套版bootstrap-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="home.html">首頁</a></li>
+                <li class="breadcrumb-item"><a href='@Url.Action("Index","Home",null)'>首頁</a></li>
                 <li class="breadcrumb-item active" aria-current="page">瀏覽商品</li>
                 @if (!String.IsNullOrEmpty(ViewBag.cateName))
                 {
@@ -32,7 +32,7 @@
                         <h5>商品總類</h5>
                     </div>
                     <ul class="sidebar_categories .sidebar-hidden-block">
-                        <li>
+                        <li class="backgroundcolr">
                             <span @*class="active fa fa-angle-double-right"*@ aria-hidden="true">
                                 @*<i class="fa fa-angle-double-right"
                                     aria-hidden="true"></i>*@
@@ -46,7 +46,7 @@
                         @foreach (var item in Model.BookTypes)
                         {
                             @*<li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>*@
-                            <li><span></span>@Html.ActionLink(@item.BookTypeName, "Index", "Book", new { name = ViewBag.catEngName, types = item.BookTypeName }, new { id = "cate" + item.BookTypeName })</li>
+                            <li class="backgroundcolr"><span></span>@Html.ActionLink(@item.BookTypeName, "Index", "Book", new { name = ViewBag.catEngName, types = item.BookTypeName }, new { id = "cate" + item.BookTypeName })</li>
                         }
 
                     </ul>
@@ -79,7 +79,7 @@
             <div class="books-block">
                 <div class="sidebarbox">
                     <div class="sidebar_title sidebar_title-hidden">
-                        <button>商品總類 <i class="fas fa-chevron-left"></i></button>
+                        <button>商品總類 <i class="fas fa-chevron-up"></i></button>
                     </div>
                     <div class="sort-div">
                         @*@{
@@ -335,11 +335,11 @@
     <script>
         $(function () {
             if ($(".sidebar_title-hidden button").is(":visible")) {
-                $(".main-menu ul").hide();
+                $(".sidebar_section").hide();
                 $(".sidebar_title-hidden button").on("click", function () {
-                    $(".main-menu ul").toggle();
-                    $(".sidebar_title-hidden button i").toggleClass("fas fa-chevron-left")
-                        .toggleClass("fas fa-chevron-right");
+                    $(".sidebar_section").toggle();
+                    $(".sidebar_title-hidden button i").toggleClass("fas fa-chevron-up")
+                        .toggleClass("fas fa-chevron-down");
                 });
             }
 

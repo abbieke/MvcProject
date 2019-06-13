@@ -16,7 +16,7 @@ using System.Web.UI;
 
 namespace MvcProjectTest.Controllers
 {
-    
+    [Authorize(Roles ="Admin")]
     public class BackStageController : Controller
     {
         private readonly CustomersRepository _cusRepo;

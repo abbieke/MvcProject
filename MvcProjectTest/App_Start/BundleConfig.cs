@@ -42,12 +42,17 @@ namespace MvcProjectTest
 
                 "~/Assets/Css/new-product-card.css",
                 "~/Assets/Css/wish-list-product-card-stylesheet.css",
-                "~/Assets/Css/cart_stylesheet.css"));
+                "~/Assets/Css/cart_stylesheet.css",
+                "~/Assets/Css/for-change-style.css",
+                "~/Assets/Css/item-quick-look.css",
+                "~/Assets/Css/override-jquery-ui-dialog.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Back-css/BackLayoutIndex").Include(
                 "~/Assets/Css/BackStage/custom.min.css",
                 "~/Assets/Css/BackStage/jquery.min.css",
-                "~/Assets/Css/BackStage/bootstrap.min.css"
+                "~/Assets/Css/BackStage/bootstrap.min.css",
+                "~/Assets/Css/BackStage/font-awesome.min.css"
                ));
 
             bundles.Add(new StyleBundle("~/Back-css/BackCustomerDetails").Include(
