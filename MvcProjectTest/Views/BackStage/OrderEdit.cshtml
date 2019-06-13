@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "OrderEdit";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
+    bool setUp = ViewBag.setUp;
+    bool preparation = ViewBag.preparation;
+    bool delivery = ViewBag.delivery;
+    bool pickUp = ViewBag.pickUp;
+    bool completePickup = ViewBag.completePickup;
+    bool transactionComplete = ViewBag.transactionComplete;
 }
 
 @Styles.Render("~/Back-css/BackCustomerDetails")
@@ -55,63 +61,65 @@
                 </div>
                 <div class="x_content">
                     <!-- start form for validation -->
-                    <form id="product-create-form" data-parsley-validate>
+                    @using (Html.BeginForm("OrderUpdate", "BackStage", null))
+                    {
+                        @Html.AntiForgeryToken()
 
-                        @Html.LabelFor(model => model.OrderID)
-                        @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-control orderedit-orderid", @readonly = "readonly" } })
+                            @Html.LabelFor(model => model.OrderID)
+                            @Html.EditorFor(model => model.OrderID, new { htmlAttributes = new { @class = "form-control orderedit-orderid", @readonly = "readonly" } })
 
-                        @Html.LabelFor(model => model.SetUp)
-                        <div class="orderedit-textboxcontent">
-                            <div class="orderedit-textbox"> @Html.TextBoxFor(model => model.SetUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })</div>
-                            <div class="orderedit-checkbox">
-                                @Html.CheckBox("SetUpname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            @Html.LabelFor(model => model.SetUp)
+                            <div class="orderedit-textboxcontent">
+                                <div class="orderedit-textbox"> @Html.TextBoxFor(model => model.SetUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })</div>
+                                <div class="orderedit-checkbox">
+                                    @Html.CheckBox("SetUpname", setUp, new { @class = "form-control from-check" })
+                                </div>
                             </div>
-                        </div>
-                        @Html.LabelFor(model => model.Preparation)
-                        <div class="orderedit-textboxcontent">
-                            <div class="orderedit-textbox">@Html.TextBoxFor(model => model.Preparation, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })</div>
-                            <div class="orderedit-checkbox">
-                                @Html.CheckBox("Preparationname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            @Html.LabelFor(model => model.Preparation)
+                            <div class="orderedit-textboxcontent">
+                                <div class="orderedit-textbox">@Html.TextBoxFor(model => model.Preparation, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })</div>
+                                <div class="orderedit-checkbox">
+                                    @Html.CheckBox("Preparationname", preparation, new { @class = "form-control from-check" })
+                                </div>
                             </div>
-                        </div>
-                        @Html.LabelFor(model => model.Delivery)
-                        <div class="orderedit-textboxcontent">
-                            <div class="orderedit-textbox">
-                                @Html.TextBoxFor(model => model.Delivery, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                            @Html.LabelFor(model => model.Delivery)
+                            <div class="orderedit-textboxcontent">
+                                <div class="orderedit-textbox">
+                                    @Html.TextBoxFor(model => model.Delivery, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <div class="orderedit-checkbox">
+                                    @Html.CheckBox("Deliveryname", delivery, new { @class = "form-control from-check" })
+                                </div>
                             </div>
-                            <div class="orderedit-checkbox">
-                                @Html.CheckBox("Deliveryname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            @Html.LabelFor(model => model.PickUp)
+                            <div class="orderedit-textboxcontent">
+                                <div class="orderedit-textbox">
+                                    @Html.TextBoxFor(model => model.PickUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <div class="orderedit-checkbox">
+                                    @Html.CheckBox("PickUpname", pickUp, new { @class = "form-control from-check" })
+                                </div>
                             </div>
-                        </div>
-                        @Html.LabelFor(model => model.PickUp)
-                        <div class="orderedit-textboxcontent">
-                            <div class="orderedit-textbox">
-                                @Html.TextBoxFor(model => model.PickUp, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                            @Html.LabelFor(model => model.CompletePickup)
+                            <div class="orderedit-textboxcontent">
+                                <div class="orderedit-textbox">
+                                    @Html.TextBoxFor(model => model.CompletePickup, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <div class="orderedit-checkbox">
+                                    @Html.CheckBox("CompletePickupname", completePickup, new { @class = "form-control from-check" })
+                                </div>
                             </div>
-                            <div class="orderedit-checkbox">
-                                @Html.CheckBox("PickUpname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
+                            @Html.LabelFor(model => model.TransactionComplete)
+                            <div class="orderedit-textboxcontent">
+                                <div class="orderedit-textbox">
+                                    @Html.TextBoxFor(model => model.TransactionComplete, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <div class="orderedit-checkbox">
+                                    @Html.CheckBox("TransactionCompletename", transactionComplete, new { @class = "form-control from-check" })
+                                </div>
                             </div>
-                        </div>
-                        @Html.LabelFor(model => model.CompletePickup)
-                        <div class="orderedit-textboxcontent">
-                            <div class="orderedit-textbox">
-                                @Html.TextBoxFor(model => model.CompletePickup, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                            </div>
-                            <div class="orderedit-checkbox">
-                                @Html.CheckBox("CompletePickupname", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
-                            </div>
-                        </div>
-                        @Html.LabelFor(model => model.TransactionComplete)
-                        <div class="orderedit-textboxcontent">
-                            <div class="orderedit-textbox">
-                                @Html.TextBoxFor(model => model.TransactionComplete, new { @value = Model.SetUp.ToString(), @class = "form-control", @readonly = "readonly" })
-                            </div>
-                            <div class="orderedit-checkbox">
-                                @Html.CheckBox("TransactionCompletename", new { @value = "", @class = "form-control from-check", @readonly = "readonly" })
-                            </div>
-                        </div>
-                        <input class="btn btn-info btn-xs" type="submit" value="Update" />
-                    </form>
+                            <input class="btn btn-info btn-xs" type="submit" value="Update" />
+                    }
                     <!-- end form for validations -->
 
                 </div>
@@ -123,11 +131,12 @@
 @section topCss {
     <style>
         .orderedit-orderid {
-            margin-bottom:20px;
+            margin-bottom: 20px;
         }
+
         .orderedit-textboxcontent {
             display: flex;
-            margin-bottom:20px;
+            margin-bottom: 20px;
         }
 
         .orderedit-textbox {
@@ -138,11 +147,34 @@
             width: 10%
         }
 
-        .orderedit-checkbox .from-check {
+            .orderedit-checkbox .from-check {
                 margin: 0;
-                width:50px;
-        }
+                width: 50px;
+            }
     </style>
 }
 @Scripts.Render("~/Back-Script/BackCustomerDetails")
+@section endScript
+{
+    @*<script>
+        if ('@setUp' == 'True') {
+            $( "#SetUpname" ).prop( "disabled", true );
+        }
+        if ('@preparation' == 'True') {
+            $( "#Preparationname" ).prop( "disabled", true );
+        }
+        if ('@delivery' == 'True') {
+            $( "#Deliveryname" ).prop( "disabled", true );
+        }
+        if ('@pickUp' == 'True') {
+            $( "#PickUpname" ).prop( "disabled", true );
+        }
+        if ('@completePickup' == 'True') {
+            $( "#CompletePickupname" ).prop( "disabled", true );
+        }
+        if ('@transactionComplete' == 'True') {
+            $( "#TransactionCompletename" ).prop( "disabled", true );
+        }
+    </script>*@
+}
 

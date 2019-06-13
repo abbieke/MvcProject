@@ -38,34 +38,33 @@
                         </div>
                         @{
                             string full = "未完成";
-                            DateTime fullTime = new DateTime(1,1,1,0,0,0);
                             string setUp = "";
                             string preparation = "";
                             string delivery = "";
                             string pickUp = "";
                             string completePickup = "";
                             string transactionComplete = "";
-                            if (Model.OrderStatus.SetUp == fullTime)
+                            if (Model.OrderStatus.SetUp == null)
                             {setUp = full;}
                             else
                             {setUp = Model.OrderStatus.SetUp.ToString();}
-                            if (Model.OrderStatus.Preparation == fullTime)
+                            if (Model.OrderStatus.Preparation == null)
                             {preparation = full;}
                             else
                             {preparation = Model.OrderStatus.Preparation.ToString();}
-                            if (Model.OrderStatus.Delivery == fullTime)
+                            if (Model.OrderStatus.Delivery == null)
                             {delivery = full;}
                             else
                             {delivery = Model.OrderStatus.Delivery.ToString();}
-                            if (Model.OrderStatus.PickUp == fullTime)
+                            if (Model.OrderStatus.PickUp == null)
                             {pickUp = full;}
                             else
                             {pickUp = Model.OrderStatus.PickUp.ToString();}
-                            if (Model.OrderStatus.CompletePickup == fullTime)
+                            if (Model.OrderStatus.CompletePickup == null)
                             {completePickup = full;}
                             else
                             {completePickup = Model.OrderStatus.CompletePickup.ToString();}
-                            if (Model.OrderStatus.TransactionComplete == fullTime)
+                            if (Model.OrderStatus.TransactionComplete == null)
                             {transactionComplete = full;}
                             else
                             {transactionComplete = Model.OrderStatus.TransactionComplete.ToString();}

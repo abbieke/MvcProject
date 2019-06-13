@@ -4,7 +4,7 @@
     ViewBag.Title = "CustomerIndex";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
-
+<script src="~/Assets/Script/BackStage/jquery.min.js"></script>
 <div class="member-body">
     <div class="container margintop" id="member-tab">
         <div class="flex">
@@ -179,23 +179,44 @@
                                             <i class="fas fa-eye"></i>
                                             <div class="membercenter-order-shopping-stasus">
                                                 <ul class="membercenter-order-shipping-progress">
-                                                    <li class="active">訂單成立</li>
-                                                    <li>準備出貨</li>
-                                                    <li>運送中</li>
-                                                    <li>待取貨</li>
-                                                    <li>完成取貨</li>
-                                                    <li>交易完成</li>
+                                                    <li class="active" id='@("setUp" + item.OrderID)'>訂單成立</li>
+                                                    <li class="" id='@("preparation" + item.OrderID)'>準備出貨</li>
+                                                    <li class="" id='@("delivery" + item.OrderID)'>運送中</li>
+                                                    <li class="" id='@("pickUp" + item.OrderID)'>待取貨</li>
+                                                    <li class="" id='@("completePickup" + item.OrderID)'>完成取貨</li>
+                                                    <li class="" id='@("transactionComplete" + item.OrderID)'>交易完成</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="membercenter-order-center-item order-box">
                                         @*@Html.ActionLink("詳細資訊", "OrderDetail", "Customer", new { id = item.OrderID }, new { @class = "membercente-sohw-orderdatil" })*@
-                                        <a href='@Url.Action("OrderDetail", "Customer", new {id = item.OrderID})'
+                                        <a href='@Url.Action("OrderDetail", "Customer", new { id = item.OrderID })'
                                            class="membercente-sohw-orderdatil">詳細資訊</a>
                                     </li>
                                 </ul>
                             </div>
+                            <script>
+                                alert('@(!(item.SetUp == null))');
+                                if ('@(!(item.SetUp == null))' == 'True') {
+                                    $('#@("setUp" + item.OrderID)').addClass('active');
+                                }
+                                if ('@(!(item.Preparation == null))' == 'True') {
+                                    $('#@("preparation" + item.OrderID)').addClass('active');
+                                    }
+                                    if ('@(!(item.Delivery == null))' == 'True') {
+                                    $('#@("delivery" + item.OrderID)').addClass('active');
+                                    }
+                                    if ('@(!(item.PickUp == null))' == 'True') {
+                                    $('#@("pickUp" + item.OrderID)').addClass('active');
+                                    }
+                                    if ('@(!(item.CompletePickup == null))' == 'True') {
+                                    $('#@("completePickup" + item.OrderID)').addClass('active');
+                                    }
+                                    if ('@(!(item.TransactionComplete == null))' == 'True') {
+                                    $('#@("transactionComplete" + item.OrderID)').addClass('active');
+                                    }
+                            </script>
                         </div>
                     }
 

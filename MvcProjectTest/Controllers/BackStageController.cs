@@ -114,15 +114,59 @@ namespace MvcProjectTest.Controllers
             return RedirectToAction("CustomerIndex", "BackStage");
         }
 
-        public ActionResult OrderDetails()
+        public ActionResult OrderDetails(int? id)
         {
-            return View();
+            var order = _cusRepo.SelectOrder(id);
+            var orderDetail = _cusRepo.SelectOrderDetails(id);
+            var orderStatus = _cusRepo.SelectOrderStatus(id);
+
+            OrderDetailMix mix = new OrderDetailMix() { Order = order, OrderDetails = orderDetail, OrderStatus = orderStatus };
+            return View(mix);
         }
 
         public ActionResult OrderEdit(string id)
         {
             var orderStatus = _orderRepo.GetOrderStatus(id);
+            ViewBag.setUp = (!(orderStatus.SetUp == null));
+            ViewBag.preparation = (!(orderStatus.Preparation == null));
+            ViewBag.delivery = (!(orderStatus.Delivery == null));
+            ViewBag.pickUp = (!(orderStatus.PickUp == null));
+            ViewBag.completePickup = (!(orderStatus.CompletePickup == null));
+            ViewBag.transactionComplete = (!(orderStatus.TransactionComplete == null));
             return View(orderStatus);
+        }
+
+        public ActionResult OrderUpdate(string OrderID, bool SetUpname, bool Preparationname, bool Deliveryname, bool PickUpname, bool CompletePickupname, bool TransactionCompletename)
+        {
+            OrderStatusModel orderStatusView = new OrderStatusModel();
+            var orderStatus = _orderRepo.GetOrderStatus(OrderID);
+            orderStatusView = orderStatus;
+            if ((!(orderStatus.SetUp == null)) != SetUpname)
+            {
+                orderStatusView.SetUp = DateTime.Now;
+            }
+            if ((!(orderStatus.Preparation == null)) != Preparationname)
+            {
+                orderStatusView.Preparation = DateTime.Now;
+            }
+            if ((!(orderStatus.Delivery == null)) != Deliveryname)
+            {
+                orderStatusView.Delivery = DateTime.Now;
+            }
+            if ((!(orderStatus.PickUp == null)) != PickUpname)
+            {
+                orderStatusView.PickUp = DateTime.Now;
+            }
+            if ((!(orderStatus.CompletePickup == null)) != CompletePickupname)
+            {
+                orderStatusView.CompletePickup = DateTime.Now;
+            }
+            if ((!(orderStatus.TransactionComplete == null)) != TransactionCompletename)
+            {
+                orderStatusView.TransactionComplete = DateTime.Now;
+            }
+            _orderRepo.OrderStatusUpdate(orderStatusView);
+            return RedirectToAction("OrderIndex", "BackStage");
         }
 
         public ActionResult OrderIndex()
@@ -135,12 +179,14 @@ namespace MvcProjectTest.Controllers
 
         public ActionResult ProductCreate()
         {
+
             return View();
         }
 
-        public ActionResult ProductDelete()
+        public ActionResult ProductDelete(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductEdit()
@@ -160,7 +206,27 @@ namespace MvcProjectTest.Controllers
             return View(model);
         }
 
-        
+        public bool CreatePress(string pressName, string pressPhone, string pressAddress )
+        {
+            Press newPress = new Press();
+            newPress.PressName = pressName;
+            newPress.PressPhone = pressPhone;
+            newPress.PressAddress = pressAddress;
+
+            try
+            {
+                _bookRepo.CreatePress(newPress);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
+        }
+
+
+
 
 
     }

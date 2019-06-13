@@ -78,7 +78,7 @@
                 <div class="x_content">
                     <h4>當月銷售前五佔總銷售額比例</h4>
                     <div class="widget_summary">
-                        <div class="w_left w_35">
+                        <div class="w_left w_30">
 
                             <span class="SalesChartTitle">@sortList[0].Key</span>
                         </div>
@@ -90,14 +90,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w_right w_20">
-                            <span>@sortList[0].Total</span>
+                        <div class="w_right w_25">
+                            <span>@sortList[0].Total 元 (@sortList[0].Percentage %)</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="widget_summary">
-                        <div class="w_left w_35">
+                        <div class="w_left w_30">
                             <span class="SalesChartTitle">@sortList[1].Key</span>
                         </div>
                         <div class="w_center w_45">
@@ -108,13 +108,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w_right w_20">
-                            <span>@sortList[1].Total</span>
+                        <div class="w_right w_25">
+                            <span>@sortList[1].Total 元 (@sortList[1].Percentage %)</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget_summary">
-                        <div class="w_left w_35">
+                        <div class="w_left w_30">
                             <span class="SalesChartTitle">@sortList[2].Key</span>
                         </div>
                         <div class="w_center w_45">
@@ -125,13 +125,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w_right w_20">
-                            <span>@sortList[2].Total</span>
+                        <div class="w_right w_25">
+                            <span>@sortList[2].Total 元 (@sortList[2].Percentage %)</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget_summary">
-                        <div class="w_left w_35">
+                        <div class="w_left w_30">
                             <span class="SalesChartTitle">@sortList[3].Key</span>
                         </div>
                         <div class="w_center w_45">
@@ -142,13 +142,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w_right w_20">
-                            <span>@sortList[3].Total</span>
+                        <div class="w_right w_25">
+                            <span>@sortList[3].Total 元 (@sortList[3].Percentage %)</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget_summary">
-                        <div class="w_left w_35">
+                        <div class="w_left w_30">
                             <span class="SalesChartTitle">@sortList[4].Key</span>
                         </div>
                         <div class="w_center w_45">
@@ -159,8 +159,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w_right w_20">
-                            <span>@sortList[4].Total</span>
+                        <div class="w_right w_25">
+                            <span>@sortList[4].Total 元 (@sortList[4].Percentage %)</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -339,6 +339,10 @@
 
         .w_35 {
             width: 35%;
+        }
+
+        .w_30 {
+            width: 30%;
         }
     </style>
 }

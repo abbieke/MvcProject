@@ -8,7 +8,7 @@
 
 }
 
-@Styles.Render("~/Assets/Css/RWD.css")
+
 <div class="books_section">
     <div class="container">
         <!-- Breadcrumbs  套版bootstrap-->
@@ -16,6 +16,10 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="home.html">首頁</a></li>
                 <li class="breadcrumb-item active" aria-current="page">瀏覽商品</li>
+                @if(!String.IsNullOrEmpty(ViewBag.cateName))
+                { <li class="breadcrumb-item active" aria-current="page">@ViewBag.cateName</li> }
+                @if(!String.IsNullOrEmpty(ViewBag.type))
+                { <li class="breadcrumb-item active" aria-current="page">@ViewBag.type</li> }
             </ol>
         </nav>
         <!-- 分類 -->
@@ -26,20 +30,21 @@
                         <h5>商品總類</h5>
                     </div>
                     <ul class="sidebar_categories">
-                        <li class="active">
-                            <a href="#">
-                                <span>
-                                    <i class="fa fa-angle-double-right"
-                                       aria-hidden="true"></i>
-                                </span>優惠特區
-                            </a>
+                        <li>
+                            <span @*class="active fa fa-angle-double-right"*@ aria-hidden="true">
+                                @*<i class="fa fa-angle-double-right"
+            aria-hidden="true"></i>*@
+                            </span>
+                            @Html.ActionLink("優惠特區", "Index", "Book", new { name = ViewBag.catEngName, types = "優惠" }, null)
+                            @*<a href="#" class="active">
+                                優惠特區
+                            </a>*@
                         </li>
-                        <li><a href="#">新品</a></li>
+                        @*<li><a href="#">新品</a></li>*@
                         @foreach (var item in Model.BookTypes)
                         {
-                            <li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>
-                            @*<li><a href="#">分類2</a></li>
-                                <li><a href="#">分類3</a></li>*@
+                            @*<li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>*@
+                            <li><span></span>@Html.ActionLink(@item.BookTypeName, "Index", "Book", new { name = ViewBag.catEngName, types = item.BookTypeName }, new { id = "cate" + item.BookTypeName})</li>
                         }
 
                     </ul>
@@ -52,7 +57,8 @@
                     </div>
                     <form action='@Url.Action("Index","Book")' method="post">
                         <p>
-                            <input type="hidden" name="bookKind" value="@ViewBag.catEngName" />
+                            <input type="hidden" name="name" value="@ViewBag.catEngName" />
+                            <input type="hidden" name="types" value="@ViewBag.type" />
                             <input type="hidden" id="maxValue" name="maxValue" value="" />
                             <input type="hidden" id="minValue" name="minValue" value="" />
                             <input type="text" class="all-view-sidebar-price-range-text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -69,22 +75,20 @@
                 </div>
             </div>
             <div class="books-block">
-                <div class="sidebar_title sidebar_title-hidden">
-                    <button>商品總類 <i class="fas fa-chevron-down"></i></button>                    
-                </div>
                 <div class="sort-div">
-                    <select class="all-book-category-select" name="all-book-category" id="all-book-category-dropdown">
-                        <option value="1" selected>預設排序</option>
-                        <option value="2">價格低至高</option>
-                        <option value="3">價格高至低</option>
-                        <option value="4">熱銷書</option>
-                        <option value="5">ISBN</option>
-
-                    </select>
+                    @{
+                        List<SelectListItem> OrderBy = new List<SelectListItem>()
+                        {
+                            new SelectListItem(){Text = "預設排序", Value = "1", Selected = true},
+                            new SelectListItem(){Text = "價格低至高", Value = "2"},
+                            new SelectListItem(){Text = "價格高至低", Value = "3"},
+                            new SelectListItem(){Text = "熱銷書", Value = "4"}
+                        };
+                    }
+                    @Html.DropDownList("OrderBys", OrderBy,new { @class="all-book-category-select"})
                     <div class="present-sorting">
                         <button class="present-sorting-button sorting-display-js" id="sorting-display-list-button"><i class="fas fa-list-ul"></i></button>
                         <button class="present-sorting-button sorting-display-js" id="sorting-display-grid-button"><i class="fas fa-th active"></i></button>
-
 
                     </div>
                 </div>
@@ -97,6 +101,20 @@
                         @Html.Partial("_ProductCardPartial", item)
                     }
                     <!-- Product Sorting -->
+                </div>
+                <div class="flex PageAction">
+                    <button class="PageAction btn" id="PageReturn">上一頁</button>
+                    <button class="PageAction PageActionNum btn" id="Page1" value="1">1</button>
+                    <button class="PageAction PageActionNum btn" id="Page2" value="2">2</button>
+                    <button class="PageAction PageActionNum btn" id="Page3" value="3">3</button>
+                    <button class="PageAction PageActionNum btn" id="Page4" value="4">4</button>
+                    <button class="PageAction PageActionNum btn" id="Page5" value="5">5</button>
+                    <button class="PageAction PageActionNum btn" id="Page6" value="6">6</button>
+                    <button class="PageAction PageActionNum btn" id="Page7" value="7">7</button>
+                    <button class="PageAction PageActionNum btn" id="Page8" value="8">8</button>
+                    <button class="PageAction PageActionNum btn" id="Page9" value="9">9</button>
+                    <button class="PageAction PageActionNum btn" id="Page10" value="10">10</button>
+                    <button class="PageAction btn" id="PageNext">下一頁</button>
                 </div>
             </div>
         </div>
@@ -115,6 +133,9 @@
 }
 @section scripts {
     <script>
+
+        var cubeNumber = 1;
+
         $(function () {
 
 
@@ -124,6 +145,7 @@
 
 
             function sorting_List_Event() {
+
                 $(".sorting-display-js i").toggleClass("active");
                 $("#sorting-display-items-block").attr("class", "sorting-display-list-style");
                 $(this).off("click");
@@ -141,7 +163,7 @@
         });
 
         $(".filter_button").click(function () {
-            var bookKind = location.pathname.split("/").pop();
+            var name = location.pathname.split("/").pop();
             var valmin = $("#slider-range").slider("values", 0);
             var valmax = $("#slider-range").slider("values", 1);
 
@@ -151,12 +173,11 @@
                 {
                     type: 'POST',
                     url: '@Url.Action("Index", "Book")',
-                    data: { bookKind: bookKind, valmin: valmin, valmax: valmax }
+                    data: { name: name, valmin: valmin, valmax: valmax }
                 })
                 .done(function (data) {
                     $("#sorting-display-items-block").html(data);
 
-                    //alert(bookKind + "+" + valmin + "+" + valmax);
                     $(".quick-view-dialog").dialog({
                         autoOpen: false,
                         modal: true,
@@ -182,6 +203,63 @@
         });
 
 
+        //分頁的部分
+        $(".PageActionNum").hide();
+        var nowPage = 1;
+        var howMany = 16;
+        var Items = @Model.Books.Count();
+        $("#Page" + nowPage).css("background-color", "buttonface");
+        var pageMuch = Math.ceil(Items / howMany);
+        $("#sorting-display-items-block").children().hide();
+        for (var i = 1; i <= howMany * 2 * cubeNumber; i += 2) {
+            $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+        }
+
+        for (var i = 1; i <= pageMuch; i++)
+        {
+            $("#Page" + i).show();
+            $("#Page" + i).click(function () {
+                $("#sorting-display-items-block").children().hide();
+                $("#Page" + nowPage).css("background-color", "transparent");
+                nowPage = $(this).attr("value");
+                for (var j = 1 + (($(this).attr("value") - 1) * howMany); j <= $(this).attr("value") * howMany; j++) 
+                {
+                    $("#sorting-display-items-block .product-card-out-block:nth-child(" + j + ")").attr("style", "display: block;");
+
+                }
+                $("#Page" + nowPage).css("background-color", "buttonface");
+                $('html, body').animate({ scrollTop: 0 }, 400);
+            });
+        }
+
+        $("#PageReturn").click(function () {
+            if (nowPage > 1) {
+                $("#Page" + nowPage).css("background-color","transparent");
+                nowPage--;
+                $("#Page" + nowPage).css("background-color", "buttonface");
+                $("#sorting-display-items-block").children().hide();
+                for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
+                    $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+                }
+                $('html, body').animate({ scrollTop: 0 }, 400);
+            }
+            else { alert("已經是第一頁了") }
+        })
+
+        $("#PageNext").click(function () {
+            if (nowPage < pageMuch) {
+                $("#Page" + nowPage).css("background-color", "transparent");
+                nowPage++;
+                $("#Page" + nowPage).css("background-color", "buttonface");
+
+                $("#sorting-display-items-block").children().hide();
+                for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
+                    $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+                }
+                $('html, body').animate({ scrollTop: 0 }, 400);
+            }
+            else { alert("已經是最後一頁了") }
+        })
 
     </script>
 
@@ -210,15 +288,40 @@
     </script>
     <script>
         $(function () {
+            //getUrlVars();
+            //var me = getUrlVars()["name"];
+            //var name2 = getUrlVars()["types"];
+            //alert(me + "," + name2);
+            //function getUrlVars() {
+            //    var vars = [], hash;
+            //    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            //    for (var i = 0; i < hashes.length; i++) {
+            //        hash = hashes[i].split('=');
+            //        vars.push(hash[0]);
+            //        vars[hash[0]] = hash[1];
+            //    }
+            //    return vars;
+            //}
+            ////$(window).load(function () {
+            ////    alert("load event!");
+            ////});
 
-            if ($(".sidebar_title-hidden").is(":visible")) {
-                $(".sidebar_title-hidden").on("click", function () {
+            if (isNaN('@ViewBag.type'))
+            {
+                $(".sidebar_categories .active").removeClass("active");
+                $(".fa-angle-double-right").removeClass("fa fa-angle-double-right");
 
-                    $(".sidebar_title-hidden button i").toggleClass("fas fa-chevron-down")
-                        .toggleClass("fas fa-chevron-up");
-                })
+                //var $type= $('.sidebar_categories').children().find(":contains('ViewBag.type')");
+                var $type = $("#@("cate" + ViewBag.type)");
+                $type.addClass("active");
+                $type.parent().find("span").addClass("active fa fa-angle-double-right");
+
+                console.log($('.sidebar_categories').children().find(":contains('@ViewBag.type')"))
+                console.log($('.sidebar_categories').children().children());
+                //console.log('@ViewBag.type')
 
             }
+            
         });
     </script>
 }

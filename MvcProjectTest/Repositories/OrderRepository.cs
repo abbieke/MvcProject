@@ -150,5 +150,15 @@ namespace MvcProjectTest.Repositories
                 return orderStatus;
             }
         }
+
+        public void OrderStatusUpdate(OrderStatusModel OrderStatus)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "UPDATE [Order Status] SET SetUp= @SetUp,Preparation=@Preparation,Delivery=@Delivery,PickUp=@PickUp,CompletePickup=@CompletePickup,TransactionComplete=@TransactionComplete WHERE OrderID=@OrderID ";
+                conn.Execute(sql, new { OrderStatus.SetUp, OrderStatus.Preparation, OrderStatus.Delivery, OrderStatus.PickUp, OrderStatus.CompletePickup, OrderStatus.TransactionComplete , OrderStatus.OrderID});
+            }
+
+        }
     }
 }
