@@ -1,7 +1,9 @@
-﻿
+﻿@using MvcProjectTest.Repositories
 @{
     ViewBag.Title = "ProductCreate";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
+
+    var _bookRepo = new BooksRepository();
 }
 
 @Styles.Render("~/Back-css/BackCustomerDetails")
@@ -127,10 +129,14 @@
                         </div>
                         <select id="CategoryID" class="form-control" required>
                             <option value="">Choose..</option>
-                            <option value="1">1 中文書</option>
-                            <option value="2">2 電子書</option>
-                            <option value="3">3 簡體書</option>
-                            <option value="4">4 外文書</option>
+                            @foreach (var cate in _bookRepo.SelectCategory())
+                            {
+                                <option value="@cate.CategoryID">@cate.CategoryID @cate.CategoryName</option>
+                            }
+                            @*<option value="1">1 中文書</option>
+        <option value="2">2 電子書</option>
+        <option value="3">3 簡體書</option>
+        <option value="4">4 外文書</option>*@
                         </select>
 
 

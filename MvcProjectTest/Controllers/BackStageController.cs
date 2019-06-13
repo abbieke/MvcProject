@@ -142,6 +142,7 @@ namespace MvcProjectTest.Controllers
 
         public ActionResult ProductCreate()
         {
+
             return View();
         }
 
