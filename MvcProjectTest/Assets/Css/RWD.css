@@ -183,6 +183,9 @@
     .forget-password-block {
         width:80%;
     }
+    .sidebar .sidebar-hidden-block {
+        display: block;
+    }
 }
 
 @media screen and (max-width:767px) {
@@ -205,6 +208,9 @@
 
     .bookshopping-sidemenulist {
         margin-right: 20px;
+    }
+    .bigimage-detail {
+        padding-top:80px;
     }
 }
 
@@ -262,5 +268,11 @@
     .newest-tab-title-row {
         display:flex;
         flex-direction:column;
+    }
+    .bigimage-detail {
+        padding-top: 50px;
+    }
+    .desc {
+        display:none;
     }
 }
