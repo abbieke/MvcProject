@@ -191,7 +191,7 @@
                         <input type="text" id="Discount" class="form-control" name="Discount" value="@Model.Discount" />
 
                         <label for="ISBN">ISBN :</label>
-                        <input type="text" id="ISBN" class="form-control" name="ISBN" value="@Model.ISBN" />
+                        <input type="text" id="ISBN" class="form-control" name="ISBN" disabled="disabled" value="@Model.ISBN" />
 
                         @*<label for="BookImage">BookImage :</label> <small class="red">*檔名必須與BookID同名</small>
                         <form action="/somewhere/to/upload" enctype="multipart/form-data">
@@ -375,9 +375,6 @@
                 if (isSuccess) {
 
                     alert("新增成功，請重整頁面");
-                    window.setTimeout(function () {
-                        $("#PressID").html("@GetPressOption()");
-                    }, 3000);
 
                 }
                 else {
@@ -425,7 +422,7 @@
             })
         }
     </script>
-    @*新增書本*@
+    @*修改書本*@
     <script>
         $(function () {
             $("#createButton").click(createBookEvent);
@@ -442,17 +439,18 @@
                 var discount = $("#Discount").val();
                 var description = $("#editor-one").html();
                 var ISBN = $("#ISBN").val();
-                var bookImage = $("#id-input-file-2").val();
 
-                //alert(bookId + bookName + pressName + cateId + authorName + unitPrice + inStock + discount + ISBN + description);
+                
                 $.ajax({
                 type: "POST",
-                url: '@Url.Action("CreateAuthor", "BackStage")',
-                data: { authorName: name }
+                url: '@Url.Action("EditBook", "BackStage")',
+                    data: {
+                        bookId: bookId, bookName: bookName, pressName: pressName, cateId: cateId, authorName: authorName, unitPrice: unitPrice, inStock: inStock, discount: discount, description: description, ISBN: ISBN
+                    }
             }).done(function (isSuccess) {
                 if (isSuccess) {
 
-                    alert("新增成功，請重整頁面");
+                    alert("新增成功");
                 }
                 else {
                     alert("新增失敗，請確定格式以及是否重複");

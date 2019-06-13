@@ -264,6 +264,7 @@ namespace MvcProjectTest.Controllers
 
         }
 
+        [HttpPost]
         public bool CreateBook(string bookId, string bookName, string pressName, string cateId, string authorName, string unitPrice, string inStock, string discount, string description, string ISBN, string bookImage)
         {
             Book book = new Book();
@@ -293,6 +294,35 @@ namespace MvcProjectTest.Controllers
 
         }
 
+        [HttpPost]
+        public bool EditBook(string bookId, string bookName, string pressName, string cateId, string authorName, string unitPrice, string inStock, string discount, string description, string ISBN)
+        {
+            Book book = new Book();
+            book.BookId = bookId;
+            book.BooksName = bookName;
+            book.PressName = pressName;
+            book.CategoryID = int.Parse(cateId);
+            book.AuthorName = authorName;
+            book.UnitPrice = decimal.Parse(unitPrice);
+            book.InStock = int.Parse(inStock);
+            book.Discount = decimal.Parse(discount);
+            book.Description = description;
+            book.ISBN = ISBN;
+
+
+
+            try
+            {
+                _bookRepo.UpdateBook(book);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
         //[HttpPost]
         //public void UploadImg(HttpPostedFileBase file)
         //{
@@ -312,10 +342,10 @@ namespace MvcProjectTest.Controllers
         //    {
         //        ViewBag.Message = "You have not specified a file.";
         //    }
-            
+
         //}
 
-        
+
 
 
 
