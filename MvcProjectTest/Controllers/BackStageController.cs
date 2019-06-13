@@ -132,8 +132,36 @@ namespace MvcProjectTest.Controllers
             return View(orderStatus);
         }
 
-        public ActionResult OrderUpdate(int id, bool SetUpname, bool Preparationname, bool Deliveryname, bool PickUpname, bool CompletePickupname, bool TransactionCompletename)
+        public ActionResult OrderUpdate(string OrderID, bool SetUpname, bool Preparationname, bool Deliveryname, bool PickUpname, bool CompletePickupname, bool TransactionCompletename)
         {
+            DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
+            OrderStatusModel orderStatusView = new OrderStatusModel();
+            var orderStatus = _orderRepo.GetOrderStatus(OrderID);
+            if ((!orderStatus.SetUp.Equals(fullTime)) != SetUpname)
+            {
+                orderStatusView.SetUp = DateTime.Now;
+            }
+            if ((!orderStatus.Preparation.Equals(fullTime)) != Preparationname)
+            {
+                orderStatusView.Preparation = DateTime.Now;
+            }
+            if ((!orderStatus.Delivery.Equals(fullTime)) != Deliveryname)
+            {
+                orderStatusView.Delivery = DateTime.Now;
+            }
+            if ((!orderStatus.PickUp.Equals(fullTime)) != PickUpname)
+            {
+                orderStatusView.PickUp = DateTime.Now;
+            }
+            if ((!orderStatus.CompletePickup.Equals(fullTime)) != CompletePickupname)
+            {
+                orderStatusView.CompletePickup = DateTime.Now;
+            }
+            if ((!orderStatus.TransactionComplete.Equals(fullTime)) != TransactionCompletename)
+            {
+                orderStatusView.TransactionComplete = DateTime.Now;
+            }
+            _orderRepo.OrderStatusUpdate(orderStatusView);
             return RedirectToAction("OrderIndex", "BackStage");
         }
 
