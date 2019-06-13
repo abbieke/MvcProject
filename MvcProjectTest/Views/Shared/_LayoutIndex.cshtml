@@ -102,6 +102,10 @@
                     </div>
                     <div class="bkshop-member-carbox">
                         <ul class="bookmenu">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="book-item"><a href='@Url.Action("Index", "BackStage", null)'><i class="fas fa-user-secret top-icon"></i></a></li>
+                            }
                             <li class="book-item ">
                                 @if (Request.IsAuthenticated)
                                 {
@@ -119,43 +123,43 @@
                             <li class="book-item" id="header-cart-block">
                                 <a href='@Url.Action("Index","Shopping", null)'><i class="fas fa-shopping-cart top-icon"></i></a>
                                 @*<ul class="book-item-list book-item-list-right">
-                                        <li class="book-item book-item-has-children">
-                                            <a href="#">最近加入的商品</a>
-                                            <ul class="book-last-list maxheight">
-                                                <li class=" book-last-item">
+                <li class="book-item book-item-has-children">
+                    <a href="#">最近加入的商品</a>
+                    <ul class="book-last-list maxheight">
+                        <li class=" book-last-item">
 
-                                                    <div class="hover-car-product-item flex">
-                                                        <div class="hover-car-product-imagebox">
-                                                            <img class="hover-car-product-image"
-                                                                 src="~/Assets/Images/TChinese/010001.jpg" alt="">
-                                                        </div>
-                                                        <div class="hover-car-product-namebox">
-                                                            <div class="hover-car-product-name">
-                                                                <span>安靜是種超能力</span>
-                                                            </div>
-                                                            <div class="hover-car-product-text flex">
-                                                                <p class="hover-car-product-price">9487 元</p>
-                                                                <div class="hover-car-product-delete">
-                                                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
-                                                                </div>
-                                                            </div>
+                            <div class="hover-car-product-item flex">
+                                <div class="hover-car-product-imagebox">
+                                    <img class="hover-car-product-image"
+                                         src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                                </div>
+                                <div class="hover-car-product-namebox">
+                                    <div class="hover-car-product-name">
+                                        <span>安靜是種超能力</span>
+                                    </div>
+                                    <div class="hover-car-product-text flex">
+                                        <p class="hover-car-product-price">9487 元</p>
+                                        <div class="hover-car-product-delete">
+                                            <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                        </div>
+                                    </div>
 
-                                                        </div>
-                                                    </div>
+                                </div>
+                            </div>
 
-                                                </li>
-                                            </ul>
-                                            <div class="hover-check-car-box">
-                                                <div class="hover-check-car-price">
-                                                    <span>當前總金額:</span>
-                                                    <span>100000元</span>
-                                                </div>
-                                                <div class="hover-gotoshopping-car flex">
-                                                    <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>*@
+                        </li>
+                    </ul>
+                    <div class="hover-check-car-box">
+                        <div class="hover-check-car-price">
+                            <span>當前總金額:</span>
+                            <span>100000元</span>
+                        </div>
+                        <div class="hover-gotoshopping-car flex">
+                            <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>*@
                             </li>
                         </ul>
                     </div>
