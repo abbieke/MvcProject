@@ -138,9 +138,10 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult ProductDelete()
+        public ActionResult ProductDelete(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductEdit()

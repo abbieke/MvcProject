@@ -329,5 +329,13 @@
     </div>
 </div>
 
-@Scripts.Render("~/Back-Script/BackCustomerDetails")
+
+@section endScript{
+    @Scripts.Render("~/Back-Script/BackCustomerDetails")
+    <script>
+        document.getElementById("editor-one").addEventListener('change', function () {
+            alert(this.innerHTML);
+        })
+    </script>
+}
 

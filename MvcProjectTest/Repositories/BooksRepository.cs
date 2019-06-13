@@ -59,7 +59,8 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select CategoryEngName,CategoryName From Category ";
+                //CategoryEngName,CategoryName
+                string sql = "Select * From Category ";
                 var category = conn.Query<Category>(sql).ToList();
                 return category;
             }
