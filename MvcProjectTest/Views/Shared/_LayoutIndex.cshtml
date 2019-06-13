@@ -16,28 +16,28 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @Styles.Render("~/css/base")
     @RenderSection("topCss", required: false)
-<style>
-    .no-js #loader {
-        display: none;
-    }
+    <style>
+        .no-js #loader {
+            display: none;
+        }
 
-    .js #loader {
-        display: block;
-        position: absolute;
-        left: 100px;
-        top: 0;
-    }
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
 
-    .loading-icon {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
-    }
-</style>
+        .loading-icon {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,20 +48,21 @@
             <div class="container">
                 <div class="bookshopping-menu flex">
                     <div class="bkshop-logo flex ">
+                        <button class="bookshopping-sidemenulist"><i class="fas fa-bars"></i></button>
                         <a href='@Url.Action("Index","Home", null)' class="dropdowns-top-logo-link flex">
                             <img class="dropdowns-logo-book" src="~/Assets/Images/logo/B-Bookstore-logo3.png" alt="">
                             <img class="dropdowns-logo-text" src="~/Assets/Images/logo/B-Bookstore-logo4.png" alt="">
                         </a>
                     </div>
                     <nav class="bkshop-nav boxfloat">
-                        <ul class="bookmenu">
+                        <ul class="bookmenu bookmobile-menu">
                             @{
                                 MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
                                 var cate = _repo.SelectCategory();
                             }
                             @foreach (var item in cate)
                             {
-                                <li class="book-item">
+                                <li class="book-item bookmobile-menu-item">
                                     <a href="@Url.Action("Index","Book",new { name = item.CategoryEngName})">@item.CategoryName</a>
                                 </li>
                             }
@@ -101,11 +102,7 @@
                     </div>
                     <div class="bkshop-member-carbox">
                         <ul class="bookmenu">
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="book-item"><a href='@Url.Action("Index", "BackStage", null)'><i class="fas fa-user-secret top-icon"></i></a></li>
-                            }
-                            <li class="book-item">
+                            <li class="book-item ">
                                 @if (Request.IsAuthenticated)
                                 {
                                     <a href='@Url.Action("CustomerIndex", "Customer", null)'><i class="fas fa-user top-icon"></i></a>
@@ -489,24 +486,35 @@
     });
 
     </script>
-    <!-- WhatsHelp.io widget -->
-    <script type="text/javascript">
-    (function () {
-        var options = {
-            facebook: "1312372605578595", // Facebook page ID
-            line: "//line.me/ti/p/@@409hsreg", // Line QR code URL
-            call_to_action: "Message us", // Call to action
-            button_color: "#000000", // Color of button
-            position: "right", // Position may be 'right' or 'left'
-            order: "facebook,line", // Order of buttons
-        };
-        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
-        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-    })();
+
+    <script>
+        $(function () {
+            var isShow = true;
+            if ($(".bookshopping-sidemenulist").is(":visible")) {
+                //$(".bkshop-nav").attr("style"), ("width: 0;");
+                $(".bookshopping-sidemenulist").on("click", function () {
+                    var width = 0;
+                    var w = $(window).width()
+                    if (isShow) {
+                        if (w >= 640) {
+                            width = 30;
+                        }
+                        else {
+                            width = 50;
+                        }
+
+
+                    }
+                    $(".bkshop-nav").attr("style", "width:" + width + "%;");
+                    $(".bkshop-searchbox").attr("style", "width:" + width + "%;");
+                    isShow = !isShow;
+                })
+
+            }
+        });
+
     </script>
-    <!-- /WhatsHelp.io widget -->
+
 </body>
 
 </html>
