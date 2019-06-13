@@ -47,7 +47,8 @@ namespace MvcProjectTest
             bundles.Add(new StyleBundle("~/Back-css/BackLayoutIndex").Include(
                 "~/Assets/Css/BackStage/custom.min.css",
                 "~/Assets/Css/BackStage/jquery.min.css",
-                "~/Assets/Css/BackStage/bootstrap.min.css"
+                "~/Assets/Css/BackStage/bootstrap.min.css",
+                "~/Assets/Css/BackStage/font-awesome.min.css"
                ));
 
             bundles.Add(new StyleBundle("~/Back-css/BackCustomerDetails").Include(
