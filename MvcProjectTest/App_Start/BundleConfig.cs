@@ -27,15 +27,17 @@ namespace MvcProjectTest
                       "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/css/base").Include(
                 "~/Assets/Css/index_stylesheet.css",
-                "~/Assets/Css/for-change-style.css"
-                
+                "~/Assets/Css/for-change-style.css",
+                "~/Assets/Css/RWD.css"
+
                 ));
 
             bundles.Add(new StyleBundle("~/css/indexView").Include(
 
                 "~/Assets/Css/new-product-card.css",
                 "~/Assets/Css/newest-tab-block.css",
-                "~/Assets/Css/index-bigimage.css"));
+                "~/Assets/Css/index-bigimage.css",
+                "~/Assets/Css/RWD.css"));
             bundles.Add(new StyleBundle("~/css/cartAndWishView").Include(
 
                 "~/Assets/Css/new-product-card.css",
