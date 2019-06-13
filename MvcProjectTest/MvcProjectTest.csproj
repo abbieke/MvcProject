@@ -207,7 +207,9 @@
     <Content Include="Assets\Images\Admin\Abbieke222.jpg" />
     <Content Include="Assets\Images\Admin\adminmin.jpg" />
     <Content Include="Assets\Images\Admin\BigWhite1.jpg" />
+    <Content Include="Assets\Images\Admin\carbon.jpg" />
     <Content Include="Assets\Images\Admin\gnkn19930225.jpg" />
+    <Content Include="Assets\Images\Admin\penguin1011.jpg" />
     <Content Include="Assets\Images\Admin\yoyoyo5420.jpg" />
     <Content Include="Assets\Images\BackStage\images\american-express.png" />
     <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo3.png" />
@@ -498,6 +500,7 @@
     <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Css\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\MvcProjectTest20190604123944 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\MvcProjectTest20190604123944 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

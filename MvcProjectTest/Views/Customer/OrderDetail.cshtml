@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
     <div class="orderdetails">
         <div class="container">
             <a href="#">
@@ -133,7 +130,7 @@
             </div>
         </div>
     </div>
-}
+
 
 @section topCss {
     <link href="~/Assets/Css/orderdetails.css" rel="stylesheet" />
