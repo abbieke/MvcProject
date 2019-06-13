@@ -449,7 +449,6 @@
     <Content Include="Assets\Script\BackStage\buttons.print.min.js" />
     <Content Include="Assets\Script\BackStage\Chart.min.js" />
     <Content Include="Assets\Script\BackStage\custom.js" />
-    <Content Include="Assets\Script\BackStage\custom.min.js" />
     <Content Include="Assets\Script\BackStage\dataTables.bootstrap.min.js" />
     <Content Include="Assets\Script\BackStage\dataTables.buttons.min.js" />
     <Content Include="Assets\Script\BackStage\dataTables.fixedHeader.min.js" />
