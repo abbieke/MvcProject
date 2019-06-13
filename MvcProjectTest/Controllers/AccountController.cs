@@ -101,7 +101,7 @@ namespace MvcProjectTest.Controllers
                         var callbackUrl = Url.Action("EmailConfirmed", "Account",new { userAccount = cust.CustomerAccount },protocol: Request.Url.Scheme);
                         await MailService.SendMailToVerify(callbackUrl,cust.CustomerEmail);
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index","Home",null);
                     }
                     return Content("密碼不符");
                 }

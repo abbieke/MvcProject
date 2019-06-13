@@ -121,7 +121,14 @@ namespace MvcProjectTest.Controllers
 
         public ActionResult OrderEdit(string id)
         {
+            DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
             var orderStatus = _orderRepo.GetOrderStatus(id);
+            ViewBag.setUp = (!orderStatus.SetUp.Equals(fullTime));
+            ViewBag.preparation = (!orderStatus.Preparation.Equals(fullTime));
+            ViewBag.delivery = (!orderStatus.Delivery.Equals(fullTime));
+            ViewBag.pickUp = (!orderStatus.PickUp.Equals(fullTime));
+            ViewBag.completePickup = (!orderStatus.CompletePickup.Equals(fullTime));
+            ViewBag.transactionComplete = (!orderStatus.TransactionComplete.Equals(fullTime));
             return View(orderStatus);
         }
 
