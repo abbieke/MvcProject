@@ -87,17 +87,21 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="button" class="btn btn-primary">新增</button>
+                                        <button type="button" class="btn btn-primary" id="createPress">新增</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <select id="PressID" class="form-control" required>
                             <option value="">Choose..</option>
-                            <option value="1">1 方舟文化</option>
-                            <option value="2">2 旗標</option>
-                            <option value="3">3 碁峰</option>
-                            <option value="4">4 台灣角川</option>
+                            @foreach (var press in _bookRepo.GetallPress())
+                            {
+                                <option value="@press.PressId">@press.PressId @press.PressName</option>
+                            }
+                            @*<option value="1">1 方舟文化</option>
+        <option value="2">2 旗標</option>
+        <option value="3">3 碁峰</option>
+        <option value="4">4 台灣角川</option>*@
                         </select>
 
 
@@ -122,7 +126,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="button" class="btn btn-primary">新增</button>
+                                        <button type="button" class="btn btn-primary" id="createCategory">新增</button>
                                     </div>
                                 </div>
                             </div>
@@ -166,9 +170,13 @@
                         </div>
                         <select id="AuthorID" class="form-control" required>
                             <option value="">Choose..</option>
-                            <option value="1">1 張瀞仁</option>
-                            <option value="2">2 中村聡史</option>
-                            <option value="3">3 呂國泰</option>
+                            @foreach (var author in _bookRepo.GetallRealAuthor())
+                            {
+                                <option value="@author.AuthorID">@author.AuthorID @author.AuthorName</option>
+                            }
+                            @*<option value="1">1 張瀞仁</option>
+        <option value="2">2 中村聡史</option>
+        <option value="3">3 呂國泰</option>*@
                         </select>
 
                         <label for="UnitPrice">UnitPrice :</label>
@@ -332,7 +340,7 @@
               }
             </script> -->
         </div>
-    </div>
+    </div>  
 </div>
 
 
@@ -342,6 +350,25 @@
         document.getElementById("editor-one").addEventListener('change', function () {
             alert(this.innerHTML);
         })
+    </script>
+
+    @*新增出版作者類別*@
+    <script>
+        $("#createPress").click(createPressEvent);
+        $("#createCategory").click(createCategoryEvent);
+
+        function createPressEvent() {
+            var name = $("#PressName").val();
+            var phone = $("#PressPhone").val();
+            var address = $("#PressAddress").val();
+            alert(name + phone + address);
+        }
+
+        function createCategoryEvent() {
+            var name = $("#CategoryName").val();
+            var engName = $("#CategoryEngName").val();
+            alert(name + engName);
+        }
     </script>
 }
 
