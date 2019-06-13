@@ -58,7 +58,7 @@
                 <div class="x_content">
 
                     <!-- start form for validation -->
-                    <form id="product-create-form" data-parsley-validate>
+                    @*<form id="product-create-form" data-parsley-validate>*@
                         <label for="BookID">BookID :</label>
                         <input type="text" id="BookID" class="form-control" name="BookID" placeholder="CH0001" />
 
@@ -99,9 +99,9 @@
                                 <option value="@press.PressName">@press.PressId @press.PressName</option>
                             }
                             @*<option value="1">1 方舟文化</option>
-                                <option value="2">2 旗標</option>
-                                <option value="3">3 碁峰</option>
-                                <option value="4">4 台灣角川</option>*@
+            <option value="2">2 旗標</option>
+            <option value="3">3 碁峰</option>
+            <option value="4">4 台灣角川</option>*@
                         </select>
 
 
@@ -138,9 +138,9 @@
                                 <option value="@cate.CategoryID">@cate.CategoryID @cate.CategoryName</option>
                             }
                             @*<option value="1">1 中文書</option>
-                                <option value="2">2 電子書</option>
-                                <option value="3">3 簡體書</option>
-                                <option value="4">4 外文書</option>*@
+            <option value="2">2 電子書</option>
+            <option value="3">3 簡體書</option>
+            <option value="4">4 外文書</option>*@
                         </select>
 
 
@@ -175,8 +175,8 @@
                                 <option value="@author.AuthorName">@author.AuthorID @author.AuthorName</option>
                             }
                             @*<option value="1">1 張瀞仁</option>
-                                <option value="2">2 中村聡史</option>
-                                <option value="3">3 呂國泰</option>*@
+            <option value="2">2 中村聡史</option>
+            <option value="3">3 呂國泰</option>*@
                         </select>
 
                         <label for="UnitPrice">UnitPrice :</label>
@@ -192,10 +192,22 @@
                         <input type="text" id="ISBN" class="form-control" name="ISBN" />
 
                         <label for="BookImage">BookImage :</label> <small class="red">*檔名必須與BookID同名</small>
-                        <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                            <input name="BookImage" type="file" accept="image/gif, image/jpeg, image/png" id="id-input-file-2">
-                        </form>
-                    </form>
+                        @*<form action="/somewhere/to/upload" enctype="multipart/form-data">
+            <input name="BookImage" type="file" accept="image/gif, image/jpeg, image/png" id="id-input-file-2">
+        </form>*@
+                        
+                        @using (Html.BeginForm("UploadImg",
+                                                "BackStage",
+                                                FormMethod.Post,
+                                                new { enctype = "multipart/form-data" }))
+                        {
+                            <label for="file">Upload Image:</label>
+                            <input type="file" name="file" id="file" /><br><br>
+                            <input type="submit" value="Upload Image" />
+                            <br><br>
+                            @ViewBag.Message
+                        }
+                    @*</form>*@
                     <!-- end form for validations -->
 
                 </div>
@@ -333,7 +345,9 @@
                 </div>
             </div>
             <button id="createButton" class="btn btn-success btn-ml"
-               style="float: right;">新增</button>
+                    style="float: right;">
+                新增
+            </button>
             <!-- <script>
               if (document.getElementById("textbox-area-info").onclick) {
                 console.log(document.getElementById("editor-one").innerHTML);
@@ -374,7 +388,7 @@
                     window.setTimeout(function () {
                         $("#PressID").html("@GetPressOption()");
                     }, 3000);
-                    
+
                 }
                 else {
                     alert("新增失敗，請確定格式以及是否重複");
@@ -440,7 +454,7 @@
                 var ISBN = $("#ISBN").val();
 
                 var bookImage = $('#id-input-file-2').val();
-                
+
                 @*$.ajax({
                 type: "POST",
                 url: '@Url.Action("CreateBook", "BackStage")',
@@ -462,36 +476,36 @@
             function UploadImage() {
 
             }
-            
+
         });
     </script>
 }
 
 @*@helper  GetPressOption()
-{
-var _bookRepo = new BooksRepository();
-var refreshPressStr = "<option value=''>Choose..</option>";
-foreach(var press in _bookRepo.GetallPress())
-{
-    refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
-}
-IHtmlString pressString = Html.Raw(refreshPressStr);
-@pressString;
-}*@
+    {
+    var _bookRepo = new BooksRepository();
+    var refreshPressStr = "<option value=''>Choose..</option>";
+    foreach(var press in _bookRepo.GetallPress())
+    {
+        refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
+    }
+    IHtmlString pressString = Html.Raw(refreshPressStr);
+    @pressString;
+    }*@
 
 @*暫時沒用到*@
-@functions 
+@functions
 {
- public IHtmlString GetPressOption()
-{
-var _bookRepo = new BooksRepository();
-var refreshPressStr = "<option value=''>Choose..</option>";
-foreach(var press in _bookRepo.GetallPress())
-{
-    refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
-}
-IHtmlString pressString = Html.Raw(refreshPressStr);
-return pressString;
-}
+    public IHtmlString GetPressOption()
+    {
+        var _bookRepo = new BooksRepository();
+        var refreshPressStr = "<option value=''>Choose..</option>";
+        foreach (var press in _bookRepo.GetallPress())
+        {
+            refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
+        }
+        IHtmlString pressString = Html.Raw(refreshPressStr);
+        return pressString;
+    }
 }
 

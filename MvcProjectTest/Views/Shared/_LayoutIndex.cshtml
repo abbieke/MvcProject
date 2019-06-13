@@ -514,6 +514,24 @@
         });
 
     </script>
+    <!-- WhatsHelp.io widget -->
+    <script type="text/javascript">
+    (function () {
+        var options = {
+            facebook: "1312372605578595", // Facebook page ID
+            line: "//line.me/ti/p/@@409hsreg", // Line QR code URL
+            call_to_action: "Message us", // Call to action
+            button_color: "#000000", // Color of button
+            position: "right", // Position may be 'right' or 'left'
+            order: "facebook,line", // Order of buttons
+        };
+        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+    </script>
+    <!-- /WhatsHelp.io widget -->
 
 </body>
 
