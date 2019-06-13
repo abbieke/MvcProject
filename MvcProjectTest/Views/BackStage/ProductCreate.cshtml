@@ -439,10 +439,7 @@
                 var description = $("#editor-one").html();
                 var ISBN = $("#ISBN").val();
 
-                var split = $('#id-input-file-2').val().toString().split('/');
-                var length = split.length;
-                var bookImage = split[length-1];
-                alert($('#id-input-file-2').val());
+                var bookImage = $('#id-input-file-2').val();
                 //alert(bookId + bookName + pressName + cateId + authorName + unitPrice + inStock + discount + ISBN + description);
                 $.ajax({
                 type: "POST",
