@@ -1,9 +1,12 @@
 ﻿@using MvcProjectTest.Services
+@using MvcProjectTest.Repositories
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
 
     BackStageServise _backSer = new BackStageServise();
+    BooksRepository _bookRepo = new BooksRepository();
+    OrderRepository _orderRepo = new OrderRepository();
 }
 
 <div class="">
@@ -22,11 +25,11 @@
             </div>*@
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-book"></i> 總銷售產品數</span>
-            <div class="count">315</div>
+            <div class="count"> @_backSer.GetOrderDetail().Count()</div>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa  fa-dollar"></i> 月銷售總額</span>
-            <div class="count">50,460,560</div>
+            <div class="count">@((int)_backSer.GetOrderDetail().Sum((x) => x.UnitPrice))元</div>
         </div>
     </div>
     <br />
@@ -53,8 +56,20 @@
 
     <div class="row">
 
-
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        @{
+            var allDetail = _backSer.GetOrderDetail();
+            var ODtotal = allDetail.Sum((x) => x.UnitPrice);
+            var nameGroup = allDetail.GroupBy(
+                book => book.BooksName,
+                (booksName, books) => new
+                {
+                    Key = booksName,
+                    Total = (int)(books.Sum((singlebook) => singlebook.UnitPrice)),
+                    Percentage = Decimal.Round((books.Sum((singleDetail) => singleDetail.UnitPrice) / ODtotal * 100), 2)
+                });
+            var sortList = nameGroup.OrderByDescending(books => books.Total).ToList();
+        }
+        <div class="col-md-8 col-sm-8 col-xs-12">
             <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                     <h2>銷售榜</h2>
@@ -63,88 +78,89 @@
                 <div class="x_content">
                     <h4>當月銷售前五佔總銷售額比例</h4>
                     <div class="widget_summary">
-                        <div class="w_left w_25">
-                            <span>愛情20招</span>
+                        <div class="w_left w_35">
+
+                            <span class="SalesChartTitle">@sortList[0].Key</span>
                         </div>
-                        <div class="w_center w_55">
+                        <div class="w_center w_45">
                             <div class="progress">
                                 <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 66%;">
+                                     aria-valuemax="100" style="width: @sortList[0].Percentage%;">
                                     <span class="sr-only">60% Complete</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w_right w_20">
-                            <span>123k</span>
+                            <span>@sortList[0].Total</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="widget_summary">
-                        <div class="w_left w_25">
-                            <span>愛情19招</span>
+                        <div class="w_left w_35">
+                            <span class="SalesChartTitle">@sortList[1].Key</span>
                         </div>
-                        <div class="w_center w_55">
+                        <div class="w_center w_45">
                             <div class="progress">
                                 <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 45%;">
+                                     aria-valuemax="100" style="width: @sortList[1].Percentage%;">
                                     <span class="sr-only">60% Complete</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w_right w_20">
-                            <span>53k</span>
+                            <span>@sortList[1].Total</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget_summary">
-                        <div class="w_left w_25">
-                            <span>冷酷58POSE</span>
+                        <div class="w_left w_35">
+                            <span class="SalesChartTitle">@sortList[2].Key</span>
                         </div>
-                        <div class="w_center w_55">
+                        <div class="w_center w_45">
                             <div class="progress">
                                 <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 25%;">
+                                     aria-valuemax="100" style="width: @sortList[2].Percentage%;">
                                     <span class="sr-only">60% Complete</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w_right w_20">
-                            <span>23k</span>
+                            <span>@sortList[2].Total</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget_summary">
-                        <div class="w_left w_25">
-                            <span>冷酷57POSE</span>
+                        <div class="w_left w_35">
+                            <span class="SalesChartTitle">@sortList[3].Key</span>
                         </div>
-                        <div class="w_center w_55">
+                        <div class="w_center w_45">
                             <div class="progress">
                                 <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 5%;">
+                                     aria-valuemax="100" style="width: @sortList[3].Percentage%;">
                                     <span class="sr-only">60% Complete</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w_right w_20">
-                            <span>3k</span>
+                            <span>@sortList[3].Total</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="widget_summary">
-                        <div class="w_left w_25">
-                            <span>冷酷56POSE</span>
+                        <div class="w_left w_35">
+                            <span class="SalesChartTitle">@sortList[4].Key</span>
                         </div>
-                        <div class="w_center w_55">
+                        <div class="w_center w_45">
                             <div class="progress">
                                 <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 2%;">
+                                     aria-valuemax="100" style="width: @sortList[4].Percentage%;">
                                     <span class="sr-only">60% Complete</span>
                                 </div>
                             </div>
                         </div>
                         <div class="w_right w_20">
-                            <span>1k</span>
+                            <span>@sortList[4].Total</span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -153,10 +169,48 @@
             </div>
         </div>
 
+        @{
+            //var allDetail2 = _backSer.GetOrderDetail();
+            var allDetail2 = allDetail.ToList();
+
+            allDetail2.Add(new OrderDetailModel { BooksName = "安靜是種超能力：寫給內向者的職場進擊指南，話不多，但大家都會聽你說", BookID = "CH0001", UnitPrice = 0 });
+            allDetail2.Add(new OrderDetailModel { BooksName = "妖怪臺灣地圖：環島搜妖探奇錄", BookID = "EL0005", UnitPrice = 0 });
+            allDetail2.Add(new OrderDetailModel { BooksName = "美國陷阱", BookID = "SI0005", UnitPrice = 0 });
+            allDetail2.Add(new OrderDetailModel { BooksName = "Bad Blood: Secrets and Lies in a Silicon Valley Startup", BookID = "FO0005", UnitPrice = 0 });
+
+            //var ODtotal2 = allDetail.Sum((x) => x.UnitPrice);
+            var nameGroup2 = allDetail2.GroupBy(
+                book => book.BooksName,
+                (booksName, books) => new
+                {
+                    Key = booksName,
+                    Total = (int)(books.Sum((singlebook) => singlebook.UnitPrice)),
+                    Percentage = books.Sum((singleDetail) => singleDetail.UnitPrice) / ODtotal * 100,
+                    CategoryId = _bookRepo.SelectBook(books.First((x) => x.BookID is string).BookID).CategoryID
+
+                });
+
+            var CateGroup = nameGroup2.GroupBy(
+                book => book.CategoryId,
+                (cate, books) => new
+                {
+                    Key = cate,
+                    Total = books.Sum((singleBook) => singleBook.Total),
+                    Percentage = Decimal.Round((books.Sum((singleDetail) => singleDetail.Total) / ODtotal * 100), 2)
+                    
+
+
+                }
+        );
+            var sortList2 = CateGroup.OrderBy(books => books.Key).ToList();
+            var int1 = sortList2.Count;
+
+        }
+
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
-                    <h2>各大類別(墊子書、中文書、外文書)銷售佔比例(以完成訂單)</h2>
+                    <h2>各類別銷售比例</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -182,34 +236,34 @@
                                 <table class="tile_info">
                                     <tr>
                                         <td>
-                                            <p><i class="fa fa-square blue"></i>IOS </p>
+                                            <p><i class="fa fa-square blue"></i>中文書 </p>
                                         </td>
-                                        <td>40%</td>
+                                        <td>@sortList2[0].Percentage%</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p><i class="fa fa-square green"></i>Android </p>
+                                            <p><i class="fa fa-square green"></i>電子書 </p>
                                         </td>
-                                        <td>0%</td>
+                                        <td>@sortList2[1].Percentage%</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p><i class="fa fa-square purple"></i>Blackberry </p>
+                                            <p><i class="fa fa-square purple"></i>簡體書 </p>
                                         </td>
-                                        <td>20%</td>
+                                        <td>@sortList2[2].Percentage%</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p><i class="fa fa-square aero"></i>Symbian </p>
+                                            <p><i class="fa fa-square aero"></i>外文書 </p>
                                         </td>
-                                        <td>15%</td>
+                                        <td>@sortList2[3].Percentage%</td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <p><i class="fa fa-square red"></i>Others </p>
-                                        </td>
-                                        <td>30%</td>
-                                    </tr>
+                                    @*<tr>
+                                            <td>
+                                                <p><i class="fa fa-square red"></i>Others </p>
+                                            </td>
+                                            <td>30%</td>
+                                        </tr>*@
                                 </table>
                             </td>
                         </tr>
@@ -219,7 +273,7 @@
         </div>
 
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        @*<div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                     <h2>Quick Settings</h2>
@@ -259,7 +313,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
     </div>
 </div>
@@ -268,5 +322,111 @@
     <link href="~/Assets/Css/BackStage/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Assets/Css/BackStage/custom.min.css" rel="stylesheet" />
 
+    <style>
+        .SalesChartTitle {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .w_45 {
+            width: 45%;
+        }
+
+        .w_35 {
+            width: 35%;
+        }
+    </style>
 }
-@Scripts.Render("~/Back-Script/BackIndex")
+@section endScript {
+    
+    <script>
+        var indexUnderCircleJson = {
+            type: 'doughnut',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+                labels: [
+                    "中文書",
+                    "電子書",
+                    "簡體書",
+                    "外文書"
+                ],
+                datasets: [{
+                    data: [@sortList2[0].Percentage, @sortList2[1].Percentage, @sortList2[2].Percentage, @sortList2[3].Percentage],
+                    backgroundColor: [
+                        "#3498DB",
+                        "#1ABB9C",
+                        "#9B59B6",
+                        "#9CC2CB"
+                    ],
+                    hoverBackgroundColor: [
+                        "#f00",
+                        "#f00",
+                        "#f00",
+                        "#f00"
+                    ]
+                }]
+            },
+            options: {
+                legend: false,
+                responsive: false
+            }
+        };
+        @{
+            DateTime timeNow = DateTime.Now;
+            var allOrder = _orderRepo.GetOrder().ToList();
+
+            //趕工先頂一陣
+            for(var i = 1; i<31; i++)
+            {
+                DateTime forWhite = new DateTime(timeNow.Year, timeNow.Month, i, 0, 0, 0);
+                Order forWhiteOrder = new Order { OrderDate = forWhite };
+                allOrder.Add(forWhiteOrder);
+            }
+
+
+            var orderByThisMonth = allOrder.Where((x) => x.OrderDate.Year == timeNow.Year && x.OrderDate.Month == timeNow.Month);
+            var groupByDay = orderByThisMonth.GroupBy((x) => x.OrderDate.Day);
+
+        }
+        var chart_plot_03_data = [
+			@*[0, @groupByDay.Where((x)=>x.Key == 1).Count() ],*@
+			[1, @(groupByDay.FirstOrDefault((x)=>x.Key == 1).Count()-1)],
+			[2, @(groupByDay.FirstOrDefault((x)=>x.Key == 2).Count()-1)],
+			[3, @(groupByDay.FirstOrDefault((x)=>x.Key == 3).Count()-1)],
+			[4, @(groupByDay.FirstOrDefault((x)=>x.Key == 4).Count()-1)],
+			[5, @(groupByDay.FirstOrDefault((x)=>x.Key == 5).Count()-1)],
+			[6, @(groupByDay.FirstOrDefault((x)=>x.Key == 6).Count()-1)],
+			[7, @(groupByDay.FirstOrDefault((x)=>x.Key == 7).Count()-1)],
+			[8, @(groupByDay.FirstOrDefault((x)=>x.Key == 8).Count()-1)],
+			[9, @(groupByDay.FirstOrDefault((x)=>x.Key == 9).Count()-1)],
+			[10, @(groupByDay.FirstOrDefault((x)=>x.Key == 10).Count()-1)],
+			[11, @(groupByDay.FirstOrDefault((x)=>x.Key == 11).Count()-1)],
+			[12, @(groupByDay.FirstOrDefault((x)=>x.Key == 12).Count()-1)],
+			[13, @(groupByDay.FirstOrDefault((x)=>x.Key == 13).Count()-1)],
+			[14, @(groupByDay.FirstOrDefault((x)=>x.Key == 14).Count()-1)],
+			[15, @(groupByDay.FirstOrDefault((x)=>x.Key == 15).Count()-1)],
+            [16, @(groupByDay.FirstOrDefault((x)=>x.Key == 16).Count()-1)],
+            [17, @(groupByDay.FirstOrDefault((x)=>x.Key == 17).Count()-1)],
+            [18, @(groupByDay.FirstOrDefault((x)=>x.Key == 18).Count()-1)],
+            [19, @(groupByDay.FirstOrDefault((x)=>x.Key == 19).Count()-1)],
+            [20, @(groupByDay.FirstOrDefault((x)=>x.Key == 20).Count()-1)],
+            [21, @(groupByDay.FirstOrDefault((x)=>x.Key == 21).Count()-1)],
+            [22, @(groupByDay.FirstOrDefault((x)=>x.Key == 22).Count()-1)],
+            [23, @(groupByDay.FirstOrDefault((x)=>x.Key == 23).Count()-1)],
+            [24, @(groupByDay.FirstOrDefault((x)=>x.Key == 24).Count()-1)],
+            [25, @(groupByDay.FirstOrDefault((x)=>x.Key == 25).Count()-1)],
+            [26, @(groupByDay.FirstOrDefault((x)=>x.Key == 26).Count()-1)],
+            [27, @(groupByDay.FirstOrDefault((x)=>x.Key == 27).Count()-1)],
+            [28, @(groupByDay.FirstOrDefault((x)=>x.Key == 28).Count()-1)],
+            [29, @(groupByDay.FirstOrDefault((x)=>x.Key == 29).Count()-1)],
+            [30, @(groupByDay.FirstOrDefault((x)=>x.Key == 30).Count()-1)]
+		];
+    </script>
+    @Scripts.Render("~/Back-Script/BackIndex")
+
+}

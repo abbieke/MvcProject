@@ -17,9 +17,13 @@ namespace MvcProjectTest.Controllers
     public class BackStageController : Controller
     {
         private readonly CustomersRepository _cusRepo;
+        private readonly OrderRepository _orderRepo;
+        private readonly BooksRepository _bookRepo;
         public BackStageController()
         {
             _cusRepo = new CustomersRepository();
+            _orderRepo = new OrderRepository();
+            _bookRepo = new BooksRepository();
         }
         // GET: BackStage
         public ActionResult Index()
@@ -115,14 +119,30 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult OrderEdit()
+        public ActionResult OrderEdit(string id)
         {
-            return View();
+            DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
+            var orderStatus = _orderRepo.GetOrderStatus(id);
+            ViewBag.setUp = (!orderStatus.SetUp.Equals(fullTime));
+            ViewBag.preparation = (!orderStatus.Preparation.Equals(fullTime));
+            ViewBag.delivery = (!orderStatus.Delivery.Equals(fullTime));
+            ViewBag.pickUp = (!orderStatus.PickUp.Equals(fullTime));
+            ViewBag.completePickup = (!orderStatus.CompletePickup.Equals(fullTime));
+            ViewBag.transactionComplete = (!orderStatus.TransactionComplete.Equals(fullTime));
+            return View(orderStatus);
+        }
+
+        public ActionResult OrderUpdate(int id, bool SetUpname, bool Preparationname, bool Deliveryname, bool PickUpname, bool CompletePickupname, bool TransactionCompletename)
+        {
+            return RedirectToAction("OrderIndex", "BackStage");
         }
 
         public ActionResult OrderIndex()
         {
-            return View();
+            var getOrders = _orderRepo.GetAllOrders();
+            List<Order> orders = new List<Order>();
+            orders = getOrders.ToList();
+            return View(orders);
         }
 
         public ActionResult ProductCreate()
@@ -140,14 +160,16 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult ProductDetails()
+        public ActionResult ProductDetails(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductIndex()
         {
-            return View();
+            var model = _bookRepo.GetAllBook();
+            return View(model);
         }
 
         

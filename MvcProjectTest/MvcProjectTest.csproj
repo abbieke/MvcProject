@@ -157,6 +157,8 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\MixModel.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Press.cs" />
+    <Compile Include="Models\RealAuthor.cs" />
     <Compile Include="Models\ShoppingCar.cs" />
     <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Models\WishList.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Css\aboutus.css" />
     <Content Include="Assets\Css\BackStage\bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\buttons.bootstrap.min.css" />
     <Content Include="Assets\Css\BackStage\dataTables.bootstrap.min.css" />
@@ -199,6 +202,12 @@
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
     <Content Include="Assets\Css\orderdetails.css" />
     <Content Include="Assets\Css\wish-list-product-card-stylesheet.css" />
+    <Content Include="Assets\Images\Admin\1G1G1G1G.jpg" />
+    <Content Include="Assets\Images\Admin\Abbieke222.jpg" />
+    <Content Include="Assets\Images\Admin\adminmin.jpg" />
+    <Content Include="Assets\Images\Admin\BigWhite1.jpg" />
+    <Content Include="Assets\Images\Admin\gnkn19930225.jpg" />
+    <Content Include="Assets\Images\Admin\yoyoyo5420.jpg" />
     <Content Include="Assets\Images\BackStage\images\american-express.png" />
     <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo3.png" />
     <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo4.png" />
@@ -553,6 +562,7 @@
     <Content Include="Views\BackStage\ProductEdit.cshtml" />
     <Content Include="Views\BackStage\ProductDetails.cshtml" />
     <Content Include="Views\BackStage\ProductIndex.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

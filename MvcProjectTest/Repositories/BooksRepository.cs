@@ -200,5 +200,120 @@ namespace MvcProjectTest.Repositories
                 return conn.QueryFirstOrDefault<string>(sql);
             }
         }
+
+        public void CreateBook(Book book)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var _bookRepo = new BooksRepository();
+                string sql = "insert into Books(BookID,BooksName,PressID,CategoryID,AuthorID,UnitPrice,InStock,Discount,Description,ISBN,BookImage) values('@bookId', '@booksName', @pressId, @categoryId,@authorId, @unitPrice, @inStock, @disCount, '@desCription', '@iSBN', '@bookImage')";
+                conn.Execute(sql, new
+                {
+
+                    bookId = book.BookId,
+                    booksName = book.BooksName,
+                    pressId = _bookRepo.GetPressIdByName(book.PressName),
+                    categoryId = book.CategoryID,
+                    authorId = _bookRepo.GetAuthorIdByName(book.AuthorName),
+                    unitPrice = book.UnitPrice,
+                    inStock = book.InStock,
+                    disCount = book.Discount,
+                    desCription = book.Description,
+                    iSBN = book.ISBN,
+                    bookImage = book.BookImage,
+                });
+            }
+
+        }
+
+        public int GetPressIdByName(string pressName)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "select PressID from Press where PressName = N'@pressName'";
+                return conn.QueryFirstOrDefault<int>(sql, new {
+                    pressName = pressName
+                });
+            }
+        }
+
+        public int GetAuthorIdByName(string authorName)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "select AuthorID from Author where AuthorName = N'@authorName'";
+                return conn.QueryFirstOrDefault<int>(sql, new
+                {
+                    authorName = authorName
+                });
+            }
+        }
+
+
+        public IEnumerable<RealAuthor> GetallRealAuthor()
+        {
+            IEnumerable<RealAuthor> allauthors;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select  * from Author";
+                allauthors = conn.Query<RealAuthor>(sql).ToList();
+            }
+            return allauthors;
+        }
+
+        public IEnumerable<Press> GetallPress()
+        {
+            IEnumerable<Press> allpress;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from Press";
+                allpress = conn.Query<Press>(sql).ToList();
+            }
+            return allpress;
+        }
+
+        public void CreatePress(Press press)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "insert into Press(PressName,PressPhone,PressAddress) values(N'@pressName', '@pressPhone', N'@pressAddress')";
+                conn.Execute(sql, new
+                {
+                    pressName=press.PressName,
+                    pressPhone=press.PressPhone,
+                    pressAddress=press.PressAddress
+
+                });
+            }
+
+        }
+
+        public void CreateRealAuthor(RealAuthor realauthor)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "insert into Author(AuthorName) values(N'@author')";
+                conn.Execute(sql, new
+                {
+                    author=realauthor.AuthorName
+                });
+            }
+
+        }
+
+        public void CreateCategory(Category cate)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "insert into Category(CategoryName,CategoryEngName) values(N'@categoryname', N'@categoryengName')";
+                conn.Execute(sql, new
+                {
+                    categoryname=cate.CategoryName,
+                    categoryengName=cate.CategoryEngName
+                });
+            }
+
+        }
+
     }
 }

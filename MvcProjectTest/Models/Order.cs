@@ -10,6 +10,7 @@ namespace MvcProjectTest.Models
         public int OrderID { get; set; }
         public string OrderNo { get; set; }
         public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
         public DateTime OrderDate { get; set; }
         public string PayWay { get; set; }
         public string DeliveryMethod { get; set; }
@@ -31,7 +32,7 @@ namespace MvcProjectTest.Models
     public class OrderDetailModel
     {
         public int OrderID { get; set; }
-        public int BooksNo { get; set; }
+        public string BookID { get; set; }
         public string BooksName { get; set; }
         public decimal UnitPrice { get; set; }
         public int Counts { get; set; }
@@ -41,6 +42,7 @@ namespace MvcProjectTest.Models
     public class OrderStatusModel
     {
         public int OrderID { get; set; }
+        public string OrderNo { get; set; }
         public DateTime SetUp { get; set; }
         public DateTime Preparation { get; set; }
         public DateTime Delivery { get; set; }
