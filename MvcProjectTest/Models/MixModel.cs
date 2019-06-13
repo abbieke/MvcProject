@@ -49,4 +49,10 @@ namespace MvcProjectTest.Models
         public List<Book> Books { get; set; }
         public List<BookType> BookTypes { get; set; }
     }
+
+    public class CustomerDetail
+    {
+        public Customer Customer { get; set; }
+        public CustomerOrderCount OrderCount { get; set; }
+    }
 }

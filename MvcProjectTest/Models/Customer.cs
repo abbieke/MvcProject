@@ -9,6 +9,7 @@ namespace MvcProjectTest.Models
 {
     public class Customer
     {
+        [Display(Name = "會員ID")]
         public int CustomerId { get; set; }
 
         [Display(Name = "會員姓名")]
@@ -59,6 +60,7 @@ namespace MvcProjectTest.Models
 
     public class CustomerViewModel
     {
+        [Display(Name = "會員ID")]
         public int CustomerId { get; set; }
 
         [Display(Name = "會員姓名")]
@@ -94,6 +96,9 @@ namespace MvcProjectTest.Models
         [StringLength(20, MinimumLength = 8, ErrorMessage = "最少需要8個字元")]
         [Remote("CheckCustomerAccount", "Account", ErrorMessage = "遠端驗證失敗")]
         public string CustomerAccount { get; set; }
+
+        [Display(Name = "Email認證")]
+        public bool EmailConfirmed { get; set; }
     }
 
     public class CustomerChangePasswordViewModel

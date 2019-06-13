@@ -1,4 +1,4 @@
-﻿@model MvcProjectTest.Models.CustomerViewModel
+﻿@model IEnumerable<MvcProjectTest.Models.Customer>
 
 @{
     ViewBag.Title = "Index";
@@ -6,69 +6,76 @@
 
 <h2>Index</h2>
 
-<div>
-    <h4>CustomerViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerPhone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerPhone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerBirth)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerBirth)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerAccount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerAccount)
-        </dd>
-
-    </dl>
-</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConfirmPassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerAccount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConfirmPassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailConfirmed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CustomerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerId })
+        </td>
+    </tr>
+}
+
+</table>

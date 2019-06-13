@@ -47,7 +47,10 @@ namespace MvcProjectTest.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                
+                if (User.IsInRole("NotVerified"))
+                {
+                    return RedirectToAction("CustomerIndex", "Customer");
+                }
                 //var carts = _repo.SelectCart(_cusRepo.GetCusromerID(User.Identity.Name));
                 //var cartSer = new ShoppingCartService();
                 var cartModel = _cartSer.GetMemberCart(User.Identity.Name);
@@ -132,7 +135,7 @@ namespace MvcProjectTest.Controllers
             _order = orderModel;
             return View(orderModel); 
         }
-        public ActionResult OrderSuccess()
+        public async System.Threading.Tasks.Task<ActionResult> OrderSuccess()
         {
             //驗證商品清單
             var a = CheckCartResult(User.Identity.Name, opList, false);
@@ -164,6 +167,8 @@ namespace MvcProjectTest.Controllers
             //
 
             Order orderModel = _order;
+            string cust_mail = _cusRepo.SelectCustomerEmail((int)Session["userid"]);
+            await MailService.SendMailToNoticeOrderSuccess(cust_mail, _order.OrderNo);
             _order = null;
             return View(orderModel);
         }

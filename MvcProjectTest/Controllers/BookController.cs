@@ -38,21 +38,42 @@ namespace MvcProjectTest.Controllers
                 var books = _repo.SelectCategoryBooks(name);
                 var bookTypes = _repo.SelectBookType(name);
                 ViewBag.catEngName = name;
+                ViewBag.cateName = _repo.GetCategoryName(name);
                 BookTypeMix mix = new BookTypeMix(){ Books = books, BookTypes = bookTypes};
                 return View(mix);
             }
             else if (String.IsNullOrEmpty(name))
             {
-                var books = _repo.SelectBookTypeAllbooks(types);
+                List<Book> books;
+                if (types == "優惠")
+                {
+                    books = _repo.GetAllBook().Where((x) => x.Discount != 0).ToList();
+                }
+                else
+                {
+                    books = _repo.SelectBookTypeAllbooks(types);
+                }
+                
                 var booktypes = _repo.SelectAllBookType();
+                ViewBag.type = types;
                 BookTypeMix mix = new BookTypeMix() { Books = books, BookTypes = booktypes };
                 return View(mix);
             }
             else
             {
-                var books = _repo.SelectBookTypebooks(name,types);
+                List<Book> books;
+                if (types == "優惠")
+                {
+                    books = _repo.SelectCategoryBooks(name).Where((x) => x.Discount != 0).ToList();
+                }
+                else
+                {
+                    books = _repo.SelectBookTypebooks(name, types);
+                }
                 var bookTypes = _repo.SelectBookType(name);
                 ViewBag.catEngName = name;
+                ViewBag.cateName = _repo.GetCategoryName(name);
+                ViewBag.type = types;
                 BookTypeMix mix = new BookTypeMix() { Books = books, BookTypes = bookTypes };
                 return View(mix);
             }

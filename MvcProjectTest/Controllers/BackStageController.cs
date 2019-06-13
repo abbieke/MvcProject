@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -15,26 +16,102 @@ namespace MvcProjectTest.Controllers
 {
     public class BackStageController : Controller
     {
-        private readonly CustomersRepository _cusRepo = new CustomersRepository();
+        private readonly CustomersRepository _cusRepo;
+        private readonly OrderRepository _orderRepo;
+        private readonly BooksRepository _bookRepo;
+        public BackStageController()
+        {
+            _cusRepo = new CustomersRepository();
+            _orderRepo = new OrderRepository();
+            _bookRepo = new BooksRepository();
+        }
         // GET: BackStage
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult CustomerDetails()
+        public ActionResult CustomerDetails(string id)
         {
-            return View();
+            var CustDetail = _cusRepo.SelectCustomerDetail(id);
+            var CustCount = _cusRepo.SelectCustomerOrderCount(id);
+            CustomerDetail mix = new CustomerDetail(){ Customer = CustDetail, OrderCount = CustCount};
+            return View(mix);
         }
 
-        public ActionResult CustomerEdit()
+        public ActionResult CustomerEdit(string id)
         {
-            return View();
+            var CustDetail = _cusRepo.SelectCustomerView(id);
+            int cust_id = _cusRepo.GetCusromerID(id);
+            List<string> cust_roles = _cusRepo.SelectRoles(cust_id);
+
+            ViewBag.isAdmin = cust_roles.Contains("2");
+            return View(CustDetail);
         }
 
         public ActionResult CustomerIndex()
         {
-            return View();
+            var Customers = _cusRepo.ReadAllCustomer();
+            List<Customer> cust = new List<Customer>();
+            cust = Customers.ToList();
+            return View(cust);
+        }
+
+        public ActionResult CustomerUpdate(CustomerViewModel cust)
+        {
+            var current_cust = _cusRepo.SelectCustomerDetail(cust.CustomerAccount);
+            if (current_cust.EmailConfirmed != cust.EmailConfirmed)
+            {
+                if (cust.EmailConfirmed)
+                {
+                    _cusRepo.CustomerRemoveRole(cust.CustomerId,"4");
+                }
+                else
+                {
+                    List<string> current_roles = _cusRepo.SelectRoles(cust.CustomerId);
+                    current_roles.Add("4");
+                    string str_current_roles = String.Join(",", current_roles.ToArray());
+                    UserRoles userRoles = new UserRoles
+                    {
+
+                        UserID = cust.CustomerId,
+                        RolesID = str_current_roles
+                    };
+                    _cusRepo.CustomerUpdateRole(userRoles);
+                }
+
+            }
+            _cusRepo.UpdateCustomer(cust);
+            
+            return RedirectToAction("CustomerIndex", "BackStage");
+        }
+        public ActionResult UpdateAdminRole(string custid, bool isAdmin)
+        {
+            int int_custid = Convert.ToInt32(custid);
+            List<string> current_roles = _cusRepo.SelectRoles(int_custid);
+            if (current_roles.Contains("2") != isAdmin)
+            {
+                if (isAdmin)
+                {
+                    current_roles.Add("2");
+                    string str_current_roles = String.Join(",", current_roles.ToArray());
+                    UserRoles userRoles = new UserRoles
+                    {
+
+                        UserID = int_custid,
+                        RolesID = str_current_roles
+                    };
+                    _cusRepo.CustomerUpdateRole(userRoles);
+
+                }
+                else
+                {
+                    _cusRepo.CustomerRemoveRole(int_custid, "2");
+                }
+
+            }
+
+            return RedirectToAction("CustomerIndex", "BackStage");
         }
 
         public ActionResult OrderDetails()
@@ -42,14 +119,18 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult OrderEdit()
+        public ActionResult OrderEdit(string id)
         {
-            return View();
+            var orderStatus = _orderRepo.GetOrderStatus(id);
+            return View(orderStatus);
         }
 
         public ActionResult OrderIndex()
         {
-            return View();
+            var getOrders = _orderRepo.GetAllOrders();
+            List<Order> orders = new List<Order>();
+            orders = getOrders.ToList();
+            return View(orders);
         }
 
         public ActionResult ProductCreate()
@@ -67,14 +148,16 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult ProductDetails()
+        public ActionResult ProductDetails(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductIndex()
         {
-            return View();
+            var model = _bookRepo.GetAllBook();
+            return View(model);
         }
 
         
