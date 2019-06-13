@@ -179,12 +179,14 @@ namespace MvcProjectTest.Controllers
 
         public ActionResult ProductCreate()
         {
+
             return View();
         }
 
-        public ActionResult ProductDelete()
+        public ActionResult ProductDelete(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductEdit()
@@ -204,7 +206,27 @@ namespace MvcProjectTest.Controllers
             return View(model);
         }
 
-        
+        public bool CreatePress(string pressName, string pressPhone, string pressAddress )
+        {
+            Press newPress = new Press();
+            newPress.PressName = pressName;
+            newPress.PressPhone = pressPhone;
+            newPress.PressAddress = pressAddress;
+
+            try
+            {
+                _bookRepo.CreatePress(newPress);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
+        }
+
+
+
 
 
     }
