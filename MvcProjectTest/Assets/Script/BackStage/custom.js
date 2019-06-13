@@ -709,7 +709,7 @@ if (typeof NProgress != 'undefined') {
 	   
 	function init_chart_doughnut(){
 				
-		if( typeof (Chart) === 'undefined'){ return; }
+		if(typeof (Chart) === 'undefined'){ return; }
 		
 		console.log('init_chart_doughnut');
 	 
@@ -728,7 +728,7 @@ if (typeof NProgress != 'undefined') {
 		}  
 	   
 	}
-	   
+	      
 	function init_gauge() {
 			
 		if( typeof (Gauge) === 'undefined'){ return; }
