@@ -77,24 +77,26 @@
                 </div>
             </div>
             <div class="books-block">
-                <div class="sidebar_title sidebar_title-hidden">
-                    <button>商品總類 <i class="fas fa-chevron-down"></i></button>
-                </div>
-                <div class="sort-div">
-                    @{
-                        List<SelectListItem> OrderBy = new List<SelectListItem>()
-                                                                        {
+                <div class="sidebarbox">
+                    <div class="sidebar_title sidebar_title-hidden">
+                        <button>商品總類 <i class="fas fa-chevron-left"></i></button>
+                    </div>
+                    <div class="sort-div">
+                        @{
+                            List<SelectListItem> OrderBy = new List<SelectListItem>()
+                                                                                        {
                             new SelectListItem(){Text = "預設排序", Value = "1", Selected = true},
                             new SelectListItem(){Text = "價格低至高", Value = "2"},
                             new SelectListItem(){Text = "價格高至低", Value = "3"},
                             new SelectListItem(){Text = "熱銷書", Value = "4"}
                         };
-                    }
-                    @Html.DropDownList("OrderBys", OrderBy, new { @class = "all-book-category-select" })
-                    <div class="present-sorting">
-                        <button class="present-sorting-button sorting-display-js" id="sorting-display-list-button"><i class="fas fa-list-ul"></i></button>
-                        <button class="present-sorting-button sorting-display-js" id="sorting-display-grid-button"><i class="fas fa-th active"></i></button>
+                        }
+                        @Html.DropDownList("OrderBys", OrderBy, new { @class = "all-book-category-select" })
+                        <div class="present-sorting">
+                            <button class="present-sorting-button sorting-display-js" id="sorting-display-list-button"><i class="fas fa-list-ul"></i></button>
+                            <button class="present-sorting-button sorting-display-js" id="sorting-display-grid-button"><i class="fas fa-th active"></i></button>
 
+                        </div>
                     </div>
                 </div>
                 <!-- 書 -->
@@ -336,8 +338,8 @@
                 $(".main-menu ul").hide();
                 $(".sidebar_title-hidden button").on("click", function () {
                     $(".main-menu ul").toggle();
-                    $(".sidebar_title-hidden button i").toggleClass("fas fa-chevron-down")
-                        .toggleClass("fas fa-chevron-up");
+                    $(".sidebar_title-hidden button i").toggleClass("fas fa-chevron-left")
+                        .toggleClass("fas fa-chevron-right");
                 });
             }
 
