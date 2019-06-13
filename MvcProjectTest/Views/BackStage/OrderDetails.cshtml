@@ -29,7 +29,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>訂單基本資訊<a href="OrderIndex.html"><small>Back to list</small></a></h2>
+                    <h2>訂單基本資訊<a href='@Url.Action("OrderIndex","BackStage",null)'><small>Back to list</small></a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -319,37 +319,41 @@
                         <div class="form-group">
 
                             <div class="col-md-6 col-sm-6 col-xs-12 back-order-detail">
-                                <p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                <p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="text-align: left;">
                                     商品名稱
                                 </p>
-                                <p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
+                                <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
                                     訂購數量
-                                </p><p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
+                                </p><p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
                                     商品價格
                                 </p>
-                                <p type="text" id="Counts" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
+                                <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
                                     折扣
                                 </p>
-                                <p type="text" id="UnitPrice" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
+                                <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
                                     總金額
                                 </p>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12 back-order-detail">
-                                <p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12 product-text" style="        text-align: left;">
-                                    商品名稱12345678912312312312312311212312321213212312313211
-                                </p>
-                                <p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
-                                    1
-                                </p><p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
-                                    123
-                                </p>
-                                <p type="text" id="Counts" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
-                                    11
-                                </p>
-                                <p type="text" id="UnitPrice" class="control-label col-md-7 col-xs-12" style="        text-align: center;">
-                                    123
-                                </p>
-                            </div>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <div class="col-md-6 col-sm-6 col-xs-12 back-order-detail">
+                                    <p type="text" class="control-label col-md-7 col-xs-12 product-text" style="text-align: left;">
+                                        @item.BooksName
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @item.Counts
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @item.UnitPrice
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @item.Discount
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @(item.Counts*item.UnitPrice*(1-item.Discount))
+                                    </p>
+                                </div>
+                            }
                         </div>
 
                     </div>

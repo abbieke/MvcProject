@@ -6,7 +6,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()  
+    @Html.AntiForgeryToken()
     <div class="orderdetails">
         <div class="container">
             <a href="#">
@@ -17,12 +17,13 @@
                     <div class="titlename">訂單狀態</div>
                     <div class="shipping-status">
                         <ul class="shipping-progress">
-                            <li class="active">訂單成立</li>
-                            <li>準備出貨</li>
-                            <li>運送中</li>
-                            <li>待取貨</li>
-                            <li>完成取貨</li>
-                            <li>交易完成</li>
+                            <!--------------------------------->
+                            <li class="active" id="setUp">訂單成立</li>
+                            <li class="" id="preparation">準備出貨</li>
+                            <li class="" id="delivery">運送中</li>
+                            <li class="" id="pickUp">待取貨</li>
+                            <li class="" id="completePickup">完成取貨</li>
+                            <li class="" id="transactionComplete">交易完成</li>
                         </ul>
                     </div>
                     <div class="orderdetails-transport-down flex">
@@ -45,29 +46,29 @@
                             string completePickup = "";
                             string transactionComplete = "";
                             if (Model.OrderStatus.SetUp == null)
-                            {setUp = full;}
+                            { setUp = full; }
                             else
-                            {setUp = Model.OrderStatus.SetUp.ToString();}
+                            { setUp = Model.OrderStatus.SetUp.ToString(); }
                             if (Model.OrderStatus.Preparation == null)
-                            {preparation = full;}
+                            { preparation = full; }
                             else
-                            {preparation = Model.OrderStatus.Preparation.ToString();}
+                            { preparation = Model.OrderStatus.Preparation.ToString(); }
                             if (Model.OrderStatus.Delivery == null)
-                            {delivery = full;}
+                            { delivery = full; }
                             else
-                            {delivery = Model.OrderStatus.Delivery.ToString();}
+                            { delivery = Model.OrderStatus.Delivery.ToString(); }
                             if (Model.OrderStatus.PickUp == null)
-                            {pickUp = full;}
+                            { pickUp = full; }
                             else
-                            {pickUp = Model.OrderStatus.PickUp.ToString();}
+                            { pickUp = Model.OrderStatus.PickUp.ToString(); }
                             if (Model.OrderStatus.CompletePickup == null)
-                            {completePickup = full;}
+                            { completePickup = full; }
                             else
-                            {completePickup = Model.OrderStatus.CompletePickup.ToString();}
+                            { completePickup = Model.OrderStatus.CompletePickup.ToString(); }
                             if (Model.OrderStatus.TransactionComplete == null)
-                            {transactionComplete = full;}
+                            { transactionComplete = full; }
                             else
-                            {transactionComplete = Model.OrderStatus.TransactionComplete.ToString();}
+                            { transactionComplete = Model.OrderStatus.TransactionComplete.ToString(); }
                         }
                         <div class="orderdetails-transport-ulbox">
                             <ul class="orderdetails-transport-list">
@@ -136,4 +137,29 @@
 
 @section topCss {
     <link href="~/Assets/Css/orderdetails.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script>
+    if ('@(!(Model.OrderStatus.SetUp == null))' == 'True') {
+        $("#setUp").addClass("active");
+    }
+    if ('@(!(Model.OrderStatus.Preparation == null))' == 'True') {
+        $("#preparation").addClass("active");
+    }
+    if ('@(!(Model.OrderStatus.Delivery == null))' == 'True') {
+        $("#delivery").addClass("active");
+    }
+    if ('@(!(Model.OrderStatus.PickUp == null))' == 'True') {
+        $("#pickUp").addClass("active");
+    }
+    if ('@(!(Model.OrderStatus.CompletePickup == null))' == 'True') {
+        $("#completePickup").addClass("active");
+    }
+    if ('@(!(Model.OrderStatus.TransactionComplete == null))' == 'True') {
+        $("#transactionComplete").addClass("active");
+    }
+
+    </script>
 }
