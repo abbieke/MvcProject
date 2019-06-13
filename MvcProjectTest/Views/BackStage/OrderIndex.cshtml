@@ -77,30 +77,29 @@
                             @foreach (var item in Model)
                             {
                                 string status = "";
-                                DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
 
-                                    if (item.SetUp == fullTime)
+                                if (item.SetUp == null)
                                     {
                                         status = "訂單未完成";
 
                                     }
-                                    else if ( item.Preparation == fullTime)
+                                    else if ( item.Preparation == null)
                                     {
                                         status = "訂單成立";
                                     }
-                                    else if ( item.Delivery == fullTime)
+                                    else if ( item.Delivery == null)
                                     {
                                         status = "出貨準備中";
                                     }
-                                    else if ( item.PickUp == fullTime)
+                                    else if ( item.PickUp == null)
                                     {
                                         status = "宅配中";
                                     }
-                                    else if ( item.CompletePickup == fullTime)
+                                    else if ( item.CompletePickup == null)
                                     {
                                         status = "待取貨";
                                     }
-                                    else if ( item.TransactionComplete == fullTime)
+                                    else if ( item.TransactionComplete == null)
                                     {
                                         status = "取貨完成";
                                     }
@@ -121,7 +120,7 @@
                                     <td>@item.RecipientAddress</td>
                                     <td>@status</td>
                                     <td style="text-align: center">
-                                        <a href="OrderDetails.html" type="button" class="btn btn-info btn-xs">明細</a>
+                                        <a href='@Url.Action("OrderDetails","BackStage",new{ id = item.OrderID})' type="button" class="btn btn-info btn-xs">明細</a>
                                         <a href='@Url.Action("OrderEdit","BackStage",new{ id = item.OrderID})' type="button" class="btn btn-warning btn-xs">修改</a>
                                         <!-- <a href="OrderDelete.html" type="button" class="btn btn-danger btn-xs">刪除</a> -->
                                     </td>

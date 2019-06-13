@@ -114,9 +114,14 @@ namespace MvcProjectTest.Controllers
             return RedirectToAction("CustomerIndex", "BackStage");
         }
 
-        public ActionResult OrderDetails()
+        public ActionResult OrderDetails(int? id)
         {
-            return View();
+            var order = _cusRepo.SelectOrder(id);
+            var orderDetail = _cusRepo.SelectOrderDetails(id);
+            var orderStatus = _cusRepo.SelectOrderStatus(id);
+
+            OrderDetailMix mix = new OrderDetailMix() { Order = order, OrderDetails = orderDetail, OrderStatus = orderStatus };
+            return View(mix);
         }
 
         public ActionResult OrderEdit(string id)
