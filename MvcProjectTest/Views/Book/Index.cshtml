@@ -57,7 +57,8 @@
                     </div>
                     <form action='@Url.Action("Index","Book")' method="post">
                         <p>
-                            <input type="hidden" name="bookKind" value="@ViewBag.catEngName" />
+                            <input type="hidden" name="name" value="@ViewBag.catEngName" />
+                            <input type="hidden" name="types" value="@ViewBag.type" />
                             <input type="hidden" id="maxValue" name="maxValue" value="" />
                             <input type="hidden" id="minValue" name="minValue" value="" />
                             <input type="text" class="all-view-sidebar-price-range-text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -172,7 +173,7 @@
         });
 
         $(".filter_button").click(function () {
-            var bookKind = location.pathname.split("/").pop();
+            var name = location.pathname.split("/").pop();
             var valmin = $("#slider-range").slider("values", 0);
             var valmax = $("#slider-range").slider("values", 1);
 
@@ -182,12 +183,11 @@
                 {
                     type: 'POST',
                     url: '@Url.Action("Index", "Book")',
-                    data: { bookKind: bookKind, valmin: valmin, valmax: valmax }
+                    data: { name: name, valmin: valmin, valmax: valmax }
                 })
                 .done(function (data) {
                     $("#sorting-display-items-block").html(data);
 
-                    //alert(bookKind + "+" + valmin + "+" + valmax);
                     $(".quick-view-dialog").dialog({
                         autoOpen: false,
                         modal: true,
@@ -240,6 +240,7 @@
                     //}
 
                 }
+                $('html, body').animate({ scrollTop: 0 }, 400);
             });
         }
 
@@ -253,6 +254,7 @@
                     //    $(".description-for-list-display-style").hide();
                     //}
                 }
+                $('html, body').animate({ scrollTop: 0 }, 400);
             }
             else { alert("已經是第一頁了") }
         })
@@ -267,6 +269,7 @@
                     //    $(".description-for-list-display-style").hide();
                     //}
                 }
+                $('html, body').animate({ scrollTop: 0 }, 400);
             }
             else { alert("已經是最後一頁了") }
         })

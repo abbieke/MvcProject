@@ -248,5 +248,72 @@ namespace MvcProjectTest.Repositories
                 });
             }
         }
+
+
+        public IEnumerable<RealAuthor> GetallRealAuthor()
+        {
+            IEnumerable<RealAuthor> allauthors;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select  * from Author";
+                allauthors = conn.Query<RealAuthor>(sql).ToList();
+            }
+            return allauthors;
+        }
+
+        public IEnumerable<Press> GetallPress()
+        {
+            IEnumerable<Press> allpress;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from Press";
+                allpress = conn.Query<Press>(sql).ToList();
+            }
+            return allpress;
+        }
+
+        public void CreatePress(Press press)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "insert into Press(PressName,PressPhone,PressAddress) values(N'@pressName', '@pressPhone', N'@pressAddress')";
+                conn.Execute(sql, new
+                {
+                    pressName=press.PressName,
+                    pressPhone=press.PressPhone,
+                    pressAddress=press.PressAddress
+
+                });
+            }
+
+        }
+
+        public void CreateRealAuthor(RealAuthor realauthor)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "insert into Author(AuthorName) values(N'@author')";
+                conn.Execute(sql, new
+                {
+                    author=realauthor.AuthorName
+                });
+            }
+
+        }
+
+        public void CreateCategory(Category cate)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "insert into Category(CategoryName,CategoryEngName) values(N'@categoryname', N'@categoryengName')";
+                conn.Execute(sql, new
+                {
+                    categoryname=cate.CategoryName,
+                    categoryengName=cate.CategoryEngName
+                });
+            }
+
+        }
+
     }
 }
