@@ -320,18 +320,19 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "update[dbo].[Books] set BooksName=@BooksName,PressID=@PressID,CategoryID=@CategoryID,AuthorID=@AuthorID,UnitPrice=@UnitPrice,InStock=@InStock,Discount=@Discount,Description=@Description,BookImage=@BookImage where BookID='11515'";
+                var _bookRepo = new BooksRepository();
+                string sql = "update[dbo].[Books] set BooksName=@BooksName,PressID=@PressID,CategoryID=@CategoryID,AuthorID=@AuthorID,UnitPrice=@UnitPrice,InStock=@InStock,Discount=@Discount,Description=@Description where BookID=@BookID";
                 conn.Execute(sql, new
                 {
                     BooksName = book.BooksName,
-                    PressID=book.PressName,
+                    PressID= _bookRepo.GetPressIdByName(book.PressName),
                     CategoryID=book.CategoryID,
-                    AuthorID=book.AuthorName,
+                    AuthorID= _bookRepo.GetAuthorIdByName(book.AuthorName),
                     UnitPrice=book.UnitPrice,
                     InStock=book.InStock,
                     Discount=book.Discount,
                     Description=book.Description,
-                    BookImage=book.BookImage
+                    BookID = book.BookId
                 });
             }
         }
