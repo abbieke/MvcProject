@@ -293,27 +293,27 @@ namespace MvcProjectTest.Controllers
 
         }
 
-        [HttpPost]
-        public void UploadImg(HttpPostedFileBase file)
-        {
-            if (file != null && file.ContentLength > 0)
-                try
-                {
-                    string path = Path.Combine(Server.MapPath("~/Assets/Images"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    ViewBag.Message = "File uploaded successfully";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                }
-            else
-            {
-                ViewBag.Message = "You have not specified a file.";
-            }
+        //[HttpPost]
+        //public void UploadImg(HttpPostedFileBase file)
+        //{
+        //    if (file != null && file.ContentLength > 0)
+        //        try
+        //        {
+        //            string path = Path.Combine(Server.MapPath("~/Assets/Images"),
+        //                                       Path.GetFileName(file.FileName));
+        //            file.SaveAs(path);
+        //            ViewBag.Message = "File uploaded successfully";
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Message = "ERROR:" + ex.Message.ToString();
+        //        }
+        //    else
+        //    {
+        //        ViewBag.Message = "You have not specified a file.";
+        //    }
             
-        }
+        //}
 
         
 

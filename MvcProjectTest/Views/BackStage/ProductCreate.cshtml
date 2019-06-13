@@ -13,7 +13,7 @@
             <h3>新增產品</h3>
         </div>
 
-        <div class="title_right">
+        @*<div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
@@ -22,7 +22,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
     <div class="clearfix"></div>
 
@@ -191,12 +191,12 @@
                         <label for="ISBN">ISBN :</label>
                         <input type="text" id="ISBN" class="form-control" name="ISBN" />
 
-                        <label for="BookImage">BookImage :</label> <small class="red">*檔名必須與BookID同名</small>
+                        @*<label for="BookImage">BookImage :</label> <small class="red">*檔名必須與BookID同名</small>*@
                         @*<form action="/somewhere/to/upload" enctype="multipart/form-data">
             <input name="BookImage" type="file" accept="image/gif, image/jpeg, image/png" id="id-input-file-2">
         </form>*@
                         
-                        @using (Html.BeginForm("UploadImg",
+                        @*@using (Html.BeginForm("UploadImg",
                                                 "BackStage",
                                                 FormMethod.Post,
                                                 new { enctype = "multipart/form-data" }))
@@ -206,7 +206,7 @@
                             <input type="submit" value="Upload Image" />
                             <br><br>
                             @ViewBag.Message
-                        }
+                        }*@
                     @*</form>*@
                     <!-- end form for validations -->
 
@@ -453,13 +453,13 @@
                 var description = $("#editor-one").html();
                 var ISBN = $("#ISBN").val();
 
-                var bookImage = $('#id-input-file-2').val();
+                //var bookImage = $('#id-input-file-2').val();
 
-                @*$.ajax({
+                $.ajax({
                 type: "POST",
                 url: '@Url.Action("CreateBook", "BackStage")',
                     data: {
-                        bookId: bookId, bookName: bookName, pressName: pressName, cateId: cateId, authorName: authorName, unitPrice: unitPrice, inStock: inStock, discount: discount, description: description, ISBN: ISBN, bookImage: bookImage
+                        bookId: bookId, bookName: bookName, pressName: pressName, cateId: cateId, authorName: authorName, unitPrice: unitPrice, inStock: inStock, discount: discount, description: description, ISBN: ISBN, bookImage: "一張圖片"
                     }
             }).done(function (isSuccess) {
                 if (isSuccess) {
@@ -469,13 +469,11 @@
                 else {
                     alert("新增失敗，請確定格式以及是否重複");
                 }
-            })*@
+            })
             }
 
 
-            function UploadImage() {
-
-            }
+            
 
         });
     </script>
