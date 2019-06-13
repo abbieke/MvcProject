@@ -132,6 +132,11 @@ namespace MvcProjectTest.Controllers
             return View(orderStatus);
         }
 
+        public ActionResult OrderUpdate(int id, bool SetUpname, bool Preparationname, bool Deliveryname, bool PickUpname, bool CompletePickupname, bool TransactionCompletename)
+        {
+            return RedirectToAction("OrderIndex", "BackStage");
+        }
+
         public ActionResult OrderIndex()
         {
             var getOrders = _orderRepo.GetAllOrders();
