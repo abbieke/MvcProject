@@ -157,6 +157,8 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\MixModel.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Press.cs" />
+    <Compile Include="Models\RealAuthor.cs" />
     <Compile Include="Models\ShoppingCar.cs" />
     <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Models\WishList.cs" />

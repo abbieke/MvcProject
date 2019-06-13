@@ -248,5 +248,29 @@ namespace MvcProjectTest.Repositories
                 });
             }
         }
+
+
+        public IEnumerable<RealAuthor> GetallRealAuthor()
+        {
+            IEnumerable<RealAuthor> allauthors;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select  * from Author";
+                allauthors = conn.Query<RealAuthor>(sql).ToList();
+            }
+            return allauthors;
+        }
+
+        public IEnumerable<Press> GetallPress()
+        {
+            IEnumerable<Press> allpress;
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from Press";
+                allpress = conn.Query<Press>(sql).ToList();
+            }
+            return allpress;
+        }
+
     }
 }
