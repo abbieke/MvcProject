@@ -267,7 +267,7 @@ namespace MvcProjectTest.Repositories
             Order orders;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select * from Orders Where OrderID = " + orderId;
+                string sql = "Select * from Orders As o Inner Join Customers As c On o.CustomerID = c.CustomerID Where OrderID = " + orderId;
                 orders = conn.QueryFirstOrDefault<Order>(sql);
                 return orders;
             }

@@ -1,4 +1,4 @@
-﻿
+﻿@model MvcProjectTest.Models.OrderDetailMix
 @{
     ViewBag.Title = "OrderDetails";
     Layout = "~/Views/Shared/_BackStageLayout.cshtml";
@@ -29,150 +29,144 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>訂單基本資訊<a href="OrderIndex.html"><small>Back to list</small></a></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li class="dropdown" style="visibility: hidden;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#">Settings 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li>
-                            <a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
+                    <h2>訂單基本資訊<a href='@Url.Action("OrderIndex","BackStage",null)'><small>Back to list</small></a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <br />
-
                     <!-- start form for validation -->
                     <!-- 撈資料庫的 -->
-
                     <div class="form-horizontal form-label-left">
-
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="OrderNo">
-                                OrderNo
-                            </label>
+                            @Html.LabelFor(model => model.Order.OrderID, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    AS0000001
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @Model.Order.OrderID
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CustomerID">
-                                CustomerID
-                            </label>
+                            @Html.LabelFor(model => model.Order.OrderNo, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @Model.Order.OrderNo
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Order.CustomerName, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="CustomerID" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">
-                                    1
+                                   style="        text-align: left;">
+                                    @Model.Order.CustomerName
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="OrderDate">
-                                OrderDate
-                            </label>
+                            @Html.LabelFor(model => model.Order.OrderDate, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="OrderDate" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">2019-06-05 14:00:00</p>
+                                   style="        text-align: left;">@Model.Order.OrderDate</p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="PayWay">
-                                PayWay
-                            </label>
+                            @Html.LabelFor(model => model.Order.PayWay, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <p type="text" id="PayWay" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    信用卡
+                                <p type="text" id="PayWay" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @Model.Order.PayWay
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="DeliveryMethod">
-                                DeliveryMethod
-                            </label>
+                            @Html.LabelFor(model => model.Order.DeliveryMethod, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="DeliveryMethod" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">
-                                    宅配
+                                   style="        text-align: left;">
+                                    @Model.Order.DeliveryMethod
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TotalPrice">
-                                TotalPrice
-                            </label>
+                            @Html.LabelFor(model => model.Order.TotalPrice, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="TotalPrice" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">700.0000</p>
+                                   style="        text-align: left;">@Model.Order.TotalPrice</p>
                             </div>
                         </div>
 
                         <hr>
+                        @{
+                            string status = "";
 
+                            if (Model.OrderStatus.SetUp == null)
+                            {
+                                status = "訂單未完成";
+
+                            }
+                            else if (Model.OrderStatus.Preparation == null)
+                            {
+                                status = "訂單成立";
+                            }
+                            else if (Model.OrderStatus.Delivery == null)
+                            {
+                                status = "出貨準備中";
+                            }
+                            else if (Model.OrderStatus.PickUp == null)
+                            {
+                                status = "宅配中";
+                            }
+                            else if (Model.OrderStatus.CompletePickup == null)
+                            {
+                                status = "待取貨";
+                            }
+                            else if (Model.OrderStatus.TransactionComplete == null)
+                            {
+                                status = "取貨完成";
+                            }
+                            else
+                            {
+                                status = "交易完成";
+                            }
+                        }
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Recipient">
-                                Recipient
-                            </label>
+                            @Html.LabelFor(model => model.Order.Recipient, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="Recipient" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">
-                                    王維俊
+                                   style="        text-align: left;">
+                                    @Model.Order.Recipient
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="RecipientPhone">
-                                RecipientPhone
-                            </label>
+                            @Html.LabelFor(model => model.Order.RecipientPhone, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="RecipientPhone" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">
-                                    0988-055-666
+                                   style="        text-align: left;">
+                                    @Model.Order.RecipientPhone
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="RecipientEmail">
-                                RecipientEmail
-                            </label>
+                            @Html.LabelFor(model => model.Order.RecipientEmail, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="RecipientEmail" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">
-                                    abbieke0222@gmail.com
+                                   style="        text-align: left;">
+                                    @Model.Order.RecipientEmail
                                 </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="RecipientAddress">
-                                RecipientAddress
-                            </label>
+                            @Html.LabelFor(model => model.Order.RecipientAddress, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="RecipientAddress" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">新竹市香山區</p>
+                                   style="        text-align: left;">@Model.Order.RecipientAddress</p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ShippingRate">
-                                ShippingRate
-                            </label>
+                            @Html.LabelFor(model => model.Order.ShippingRate, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="ShippingRate" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">50.0000</p>
+                                   style="        text-align: left;">@Model.Order.ShippingRate</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -181,7 +175,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <p type="text" id="OrderStatus" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">已出貨</p>
+                                   style="        text-align: left;">@status</p>
                             </div>
                         </div>
                     </div>
@@ -195,9 +189,104 @@
 
             <div class="x_panel">
                 <div class="x_title">
+                    <h2>訂單狀態資訊</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <!-- start form for validation -->
+                    <!-- 撈資料庫的 -->
+                    @{
+                        string full = "未完成";
+                        string setUp = "";
+                        string preparation = "";
+                        string delivery = "";
+                        string pickUp = "";
+                        string completePickup = "";
+                        string transactionComplete = "";
+                        if (Model.OrderStatus.SetUp == null)
+                        { setUp = full; }
+                        else
+                        { setUp = Model.OrderStatus.SetUp.ToString(); }
+                        if (Model.OrderStatus.Preparation == null)
+                        { preparation = full; }
+                        else
+                        { preparation = Model.OrderStatus.Preparation.ToString(); }
+                        if (Model.OrderStatus.Delivery == null)
+                        { delivery = full; }
+                        else
+                        { delivery = Model.OrderStatus.Delivery.ToString(); }
+                        if (Model.OrderStatus.PickUp == null)
+                        { pickUp = full; }
+                        else
+                        { pickUp = Model.OrderStatus.PickUp.ToString(); }
+                        if (Model.OrderStatus.CompletePickup == null)
+                        { completePickup = full; }
+                        else
+                        { completePickup = Model.OrderStatus.CompletePickup.ToString(); }
+                        if (Model.OrderStatus.TransactionComplete == null)
+                        { transactionComplete = full; }
+                        else
+                        { transactionComplete = Model.OrderStatus.TransactionComplete.ToString(); }
+                    }
+                    <div class="form-horizontal form-label-left">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.SetUp, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @setUp
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.Preparation, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @preparation
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.Delivery, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @delivery
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.PickUp, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @pickUp
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.CompletePickup, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @completePickup
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OrderStatus.TransactionComplete, new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p type="text" id="OrderNo" class="control-label col-md-7 col-xs-12" style="        text-align: left;">
+                                    @transactionComplete
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end form for validations -->
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
                     <h2>訂單商品資訊</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                        <li class="dropdown" style="visibility: hidden;">
+                        <li class="dropdown" style="        visibility: hidden;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <i class="fa fa-wrench"></i>
                             </a>
@@ -228,21 +317,43 @@
                     <div class="form-horizontal form-label-left">
 
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BooksInfo">
-                                BooksInfo
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <div class="col-md-6 col-sm-6 col-xs-12 back-order-detail">
                                 <p type="text" id="BooksNo" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    No 1
+                                    商品名稱
                                 </p>
-                                <p type="text" id="Counts" class="control-label col-md-7 col-xs-12" style="text-align: left;">
-                                    1 本
+                                <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                    訂購數量
+                                </p><p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                    商品價格
                                 </p>
-                                <p type="text" id="UnitPrice" class="control-label col-md-7 col-xs-12"
-                                   style="text-align: left;">
-                                    350 元
+                                <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                    折扣
+                                </p>
+                                <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                    總金額
                                 </p>
                             </div>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <div class="col-md-6 col-sm-6 col-xs-12 back-order-detail">
+                                    <p type="text" class="control-label col-md-7 col-xs-12 product-text" style="text-align: left;">
+                                        @item.BooksName
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @item.Counts
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @item.UnitPrice
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @item.Discount
+                                    </p>
+                                    <p type="text" class="control-label col-md-7 col-xs-12" style="text-align: center;">
+                                        @(item.Counts*item.UnitPrice*(1-item.Discount))
+                                    </p>
+                                </div>
+                            }
                         </div>
 
                     </div>
@@ -255,6 +366,21 @@
 
     </div>
 </div>
+@section topCss {
+    <style>
+    .form-group .back-order-detail {
+        display: flex;
+        width: 100%;
+    }
 
+    .product-text {
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+  </style>
+}
 @Scripts.Render("~/Back-Script/BackCustomerDetails")
 
