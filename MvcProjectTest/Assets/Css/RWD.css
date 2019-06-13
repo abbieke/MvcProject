@@ -162,19 +162,33 @@
         background-color: transparent;
         color: black;
     }
+    .allbooks {
+        position:relative;
+    }
+    .sidebar_title {
+        display:none;
+    }
     .sidebarbox {
         display: flex;
         justify-content: center;
+        align-items: center;
+        margin: 15px 0;
     }
     .sidebar {
-        display:none;
+        position: absolute;
+        z-index: 10;
+        background: rgba(255, 255, 255, .7);
+        left: 80px;
+        top: 70px;
+        width: 242px;
+        text-align: center;
+        font-size: 1.25rem;
     }
     .books-block {
         margin:0;
     }
     .sidebar_title-hidden {
-        display: flex;
-        align-items:center;
+        display: block;
         margin-right:20px;
     }
         .sidebar_title-hidden button {
@@ -192,6 +206,17 @@
     .sidebar .sidebar-hidden-block {
         display: block;
     }
+    .sort-div {
+        margin: 0;
+    }
+
+    .backgroundcolr a:hover {
+        color:#ff0000;
+    }
+    .product-card-title {
+        font-size: 1.2rem;
+    }
+
 }
 
 @media screen and (max-width:767px) {
@@ -218,11 +243,18 @@
     .bigimage-detail {
         padding-top:80px;
     }
+    .product-card-block {
+        flex-direction: column;
+    }
+        .product-card-block .product-card-img-block {
+            width: 100%;
+            justify-content: center;
+        }
 }
 
 @media screen and (max-width:640px) {
     .product-card-out-block {
-        width: 100%;
+        width: 48%;
     }
 
     .index-block-right {
@@ -251,6 +283,10 @@
         height: auto;
     }
 
+    .sidebar {
+        left: 0;
+        width: 180px;
+    }
     .service-block ul li {
         width: 100%;
         margin-bottom: 10px;

@@ -14,7 +14,7 @@
     }
     var wishbooks = _shoppingRepo.SelectWish((int)Session["userid"]);
 
-
+    ViewBag.cardIndex = 0;
 
 }
 
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div id="cart-tab">
+        <div id="cart-tab" style="border: 0;">
             <div class="cart-tab-title-row-block">
                 <ul>
                     <li class="cart-tab-title-li">
@@ -138,6 +138,7 @@
                 <div class="product-card-list flex">
                     @foreach (var book in wishbooks)
                     {
+                        ViewBag.cardIndex++;
                         @Html.Partial("_WishProductCardPartial", book)
                     }
 
