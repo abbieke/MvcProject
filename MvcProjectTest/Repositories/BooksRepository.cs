@@ -316,5 +316,25 @@ namespace MvcProjectTest.Repositories
 
         }
 
+        public void UpdateBook(Book book)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "update[dbo].[Books] set BooksName=@BooksName,PressID=@PressID,CategoryID=@CategoryID,AuthorID=@AuthorID,UnitPrice=@UnitPrice,InStock=@InStock,Discount=@Discount,Description=@Description,BookImage=@BookImage where BookID='11515'";
+                conn.Execute(sql, new
+                {
+                    BooksName = book.BooksName,
+                    PressID=book.PressName,
+                    CategoryID=book.CategoryID,
+                    AuthorID=book.AuthorName,
+                    UnitPrice=book.UnitPrice,
+                    InStock=book.InStock,
+                    Discount=book.Discount,
+                    Description=book.Description,
+                    BookImage=book.BookImage
+                });
+            }
+        }
+
     }
 }
