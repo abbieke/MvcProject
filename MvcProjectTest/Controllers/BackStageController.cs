@@ -121,43 +121,42 @@ namespace MvcProjectTest.Controllers
 
         public ActionResult OrderEdit(string id)
         {
-            DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
             var orderStatus = _orderRepo.GetOrderStatus(id);
-            ViewBag.setUp = (!orderStatus.SetUp.Equals(fullTime));
-            ViewBag.preparation = (!orderStatus.Preparation.Equals(fullTime));
-            ViewBag.delivery = (!orderStatus.Delivery.Equals(fullTime));
-            ViewBag.pickUp = (!orderStatus.PickUp.Equals(fullTime));
-            ViewBag.completePickup = (!orderStatus.CompletePickup.Equals(fullTime));
-            ViewBag.transactionComplete = (!orderStatus.TransactionComplete.Equals(fullTime));
+            ViewBag.setUp = (!(orderStatus.SetUp == null));
+            ViewBag.preparation = (!(orderStatus.Preparation == null));
+            ViewBag.delivery = (!(orderStatus.Delivery == null));
+            ViewBag.pickUp = (!(orderStatus.PickUp == null));
+            ViewBag.completePickup = (!(orderStatus.CompletePickup == null));
+            ViewBag.transactionComplete = (!(orderStatus.TransactionComplete == null));
             return View(orderStatus);
         }
 
         public ActionResult OrderUpdate(string OrderID, bool SetUpname, bool Preparationname, bool Deliveryname, bool PickUpname, bool CompletePickupname, bool TransactionCompletename)
         {
-            DateTime fullTime = new DateTime(1, 1, 1, 0, 0, 0);
             OrderStatusModel orderStatusView = new OrderStatusModel();
             var orderStatus = _orderRepo.GetOrderStatus(OrderID);
-            if ((!orderStatus.SetUp.Equals(fullTime)) != SetUpname)
+            orderStatusView = orderStatus;
+            if ((!(orderStatus.SetUp == null)) != SetUpname)
             {
                 orderStatusView.SetUp = DateTime.Now;
             }
-            if ((!orderStatus.Preparation.Equals(fullTime)) != Preparationname)
+            if ((!(orderStatus.Preparation == null)) != Preparationname)
             {
                 orderStatusView.Preparation = DateTime.Now;
             }
-            if ((!orderStatus.Delivery.Equals(fullTime)) != Deliveryname)
+            if ((!(orderStatus.Delivery == null)) != Deliveryname)
             {
                 orderStatusView.Delivery = DateTime.Now;
             }
-            if ((!orderStatus.PickUp.Equals(fullTime)) != PickUpname)
+            if ((!(orderStatus.PickUp == null)) != PickUpname)
             {
                 orderStatusView.PickUp = DateTime.Now;
             }
-            if ((!orderStatus.CompletePickup.Equals(fullTime)) != CompletePickupname)
+            if ((!(orderStatus.CompletePickup == null)) != CompletePickupname)
             {
                 orderStatusView.CompletePickup = DateTime.Now;
             }
-            if ((!orderStatus.TransactionComplete.Equals(fullTime)) != TransactionCompletename)
+            if ((!(orderStatus.TransactionComplete == null)) != TransactionCompletename)
             {
                 orderStatusView.TransactionComplete = DateTime.Now;
             }
