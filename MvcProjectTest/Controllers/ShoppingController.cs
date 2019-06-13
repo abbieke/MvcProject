@@ -31,7 +31,9 @@ namespace MvcProjectTest.Controllers
         //先頂著用
         private static Order _order;
         private static IEnumerable<ShoppingCartViewModel> opList;
-        
+        private static bool _isNeedingClear;
+
+
         public ShoppingController()
         {
             _repo = new ShoppingRepository();
@@ -93,7 +95,7 @@ namespace MvcProjectTest.Controllers
 
             if (isNeedingClear)
             {
-                _cartSer.DeleteCartByAccount(cusAccount);
+                _isNeedingClear = true;
             }
 
             
@@ -117,7 +119,6 @@ namespace MvcProjectTest.Controllers
 
             orderModel.OrderDate = DateTime.Now;
 
-            int total = 0;
             foreach(var item in opList)
             {
                 var book = _bookRepo.GetBookById(item.BookID);
@@ -169,6 +170,11 @@ namespace MvcProjectTest.Controllers
             Order orderModel = _order;
             string cust_mail = _cusRepo.SelectCustomerEmail((int)Session["userid"]);
             await MailService.SendMailToNoticeOrderSuccess(cust_mail, _order.OrderNo);
+            if (_isNeedingClear)
+            {
+                _cartSer.DeleteCartByAccount(User.Identity.Name);
+            }
+            _isNeedingClear = false;
             _order = null;
             return View(orderModel);
         }
