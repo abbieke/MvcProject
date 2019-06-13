@@ -109,15 +109,25 @@ namespace MvcProjectTest.Repositories
             return result;
         }
 
-        public IEnumerable<Order> GetOrderDetail()
+        public IEnumerable<OrderDetailModel> GetOrderDetail()
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "select * from[dbo].[Order Detail]";
-                var result = conn.Query<Order>(sql);
+                string sql = "select * from[dbo].[Order Detail] od INNER JOIN Books b ON b.BookID = od.BookID";
+                var result = conn.Query<OrderDetailModel>(sql);
                 return result;
             }
             
+        }
+
+        public IEnumerable<Order> GetOrder()
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                string sql = "select * from Orders";
+                var result = conn.Query<Order>(sql);
+                return result;
+            }
         }
 
         public List<Order> GetAllOrders()

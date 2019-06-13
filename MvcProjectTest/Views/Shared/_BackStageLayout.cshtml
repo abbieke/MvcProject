@@ -25,7 +25,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title">
+                        <a href=@Url.Action("Index","BackStage") class="site_title">
                             <img src="~/Assets/Images/BackStage/images/Bookstore-logo3.png"
                                  style="width: 40px;margin:0 10px 0 5px;"><img src="~/Assets/Images/BackStage/images/B-Bookstore-logo4.png"
                                                                                style="width: 150px;margin:0 10px 0 5px;">
@@ -54,14 +54,14 @@
                             <h3>功能總覽</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> 首頁</a>
+                                    <a href=@Url.Action("Index","BackStage")><i class="fa fa-home"></i> 首頁</a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-edit"></i> 資料管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="ProductIndex.html">商品管理</a></li>
-                                        <li><a href="OrderIndex.html">訂單管理</a></li>
-                                        <li><a href="CustomerIndex.html">會員管理</a></li>
+                                        <li><a href=@Url.Action("ProductIndex","BackStage")>商品管理</a></li>
+                                        <li><a href=@Url.Action("OrderIndex","BackStage")>訂單管理</a></li>
+                                        <li><a href=@Url.Action("CustomerIndex","BackStage")>會員管理</a></li>
                                         <li><a href="#">管理員管理</a></li>
                                     </ul>
                                 </li>

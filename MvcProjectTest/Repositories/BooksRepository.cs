@@ -200,5 +200,53 @@ namespace MvcProjectTest.Repositories
                 return conn.QueryFirstOrDefault<string>(sql);
             }
         }
+
+        public void CreateBook(Book book)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var _bookRepo = new BooksRepository();
+                string sql = "insert into Books(BookID,BooksName,PressID,CategoryID,AuthorID,UnitPrice,InStock,Discount,Description,ISBN,BookImage) values('@bookId', '@booksName', @pressId, @categoryId,@authorId, @unitPrice, @inStock, @disCount, '@desCription', '@iSBN', '@bookImage')";
+                conn.Execute(sql, new
+                {
+
+                    bookId = book.BookId,
+                    booksName = book.BooksName,
+                    pressId = _bookRepo.GetPressIdByName(book.PressName),
+                    categoryId = book.CategoryID,
+                    authorId = _bookRepo.GetAuthorIdByName(book.AuthorName),
+                    unitPrice = book.UnitPrice,
+                    inStock = book.InStock,
+                    disCount = book.Discount,
+                    desCription = book.Description,
+                    iSBN = book.ISBN,
+                    bookImage = book.BookImage,
+                });
+            }
+
+        }
+
+        public int GetPressIdByName(string pressName)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "select PressID from Press where PressName = N'@pressName'";
+                return conn.QueryFirstOrDefault<int>(sql, new {
+                    pressName = pressName
+                });
+            }
+        }
+
+        public int GetAuthorIdByName(string authorName)
+        {
+            using (conn = new SqlConnection(connString))
+            {
+                var sql = "select AuthorID from Author where AuthorName = N'@authorName'";
+                return conn.QueryFirstOrDefault<int>(sql, new
+                {
+                    authorName = authorName
+                });
+            }
+        }
     }
 }

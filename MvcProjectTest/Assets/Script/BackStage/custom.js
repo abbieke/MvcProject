@@ -388,25 +388,39 @@ if (typeof NProgress != 'undefined') {
 		
 		var chart_plot_02_data = [];
 		
-		var chart_plot_03_data = [
-			[0, 1],
-			[1, 9],
-			[2, 6],
-			[3, 10],
-			[4, 5],
-			[5, 17],
-			[6, 6],
-			[7, 10],
-			[8, 7],
-			[9, 11],
-			[10, 35],
-			[11, 9],
-			[12, 12],
-			[13, 5],
-			[14, 3],
-			[15, 4],
-			[16, 9]
-		];
+		//var chart_plot_03_data = [
+		//	[0, 1],
+		//	[1, 9],
+		//	[2, 6],
+		//	[3, 10],
+		//	[4, 5],
+		//	[5, 17],
+		//	[6, 6],
+		//	[7, 10],
+		//	[8, 7],
+		//	[9, 11],
+		//	[10, 35],
+		//	[11, 9],
+		//	[12, 12],
+		//	[13, 5],
+		//	[14, 3],
+		//	[15, 4],
+  //          [16, 9],
+  //          [17, 10],
+  //          [18, 10],
+  //          [19, 10],
+  //          [20, 10],
+  //          [21, 10],
+  //          [22, 10],
+  //          [23, 10],
+  //          [24, 10],
+  //          [25, 10],
+  //          [26, 10],
+  //          [27, 10],
+  //          [28, 10],
+  //          [29, 10],
+  //          [30, 10]
+		//];
 		
 		
 		for (var i = 0; i < 30; i++) {
@@ -523,28 +537,39 @@ if (typeof NProgress != 'undefined') {
 			}
 		};	
 	
-		var chart_plot_03_settings = {
-			series: {
-				curvedLines: {
-					apply: true,
-					active: true,
-					monotonicFit: true
-				}
-			},
-			colors: ["#26B99A"],
-			grid: {
-				borderWidth: {
-					top: 0,
-					right: 0,
-					bottom: 1,
-					left: 1
-				},
-				borderColor: {
-					bottom: "#7F8790",
-					left: "#7F8790"
-				}
-			}
-		};
+        var chart_plot_03_settings = {
+            series: {
+                curvedLines: {
+                    apply: true,
+                    active: true,
+                    monotonicFit: true
+
+                }
+            },
+            colors: ["#26B99A"],
+            grid: {
+                borderWidth: {
+                    top: 0,
+                    right: 0,
+                    bottom: 1,
+                    left: 1
+                },
+                borderColor: {
+                    bottom: "#7F8790",
+                    left: "#7F8790"
+                }
+            },
+            
+            yaxis: {
+                min: 0,
+                max: 25
+            },
+            xaxis: {
+               
+                min: 0,
+                ticks: 30
+            }
+        }
         
 		
         if ($("#chart_plot_01").length){
@@ -575,14 +600,14 @@ if (typeof NProgress != 'undefined') {
 			
 			
 			$.plot($("#chart_plot_03"), [{
-				label: "Registrations",
+				label: "每日訂單量",
 				data: chart_plot_03_data,
 				lines: {
 					fillColor: "rgba(150, 202, 89, 0.12)"
 				}, 
 				points: {
 					fillColor: "#fff"
-				}
+                }
 			}], chart_plot_03_settings);
 			
 		};
@@ -689,41 +714,42 @@ if (typeof NProgress != 'undefined') {
 		console.log('init_chart_doughnut');
 	 
 		if ($('.canvasDoughnut').length){
-			
-		var chart_doughnut_settings = {
-				type: 'doughnut',
-				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-				data: {
-					labels: [
-						"Symbian",
-						"Blackberry",
-						"Other",
-						"Android",
-						"IOS"
-					],
-					datasets: [{
-						data: [15, 20, 30, 10, 30],
-						backgroundColor: [
-							"#BDC3C7",
-							"#9B59B6",
-							"#E74C3C",
-							"#26B99A",
-							"#3498DB"
-						],
-						hoverBackgroundColor: [
-							"#CFD4D8",
-							"#B370CF",
-							"#E95E4F",
-							"#36CAAB",
-							"#49A9EA"
-						]
-					}]
-				},
-				options: { 
-					legend: false, 
-					responsive: false 
-				}
-			}
+			//帶首頁中的變數，首頁做Json
+            var chart_doughnut_settings = indexUnderCircleJson;
+   //         {
+			//	type: 'doughnut',
+			//	tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+			//	data: {
+			//		labels: [
+			//			"Symbian",
+			//			"Blackberry",
+			//			"Other",
+			//			"Android",
+			//			"IOS"
+			//		],
+			//		datasets: [{
+			//			data: [15, 20, 30, 10, 30],
+			//			backgroundColor: [
+			//				"#BDC3C7",
+			//				"#9B59B6",
+			//				"#E74C3C",
+			//				"#26B99A",
+			//				"#3498DB"
+			//			],
+			//			hoverBackgroundColor: [
+			//				"#CFD4D8",
+			//				"#B370CF",
+			//				"#E95E4F",
+			//				"#36CAAB",
+			//				"#49A9EA"
+			//			]
+			//		}]
+			//	},
+			//	options: { 
+			//		legend: false, 
+			//		responsive: false 
+			//	}
+			//}
 		
 			$('.canvasDoughnut').each(function(){
 				

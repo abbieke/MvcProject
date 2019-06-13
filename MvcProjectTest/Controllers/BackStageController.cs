@@ -18,10 +18,12 @@ namespace MvcProjectTest.Controllers
     {
         private readonly CustomersRepository _cusRepo;
         private readonly OrderRepository _orderRepo;
+        private readonly BooksRepository _bookRepo;
         public BackStageController()
         {
             _cusRepo = new CustomersRepository();
             _orderRepo = new OrderRepository();
+            _bookRepo = new BooksRepository();
         }
         // GET: BackStage
         public ActionResult Index()
@@ -153,14 +155,16 @@ namespace MvcProjectTest.Controllers
             return View();
         }
 
-        public ActionResult ProductDetails()
+        public ActionResult ProductDetails(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductIndex()
         {
-            return View();
+            var model = _bookRepo.GetAllBook();
+            return View(model);
         }
 
         
