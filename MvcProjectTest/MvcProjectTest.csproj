@@ -202,6 +202,12 @@
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
     <Content Include="Assets\Css\orderdetails.css" />
     <Content Include="Assets\Css\wish-list-product-card-stylesheet.css" />
+    <Content Include="Assets\Images\Admin\1G1G1G1G.jpg" />
+    <Content Include="Assets\Images\Admin\Abbieke222.jpg" />
+    <Content Include="Assets\Images\Admin\adminmin.jpg" />
+    <Content Include="Assets\Images\Admin\BigWhite1.jpg" />
+    <Content Include="Assets\Images\Admin\gnkn19930225.jpg" />
+    <Content Include="Assets\Images\Admin\yoyoyo5420.jpg" />
     <Content Include="Assets\Images\BackStage\images\american-express.png" />
     <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo3.png" />
     <Content Include="Assets\Images\BackStage\images\B-Bookstore-logo4.png" />
