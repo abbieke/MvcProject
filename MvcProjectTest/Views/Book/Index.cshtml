@@ -82,7 +82,7 @@
                         <button>商品總類 <i class="fas fa-chevron-up"></i></button>
                     </div>
                     <div class="sort-div">
-                        @{
+                        @*@{
                             List<SelectListItem> OrderBy = new List<SelectListItem>()
                                                                                         {
                             new SelectListItem(){Text = "預設排序", Value = "1", Selected = true},
@@ -91,7 +91,7 @@
                             new SelectListItem(){Text = "熱銷書", Value = "4"}
                         };
                         }
-                        @Html.DropDownList("OrderBys", OrderBy, new { @class = "all-book-category-select" })
+                        @Html.DropDownList("OrderBys", OrderBy, new { @class = "all-book-category-select" })*@
                         <div class="present-sorting">
                             <button class="present-sorting-button sorting-display-js" id="sorting-display-list-button"><i class="fas fa-list-ul"></i></button>
                             <button class="present-sorting-button sorting-display-js" id="sorting-display-grid-button"><i class="fas fa-th active"></i></button>
