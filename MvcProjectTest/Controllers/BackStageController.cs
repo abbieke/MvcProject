@@ -220,6 +220,58 @@ namespace MvcProjectTest.Controllers
             
         }
 
+        public bool CreateCategory(string cateName, string cateEngName)
+        {
+            Category newCate = new Category();
+            newCate.CategoryName = cateName;
+            newCate.CategoryEngName = cateEngName;
+
+            try
+            {
+                _bookRepo.CreateCategory(newCate);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool CreateAuthor(string authorName)
+        {
+            RealAuthor newAuthor = new RealAuthor();
+            newAuthor.AuthorName = authorName;
+
+            try
+            {
+                _bookRepo.CreateRealAuthor(newAuthor);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool CreateBook(string bookId, string bookName, string pressName, string cateId, string authorName, string unitPrice, string inStock, string discount, string description, string ISBN, string bookImage)
+        {
+            RealAuthor newAuthor = new RealAuthor();
+            newAuthor.AuthorName = authorName;
+
+            try
+            {
+                _bookRepo.CreateBook(book)
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
 
 
 

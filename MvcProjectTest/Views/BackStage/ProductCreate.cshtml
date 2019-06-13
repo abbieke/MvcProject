@@ -79,11 +79,11 @@
                                     <div class="modal-body">
                                         <p>Id會依序往下排序</p>
                                         <h4>出版商名稱</h4>
-                                        <input type="text" id="PressName" class="form-control" name="PressName" />
+                                        <input type="text" id="NewPressName" class="form-control" name="PressName" />
                                         <h4>出版商電話</h4>
-                                        <input type="text" id="PressPhone" class="form-control" name="PressPhone" />
+                                        <input type="text" id="NewPressPhone" class="form-control" name="PressPhone" />
                                         <h4>出版商地址</h4>
-                                        <input type="text" id="PressAddress" class="form-control" name="PressAddress" />
+                                        <input type="text" id="NewPressAddress" class="form-control" name="PressAddress" />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -92,11 +92,11 @@
                                 </div>
                             </div>
                         </div>
-                        <select id="PressID" class="form-control" required>
-                            <option value="">Choose..</option>
+                        <select id="PressName" class="form-control" required>
+                            @*<option value="">Choose..</option>*@
                             @foreach (var press in _bookRepo.GetallPress())
                             {
-                                <option value="@press.PressId">@press.PressId @press.PressName</option>
+                                <option value="@press.PressName">@press.PressId @press.PressName</option>
                             }
                             @*<option value="1">1 方舟文化</option>
                                 <option value="2">2 旗標</option>
@@ -132,7 +132,7 @@
                             </div>
                         </div>
                         <select id="CategoryID" class="form-control" required>
-                            <option value="">Choose..</option>
+                            @*<option value="">Choose..</option>*@
                             @foreach (var cate in _bookRepo.SelectCategory())
                             {
                                 <option value="@cate.CategoryID">@cate.CategoryID @cate.CategoryName</option>
@@ -159,7 +159,7 @@
                                     <div class="modal-body">
                                         <p>Id會依序往下排序</p>
                                         <h4>作者名稱</h4>
-                                        <input type="text" id="AuthorName" class="form-control" name="AuthorName" />
+                                        <input type="text" id="NewAuthorName" class="form-control" name="AuthorName" />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -168,11 +168,11 @@
                                 </div>
                             </div>
                         </div>
-                        <select id="AuthorID" class="form-control" required>
-                            <option value="">Choose..</option>
+                        <select id="AuthorName" class="form-control" required>
+                            @*<option value="">Choose..</option>*@
                             @foreach (var author in _bookRepo.GetallRealAuthor())
                             {
-                                <option value="@author.AuthorID">@author.AuthorID @author.AuthorName</option>
+                                <option value="@author.AuthorName">@author.AuthorID @author.AuthorName</option>
                             }
                             @*<option value="1">1 張瀞仁</option>
                                 <option value="2">2 中村聡史</option>
@@ -193,7 +193,7 @@
 
                         <label for="BookImage">BookImage :</label> <small class="red">*檔名必須與BookID同名</small>
                         <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                            <input name="BookImage" type="file" accept="image/gif, image/jpeg, image/png">
+                            <input name="BookImage" type="file" accept="image/gif, image/jpeg, image/png" id="id-input-file-2">
                         </form>
                     </form>
                     <!-- end form for validations -->
@@ -332,8 +332,8 @@
 
                 </div>
             </div>
-            <a id="textbox-area-info" href="" type="button" class="btn btn-success btn-ml"
-               style="float: right;">新增</a>
+            <button id="createButton" class="btn btn-success btn-ml"
+               style="float: right;">新增</button>
             <!-- <script>
               if (document.getElementById("textbox-area-info").onclick) {
                 console.log(document.getElementById("editor-one").innerHTML);
@@ -359,9 +359,9 @@
         $("#createAuthor").click(createAuthorEvent);
 
         function createPressEvent() {
-            var name = $("#PressName").val();
-            var phone = $("#PressPhone").val();
-            var address = $("#PressAddress").val();
+            var name = $("#NewPressName").val();
+            var phone = $("#NewPressPhone").val();
+            var address = $("#NewPressAddress").val();
 
             $.ajax({
                 type: "POST",
@@ -369,41 +369,118 @@
                 data: { pressName: name, pressPhone: phone, pressAddress: address }
             }).done(function (isSuccess) {
                 if (isSuccess) {
-                    alert("新增成功");
+
+                    alert("新增成功，請重整頁面");
+                    window.setTimeout(function () {
+                        $("#PressID").html("@GetPressOption()");
+                    }, 3000);
                     
-                    
-                    $("#PressID").html( "@GetPressOption()");
                 }
                 else {
                     alert("新增失敗，請確定格式以及是否重複");
                 }
             })
 
-            }
+         }
 
 
         function createCategoryEvent() {
             var name = $("#CategoryName").val();
             var engName = $("#CategoryEngName").val();
-            alert(name + engName);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreateCategory", "BackStage")',
+                data: { cateName: name, cateEngName: engName }
+            }).done(function (isSuccess) {
+                if (isSuccess) {
+
+                    alert("新增成功，請重整頁面");
+                }
+                else {
+                    alert("新增失敗，請確定格式以及是否重複");
+                }
+            })
         }
 
         function createAuthorEvent() {
-            var name = $("#AuthorName").val();
+            var name = $("#NewAuthorName").val();
 
-            alert(name);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreateAuthor", "BackStage")',
+                data: { authorName: name }
+            }).done(function (isSuccess) {
+                if (isSuccess) {
+
+                    alert("新增成功，請重整頁面");
+                }
+                else {
+                    alert("新增失敗，請確定格式以及是否重複");
+                }
+            })
         }
+    </script>
+    @*新增書本*@
+    <script>
+        $(function () {
+            $("#createButton").click(createBookEvent);
+
+
+            function createBookEvent() {
+                var bookId = $("#BookID").val();
+                var bookName = $("#BookName").val();
+                var pressName = $("#PressName option:selected").val();
+                var cateId = $("#CategoryID option:selected").val();
+                var authorName = $("#AuthorName option:selected").val();
+                var unitPrice = $("#UnitPrice").val();
+                var inStock = $("#InStock").val();
+                var discount = $("#Discount").val();
+                var description = $("#editor-one").html();
+                var ISBN = $("#ISBN").val();
+                var bookImage = getImageUrl();
+
+                //alert(bookId + bookName + pressName + cateId + authorName + unitPrice + inStock + discount + ISBN + description);
+                alert(bookImage);
+            }
+
+            function getImageUrl() {
+                var filename = $('#id-input-file-2').val();
+                 var file = document.getElementById('id-input-file-2').files[0];      
+                var filename = document.getElementById('id-input-file-2').files[0].name;      
+                var blob = new Blob([file]);
+                var url = URL.createObjectURL(blob);
+
+                return url
+            }
+        });
     </script>
 }
 
-@helper  GetPressOption()
+@*@helper  GetPressOption()
 {
-        var _bookRepo = new BooksRepository();
-        var refreshPressStr = "<option value=''>Choose..</option>";
-        foreach(var press in _bookRepo.GetallPress())
-        {
-            refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
-        }
-        @refreshPressStr;
+var _bookRepo = new BooksRepository();
+var refreshPressStr = "<option value=''>Choose..</option>";
+foreach(var press in _bookRepo.GetallPress())
+{
+    refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
+}
+IHtmlString pressString = Html.Raw(refreshPressStr);
+@pressString;
+}*@
+
+@functions 
+{
+ public IHtmlString GetPressOption()
+{
+var _bookRepo = new BooksRepository();
+var refreshPressStr = "<option value=''>Choose..</option>";
+foreach(var press in _bookRepo.GetallPress())
+{
+    refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
+}
+IHtmlString pressString = Html.Raw(refreshPressStr);
+return pressString;
+}
 }
 
