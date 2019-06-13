@@ -207,7 +207,7 @@ namespace MvcProjectTest.Repositories
             using (conn = new SqlConnection(connString))
             {
                 var _bookRepo = new BooksRepository();
-                string sql = "insert into Books(BookID,BooksName,PressID,CategoryID,AuthorID,UnitPrice,InStock,Discount,Description,ISBN,BookImage) values('@bookId', '@booksName', @pressId, @categoryId,@authorId, @unitPrice, @inStock, @disCount, '@desCription', '@iSBN', '@bookImage')";
+                string sql = "insert into Books(BookID,BooksName,PressID,CategoryID,AuthorID,UnitPrice,InStock,Discount,Description,ISBN,BookImage) values(@bookId, @booksName, @pressId, @categoryId,@authorId, @unitPrice, @inStock, @disCount, @desCription, @iSBN, @bookImage)";
                 conn.Execute(sql, new
                 {
 
@@ -231,7 +231,7 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                var sql = "select PressID from Press where PressName = N'@pressName'";
+                var sql = "select PressID from Press where PressName = @pressName";
                 return conn.QueryFirstOrDefault<int>(sql, new {
                     pressName = pressName
                 });
@@ -242,7 +242,7 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                var sql = "select AuthorID from Author where AuthorName = N'@authorName'";
+                var sql = "select AuthorID from Author where AuthorName = @authorName";
                 return conn.QueryFirstOrDefault<int>(sql, new
                 {
                     authorName = authorName
@@ -277,7 +277,7 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "insert into Press(PressName,PressPhone,PressAddress) values(N'@pressName', '@pressPhone', N'@pressAddress')";
+                string sql = "insert into Press(PressName,PressPhone,PressAddress) values(@pressName, @pressPhone, @pressAddress)";
                 conn.Execute(sql, new
                 {
                     pressName=press.PressName,
@@ -293,7 +293,7 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "insert into Author(AuthorName) values(N'@author')";
+                string sql = "insert into Author(AuthorName) values(@author)";
                 conn.Execute(sql, new
                 {
                     author=realauthor.AuthorName
@@ -306,7 +306,7 @@ namespace MvcProjectTest.Repositories
         {
             using (conn = new SqlConnection(connString))
             {
-                string sql = "insert into Category(CategoryName,CategoryEngName) values(N'@categoryname', N'@categoryengName')";
+                string sql = "insert into Category(CategoryName,CategoryEngName) values(@categoryname, @categoryengName)";
                 conn.Execute(sql, new
                 {
                     categoryname=cate.CategoryName,

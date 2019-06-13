@@ -99,9 +99,9 @@
                                 <option value="@press.PressId">@press.PressId @press.PressName</option>
                             }
                             @*<option value="1">1 方舟文化</option>
-        <option value="2">2 旗標</option>
-        <option value="3">3 碁峰</option>
-        <option value="4">4 台灣角川</option>*@
+                                <option value="2">2 旗標</option>
+                                <option value="3">3 碁峰</option>
+                                <option value="4">4 台灣角川</option>*@
                         </select>
 
 
@@ -138,9 +138,9 @@
                                 <option value="@cate.CategoryID">@cate.CategoryID @cate.CategoryName</option>
                             }
                             @*<option value="1">1 中文書</option>
-        <option value="2">2 電子書</option>
-        <option value="3">3 簡體書</option>
-        <option value="4">4 外文書</option>*@
+                                <option value="2">2 電子書</option>
+                                <option value="3">3 簡體書</option>
+                                <option value="4">4 外文書</option>*@
                         </select>
 
 
@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="button" class="btn btn-primary">新增</button>
+                                        <button type="button" class="btn btn-primary" id="createAuthor">新增</button>
                                     </div>
                                 </div>
                             </div>
@@ -175,8 +175,8 @@
                                 <option value="@author.AuthorID">@author.AuthorID @author.AuthorName</option>
                             }
                             @*<option value="1">1 張瀞仁</option>
-        <option value="2">2 中村聡史</option>
-        <option value="3">3 呂國泰</option>*@
+                                <option value="2">2 中村聡史</option>
+                                <option value="3">3 呂國泰</option>*@
                         </select>
 
                         <label for="UnitPrice">UnitPrice :</label>
@@ -340,7 +340,7 @@
               }
             </script> -->
         </div>
-    </div>  
+    </div>
 </div>
 
 
@@ -356,19 +356,54 @@
     <script>
         $("#createPress").click(createPressEvent);
         $("#createCategory").click(createCategoryEvent);
+        $("#createAuthor").click(createAuthorEvent);
 
         function createPressEvent() {
             var name = $("#PressName").val();
             var phone = $("#PressPhone").val();
             var address = $("#PressAddress").val();
-            alert(name + phone + address);
-        }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreatePress", "BackStage")',
+                data: { pressName: name, pressPhone: phone, pressAddress: address }
+            }).done(function (isSuccess) {
+                if (isSuccess) {
+                    alert("新增成功");
+                    
+                    
+                    $("#PressID").html( "@GetPressOption()");
+                }
+                else {
+                    alert("新增失敗，請確定格式以及是否重複");
+                }
+            })
+
+            }
+
 
         function createCategoryEvent() {
             var name = $("#CategoryName").val();
             var engName = $("#CategoryEngName").val();
             alert(name + engName);
         }
+
+        function createAuthorEvent() {
+            var name = $("#AuthorName").val();
+
+            alert(name);
+        }
     </script>
+}
+
+@helper  GetPressOption()
+{
+        var _bookRepo = new BooksRepository();
+        var refreshPressStr = "<option value=''>Choose..</option>";
+        foreach(var press in _bookRepo.GetallPress())
+        {
+            refreshPressStr += "<option value='" + @press.PressId.ToString() + "'>" + @press.PressId.ToString() + " " + @press.PressName + "</option>";
+        }
+        @refreshPressStr;
 }
 

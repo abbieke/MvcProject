@@ -44,7 +44,7 @@
                         @foreach (var item in Model.BookTypes)
                         {
                             @*<li><a href='@Url.Action("Index","Book",new{name = ViewBag.catEngName, types = item.BookTypeName})'>@item.BookTypeName</a></li>*@
-                            <li><span></span>@Html.ActionLink(@item.BookTypeName, "Index", "Book", new { name = ViewBag.catEngName, types = item.BookTypeName }, null)</li>
+                            <li><span></span>@Html.ActionLink(@item.BookTypeName, "Index", "Book", new { name = ViewBag.catEngName, types = item.BookTypeName }, new { id = "cate" + item.BookTypeName})</li>
                         }
 
                     </ul>
@@ -318,10 +318,11 @@
 
             if (isNaN('@ViewBag.type'))
             {
-                $(".active").removeClass("active");
+                $(".sidebar_categories .active").removeClass("active");
                 $(".fa-angle-double-right").removeClass("fa fa-angle-double-right");
 
-                var $type= $('.sidebar_categories').children().find(":contains('@ViewBag.type')");
+                //var $type= $('.sidebar_categories').children().find(":contains('ViewBag.type')");
+                var $type = $("#@("cate" + ViewBag.type)");
                 $type.addClass("active");
                 $type.parent().find("span").addClass("active fa fa-angle-double-right");
 

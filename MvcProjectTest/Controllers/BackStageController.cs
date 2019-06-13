@@ -174,7 +174,27 @@ namespace MvcProjectTest.Controllers
             return View(model);
         }
 
-        
+        public bool CreatePress(string pressName, string pressPhone, string pressAddress )
+        {
+            Press newPress = new Press();
+            newPress.PressName = pressName;
+            newPress.PressPhone = pressPhone;
+            newPress.PressAddress = pressAddress;
+
+            try
+            {
+                _bookRepo.CreatePress(newPress);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
+        }
+
+
+
 
 
     }
