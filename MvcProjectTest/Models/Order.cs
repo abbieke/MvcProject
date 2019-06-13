@@ -43,12 +43,12 @@ namespace MvcProjectTest.Models
     {
         public int OrderID { get; set; }
         public string OrderNo { get; set; }
-        public DateTime SetUp { get; set; }
-        public DateTime Preparation { get; set; }
-        public DateTime Delivery { get; set; }
-        public DateTime PickUp { get; set; }
-        public DateTime CompletePickup { get; set; }
-        public DateTime TransactionComplete { get; set; }
+        public DateTime? SetUp { get; set; }
+        public DateTime? Preparation { get; set; }
+        public DateTime? Delivery { get; set; }
+        public DateTime? PickUp { get; set; }
+        public DateTime? CompletePickup { get; set; }
+        public DateTime? TransactionComplete { get; set; }
     }
 
     public class CustomerOrderCount

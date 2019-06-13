@@ -57,7 +57,8 @@
                     </div>
                     <form action='@Url.Action("Index","Book")' method="post">
                         <p>
-                            <input type="hidden" name="bookKind" value="@ViewBag.catEngName" />
+                            <input type="hidden" name="name" value="@ViewBag.catEngName" />
+                            <input type="hidden" name="types" value="@ViewBag.type" />
                             <input type="hidden" id="maxValue" name="maxValue" value="" />
                             <input type="hidden" id="minValue" name="minValue" value="" />
                             <input type="text" class="all-view-sidebar-price-range-text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -102,18 +103,18 @@
                     <!-- Product Sorting -->
                 </div>
                 <div class="flex PageAction">
-                    <button class="PageAction" id="PageReturn">上一頁</button>
-                    <button class="PageAction PageActionNum" id="Page1" value="1">1</button>
-                    <button class="PageAction PageActionNum" id="Page2" value="2">2</button>
-                    <button class="PageAction PageActionNum" id="Page3" value="3">3</button>
-                    <button class="PageAction PageActionNum" id="Page4" value="4">4</button>
-                    <button class="PageAction PageActionNum" id="Page5" value="5">5</button>
-                    <button class="PageAction PageActionNum" id="Page6" value="6">6</button>
-                    <button class="PageAction PageActionNum" id="Page7" value="7">7</button>
-                    <button class="PageAction PageActionNum" id="Page8" value="8">8</button>
-                    <button class="PageAction PageActionNum" id="Page9" value="9">9</button>
-                    <button class="PageAction PageActionNum" id="Page10" value="10">10</button>
-                    <button class="PageAction" id="PageNext">下一頁</button>
+                    <button class="PageAction btn" id="PageReturn">上一頁</button>
+                    <button class="PageAction PageActionNum btn" id="Page1" value="1">1</button>
+                    <button class="PageAction PageActionNum btn" id="Page2" value="2">2</button>
+                    <button class="PageAction PageActionNum btn" id="Page3" value="3">3</button>
+                    <button class="PageAction PageActionNum btn" id="Page4" value="4">4</button>
+                    <button class="PageAction PageActionNum btn" id="Page5" value="5">5</button>
+                    <button class="PageAction PageActionNum btn" id="Page6" value="6">6</button>
+                    <button class="PageAction PageActionNum btn" id="Page7" value="7">7</button>
+                    <button class="PageAction PageActionNum btn" id="Page8" value="8">8</button>
+                    <button class="PageAction PageActionNum btn" id="Page9" value="9">9</button>
+                    <button class="PageAction PageActionNum btn" id="Page10" value="10">10</button>
+                    <button class="PageAction btn" id="PageNext">下一頁</button>
                 </div>
             </div>
         </div>
@@ -145,14 +146,6 @@
 
             function sorting_List_Event() {
 
-                //威志寫的
-                //cubeNumber = 4;
-                //$("#sorting-display-items-block").children().hide();
-                //for (var i = 1; i <= 16; i++) {
-                //    $("#sorting-display-items-block :nth-child(" + i + ")").attr("style", "display:block");
-                //}
-                //威志寫的
-
                 $(".sorting-display-js i").toggleClass("active");
                 $("#sorting-display-items-block").attr("class", "sorting-display-list-style");
                 $(this).off("click");
@@ -160,8 +153,6 @@
             }
 
             function sorting_Grid_Event() {
-                //cubeNumber = 1;
-                //$(".description-for-list-display-style").hide();
                 $(".sorting-display-js i").toggleClass("active");
                 $("#sorting-display-items-block").attr("class", "row sorting-display");
                 $(this).off("click");
@@ -172,7 +163,7 @@
         });
 
         $(".filter_button").click(function () {
-            var bookKind = location.pathname.split("/").pop();
+            var name = location.pathname.split("/").pop();
             var valmin = $("#slider-range").slider("values", 0);
             var valmax = $("#slider-range").slider("values", 1);
 
@@ -182,12 +173,11 @@
                 {
                     type: 'POST',
                     url: '@Url.Action("Index", "Book")',
-                    data: { bookKind: bookKind, valmin: valmin, valmax: valmax }
+                    data: { name: name, valmin: valmin, valmax: valmax }
                 })
                 .done(function (data) {
                     $("#sorting-display-items-block").html(data);
 
-                    //alert(bookKind + "+" + valmin + "+" + valmax);
                     $(".quick-view-dialog").dialog({
                         autoOpen: false,
                         modal: true,
@@ -215,10 +205,10 @@
 
         //分頁的部分
         $(".PageActionNum").hide();
-        //$(".description-for-list-display-style").hide();
         var nowPage = 1;
         var howMany = 16;
         var Items = @Model.Books.Count();
+        $("#Page" + nowPage).css("background-color", "buttonface");
         var pageMuch = Math.ceil(Items / howMany);
         $("#sorting-display-items-block").children().hide();
         for (var i = 1; i <= howMany * 2 * cubeNumber; i += 2) {
@@ -230,43 +220,43 @@
             $("#Page" + i).show();
             $("#Page" + i).click(function () {
                 $("#sorting-display-items-block").children().hide();
+                $("#Page" + nowPage).css("background-color", "transparent");
+                nowPage = $(this).attr("value");
                 for (var j = 1 + (($(this).attr("value") - 1) * howMany); j <= $(this).attr("value") * howMany; j++) 
                 {
-                    nowPage = $(this).attr("value");
                     $("#sorting-display-items-block .product-card-out-block:nth-child(" + j + ")").attr("style", "display: block;");
-                    //if (cubeNumber == 1)
-                    //{
-                    //    $(".description-for-list-display-style").hide();
-                    //}
 
                 }
+                $("#Page" + nowPage).css("background-color", "buttonface");
+                $('html, body').animate({ scrollTop: 0 }, 400);
             });
         }
 
         $("#PageReturn").click(function () {
             if (nowPage > 1) {
+                $("#Page" + nowPage).css("background-color","transparent");
                 nowPage--;
+                $("#Page" + nowPage).css("background-color", "buttonface");
                 $("#sorting-display-items-block").children().hide();
                 for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
                     $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
-                    //if (cubeNumber == 1) {
-                    //    $(".description-for-list-display-style").hide();
-                    //}
                 }
+                $('html, body').animate({ scrollTop: 0 }, 400);
             }
             else { alert("已經是第一頁了") }
         })
 
         $("#PageNext").click(function () {
             if (nowPage < pageMuch) {
+                $("#Page" + nowPage).css("background-color", "transparent");
                 nowPage++;
+                $("#Page" + nowPage).css("background-color", "buttonface");
+
                 $("#sorting-display-items-block").children().hide();
                 for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
                     $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
-                    //if (cubeNumber == 1) {
-                    //    $(".description-for-list-display-style").hide();
-                    //}
                 }
+                $('html, body').animate({ scrollTop: 0 }, 400);
             }
             else { alert("已經是最後一頁了") }
         })
