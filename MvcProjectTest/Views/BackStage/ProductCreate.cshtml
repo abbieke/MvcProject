@@ -440,8 +440,8 @@
                 var ISBN = $("#ISBN").val();
 
                 var bookImage = $('#id-input-file-2').val();
-                //alert(bookId + bookName + pressName + cateId + authorName + unitPrice + inStock + discount + ISBN + description);
-                $.ajax({
+                
+                @*$.ajax({
                 type: "POST",
                 url: '@Url.Action("CreateBook", "BackStage")',
                     data: {
@@ -455,9 +455,13 @@
                 else {
                     alert("新增失敗，請確定格式以及是否重複");
                 }
-            })
+            })*@
             }
 
+
+            function UploadImage() {
+
+            }
             
         });
     </script>
