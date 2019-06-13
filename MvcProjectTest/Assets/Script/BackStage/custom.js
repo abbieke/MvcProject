@@ -728,7 +728,7 @@ if (typeof NProgress != 'undefined') {
 		}  
 	   
 	}
-	   
+	      
 	function init_gauge() {
 			
 		if( typeof (Gauge) === 'undefined'){ return; }
