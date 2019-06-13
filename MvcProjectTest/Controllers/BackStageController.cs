@@ -189,9 +189,10 @@ namespace MvcProjectTest.Controllers
             return View(model);
         }
 
-        public ActionResult ProductEdit()
+        public ActionResult ProductEdit(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductDetails(string bookId)

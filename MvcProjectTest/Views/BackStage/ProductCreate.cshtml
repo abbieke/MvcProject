@@ -438,10 +438,27 @@
                 var discount = $("#Discount").val();
                 var description = $("#editor-one").html();
                 var ISBN = $("#ISBN").val();
-                var bookImage = $('#id-input-file-2').val();
 
+                var split = $('#id-input-file-2').val().toString().split('/');
+                var length = split.length;
+                var bookImage = split[length-1];
+                alert($('#id-input-file-2').val());
                 //alert(bookId + bookName + pressName + cateId + authorName + unitPrice + inStock + discount + ISBN + description);
-                alert(bookImage);
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreateBook", "BackStage")',
+                    data: {
+                        bookId: bookId, bookName: bookName, pressName: pressName, cateId: cateId, authorName: authorName, unitPrice: unitPrice, inStock: inStock, discount: discount, description: description, ISBN: ISBN, bookImage: bookImage
+                    }
+            }).done(function (isSuccess) {
+                if (isSuccess) {
+
+                    alert("新增成功");
+                }
+                else {
+                    alert("新增失敗，請確定格式以及是否重複");
+                }
+            })
             }
 
             
