@@ -16,28 +16,28 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @Styles.Render("~/css/base")
     @RenderSection("topCss", required: false)
-<style>
-    .no-js #loader {
-        display: none;
-    }
+    <style>
+        .no-js #loader {
+            display: none;
+        }
 
-    .js #loader {
-        display: block;
-        position: absolute;
-        left: 100px;
-        top: 0;
-    }
+        .js #loader {
+            display: block;
+            position: absolute;
+            left: 100px;
+            top: 0;
+        }
 
-    .loading-icon {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
-    }
-</style>
+        .loading-icon {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url(Assets/Images/GIF/Loading1.gif) center no-repeat #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,49 +48,50 @@
             <div class="container">
                 <div class="bookshopping-menu flex">
                     <div class="bkshop-logo flex ">
+                        <button class="bookshopping-sidemenulist"><i class="fas fa-bars"></i></button>
                         <a href='@Url.Action("Index","Home", null)' class="dropdowns-top-logo-link flex">
                             <img class="dropdowns-logo-book" src="~/Assets/Images/logo/B-Bookstore-logo3.png" alt="">
                             <img class="dropdowns-logo-text" src="~/Assets/Images/logo/B-Bookstore-logo4.png" alt="">
                         </a>
                     </div>
                     <nav class="bkshop-nav boxfloat">
-                        <ul class="bookmenu">
+                        <ul class="bookmenu bookmobile-menu">
                             @{
                                 MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
                                 var cate = _repo.SelectCategory();
                             }
                             @foreach (var item in cate)
                             {
-                                <li class="book-item">
+                                <li class="book-item bookmobile-menu-item">
                                     <a href="@Url.Action("Index","Book",new { name = item.CategoryEngName})">@item.CategoryName</a>
                                 </li>
                             }
                             @*<li class="book-item">
-                    <a href="#">home</a>
-                    <ul class="book-item-list">
-                        <li class="book-item book-item-has-children">
-                            <a href="#"> 類別</a>
-                            <ul class="book-last-list">
-                                @{
-                                    MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
-                                    var cate = _repo.SelectCategory();
-                                }
-                                @foreach (var item in cate)
-                                {
-                                    <li class=" book-last-item"> <a href="#"> @item.CategoryName</a></li>
-                                    @*<li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
-                                }
-                            </ul>
-                        </li>
-                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
-                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
-                    </ul>
-                </li>
-                <li class="book-item"> <a href="#">home</a></li>
-                <li class="book-item"> <a href="#">home</a></li>
-                <li class="book-item"> <a href="#">home</a></li>*@
+                                    <a href="#">home</a>
+                                    <ul class="book-item-list">
+                                        <li class="book-item book-item-has-children">
+                                            <a href="#"> 類別</a>
+                                            <ul class="book-last-list">
+                                                @{
+                                                    MvcProjectTest.Repositories.BooksRepository _repo = new MvcProjectTest.Repositories.BooksRepository();
+                                                    var cate = _repo.SelectCategory();
+                                                }
+                                                @foreach (var item in cate)
+                                                {
+                                                    <li class=" book-last-item"> <a href="#"> @item.CategoryName</a></li>
+                                                    @*<li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                    <li class=" book-last-item"> <a href="#">Checkout</a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                        <li class="book-item book-item-has-children"><a href="#"> Checkout</a></li>
+                                    </ul>
+                                </li>
+                                <li class="book-item"> <a href="#">home</a></li>
+                                <li class="book-item"> <a href="#">home</a></li>
+                                <li class="book-item"> <a href="#">home</a></li>*@
                         </ul>
                     </nav>
                     <div class="bkshop-searchbox">
@@ -101,11 +102,7 @@
                     </div>
                     <div class="bkshop-member-carbox">
                         <ul class="bookmenu">
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="book-item"><a href='@Url.Action("Index", "BackStage", null)'><i class="fas fa-user-secret top-icon"></i></a></li>
-                            }
-                            <li class="book-item">
+                            <li class="book-item ">
                                 @if (Request.IsAuthenticated)
                                 {
                                     <a href='@Url.Action("CustomerIndex", "Customer", null)'><i class="fas fa-user top-icon"></i></a>
@@ -122,43 +119,43 @@
                             <li class="book-item" id="header-cart-block">
                                 <a href='@Url.Action("Index","Shopping", null)'><i class="fas fa-shopping-cart top-icon"></i></a>
                                 @*<ul class="book-item-list book-item-list-right">
-                <li class="book-item book-item-has-children">
-                    <a href="#">最近加入的商品</a>
-                    <ul class="book-last-list maxheight">
-                        <li class=" book-last-item">
+                                        <li class="book-item book-item-has-children">
+                                            <a href="#">最近加入的商品</a>
+                                            <ul class="book-last-list maxheight">
+                                                <li class=" book-last-item">
 
-                            <div class="hover-car-product-item flex">
-                                <div class="hover-car-product-imagebox">
-                                    <img class="hover-car-product-image"
-                                         src="~/Assets/Images/TChinese/010001.jpg" alt="">
-                                </div>
-                                <div class="hover-car-product-namebox">
-                                    <div class="hover-car-product-name">
-                                        <span>安靜是種超能力</span>
-                                    </div>
-                                    <div class="hover-car-product-text flex">
-                                        <p class="hover-car-product-price">9487 元</p>
-                                        <div class="hover-car-product-delete">
-                                            <a class="hover-car-product-delete-text" href="#">刪除</a>
-                                        </div>
-                                    </div>
+                                                    <div class="hover-car-product-item flex">
+                                                        <div class="hover-car-product-imagebox">
+                                                            <img class="hover-car-product-image"
+                                                                 src="~/Assets/Images/TChinese/010001.jpg" alt="">
+                                                        </div>
+                                                        <div class="hover-car-product-namebox">
+                                                            <div class="hover-car-product-name">
+                                                                <span>安靜是種超能力</span>
+                                                            </div>
+                                                            <div class="hover-car-product-text flex">
+                                                                <p class="hover-car-product-price">9487 元</p>
+                                                                <div class="hover-car-product-delete">
+                                                                    <a class="hover-car-product-delete-text" href="#">刪除</a>
+                                                                </div>
+                                                            </div>
 
-                                </div>
-                            </div>
+                                                        </div>
+                                                    </div>
 
-                        </li>
-                    </ul>
-                    <div class="hover-check-car-box">
-                        <div class="hover-check-car-price">
-                            <span>當前總金額:</span>
-                            <span>100000元</span>
-                        </div>
-                        <div class="hover-gotoshopping-car flex">
-                            <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>*@
+                                                </li>
+                                            </ul>
+                                            <div class="hover-check-car-box">
+                                                <div class="hover-check-car-price">
+                                                    <span>當前總金額:</span>
+                                                    <span>100000元</span>
+                                                </div>
+                                                <div class="hover-gotoshopping-car flex">
+                                                    <a class="hover-gotoshoppingcar-button" href="#">查看購物車</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>*@
                             </li>
                         </ul>
                     </div>
@@ -489,6 +486,35 @@
     });
 
     </script>
+
+    <script>
+        $(function () {
+            var isShow = true;
+            if ($(".bookshopping-sidemenulist").is(":visible")) {
+                //$(".bkshop-nav").attr("style"), ("width: 0;");
+                $(".bookshopping-sidemenulist").on("click", function () {
+                    var width = 0;
+                    var w = $(window).width()
+                    if (isShow) {
+                        if (w >= 640) {
+                            width = 30;
+                        }
+                        else {
+                            width = 50;
+                        }
+
+
+                    }
+                    $(".bkshop-nav").attr("style", "width:" + width + "%;");
+                    $(".bkshop-searchbox").attr("style", "width:" + width + "%;");
+                    isShow = !isShow;
+                })
+
+            }
+        });
+
+    </script>
+
 </body>
 
 </html>

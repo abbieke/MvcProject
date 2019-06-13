@@ -14,6 +14,7 @@ using MvcProjectTest.Models;
 
 namespace MvcProjectTest.Controllers
 {
+    
     public class BackStageController : Controller
     {
         private readonly CustomersRepository _cusRepo;
@@ -189,9 +190,10 @@ namespace MvcProjectTest.Controllers
             return View(model);
         }
 
-        public ActionResult ProductEdit()
+        public ActionResult ProductEdit(string bookId)
         {
-            return View();
+            Book model = _bookRepo.SelectBook(bookId);
+            return View(model);
         }
 
         public ActionResult ProductDetails(string bookId)
@@ -223,6 +225,70 @@ namespace MvcProjectTest.Controllers
                 return false;
             }
             
+        }
+
+        public bool CreateCategory(string cateName, string cateEngName)
+        {
+            Category newCate = new Category();
+            newCate.CategoryName = cateName;
+            newCate.CategoryEngName = cateEngName;
+
+            try
+            {
+                _bookRepo.CreateCategory(newCate);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool CreateAuthor(string authorName)
+        {
+            RealAuthor newAuthor = new RealAuthor();
+            newAuthor.AuthorName = authorName;
+
+            try
+            {
+                _bookRepo.CreateRealAuthor(newAuthor);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool CreateBook(string bookId, string bookName, string pressName, string cateId, string authorName, string unitPrice, string inStock, string discount, string description, string ISBN, string bookImage)
+        {
+            Book book = new Book();
+            book.BookId = bookId;
+            book.BooksName = bookName;
+            book.PressName = pressName;
+            book.CategoryID = int.Parse( cateId);
+            book.AuthorName = authorName;
+            book.UnitPrice = int.Parse(unitPrice);
+            book.InStock = int.Parse(inStock);
+            book.Discount = decimal.Parse( discount);
+            book.Description = description;
+            book.ISBN = ISBN;
+            book.BookImage = bookImage;
+
+
+
+            try
+            {
+                _bookRepo.CreateBook(book);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
 
 

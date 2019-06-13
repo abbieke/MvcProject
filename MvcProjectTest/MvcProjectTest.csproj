@@ -201,6 +201,7 @@
     <Content Include="Assets\Css\Index_stylesheet.css" />
     <Content Include="Assets\Css\Index_stylesheetOld.css" />
     <Content Include="Assets\Css\orderdetails.css" />
+    <Content Include="Assets\Css\RWD.css" />
     <Content Include="Assets\Css\wish-list-product-card-stylesheet.css" />
     <Content Include="Assets\Images\Admin\1G1G1G1G.jpg" />
     <Content Include="Assets\Images\Admin\Abbieke222.jpg" />
