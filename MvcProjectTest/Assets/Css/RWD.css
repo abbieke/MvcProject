@@ -258,6 +258,15 @@
     .member-input-textbox {
         width: 100%;
     }
+    .function-button-inner .blockleft-images-one {
+        margin: 0;
+    }
+    .function-button-inner .blockleft-images-two {
+        margin: 0;
+    }
+    .function-button-inner .blockleft-images-three {
+        margin: 0;
+    }
 }
 
 @media screen and (max-width:767px) {
@@ -299,7 +308,7 @@
 
 @media screen and (max-width:640px) {
     .product-card-out-block {
-        width: 48%;
+        width: 100%;
     }
 
     .index-block-right {
@@ -372,4 +381,41 @@
     .member-input-label {
         width:50%;
     }
+}
+
+
+@media screen and (max-width:450px) {
+    .container {
+        width: 100%;
+    }
+    .center-text {
+        font-size: 70px;
+        line-height: 1.1;
+    }
+}
+
+@media screen and (max-width:375px) {
+
+    .bookshopping-sidemenulist {
+        margin:0;
+    }
+    .bkshop-logo {
+        width:60%;
+    }
+    .center-text {
+        font-size: 50px;
+        line-height: 1.1;
+    }
+    .index-block-right {
+        flex-wrap:wrap;
+    }
+    .block-right-image {
+        width:100%;
+        margin:0;
+    }
+    .index-block-left {
+        margin-top: 50px;
+        width: 80%;
+    }
+
 }
