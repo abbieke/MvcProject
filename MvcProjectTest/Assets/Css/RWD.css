@@ -394,19 +394,17 @@
     }
 }
 
-@media screen and (max-width:350px) {
-    .container {
-        padding:0;
-    }
+@media screen and (max-width:375px) {
+
     .bookshopping-sidemenulist {
-        margin: 0;
+        margin:0;
     }
     .bkshop-logo {
         width:60%;
     }
     .center-text {
-        font-size: 30px;
-        line-height: 1;
+        font-size: 50px;
+        line-height: 1.1;
     }
     .index-block-right {
         flex-wrap:wrap;
@@ -419,23 +417,39 @@
         margin-top: 50px;
         width: 80%;
     }
+
+}
+@media screen and (max-width:350px) {
+    .container {
+        padding: 0;
+    }
+
+    .bookshopping-sidemenulist {
+        margin: 0;
+    }
+    .index-block-right {
+        padding:0;
+    }
+    .center-text {
+        font-size: 30px;
+        line-height: 1;
+    }
+
+
+    .block-right-image {
+        width: 100%;
+        margin: 0;
+    }
+
     .index-bigimage-box {
-        height:450px;
+        height: 450px;
     }
+
     .bottom-text {
-        line-height:1.5;
+        line-height: 1.5;
     }
+
     .block-right-text {
         padding: 20px 5px 0 15px;
     }
 }
-
-/*@media screen and (max-width:320px) {
-
-
-    .center-text {
-        font-size: 0px;
-        line-height: 1.1;
-    }
-
-}*/
