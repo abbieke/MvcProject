@@ -393,3 +393,29 @@
         line-height: 1.1;
     }
 }
+
+@media screen and (max-width:375px) {
+
+    .bookshopping-sidemenulist {
+        margin:0;
+    }
+    .bkshop-logo {
+        width:60%;
+    }
+    .center-text {
+        font-size: 50px;
+        line-height: 1.1;
+    }
+    .index-block-right {
+        flex-wrap:wrap;
+    }
+    .block-right-image {
+        width:100%;
+        margin:0;
+    }
+    .index-block-left {
+        margin-top: 50px;
+        width: 80%;
+    }
+
+}
