@@ -89,6 +89,8 @@ namespace MvcProjectTest.Services
             {
                 case Error.emptyError:
                     return "您並未選擇任何商品。";
+                case Error.zeroError:
+                    return "商品數量不能選擇為0";
                 case Error.inStockError:
                     return "商品庫存不足，有可能在購買過程中庫存有所更新，請重試";
                 case Error.accountError:
@@ -107,7 +109,7 @@ namespace MvcProjectTest.Services
         
         public enum Error
         {
-            accountError, emptyError, inStockError, cartError, clearArgumentError, otherError
+            accountError, emptyError, zeroError, inStockError, cartError, clearArgumentError, otherError
         }
 
 
