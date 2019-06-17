@@ -209,6 +209,14 @@ namespace MvcProjectTest.Controllers
                 checkResult.ErrorText = ShoppingCartService.GetErrorText(ShoppingCartService.Error.emptyError);
                 return new JsonNetResult { Data = checkResult };
             }
+            //確認是否有為0的商品
+            if (orderProducts.Any((x)=>x.Quantity == 0))
+            {
+                checkResult.IsError = true;
+                checkResult.ErrorType = ShoppingCartService.Error.zeroError;
+                checkResult.ErrorText = ShoppingCartService.GetErrorText(ShoppingCartService.Error.zeroError);
+                return new JsonNetResult { Data = checkResult };
+            }
             //驗證項目是否對應用戶購物車
             if (_cartSer.ProductlistIsNotCorrect(cusAccount, orderProducts))
             {

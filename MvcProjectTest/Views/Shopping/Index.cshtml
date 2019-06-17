@@ -100,7 +100,7 @@
                                         <span class="instock-span">庫存：@book.InStock 個</span>
                                     </div>
                                 </td>
-                                <td class="item-price-list" field=@(book.BookID + "/price")>@((book.UnitPrice * (1 - book.Discount)).ToString("0")) 元</td>
+                                <td class="item-price-list" field=@(book.BookID + "/price")>@( (int)( Math.Round(book.UnitPrice * (1 - book.Discount))) ) 元</td>
                                 <td class="item-delete-list"><button class="remove-button" value="@book.BookID" field=@(book.BookID + "/remove")><i class="far fa-trash-alt"></i></button></td>
                             </tr>
 
@@ -209,7 +209,7 @@
 
 
 
-
+            //全選預設需要改的參數1/2
             function init() {
                 var itemList = document.getElementsByClassName("ordercheck-list-height");
                 for (var index = 0; index < itemList.length; index++) {
@@ -244,7 +244,8 @@
             }
 
             function thisProductTotal() {
-                let result = parseInt( Math.round(this.unitprice * this.quantity * (1 - this.discount)));
+                //let result = parseInt(Math.round(this.unitprice * this.quantity * (1 - this.discount)));
+                let result = this.quantity * parseInt( Math.round(this.unitprice * (1 - this.discount)));
                 return result;
             }
 
@@ -349,7 +350,9 @@
             var defaultAll = false;
 
             //預設
-            //document.getElementById("#all-check").dispatchEvent("click");
+            //var event = new MouseEvent("click",
+            //    first);
+            //document.getElementById("all-check").dispatchEvent(event);
             
             function first() {
                 var as = document.getElementsByClassName("checkbox-class");
@@ -403,9 +406,12 @@
             var inStock = $("input[name='" + id + "/inStock']").val();
             //var inStock = $(this).siblings("input[name='inStock']").val();
 
-            this.value = this.value.replace(/[^1-9]/g, '');
+            this.value = this.value.replace(/[^0-9]/g, '');
             if (parseInt(this.value) > parseInt(inStock)) {
                 this.value = inStock;
+            }
+            else if (parseInt(this.value == 0)) {
+                this.value = 1;
             }
                 let listIndex = cartList_findIndex(id);
                 cartList[listIndex].quantity = $(this).val();
@@ -509,6 +515,12 @@
 
 
             };
+
+
+            //預設勾選
+            var event = new MouseEvent("click",
+                first);
+            document.getElementById("all-check").dispatchEvent(event);
 
              @*刪除購物車商品*@
 
