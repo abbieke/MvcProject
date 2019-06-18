@@ -25,35 +25,20 @@ namespace MvcProjectTest.Controllers
         public JsonResult CheckCustomerAccount(string CustomerAccount)
         {
             bool isValidate = false;
-            //if (Url.IsLocalUrl(Request.Url.AbsoluteUri))
-            //{
-                //利用 IsLocalUrl檢查是否為網站呼叫的
-                //借此忽略一些不必要的流量
-                if (_repo.SelectCustomer(CustomerAccount))
-                {
-                    //因連資料庫麻煩
-                    //所以假裝示範不可以註冊某一名字
-                    isValidate = true;
-                }
-            //}
-            // Remote 驗證是使用 Get 因此要開放
+            if (_repo.SelectCustomer(CustomerAccount))
+            {
+                isValidate = true;
+            }
             return Json(isValidate, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult CheckCustomerEmail(string CustomerEmail)
         {
             bool isValidate = false;
-            //if (Url.IsLocalUrl(Request.Url.AbsoluteUri))
-            //{
-            //利用 IsLocalUrl檢查是否為網站呼叫的
-            //借此忽略一些不必要的流量
             if (_repo.SelectCustomerEmail(CustomerEmail))
             {
-                //因連資料庫麻煩
-                //所以假裝示範不可以註冊某一名字
                 isValidate = true;
             }
-            //}
             // Remote 驗證是使用 Get 因此要開放
             return Json(isValidate, JsonRequestBehavior.AllowGet);
         }
@@ -73,7 +58,7 @@ namespace MvcProjectTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Registration(Customer cust)
         {
-            if(String.IsNullOrEmpty(cust.ConfirmPassword))
+            if (String.IsNullOrEmpty(cust.ConfirmPassword))
             {
                 return Content("未確認密碼");
             }
@@ -98,46 +83,32 @@ namespace MvcProjectTest.Controllers
                             CustomerPhone = cust.CustomerPhone
                         };
                         _repo.InsertCustomer(customer);
-                        var callbackUrl = Url.Action("EmailConfirmed", "Account",new { userAccount = cust.CustomerAccount },protocol: Request.Url.Scheme);
-                        await MailService.SendMailToVerify(callbackUrl,cust.CustomerEmail);
+                        var callbackUrl = Url.Action("EmailConfirmed", "Account", new { userAccount = cust.CustomerAccount }, protocol: Request.Url.Scheme);
+                        await MailService.SendMailToVerify(callbackUrl, cust.CustomerEmail);
 
-                        return RedirectToAction("Index","Home",null);
+                        return RedirectToAction("Index", "Home", null);
                     }
                     return Content("密碼不符");
                 }
             }
         }
-        
+
         public ActionResult EmailConfirmed(string userAccount)
         {
-            int userId=_repo.GetCusromerID(userAccount);
+            int userId = _repo.GetCusromerID(userAccount);
             _repo.UpdateEmailConfirmed(userId, true);
             _repo.CustomerRemoveRole(userId, "4");
 
-            return RedirectToAction("Index","Home",null);
+            return RedirectToAction("Index", "Home", null);
         }
-
-        //public ActionResult test()
-        //{
-        //    //return Content( _repo.CustomerRemoveRole(3, "4"));
-        //}
-
-
-
 
         [HttpGet]
         public ActionResult Login()
         {
             ViewData["Titlett"] = "會員登入";
-            //if(TempData["PageFrom"] is null)
-            //{
-            //    TempData["PageFrom"] = Url.Action("Index", "Home");
-            //}
-            ////TempData.Keep();
-            //TempData["PageFrom"] = TempData["PageFrom"];
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel loginVM)
@@ -152,7 +123,7 @@ namespace MvcProjectTest.Controllers
             string password = HttpUtility.HtmlEncode(loginVM.CustomerPassword);
 
             string sha256Password = HashService.SHA256Hash(password);
-           
+
             //dapper
             Customer cust = _repo.CustomerLogin(account, sha256Password);
             if (cust == null)
@@ -182,7 +153,7 @@ namespace MvcProjectTest.Controllers
             // Create the cookie.
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             Response.Cookies.Add(cookie);
-            
+
 
             // Redirect back to original URL.
             //var url = FormsAuthentication.GetRedirectUrl(account, true);
@@ -193,7 +164,7 @@ namespace MvcProjectTest.Controllers
 
             //string pageFrom = TempData["PageFrom"].ToString();
             //TempData["PageFrom"] = null;
-            
+
             return RedirectToAction("Index", "Home");
             //return Redirect(pageFrom);
 
@@ -202,12 +173,12 @@ namespace MvcProjectTest.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            Session.RemoveAll();          
+            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         public ActionResult ForgetPassword()
-        {         
+        {
             return View();
         }
         [HttpPost]
@@ -224,7 +195,7 @@ namespace MvcProjectTest.Controllers
 
             //dapper
             Customer cust = _repo.CustomerLogin(account);
-            if (cust==null)
+            if (cust == null)
             {
                 ModelState.AddModelError("", "無效的帳號。");
                 return View();
@@ -245,7 +216,7 @@ namespace MvcProjectTest.Controllers
         [HttpGet]
         public ActionResult ResetPassword(string userAccount)
         {
-            Customer cust= _repo.CustomerLogin(userAccount);
+            Customer cust = _repo.CustomerLogin(userAccount);
             Session["userid"] = _repo.GetCusromerID(cust.CustomerAccount);
             string roles = GetRoles((int)Session["userid"]);
             var ticket = new FormsAuthenticationTicket(
@@ -291,13 +262,13 @@ namespace MvcProjectTest.Controllers
             return rolesEngNames;
         }
 
-        public async Task SendAsync(string account,string mail)
+        public async Task SendAsync(string account, string mail)
         {
-            var callbackUrl = Url.Action("EmailConfirmed", "Account", new { userAccount =account }, protocol: Request.Url.Scheme);
+            var callbackUrl = Url.Action("EmailConfirmed", "Account", new { userAccount = account }, protocol: Request.Url.Scheme);
             await MailService.SendMailToVerify(callbackUrl, mail);
         }
-        
 
-        
+
+
     }
 }
