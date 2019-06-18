@@ -117,7 +117,7 @@ namespace MvcProjectTest.Controllers
             else if (String.IsNullOrEmpty(name))
             {
                 List<Book> books;
-                if (types == "優惠")
+                if (types == "優惠特區")
                 {
                     books = _repo.GetAllBook().Where((x) => x.Discount != 0).ToList();
                 }
@@ -140,7 +140,7 @@ namespace MvcProjectTest.Controllers
             else
             {
                 List<Book> books;
-                if (types == "優惠")
+                if (types == "優惠特區")
                 {
                     books = _repo.SelectCategoryBooks(name).Where((x) => x.Discount != 0).ToList();
                 }
