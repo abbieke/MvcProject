@@ -39,7 +39,13 @@ namespace MvcProjectTest.Repositories
             List<Book> books;
             using (conn = new SqlConnection(connString))
             {
-                string sql = "Select TOP 8 * From Books As b INNER JOIN Author As a ON b.AuthorID = a.AuthorID Inner Join Category AS c ON b.CategoryID = c.CategoryID ORDER BY b.InStock";
+                string sql = "Select Top 8 od.BookID ,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName ,SUM(od.Counts)as TopSUM " +
+                             "from [Order Detail] As od " +
+                             "Inner Join Books As b On od.BookID = b.BookID " +
+                             "Inner Join Author As a On a.AuthorID = b.AuthorID " +
+                             "Inner Join Category As c On c.CategoryID = b.CategoryID " +
+                             "Group By od.BookID,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName " +
+                             "Order By SUM(od.Counts) desc";
                 books = conn.Query<Book>(sql).ToList();
             }
             return books;

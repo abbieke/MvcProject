@@ -40,17 +40,7 @@ namespace MvcProjectTest
 
         }
 
-        public void Application_AuthorizeRequest(object sender, EventArgs e)
-        {
-            if (Request.IsAuthenticated)
-            {
-                if (Session["userid"] == null)
-                {
-                    CustomersRepository _repo = new CustomersRepository();
-                    Session["userid"] = _repo.GetCusromerID(User.Identity.Name);
-                }
-            }
-        }
+        
     }
     
 }
