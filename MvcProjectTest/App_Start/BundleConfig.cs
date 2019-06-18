@@ -92,6 +92,7 @@ namespace MvcProjectTest
                 "~/Assets/Script/BackStage/gauge.min.js",
                 "~/Assets/Script/BackStage/jquery.flot.js"
                ));
+            //倒數第一行更動紀錄
             bundles.Add(new ScriptBundle("~/Back-Script/BackCustomerDetails").Include(
                 "~/Assets/Script/BackStage/jquery.min.js",
                 "~/Assets/Script/BackStage/bootstrap.min.js",
@@ -111,8 +112,9 @@ namespace MvcProjectTest
                 "~/Assets/Script/BackStage/autosize.min.js",
                 "~/Assets/Script/BackStage/jquery.autocomplete.min.js",
                 "~/Assets/Script/BackStage/starrr.js",
-                "~/Assets/Script/BackStage/custom.min.js"
+                "~/Assets/Script/BackStage/custom.js"
                ));
+            //倒數第一行更動紀錄
             bundles.Add(new ScriptBundle("~/Back-Script/BackCustomerIndex").Include(                
                 "~/Assets/Script/BackStage/jquery.min.js",
                 "~/Assets/Script/BackStage/bootstrap.min.js",
@@ -134,7 +136,7 @@ namespace MvcProjectTest
                 "~/Assets/Script/BackStage/jszip.min.js",
                 "~/Assets/Script/BackStage/pdfmake.min.js",
                 "~/Assets/Script/BackStage/vfs_fonts.js",
-                "~/Assets/Script/BackStage/custom.min.js"
+                "~/Assets/Script/BackStage/custom.js"
                ));          
 
         }

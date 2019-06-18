@@ -117,7 +117,7 @@ namespace MvcProjectTest.Repositories
                              "Inner Join Author As a On a.AuthorID = b.AuthorID " +
                              "Inner Join Category As c On c.CategoryID = b.CategoryID " +
                              "Group By od.BookID,b.BooksName,c.CategoryEngName,b.BookImage,a.AuthorName " +
-                             "Order By SUM(od.Counts)";
+                             "Order By SUM(od.Counts) desc";
                 var author = conn.QueryFirstOrDefault<Author>(sql);
                 return author;
             }
