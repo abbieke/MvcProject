@@ -44,11 +44,11 @@ namespace MvcProjectTest
         {
             if (Request.IsAuthenticated)
             {
-                if (Session["userid"] == null)
-                {
-                    CustomersRepository _repo = new CustomersRepository();
-                    Session["userid"] = _repo.GetCusromerID(User.Identity.Name);
-                }
+                //if (Session["userid"] == null)
+                //{
+                    //CustomersRepository _repo = new CustomersRepository();
+                    //Session["userid"] = _repo.GetCusromerID(User.Identity.Name);
+                //}
             }
         }
     }
