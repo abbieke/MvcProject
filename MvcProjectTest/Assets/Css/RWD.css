@@ -395,7 +395,9 @@
 }
 
 @media screen and (max-width:375px) {
-
+    .container {
+        padding: 0 5px;
+    }
     .bookshopping-sidemenulist {
         margin:0;
     }
@@ -407,7 +409,8 @@
         line-height: 1.1;
     }
     .index-block-right {
-        flex-wrap:wrap;
+        flex-wrap: wrap;
+        padding: 0;
     }
     .block-right-image {
         width:100%;
@@ -427,9 +430,7 @@
     .bookshopping-sidemenulist {
         margin: 0;
     }
-    .index-block-right {
-        padding:0;
-    }
+
     .center-text {
         font-size: 30px;
         line-height: 1;
