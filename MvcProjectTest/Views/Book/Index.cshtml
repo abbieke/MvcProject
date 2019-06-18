@@ -219,7 +219,7 @@
         $("#Page" + nowPage).css("background-color", "buttonface");
         var pageMuch = Math.ceil(Items / howMany);
         $("#sorting-display-items-block").children().hide();
-        for (var i = 1; i <= howMany * 2 * cubeNumber; i += 2) {
+        for (var i = 1; i <= howMany * 2 * cubeNumber; i++) {
             $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
         }
 
