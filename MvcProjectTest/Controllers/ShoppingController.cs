@@ -101,11 +101,11 @@ namespace MvcProjectTest.Controllers
             orderModel.RecipientEmail = email;
             orderModel.RecipientAddress = address;
 
-            orderModel.OrderNo = _orderSer.GetFakeOrderNo();
+            //orderModel.OrderNo = _orderSer.GetFakeOrderNo();
             orderModel.CustomerID = _cusRepo.GetCusromerID(User.Identity.Name);
             orderModel.ShippingRate = shippingRate;
 
-            orderModel.OrderDate = DateTime.Now;
+            //orderModel.OrderDate = DateTime.Now;
 
             foreach(var item in opList)
             {
@@ -135,8 +135,8 @@ namespace MvcProjectTest.Controllers
                 return Redirect("/Shopping/ErrorPage/" + errorModel.ErrorType.ToString());
                 //throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
             }
-
-
+            _order.OrderNo = _orderSer.GetFakeOrderNo();
+            _order.OrderDate = DateTime.Now;
             _order.SetUp = DateTime.Now;
             //加訂單請寫在註解中間
             Order order;
