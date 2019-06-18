@@ -135,7 +135,7 @@
             </div>
             <!-- 願望清單 -->
             <div id="cart-tabs-2" class="tab-inner">
-                <div class="product-card-list flex">
+                <div class="product-card-list flex" id="wish-items-block">
                     @foreach (var book in wishbooks)
                     {
                         ViewBag.cardIndex++;
@@ -615,6 +615,36 @@
                 }
             });
         })
+    </script>
+
+    @*刪除願望清單*@
+    <script>
+        $(function () {
+            $(".product-trash-icon-button").click(function () {
+
+                $.ajax({
+                type: "POST",
+                    url: '@Url.Action("RemoveFromWish", "Shopping")',
+                    data: { bookId: $(this).val() }
+            })
+                    .done(function (success) {
+                        if (success) {
+                            //$("#wish-items-block").html()
+                            //先暫時不做刷新
+                            alert("刪除成功，可以重新整理頁面確認！");
+                        }
+                        else {
+                            alert("刪除失敗，請重試");
+                        }
+                });
+
+
+            });
+
+
+
+        });
+
     </script>
 
 
