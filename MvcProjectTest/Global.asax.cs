@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvcProjectTest.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -37,6 +38,18 @@ namespace MvcProjectTest
                 Context.User = new GenericPrincipal(Context.User.Identity, roles);
             }
 
+        }
+
+        public void Application_AuthorizeRequest(object sender, EventArgs e)
+        {
+            if (Request.IsAuthenticated)
+            {
+                //if (Session["userid"] == null)
+                //{
+                    //CustomersRepository _repo = new CustomersRepository();
+                    //Session["userid"] = _repo.GetCusromerID(User.Identity.Name);
+                //}
+            }
         }
     }
     

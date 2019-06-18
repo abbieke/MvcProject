@@ -212,59 +212,63 @@
 
 
         //分頁的部分
-        $(".PageActionNum").hide();
-        var nowPage = 1;
-        var howMany = 16;
-        var Items = @Model.Books.Count();
-        $("#Page" + nowPage).css("background-color", "buttonface");
-        var pageMuch = Math.ceil(Items / howMany);
-        $("#sorting-display-items-block").children().hide();
-        for (var i = 1; i <= howMany * 2 * cubeNumber; i++) {
+        $(".PageActionNum").hide();/*1到10頁隱藏*/
+        var nowPage = 1;/*紀錄現在頁數*/
+        var howMany = 16;/*每頁顯示個數*/
+        var Items = @Model.Books.Count();/*計算項目個數*/
+        $("#Page" + nowPage).css("background-color", "buttonface");/*目前頁數變色*/
+        var pageMuch = Math.ceil(Items / howMany);/*計算要放幾頁*/
+        $("#sorting-display-items-block").children().hide(); /*隱藏全部項目*/
+        for (var i = 1; i <= howMany * 2 * cubeNumber; i += 2) {
             $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+            //顯示第一頁
         }
 
         for (var i = 1; i <= pageMuch; i++)
         {
-            $("#Page" + i).show();
-            $("#Page" + i).click(function () {
-                $("#sorting-display-items-block").children().hide();
-                $("#Page" + nowPage).css("background-color", "transparent");
-                nowPage = $(this).attr("value");
+            $("#Page" + i).show();/*顯示需要的頁數按鈕*/
+            $("#Page" + i).click(function () {/*頁數按鈕加上Function*/
+                $("#sorting-display-items-block").children().hide(); /*一樣先全部隱藏*/
+                $("#Page" + nowPage).css("background-color", "transparent");/*還原上一頁按鍵顏色*/
+                nowPage = $(this).attr("value");/*抓目前頁數的值*/
                 for (var j = 1 + (($(this).attr("value") - 1) * howMany); j <= $(this).attr("value") * howMany; j++)
                 {
                     $("#sorting-display-items-block .product-card-out-block:nth-child(" + j + ")").attr("style", "display: block;");
-
+                    //顯示目前頁數的項目
                 }
-                $("#Page" + nowPage).css("background-color", "buttonface");
-                $('html, body').animate({ scrollTop: 0 }, 400);
+                $("#Page" + nowPage).css("background-color", "buttonface");/*目前頁數按鍵變色*/
+                $('html, body').animate({ scrollTop: 0 }, 400);/*鏡頭拉回頂端*/
             });
         }
 
-        $("#PageReturn").click(function () {
+        $("#PageReturn").click(function () {/*上一頁*/
             if (nowPage > 1) {
-                $("#Page" + nowPage).css("background-color","transparent");
-                nowPage--;
-                $("#Page" + nowPage).css("background-color", "buttonface");
-                $("#sorting-display-items-block").children().hide();
+                $("#Page" + nowPage).css("background-color", "transparent");/*還原上一頁按鍵顏色*/
+                nowPage--;/*紀錄目前頁數*/
+                $("#Page" + nowPage).css("background-color", "buttonface");/*變更目前頁數顏色*/
+                $("#sorting-display-items-block").children().hide();/*全部隱藏*/
                 for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
                     $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+                    //一樣顯示目前頁數項目
                 }
-                $('html, body').animate({ scrollTop: 0 }, 400);
+                $('html, body').animate({ scrollTop: 0 }, 400);/*鏡頭拉回頂端*/
             }
             else { alert("已經是第一頁了") }
         })
 
-        $("#PageNext").click(function () {
+        $("#PageNext").click(function () {/*下一頁*/
             if (nowPage < pageMuch) {
-                $("#Page" + nowPage).css("background-color", "transparent");
-                nowPage++;
-                $("#Page" + nowPage).css("background-color", "buttonface");
+                $("#Page" + nowPage).css("background-color", "transparent");/*還原上一頁按鍵顏色*/
+                nowPage++;/*紀錄目前頁數*/
+                $("#Page" + nowPage).css("background-color", "buttonface");/*變更目前頁數顏色*/
 
-                $("#sorting-display-items-block").children().hide();
+                $("#sorting-display-items-block").children().hide();/*隱藏所有項目*/
                 for (var i = 1 + ((nowPage - 1) * howMany); i <= nowPage * howMany; i++) {
                     $("#sorting-display-items-block .product-card-out-block:nth-child(" + i + ")").attr("style", "display: block;");
+                    //顯示目前頁數項目
                 }
                 $('html, body').animate({ scrollTop: 0 }, 400);
+                //移到頂端
             }
             else { alert("已經是最後一頁了") }
         })

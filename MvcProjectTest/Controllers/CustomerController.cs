@@ -89,49 +89,5 @@ namespace MvcProjectTest.Controllers
             OrderDetailMix mix = new OrderDetailMix(){ Order = order, OrderDetails = orderDetail, OrderStatus = orderStatus};
             return View(mix);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CustomerIndex(CustomerMix cust)
-        //{
-        //    CustomerMix customer = new CustomerMix
-        //    {
-        //        CustomerView = cust.CustomerView
-        //    };
-        //    _repo.UpdateCustomer(customer.CustomerView);
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CustomerIndex(CustomerMix cust,string id)
-        //{
-        //    if (id == "1")
-        //    {
-        //        CustomerMix customer = new CustomerMix
-        //        {
-        //            CustomerView = cust.CustomerView
-        //        };
-        //        _repo.UpdateCustomer(customer.CustomerView);
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else if (id == "2")
-        //    {
-        //        CustomerMix customer = new CustomerMix
-        //        {
-        //            ChangePassword = cust.ChangePassword
-        //        };
-        //        if (customer.ChangePassword.CustomerPassword == _repo.SelectCustomerPassword(customer.ChangePassword.CustomerAccount))
-        //        {
-        //            _repo.UpdatePassword(customer.ChangePassword.CustomerAccount, customer.ChangePassword.CustomerNewPassword);
-        //            return RedirectToAction("CustomerIndex");
-        //        }
-        //        else
-        //        {
-        //            return Content("密碼錯誤");
-        //        }
-        //    }
-        //    return RedirectToAction("CustomerIndex");
-        //}
     }
 }

@@ -81,18 +81,6 @@ namespace MvcProjectTest.Controllers
         [HttpPost]
         public ActionResult ShippingInfo(string cusAccount, [Bind (Include = "BookID, Quantity")]IEnumerable<ShoppingCartViewModel> orderProducts, bool isNeedingClear)
         {
-            
-            //因為是藉由網址導向此頁，再轉向後進行再次驗證
-            //var a = CheckCartResult(cusAccount, orderProducts, isNeedingClear);
-            //var b = JsonConvert.SerializeObject(a);
-            //var errorModel = JsonConvert.DeserializeObject<CartErrorModel>(b);
-            //if (errorModel.IsError)
-            //{
-            //    throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
-            //}
-
-            
-
             if (isNeedingClear)
             {
                 _isNeedingClear = true;
