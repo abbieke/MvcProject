@@ -45,7 +45,8 @@ namespace MvcProjectTest
                 "~/Assets/Css/cart_stylesheet.css",
                 "~/Assets/Css/for-change-style.css",
                 "~/Assets/Css/item-quick-look.css",
-                "~/Assets/Css/override-jquery-ui-dialog.css"
+                "~/Assets/Css/override-jquery-ui-dialog.css",
+                 "~/Assets/Css/RWD.css"
                 ));
 
             bundles.Add(new StyleBundle("~/Back-css/BackLayoutIndex").Include(
