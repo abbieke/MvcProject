@@ -29,9 +29,9 @@ namespace MvcProjectTest.Controllers
         private readonly ShoppingRepository _cartRepo;
 
         //先頂著用
-        private static Order _order;
-        private static IEnumerable<ShoppingCartViewModel> opList;
-        private static bool _isNeedingClear;
+        //private static Order _order;
+        //private static IEnumerable<ShoppingCartViewModel> opList;
+        //private static bool _isNeedingClear;
 
 
         public ShoppingController()
@@ -83,11 +83,15 @@ namespace MvcProjectTest.Controllers
         {
             if (isNeedingClear)
             {
-                _isNeedingClear = true;
+                Session["isNeedingClear"] = true;
             }
 
+            else
+            {
+                Session["isNeedingClear"] = false;
+            }
             
-            return View(opList);
+            return View(getOpListEnumerable(Session["opList"]));
         }
         public ActionResult OrderCheck(OrderService.PayWay payWay, OrderService.DeliveryMethod deliveryMethod, string name, string phone, string email, string address)
         {
@@ -107,7 +111,7 @@ namespace MvcProjectTest.Controllers
 
             //orderModel.OrderDate = DateTime.Now;
 
-            foreach(var item in opList)
+            foreach(var item in getOpListEnumerable(Session["opList"]))
             {
                 var book = _bookRepo.GetBookById(item.BookID);
                 item.UnitPrice = book.UnitPrice;
@@ -116,18 +120,18 @@ namespace MvcProjectTest.Controllers
                 item.BooksName = book.BooksName;
             }
 
-            orderModel.TotalPrice = 
-                opList.Sum((x) => Math.Round(x.UnitPrice * x.Quantity * (1 - x.Discount))) + shippingRate;
+            orderModel.TotalPrice =
+                getOpListEnumerable(Session["opList"]).Sum((x) => Math.Round(x.UnitPrice * x.Quantity * (1 - x.Discount))) + shippingRate;
 
 
 
-            _order = orderModel;
-            return View(orderModel); 
+            Session["order"] = orderModel;
+            return View(orderModel);
         }
         public async System.Threading.Tasks.Task<ActionResult> OrderSuccess()
         {
             //驗證商品清單
-            var a = CheckCartResult(User.Identity.Name, opList, false);
+            var a = CheckCartResult(User.Identity.Name, getOpListEnumerable(Session["opList"]), false);
             var b = JsonConvert.SerializeObject(a);
             var errorModel = JsonConvert.DeserializeObject<CartErrorModel>(b);
             if (errorModel.IsError)
@@ -135,19 +139,19 @@ namespace MvcProjectTest.Controllers
                 return Redirect("/Shopping/ErrorPage/" + errorModel.ErrorType.ToString());
                 //throw new Exception("在驗證後傳送資訊可能遭到變更，請確認");
             }
-            _order.OrderNo = _orderSer.GetFakeOrderNo();
-            _order.OrderDate = DateTime.Now;
-            _order.SetUp = DateTime.Now;
+            getOrderFromSession().OrderNo = _orderSer.GetFakeOrderNo();
+            getOrderFromSession().OrderDate = DateTime.Now;
+            getOrderFromSession().SetUp = DateTime.Now;
             //加訂單請寫在註解中間
             Order order;
-            _orderRepo.CreateOrder(_order);
-            order=_orderRepo.GetOrderFromOrderNo(_order.OrderNo);
+            _orderRepo.CreateOrder(getOrderFromSession());
+            order=_orderRepo.GetOrderFromOrderNo(getOrderFromSession().OrderNo);
 
-            _orderRepo.CreateOrderStatus(order.OrderID,_order);
+            _orderRepo.CreateOrderStatus(order.OrderID, getOrderFromSession());
 
-            _orderRepo.CreateOrderDetail(order.OrderID, opList);
+            _orderRepo.CreateOrderDetail(order.OrderID, getOpListEnumerable(Session["opList"]));
 
-            foreach(var item in opList)
+            foreach(var item in getOpListEnumerable(Session["opList"]))
             {
                 _cartRepo.RemoveCartBook(_cusRepo.GetCusromerID(User.Identity.Name), item.BookID);
             }
@@ -155,21 +159,26 @@ namespace MvcProjectTest.Controllers
 
             //
 
-            Order orderModel = _order;
+            Order orderModel = getOrderFromSession();
             string cust_mail = _cusRepo.SelectCustomerEmail((int)Session["userid"]);
-            await MailService.SendMailToNoticeOrderSuccess(cust_mail, _order.OrderNo);
-            if (_isNeedingClear)
+            await MailService.SendMailToNoticeOrderSuccess(cust_mail, getOrderFromSession().OrderNo);
+            if ((bool)Session["isNeedingClear"])
             {
                 _cartSer.DeleteCartByAccount(User.Identity.Name);
             }
-            _isNeedingClear = false;
-            _order = null;
+            Session["isNeedingClear"] = false;
+            Session["order"] = null;
             return View(orderModel);
         }
 
         public JsonResult GetOpList()
         {
-            return Json(opList, JsonRequestBehavior.AllowGet);
+            return Json(getOpListEnumerable(Session["opList"]), JsonRequestBehavior.AllowGet);
+        }
+
+        public Order getOrderFromSession()
+        {
+            return (Order)Session["order"];
         }
 
 
@@ -179,7 +188,7 @@ namespace MvcProjectTest.Controllers
         {
             
             CartErrorModel checkResult = new CartErrorModel();
-            opList = null;
+            Session["opList"] = null;
 
             //驗證帳戶
             if(cusAccount == null || cusAccount!=User.Identity.Name || _cusRepo.GetCusromerID(cusAccount)==0 )
@@ -231,14 +240,18 @@ namespace MvcProjectTest.Controllers
             }
 
             //先這樣用一下..
-            opList = orderProducts;
+            Session["opList"] = orderProducts;
+
 
             checkResult.IsError = false;
             return new JsonNetResult { Data = checkResult };
 
         }
 
-
+        public IEnumerable<ShoppingCartViewModel> getOpListEnumerable(object oplist)
+        {
+            return ((IEnumerable <ShoppingCartViewModel>) oplist);
+        }
 
 
 
@@ -337,5 +350,7 @@ namespace MvcProjectTest.Controllers
                 return new EmptyResult();
             }
         }
+
+       
     }
 }
